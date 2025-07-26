@@ -9,7 +9,7 @@ BO1:
 * C
 
 BO2:
-* A
+* Cowboy/resverse cowboy binds need fixed
 * B
 * C
 
