@@ -1,4 +1,4 @@
-   newMenus()
+newMenus()
 {
     player = self.selected_player;
     menu = self getCurrentMenu();
@@ -54,12 +54,12 @@
             break;
 
         case "cwby":
-    self addMenu("cwby", "Cowboy Bind");
-    self addOpt("Cowboy Bind: [{+actionslot 1}]", ::cowboyBind, 1);
-    self addOpt("Cowboy Bind: [{+actionslot 2}]", ::cowboyBind, 2);
-    self addOpt("Cowboy Bind: [{+actionslot 3}]", ::cowboyBind, 3);
-    self addOpt("Cowboy Bind: [{+actionslot 4}]", ::cowboyBind, 4);
-    break;
+            self addMenu("cwby", "Cowboy Bind");
+            self addOpt("Cowboy Bind: [{+actionslot 1}]", ::cowboyBind, 1);
+            self addOpt("Cowboy Bind: [{+actionslot 2}]", ::cowboyBind, 2);
+            self addOpt("Cowboy Bind: [{+actionslot 3}]", ::cowboyBind, 3);
+            self addOpt("Cowboy Bind: [{+actionslot 4}]", ::cowboyBind, 4);
+            break;
 
 
         case "rcwby":  // Reverse Cowboy Bind submenu
@@ -442,551 +442,549 @@
             break;
 
         case "scarAtt":
-    self addMenu("scarAtt", "Scar-H Attachments");
-    self addOpt("None", ::giveUserWeapon, "scar_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "scar_mp+reflex");
-    self addOpt("ACOG", ::giveUserWeapon, "scar_mp+acog");
-    self addOpt("Target Finder", ::giveUserWeapon, "scar_mp+rangefinder");
-    self addOpt("Select Fire", ::giveUserWeapon, "scar_mp+sf");
-    self addOpt("EO Tech", ::giveUserWeapon, "scar_mp+holo");
-    self addOpt("Suppressor", ::giveUserWeapon, "scar_mp+silencer");
-    self addOpt("Hybrid Sight", ::giveUserWeapon, "scar_mp+dualoptic");
-    self addOpt("Grenade Launcher", ::giveUserWeapon, "scar_mp+gl");
-    self addOpt("MMS", ::giveUserWeapon, "scar_mp+mms");
-    break;
+            self addMenu("scarAtt", "Scar-H Attachments");
+            self addOpt("None", ::giveUserWeapon, "scar_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "scar_mp+reflex");
+            self addOpt("ACOG", ::giveUserWeapon, "scar_mp+acog");
+            self addOpt("Target Finder", ::giveUserWeapon, "scar_mp+rangefinder");
+            self addOpt("Select Fire", ::giveUserWeapon, "scar_mp+sf");
+            self addOpt("EO Tech", ::giveUserWeapon, "scar_mp+holo");
+            self addOpt("Suppressor", ::giveUserWeapon, "scar_mp+silencer");
+            self addOpt("Hybrid Sight", ::giveUserWeapon, "scar_mp+dualoptic");
+            self addOpt("Grenade Launcher", ::giveUserWeapon, "scar_mp+gl");
+            self addOpt("MMS", ::giveUserWeapon, "scar_mp+mms");
+            break;
 
-case "smrAtt":
-    self addMenu("smrAtt", "SMR Attachments");
-    self addOpt("None", ::giveUserWeapon, "saritch_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "saritch_mp+reflex");
-    self addOpt("ACOG", ::giveUserWeapon, "saritch_mp+acog");
-    self addOpt("Target Finder", ::giveUserWeapon, "saritch_mp+rangefinder");
-    self addOpt("Select Fire", ::giveUserWeapon, "saritch_mp+sf");
-    self addOpt("EO Tech", ::giveUserWeapon, "saritch_mp+holo");
-    self addOpt("Suppressor", ::giveUserWeapon, "saritch_mp+silencer");
-    self addOpt("Hybrid Sight", ::giveUserWeapon, "saritch_mp+dualoptic");
-    self addOpt("Grenade Launcher", ::giveUserWeapon, "saritch_mp+gl");
-    self addOpt("MMS", ::giveUserWeapon, "saritch_mp+mms");
-    break;
+        case "smrAtt":
+            self addMenu("smrAtt", "SMR Attachments");
+            self addOpt("None", ::giveUserWeapon, "saritch_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "saritch_mp+reflex");
+            self addOpt("ACOG", ::giveUserWeapon, "saritch_mp+acog");
+            self addOpt("Target Finder", ::giveUserWeapon, "saritch_mp+rangefinder");
+            self addOpt("Select Fire", ::giveUserWeapon, "saritch_mp+sf");
+            self addOpt("EO Tech", ::giveUserWeapon, "saritch_mp+holo");
+            self addOpt("Suppressor", ::giveUserWeapon, "saritch_mp+silencer");
+            self addOpt("Hybrid Sight", ::giveUserWeapon, "saritch_mp+dualoptic");
+            self addOpt("Grenade Launcher", ::giveUserWeapon, "saritch_mp+gl");
+            self addOpt("MMS", ::giveUserWeapon, "saritch_mp+mms");
+            break;
 
-case "m8a1Att":
-    self addMenu("m8a1Att", "M8A1 Attachments");
-    self addOpt("None", ::giveUserWeapon, "xm8_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "xm8_mp+reflex");
-    self addOpt("ACOG", ::giveUserWeapon, "xm8_mp+acog");
-    self addOpt("Target Finder", ::giveUserWeapon, "xm8_mp+rangefinder");
-    self addOpt("Select Fire", ::giveUserWeapon, "xm8_mp+sf");
-    self addOpt("EO Tech", ::giveUserWeapon, "xm8_mp+holo");
-    self addOpt("Suppressor", ::giveUserWeapon, "xm8_mp+silencer");
-    self addOpt("Hybrid Sight", ::giveUserWeapon, "xm8_mp+dualoptic");
-    self addOpt("Grenade Launcher", ::giveUserWeapon, "xm8_mp+gl");
-    self addOpt("MMS", ::giveUserWeapon, "xm8_mp+mms");
-    break;
+        case "m8a1Att":
+            self addMenu("m8a1Att", "M8A1 Attachments");
+            self addOpt("None", ::giveUserWeapon, "xm8_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "xm8_mp+reflex");
+            self addOpt("ACOG", ::giveUserWeapon, "xm8_mp+acog");
+            self addOpt("Target Finder", ::giveUserWeapon, "xm8_mp+rangefinder");
+            self addOpt("Select Fire", ::giveUserWeapon, "xm8_mp+sf");
+            self addOpt("EO Tech", ::giveUserWeapon, "xm8_mp+holo");
+            self addOpt("Suppressor", ::giveUserWeapon, "xm8_mp+silencer");
+            self addOpt("Hybrid Sight", ::giveUserWeapon, "xm8_mp+dualoptic");
+            self addOpt("Grenade Launcher", ::giveUserWeapon, "xm8_mp+gl");
+            self addOpt("MMS", ::giveUserWeapon, "xm8_mp+mms");
+            break;
 
-case "an94Att":
-    self addMenu("an94Att", "AN-94 Attachments");
-    self addOpt("None", ::giveUserWeapon, "an94_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "an94_mp+reflex");
-    self addOpt("ACOG", ::giveUserWeapon, "an94_mp+acog");
-    self addOpt("Target Finder", ::giveUserWeapon, "an94_mp+rangefinder");
-    self addOpt("Select Fire", ::giveUserWeapon, "an94_mp+sf");
-    self addOpt("EO Tech", ::giveUserWeapon, "an94_mp+holo");
-    self addOpt("Suppressor", ::giveUserWeapon, "an94_mp+silencer");
-    self addOpt("Hybrid Sight", ::giveUserWeapon, "an94_mp+dualoptic");
-    self addOpt("Grenade Launcher", ::giveUserWeapon, "an94_mp+gl");
-    self addOpt("MMS", ::giveUserWeapon, "an94_mp+mms");
-    break;
+        case "an94Att":
+            self addMenu("an94Att", "AN-94 Attachments");
+            self addOpt("None", ::giveUserWeapon, "an94_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "an94_mp+reflex");
+            self addOpt("ACOG", ::giveUserWeapon, "an94_mp+acog");
+            self addOpt("Target Finder", ::giveUserWeapon, "an94_mp+rangefinder");
+            self addOpt("Select Fire", ::giveUserWeapon, "an94_mp+sf");
+            self addOpt("EO Tech", ::giveUserWeapon, "an94_mp+holo");
+            self addOpt("Suppressor", ::giveUserWeapon, "an94_mp+silencer");
+            self addOpt("Hybrid Sight", ::giveUserWeapon, "an94_mp+dualoptic");
+            self addOpt("Grenade Launcher", ::giveUserWeapon, "an94_mp+gl");
+            self addOpt("MMS", ::giveUserWeapon, "an94_mp+mms");
+            break;
 
-case "sgs":
-    self addMenu("sgs", "Shotguns");
-    self addOpt("Remington 870 MCS", ::newMenu, "r870Att");
-    self addOpt("S12", ::newMenu, "s12Att");
-    self addOpt("KSG", ::newMenu, "ksgAtt");
-    self addOpt("M1216", ::newMenu, "m12Att");
-    break;
+        case "sgs":
+            self addMenu("sgs", "Shotguns");
+            self addOpt("Remington 870 MCS", ::newMenu, "r870Att");
+            self addOpt("S12", ::newMenu, "s12Att");
+            self addOpt("KSG", ::newMenu, "ksgAtt");
+            self addOpt("M1216", ::newMenu, "m12Att");
+            break;
 
-case "r870Att":
-    self addMenu("r870Att", "Remington 870 MCS Attachments");
-    self addOpt("None", ::giveUserWeapon, "870mcs_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "870mcs_mp+reflex");
-    self addOpt("Laser Sight", ::giveUserWeapon, "870mcs_mp+steadyaim");
-    self addOpt("Suppressor", ::giveUserWeapon, "870mcs_mp+silencer");
-    self addOpt("Quickdraw", ::giveUserWeapon, "870mcs_mp+fastads");
-    self addOpt("MMS", ::giveUserWeapon, "870mcs_mp+mms");
-    break;
+        case "r870Att":
+            self addMenu("r870Att", "Remington 870 MCS Attachments");
+            self addOpt("None", ::giveUserWeapon, "870mcs_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "870mcs_mp+reflex");
+            self addOpt("Laser Sight", ::giveUserWeapon, "870mcs_mp+steadyaim");
+            self addOpt("Suppressor", ::giveUserWeapon, "870mcs_mp+silencer");
+            self addOpt("Quickdraw", ::giveUserWeapon, "870mcs_mp+fastads");
+            self addOpt("MMS", ::giveUserWeapon, "870mcs_mp+mms");
+            break;
 
-case "s12Att":
-    self addMenu("s12Att", "S12 Attachments");
-    self addOpt("None", ::giveUserWeapon, "saiga12_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "saiga12_mp+reflex");
-    self addOpt("Laser Sight", ::giveUserWeapon, "saiga12_mp+steadyaim");
-    self addOpt("Suppressor", ::giveUserWeapon, "saiga12_mp+silencer");
-    self addOpt("Quickdraw", ::giveUserWeapon, "saiga12_mp+fastads");
-    self addOpt("MMS", ::giveUserWeapon, "saiga12_mp+mms");
-    break;
+        case "s12Att":
+            self addMenu("s12Att", "S12 Attachments");
+            self addOpt("None", ::giveUserWeapon, "saiga12_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "saiga12_mp+reflex");
+            self addOpt("Laser Sight", ::giveUserWeapon, "saiga12_mp+steadyaim");
+            self addOpt("Suppressor", ::giveUserWeapon, "saiga12_mp+silencer");
+            self addOpt("Quickdraw", ::giveUserWeapon, "saiga12_mp+fastads");
+            self addOpt("MMS", ::giveUserWeapon, "saiga12_mp+mms");
+            break;
 
-case "ksgAtt":
-    self addMenu("ksgAtt", "KSG Attachments");
-    self addOpt("None", ::giveUserWeapon, "ksg_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "ksg_mp+reflex");
-    self addOpt("Laser Sight", ::giveUserWeapon, "ksg_mp+steadyaim");
-    self addOpt("Suppressor", ::giveUserWeapon, "ksg_mp+silencer");
-    self addOpt("Quickdraw", ::giveUserWeapon, "ksg_mp+fastads");
-    self addOpt("MMS", ::giveUserWeapon, "ksg_mp+mms");
-    break;
+        case "ksgAtt":
+            self addMenu("ksgAtt", "KSG Attachments");
+            self addOpt("None", ::giveUserWeapon, "ksg_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "ksg_mp+reflex");
+            self addOpt("Laser Sight", ::giveUserWeapon, "ksg_mp+steadyaim");
+            self addOpt("Suppressor", ::giveUserWeapon, "ksg_mp+silencer");
+            self addOpt("Quickdraw", ::giveUserWeapon, "ksg_mp+fastads");
+            self addOpt("MMS", ::giveUserWeapon, "ksg_mp+mms");
+            break;
 
-case "m12Att":
-    self addMenu("m12Att", "M1216 Attachments");
-    self addOpt("None", ::giveUserWeapon, "srm1216_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "srm1216_mp+reflex");
-    self addOpt("Laser Sight", ::giveUserWeapon, "srm1216_mp+steadyaim");
-    self addOpt("Suppressor", ::giveUserWeapon, "srm1216_mp+silencer");
-    self addOpt("Quickdraw", ::giveUserWeapon, "srm1216_mp+fastads");
-    self addOpt("MMS", ::giveUserWeapon, "srm1216_mp+mms");
-    break;
+        case "m12Att":
+            self addMenu("m12Att", "M1216 Attachments");
+            self addOpt("None", ::giveUserWeapon, "srm1216_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "srm1216_mp+reflex");
+            self addOpt("Laser Sight", ::giveUserWeapon, "srm1216_mp+steadyaim");
+            self addOpt("Suppressor", ::giveUserWeapon, "srm1216_mp+silencer");
+            self addOpt("Quickdraw", ::giveUserWeapon, "srm1216_mp+fastads");
+            self addOpt("MMS", ::giveUserWeapon, "srm1216_mp+mms");
+            break;
 
-case "lmgs":
-    self addMenu("lmgs", "Light Machine Guns");
-    self addOpt("MK48", ::newMenu, "mk48Att");
-    self addOpt("QBB LSW", ::newMenu, "qbbAtt");
-    self addOpt("LSAT", ::newMenu, "lsatAtt");
-    self addOpt("HAMR", ::newMenu, "hamrAtt");
-    break;
+        case "lmgs":
+            self addMenu("lmgs", "Light Machine Guns");
+            self addOpt("MK48", ::newMenu, "mk48Att");
+            self addOpt("QBB LSW", ::newMenu, "qbbAtt");
+            self addOpt("LSAT", ::newMenu, "lsatAtt");
+            self addOpt("HAMR", ::newMenu, "hamrAtt");
+            break;
 
-case "mk48Att":
-    self addMenu("mk48Att", "MK48 Attachments");
-    self addOpt("None", ::giveUserWeapon, "mk48_mp");
-    self addOpt("EO Tech", ::giveUserWeapon, "mk48_mp+holo");
-    self addOpt("Reflex", ::giveUserWeapon, "mk48_mp+reflex");
-    self addOpt("Target Finder", ::giveUserWeapon, "mk48_mp+rangefinder");
-    self addOpt("ACOG", ::giveUserWeapon, "mk48_mp+acog");
-    self addOpt("Laser Sight", ::giveUserWeapon, "mk48_mp+steadyaim");
-    self addOpt("Suppressor", ::giveUserWeapon, "mk48_mp+silencer");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "mk48_mp+vzoom");
-    self addOpt("Hybrid", ::giveUserWeapon, "mk48_mp+dualoptic");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "mk48_mp+ir");
-    break;
+        case "mk48Att":
+            self addMenu("mk48Att", "MK48 Attachments");
+            self addOpt("None", ::giveUserWeapon, "mk48_mp");
+            self addOpt("EO Tech", ::giveUserWeapon, "mk48_mp+holo");
+            self addOpt("Reflex", ::giveUserWeapon, "mk48_mp+reflex");
+            self addOpt("Target Finder", ::giveUserWeapon, "mk48_mp+rangefinder");
+            self addOpt("ACOG", ::giveUserWeapon, "mk48_mp+acog");
+            self addOpt("Laser Sight", ::giveUserWeapon, "mk48_mp+steadyaim");
+            self addOpt("Suppressor", ::giveUserWeapon, "mk48_mp+silencer");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "mk48_mp+vzoom");
+            self addOpt("Hybrid", ::giveUserWeapon, "mk48_mp+dualoptic");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "mk48_mp+ir");
+            break;
 
-case "qbbAtt":
-    self addMenu("qbbAtt", "QBB LSW Attachments");
-    self addOpt("None", ::giveUserWeapon, "qbb95_mp");
-    self addOpt("EO Tech", ::giveUserWeapon, "qbb95_mp+holo");
-    self addOpt("Reflex", ::giveUserWeapon, "qbb95_mp+reflex");
-    self addOpt("Target Finder", ::giveUserWeapon, "qbb95_mp+rangefinder");
-    self addOpt("ACOG", ::giveUserWeapon, "qbb95_mp+acog");
-    self addOpt("Laser Sight", ::giveUserWeapon, "qbb95_mp+steadyaim");
-    self addOpt("Suppressor", ::giveUserWeapon, "qbb95_mp+silencer");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "qbb95_mp+vzoom");
-    self addOpt("Hybrid", ::giveUserWeapon, "qbb95_mp+dualoptic");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "qbb95_mp+ir");
-    break;
+        case "qbbAtt":
+            self addMenu("qbbAtt", "QBB LSW Attachments");
+            self addOpt("None", ::giveUserWeapon, "qbb95_mp");
+            self addOpt("EO Tech", ::giveUserWeapon, "qbb95_mp+holo");
+            self addOpt("Reflex", ::giveUserWeapon, "qbb95_mp+reflex");
+            self addOpt("Target Finder", ::giveUserWeapon, "qbb95_mp+rangefinder");
+            self addOpt("ACOG", ::giveUserWeapon, "qbb95_mp+acog");
+            self addOpt("Laser Sight", ::giveUserWeapon, "qbb95_mp+steadyaim");
+            self addOpt("Suppressor", ::giveUserWeapon, "qbb95_mp+silencer");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "qbb95_mp+vzoom");
+            self addOpt("Hybrid", ::giveUserWeapon, "qbb95_mp+dualoptic");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "qbb95_mp+ir");
+            break;
 
-case "lsatAtt":
-    self addMenu("lsatAtt", "LSAT Attachments");
-    self addOpt("None", ::giveUserWeapon, "lsat_mp");
-    self addOpt("EO Tech", ::giveUserWeapon, "lsat_mp+holo");
-    self addOpt("Reflex", ::giveUserWeapon, "lsat_mp+reflex");
-    self addOpt("Target Finder", ::giveUserWeapon, "lsat_mp+rangefinder");
-    self addOpt("ACOG", ::giveUserWeapon, "lsat_mp+acog");
-    self addOpt("Laser Sight", ::giveUserWeapon, "lsat_mp+steadyaim");
-    self addOpt("Suppressor", ::giveUserWeapon, "lsat_mp+silencer");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "lsat_mp+vzoom");
-    self addOpt("Hybrid", ::giveUserWeapon, "lsat_mp+dualoptic");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "lsat_mp+ir");
-    break;
+        case "lsatAtt":
+            self addMenu("lsatAtt", "LSAT Attachments");
+            self addOpt("None", ::giveUserWeapon, "lsat_mp");
+            self addOpt("EO Tech", ::giveUserWeapon, "lsat_mp+holo");
+            self addOpt("Reflex", ::giveUserWeapon, "lsat_mp+reflex");
+            self addOpt("Target Finder", ::giveUserWeapon, "lsat_mp+rangefinder");
+            self addOpt("ACOG", ::giveUserWeapon, "lsat_mp+acog");
+            self addOpt("Laser Sight", ::giveUserWeapon, "lsat_mp+steadyaim");
+            self addOpt("Suppressor", ::giveUserWeapon, "lsat_mp+silencer");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "lsat_mp+vzoom");
+            self addOpt("Hybrid", ::giveUserWeapon, "lsat_mp+dualoptic");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "lsat_mp+ir");
+            break;
 
-case "hamrAtt":
-    self addMenu("hamrAtt", "HAMR Attachments");
-    self addOpt("None", ::giveUserWeapon, "hamr_mp");
-    self addOpt("EO Tech", ::giveUserWeapon, "hamr_mp+holo");
-    self addOpt("Reflex", ::giveUserWeapon, "hamr_mp+reflex");
-    self addOpt("Target Finder", ::giveUserWeapon, "hamr_mp+rangefinder");
-    self addOpt("ACOG", ::giveUserWeapon, "hamr_mp+acog");
-    self addOpt("Laser Sight", ::giveUserWeapon, "hamr_mp+steadyaim");
-    self addOpt("Suppressor", ::giveUserWeapon, "hamr_mp+silencer");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "hamr_mp+vzoom");
-    self addOpt("Hybrid", ::giveUserWeapon, "hamr_mp+dualoptic");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "hamr_mp+ir");
-    break;
+        case "hamrAtt":
+            self addMenu("hamrAtt", "HAMR Attachments");
+            self addOpt("None", ::giveUserWeapon, "hamr_mp");
+            self addOpt("EO Tech", ::giveUserWeapon, "hamr_mp+holo");
+            self addOpt("Reflex", ::giveUserWeapon, "hamr_mp+reflex");
+            self addOpt("Target Finder", ::giveUserWeapon, "hamr_mp+rangefinder");
+            self addOpt("ACOG", ::giveUserWeapon, "hamr_mp+acog");
+            self addOpt("Laser Sight", ::giveUserWeapon, "hamr_mp+steadyaim");
+            self addOpt("Suppressor", ::giveUserWeapon, "hamr_mp+silencer");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "hamr_mp+vzoom");
+            self addOpt("Hybrid", ::giveUserWeapon, "hamr_mp+dualoptic");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "hamr_mp+ir");
+            break;
 
-case "srs":
-    self addMenu("srs", "Sniper Rifles");
-    self addOpt("SVU-AS", ::newMenu, "svuAtt");
-    self addOpt("DSR-50", ::newMenu, "dsr50Att");
-    self addOpt("Ballista", ::newMenu, "ballistaAtt");
-    self addOpt("XPR-50", ::newMenu, "as50Att");
-    break;
+        case "srs":
+            self addMenu("srs", "Sniper Rifles");
+            self addOpt("SVU-AS", ::newMenu, "svuAtt");
+            self addOpt("DSR-50", ::newMenu, "dsr50Att");
+            self addOpt("Ballista", ::newMenu, "ballistaAtt");
+            self addOpt("XPR-50", ::newMenu, "as50Att");
+            break;
 
-case "svuAtt":
-    self addMenu("svuAtt", "SVU-AS Attachments");
-    self addOpt("None", ::giveUserWeapon, "svu_mp");
-    self addOpt("Suppressor", ::giveUserWeapon, "svu_mp+silencer");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "svu_mp+vzoom");
-    self addOpt("ACOG", ::giveUserWeapon, "svu_mp+acog");
-    self addOpt("Laser Sight", ::giveUserWeapon, "svu_mp+steadyaim");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "svu_mp+ir");
-    break;
+        case "svuAtt":
+            self addMenu("svuAtt", "SVU-AS Attachments");
+            self addOpt("None", ::giveUserWeapon, "svu_mp");
+            self addOpt("Suppressor", ::giveUserWeapon, "svu_mp+silencer");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "svu_mp+vzoom");
+            self addOpt("ACOG", ::giveUserWeapon, "svu_mp+acog");
+            self addOpt("Laser Sight", ::giveUserWeapon, "svu_mp+steadyaim");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "svu_mp+ir");
+            break;
 
-case "dsr50Att":
-    self addMenu("dsr50Att", "DSR-50 Attachments");
-    self addOpt("None", ::giveUserWeapon, "dsr50_mp");
-    self addOpt("Suppressor", ::giveUserWeapon, "dsr50_mp+silencer");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "dsr50_mp+vzoom");
-    self addOpt("ACOG", ::giveUserWeapon, "dsr50_mp+acog");
-    self addOpt("Laser Sight", ::giveUserWeapon, "dsr50_mp+steadyaim");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "dsr50_mp+ir");
-    break;
+        case "dsr50Att":
+            self addMenu("dsr50Att", "DSR-50 Attachments");
+            self addOpt("None", ::giveUserWeapon, "dsr50_mp");
+            self addOpt("Suppressor", ::giveUserWeapon, "dsr50_mp+silencer");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "dsr50_mp+vzoom");
+            self addOpt("ACOG", ::giveUserWeapon, "dsr50_mp+acog");
+            self addOpt("Laser Sight", ::giveUserWeapon, "dsr50_mp+steadyaim");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "dsr50_mp+ir");
+            break;
 
-case "ballistaAtt":
-    self addMenu("ballistaAtt", "Ballista Attachments");
-    self addOpt("None", ::giveUserWeapon, "ballista_mp");
-    self addOpt("Suppressor", ::giveUserWeapon, "ballista_mp+silencer");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "ballista_mp+vzoom");
-    self addOpt("ACOG", ::giveUserWeapon, "ballista_mp+acog");
-    self addOpt("Laser Sight", ::giveUserWeapon, "ballista_mp+steadyaim");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "ballista_mp+ir");
-    self addOpt("Iron Sight", ::giveUserWeapon, "ballista_mp+is");
-    break;
+        case "ballistaAtt":
+            self addMenu("ballistaAtt", "Ballista Attachments");
+            self addOpt("None", ::giveUserWeapon, "ballista_mp");
+            self addOpt("Suppressor", ::giveUserWeapon, "ballista_mp+silencer");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "ballista_mp+vzoom");
+            self addOpt("ACOG", ::giveUserWeapon, "ballista_mp+acog");
+            self addOpt("Laser Sight", ::giveUserWeapon, "ballista_mp+steadyaim");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "ballista_mp+ir");
+            self addOpt("Iron Sight", ::giveUserWeapon, "ballista_mp+is");
+            break;
 
-case "as50Att":
-    self addMenu("as50Att", "XPR-50 Attachments");
-    self addOpt("None", ::giveUserWeapon, "as50_mp");
-    self addOpt("Suppressor", ::giveUserWeapon, "as50_mp+silencer");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "as50_mp+vzoom");
-    self addOpt("ACOG", ::giveUserWeapon, "as50_mp+acog");
-    self addOpt("Laser Sight", ::giveUserWeapon, "as50_mp+steadyaim");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "as50_mp+ir");
-    break;
+        case "as50Att":
+            self addMenu("as50Att", "XPR-50 Attachments");
+            self addOpt("None", ::giveUserWeapon, "as50_mp");
+            self addOpt("Suppressor", ::giveUserWeapon, "as50_mp+silencer");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "as50_mp+vzoom");
+            self addOpt("ACOG", ::giveUserWeapon, "as50_mp+acog");
+            self addOpt("Laser Sight", ::giveUserWeapon, "as50_mp+steadyaim");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "as50_mp+ir");
+            break;
 
-case "secs":
-    self addMenu("secs", "Secondary Weapons");
-    self addOpt("Pistols", ::newMenu, "hgs");
-    self addOpt("Launchers", ::newMenu, "lnchrs");
-    self addOpt("Specials", ::newMenu, "specs");
-    break;
+        case "secs":
+            self addMenu("secs", "Secondary Weapons");
+            self addOpt("Pistols", ::newMenu, "hgs");
+            self addOpt("Launchers", ::newMenu, "lnchrs");
+            self addOpt("Specials", ::newMenu, "specs");
+            break;
 
-case "hgs":
-    self addMenu("hgs", "Pistols");
-    self addOpt("Five Seven", ::newMenu, "57Att");
-    self addOpt("Tac-45", ::newMenu, "t45Att");
-    self addOpt("B23R", ::newMenu, "b23rAtt");
-    self addOpt("Executioner", ::newMenu, "execAtt");
-    self addOpt("KAP-40", ::newMenu, "k40Att");
-    break;
+        case "hgs":
+            self addMenu("hgs", "Pistols");
+            self addOpt("Five Seven", ::newMenu, "57Att");
+            self addOpt("Tac-45", ::newMenu, "t45Att");
+            self addOpt("B23R", ::newMenu, "b23rAtt");
+            self addOpt("Executioner", ::newMenu, "execAtt");
+            self addOpt("KAP-40", ::newMenu, "k40Att");
+            break;
 
-case "57Att":
-    self addMenu("57Att", "Five Seven Attachments");
-    self addOpt("None", ::giveUserWeapon, "fiveseven_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "fiveseven_mp+reflex");
-    self addOpt("Extended Mag", ::giveUserWeapon, "fiveseven_mp+extclip");
-    self addOpt("Laser Sight", ::giveUserWeapon, "fiveseven_mp+steadyaim");
-    self addOpt("Long Barrel", ::giveUserWeapon, "fiveseven_mp+extbarrel");
-    self addOpt("FMJ", ::giveUserWeapon, "fiveseven_mp+fmj");
-    self addOpt("Fast Mags", ::giveUserWeapon, "fiveseven_mp+dualclip");
-    self addOpt("Suppressor", ::giveUserWeapon, "fiveseven_mp+silencer");
-    self addOpt("Tactical Knife", ::giveUserWeapon, "fiveseven_mp+tacknife");
-    self addOpt("Dual Wield", ::giveUserWeapon, "fiveseven_dw_mp");
-    break;
+        case "57Att":
+            self addMenu("57Att", "Five Seven Attachments");
+            self addOpt("None", ::giveUserWeapon, "fiveseven_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "fiveseven_mp+reflex");
+            self addOpt("Extended Mag", ::giveUserWeapon, "fiveseven_mp+extclip");
+            self addOpt("Laser Sight", ::giveUserWeapon, "fiveseven_mp+steadyaim");
+            self addOpt("Long Barrel", ::giveUserWeapon, "fiveseven_mp+extbarrel");
+            self addOpt("FMJ", ::giveUserWeapon, "fiveseven_mp+fmj");
+            self addOpt("Fast Mags", ::giveUserWeapon, "fiveseven_mp+dualclip");
+            self addOpt("Suppressor", ::giveUserWeapon, "fiveseven_mp+silencer");
+            self addOpt("Tactical Knife", ::giveUserWeapon, "fiveseven_mp+tacknife");
+            self addOpt("Dual Wield", ::giveUserWeapon, "fiveseven_dw_mp");
+            break;
 
-case "t45Att":
-    self addMenu("t45Att", "Tac-45 Attachments");
-    self addOpt("None", ::giveUserWeapon, "fnp45_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "fnp45_mp+reflex");
-    self addOpt("Extended Mag", ::giveUserWeapon, "fnp45_mp+extclip");
-    self addOpt("Laser Sight", ::giveUserWeapon, "fnp45_mp+steadyaim");
-    self addOpt("Long Barrel", ::giveUserWeapon, "fnp45_mp+extbarrel");
-    self addOpt("FMJ", ::giveUserWeapon, "fnp45_mp+fmj");
-    self addOpt("Fast Mags", ::giveUserWeapon, "fnp45_mp+dualclip");
-    self addOpt("Suppressor", ::giveUserWeapon, "fnp45_mp+silencer");
-    self addOpt("Tactical Knife", ::giveUserWeapon, "fnp45_mp+tacknife");
-    self addOpt("Dual Wield", ::giveUserWeapon, "fnp45_dw_mp");
-    break;
+        case "t45Att":
+            self addMenu("t45Att", "Tac-45 Attachments");
+            self addOpt("None", ::giveUserWeapon, "fnp45_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "fnp45_mp+reflex");
+            self addOpt("Extended Mag", ::giveUserWeapon, "fnp45_mp+extclip");
+            self addOpt("Laser Sight", ::giveUserWeapon, "fnp45_mp+steadyaim");
+            self addOpt("Long Barrel", ::giveUserWeapon, "fnp45_mp+extbarrel");
+            self addOpt("FMJ", ::giveUserWeapon, "fnp45_mp+fmj");
+            self addOpt("Fast Mags", ::giveUserWeapon, "fnp45_mp+dualclip");
+            self addOpt("Suppressor", ::giveUserWeapon, "fnp45_mp+silencer");
+            self addOpt("Tactical Knife", ::giveUserWeapon, "fnp45_mp+tacknife");
+            self addOpt("Dual Wield", ::giveUserWeapon, "fnp45_dw_mp");
+            break;
 
-case "b23rAtt":
-    self addMenu("b23rAtt", "B23R Attachments");
-    self addOpt("None", ::giveUserWeapon, "beretta93r_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "beretta93r_mp+reflex");
-    self addOpt("Extended Mag", ::giveUserWeapon, "beretta93r_mp+extclip");
-    self addOpt("Laser Sight", ::giveUserWeapon, "beretta93r_mp+steadyaim");
-    self addOpt("Long Barrel", ::giveUserWeapon, "beretta93r_mp+extbarrel");
-    self addOpt("FMJ", ::giveUserWeapon, "beretta93r_mp+fmj");
-    self addOpt("Fast Mags", ::giveUserWeapon, "beretta93r_mp+dualclip");
-    self addOpt("Suppressor", ::giveUserWeapon, "beretta93r_mp+silencer");
-    self addOpt("Tactical Knife", ::giveUserWeapon, "beretta93r_mp+tacknife");
-    self addOpt("Dual Wield", ::giveUserWeapon, "beretta93r_dw_mp");
-    break;
+        case "b23rAtt":
+            self addMenu("b23rAtt", "B23R Attachments");
+            self addOpt("None", ::giveUserWeapon, "beretta93r_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "beretta93r_mp+reflex");
+            self addOpt("Extended Mag", ::giveUserWeapon, "beretta93r_mp+extclip");
+            self addOpt("Laser Sight", ::giveUserWeapon, "beretta93r_mp+steadyaim");
+            self addOpt("Long Barrel", ::giveUserWeapon, "beretta93r_mp+extbarrel");
+            self addOpt("FMJ", ::giveUserWeapon, "beretta93r_mp+fmj");
+            self addOpt("Fast Mags", ::giveUserWeapon, "beretta93r_mp+dualclip");
+            self addOpt("Suppressor", ::giveUserWeapon, "beretta93r_mp+silencer");
+            self addOpt("Tactical Knife", ::giveUserWeapon, "beretta93r_mp+tacknife");
+            self addOpt("Dual Wield", ::giveUserWeapon, "beretta93r_dw_mp");
+            break;
 
-case "execAtt":
-    self addMenu("execAtt", "Executioner Attachments");
-    self addOpt("None", ::giveUserWeapon, "judge_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "judge_mp+reflex");
-    self addOpt("Extended Mag", ::giveUserWeapon, "judge_mp+extclip");
-    self addOpt("Laser Sight", ::giveUserWeapon, "judge_mp+steadyaim");
-    self addOpt("Long Barrel", ::giveUserWeapon, "judge_mp+extbarrel");
-    self addOpt("FMJ", ::giveUserWeapon, "judge_mp+fmj");
-    self addOpt("Fast Mags", ::giveUserWeapon, "judge_mp+dualclip");
-    self addOpt("Suppressor", ::giveUserWeapon, "judge_mp+silencer");
-    self addOpt("Tactical Knife", ::giveUserWeapon, "judge_mp+tacknife");
-    self addOpt("Dual Wield", ::giveUserWeapon, "judge_dw_mp");
-    break;
+        case "execAtt":
+            self addMenu("execAtt", "Executioner Attachments");
+            self addOpt("None", ::giveUserWeapon, "judge_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "judge_mp+reflex");
+            self addOpt("Extended Mag", ::giveUserWeapon, "judge_mp+extclip");
+            self addOpt("Laser Sight", ::giveUserWeapon, "judge_mp+steadyaim");
+            self addOpt("Long Barrel", ::giveUserWeapon, "judge_mp+extbarrel");
+            self addOpt("FMJ", ::giveUserWeapon, "judge_mp+fmj");
+            self addOpt("Fast Mags", ::giveUserWeapon, "judge_mp+dualclip");
+            self addOpt("Suppressor", ::giveUserWeapon, "judge_mp+silencer");
+            self addOpt("Tactical Knife", ::giveUserWeapon, "judge_mp+tacknife");
+            self addOpt("Dual Wield", ::giveUserWeapon, "judge_dw_mp");
+            break;
 
-case "k40Att":
-    self addMenu("k40Att", "KAP-40 Attachments");
-    self addOpt("None", ::giveUserWeapon, "kard_mp");
-    self addOpt("Reflex", ::giveUserWeapon, "kard_mp+reflex");
-    self addOpt("Extended Mag", ::giveUserWeapon, "kard_mp+extclip");
-    self addOpt("Laser Sight", ::giveUserWeapon, "kard_mp+steadyaim");
-    self addOpt("Long Barrel", ::giveUserWeapon, "kard_mp+extbarrel");
-    self addOpt("FMJ", ::giveUserWeapon, "kard_mp+fmj");
-    self addOpt("Fast Mags", ::giveUserWeapon, "kard_mp+dualclip");
-    self addOpt("Suppressor", ::giveUserWeapon, "kard_mp+silencer");
-    self addOpt("Tactical Knife", ::giveUserWeapon, "kard_mp+tacknife");
-    self addOpt("Dual Wield", ::giveUserWeapon, "kard_dw_mp");
-    break;
+        case "k40Att":
+            self addMenu("k40Att", "KAP-40 Attachments");
+            self addOpt("None", ::giveUserWeapon, "kard_mp");
+            self addOpt("Reflex", ::giveUserWeapon, "kard_mp+reflex");
+            self addOpt("Extended Mag", ::giveUserWeapon, "kard_mp+extclip");
+            self addOpt("Laser Sight", ::giveUserWeapon, "kard_mp+steadyaim");
+            self addOpt("Long Barrel", ::giveUserWeapon, "kard_mp+extbarrel");
+            self addOpt("FMJ", ::giveUserWeapon, "kard_mp+fmj");
+            self addOpt("Fast Mags", ::giveUserWeapon, "kard_mp+dualclip");
+            self addOpt("Suppressor", ::giveUserWeapon, "kard_mp+silencer");
+            self addOpt("Tactical Knife", ::giveUserWeapon, "kard_mp+tacknife");
+            self addOpt("Dual Wield", ::giveUserWeapon, "kard_dw_mp");
+            break;
 
-case "lnchrs":
-    self addMenu("lnchrs", "Launchers");
-    self addOpt("SMAW", ::giveUserWeapon, "smaw_mp");
-    self addOpt("FHJ-18 AA", ::giveUserWeapon, "fhj18_mp");
-    self addOpt("RPG", ::giveUserWeapon, "usrpg_mp");
-    break;
+        case "lnchrs":
+            self addMenu("lnchrs", "Launchers");
+            self addOpt("SMAW", ::giveUserWeapon, "smaw_mp");
+            self addOpt("FHJ-18 AA", ::giveUserWeapon, "fhj18_mp");
+            self addOpt("RPG", ::giveUserWeapon, "usrpg_mp");
+            break;
 
-case "specs":
-    self addMenu("specs", "Specials");
-    self addOpt("Crossbow", ::newMenu, "cbowAtt");
-    self addOpt("Ballistic Knife", ::giveUserWeapon, "knife_ballistic_mp");
-    break;
+        case "specs":
+            self addMenu("specs", "Specials");
+            self addOpt("Crossbow", ::newMenu, "cbowAtt");
+            self addOpt("Ballistic Knife", ::giveUserWeapon, "knife_ballistic_mp");
+            break;
 
-case "cbowAtt":
-    self addMenu("cbowAtt", "Crossbow Attachments");
-    self addOpt("None", ::giveUserWeapon, "crossbow_mp");
-    self addOpt("ACOG Sight", ::giveUserWeapon, "crossbow_mp+acog");
-    self addOpt("Tri-Bolt", ::giveUserWeapon, "crossbow_mp+stackfire");
-    self addOpt("Dual Band Scope", ::giveUserWeapon, "crossbow_mp+ir");
-    self addOpt("Reflex", ::giveUserWeapon, "crossbow_mp+reflex");
-    self addOpt("Variable Zoom", ::giveUserWeapon, "crossbow_mp+vzoom");
-    break;
+        case "cbowAtt":
+            self addMenu("cbowAtt", "Crossbow Attachments");
+            self addOpt("None", ::giveUserWeapon, "crossbow_mp");
+            self addOpt("ACOG Sight", ::giveUserWeapon, "crossbow_mp+acog");
+            self addOpt("Tri-Bolt", ::giveUserWeapon, "crossbow_mp+stackfire");
+            self addOpt("Dual Band Scope", ::giveUserWeapon, "crossbow_mp+ir");
+            self addOpt("Reflex", ::giveUserWeapon, "crossbow_mp+reflex");
+            self addOpt("Variable Zoom", ::giveUserWeapon, "crossbow_mp+vzoom");
+            break;
 
-case "sWpns":
-    self addMenu("sWpns", "Special Weapons");
-    self addOpt("Bomb Briefcase", ::giveUserWeapon, "briefcase_bomb_defuse_mp");
-    self addOpt("Shield Knife", ::giveUserWeapon, "knife_held_mp");
-    self addOpt("Default Weapon", ::giveUserWeapon, "defaultweapon_mp");
-    break;
+        case "sWpns":
+            self addMenu("sWpns", "Special Weapons");
+            self addOpt("Bomb Briefcase", ::giveUserWeapon, "briefcase_bomb_defuse_mp");
+            self addOpt("Shield Knife", ::giveUserWeapon, "knife_held_mp");
+            self addOpt("Default Weapon", ::giveUserWeapon, "defaultweapon_mp");
+            break;
 
-case "camos":
-    self addMenu("camos", "Camos");
-    self addOpt("Remove Camo", ::changeCamo, 0);
-    self addOpt("Random Camo", ::randomCamo);
-    self addOpt("Base Camos", ::newMenu, "baseCamos");
-    self addOpt("DLC Camos", ::newMenu, "dlcCamos");
-    self addOpt("Secret Camos", ::newMenu, "secretCamos");
-    break;
+        case "camos":
+            self addMenu("camos", "Camos");
+            self addOpt("Remove Camo", ::changeCamo, 0);
+            self addOpt("Random Camo", ::randomCamo);
+            self addOpt("Base Camos", ::newMenu, "baseCamos");
+            self addOpt("DLC Camos", ::newMenu, "dlcCamos");
+            self addOpt("Secret Camos", ::newMenu, "secretCamos");
+            break;
 
-case "baseCamos":
-    self addMenu("baseCamos", "Base Camos");
-    self addOpt("DEVGRU", ::changeCamo, 1);
-    self addOpt("A-TACS AU", ::changeCamo, 2);
-    self addOpt("ERDL", ::changeCamo, 3);
-    self addOpt("Siberia", ::changeCamo, 4);
-    self addOpt("Choco", ::changeCamo, 5);
-    self addOpt("Blue Tiger", ::changeCamo, 6);
-    self addOpt("Bloodshot", ::changeCamo, 7);
-    self addOpt("Ghostex: Delta 6", ::changeCamo, 8);
-    self addOpt("Kryptek: Typhon", ::changeCamo, 9);
-    self addOpt("Carbon Fiber", ::changeCamo, 10);
-    self addOpt("Cherry Blossom", ::changeCamo, 11);
-    self addOpt("Art of War", ::changeCamo, 12);
-    self addOpt("Ronin", ::changeCamo, 13);
-    self addOpt("Skulls", ::changeCamo, 14);
-    self addOpt("Gold", ::changeCamo, 15);
-    self addOpt("Diamond", ::changeCamo, 16);
-    break;
+        case "baseCamos":
+            self addMenu("baseCamos", "Base Camos");
+            self addOpt("DEVGRU", ::changeCamo, 1);
+            self addOpt("A-TACS AU", ::changeCamo, 2);
+            self addOpt("ERDL", ::changeCamo, 3);
+            self addOpt("Siberia", ::changeCamo, 4);
+            self addOpt("Choco", ::changeCamo, 5);
+            self addOpt("Blue Tiger", ::changeCamo, 6);
+            self addOpt("Bloodshot", ::changeCamo, 7);
+            self addOpt("Ghostex: Delta 6", ::changeCamo, 8);
+            self addOpt("Kryptek: Typhon", ::changeCamo, 9);
+            self addOpt("Carbon Fiber", ::changeCamo, 10);
+            self addOpt("Cherry Blossom", ::changeCamo, 11);
+            self addOpt("Art of War", ::changeCamo, 12);
+            self addOpt("Ronin", ::changeCamo, 13);
+            self addOpt("Skulls", ::changeCamo, 14);
+            self addOpt("Gold", ::changeCamo, 15);
+            self addOpt("Diamond", ::changeCamo, 16);
+            break;
 
-case "dlcCamos":
-    self addMenu("dlcCamos", "DLC Camos");
-    self addOpt("Elite", ::changeCamo, 17);
-    self addOpt("Benjamins", ::changeCamo, 21);
-    self addOpt("Dia De Muertos", ::changeCamo, 22);
-    self addOpt("Graffiti", ::changeCamo, 23);
-    self addOpt("Kawaii", ::changeCamo, 24);
-    self addOpt("Party Rock", ::changeCamo, 25);
-    self addOpt("Zombies", ::changeCamo, 26);
-    self addOpt("Viper", ::changeCamo, 27);
-    self addOpt("Bacon", ::changeCamo, 28);
-    self addOpt("Dragon", ::changeCamo, 32);
-    self addOpt("Cyborg", ::changeCamo, 31);
-    self addOpt("Aqua", ::changeCamo, 34);
-    self addOpt("Breach", ::changeCamo, 35);
-    self addOpt("Coyote", ::changeCamo, 36);
-    self addOpt("Glam", ::changeCamo, 37);
-    self addOpt("Rogue", ::changeCamo, 38);
-    self addOpt("Pack-a-Punch", ::changeCamo, 39);
-    self addOpt("UK Punk", ::changeCamo, 20);
-    self addOpt("Paladin", ::changeCamo, 30);
-    self addOpt("Comics", ::changeCamo, 33);
-    self addOpt("Afterlife", ::changeCamo, 44);
-    self addOpt("Dead Mans Hand", ::changeCamo, 40);
-    self addOpt("Beast", ::changeCamo, 41);
-    self addOpt("Octane", ::changeCamo, 42);
-    self addOpt("Weaponized 115", ::changeCamo, 43);
-    break;
+        case "dlcCamos":
+            self addMenu("dlcCamos", "DLC Camos");
+            self addOpt("Elite", ::changeCamo, 17);
+            self addOpt("Benjamins", ::changeCamo, 21);
+            self addOpt("Dia De Muertos", ::changeCamo, 22);
+            self addOpt("Graffiti", ::changeCamo, 23);
+            self addOpt("Kawaii", ::changeCamo, 24);
+            self addOpt("Party Rock", ::changeCamo, 25);
+            self addOpt("Zombies", ::changeCamo, 26);
+            self addOpt("Viper", ::changeCamo, 27);
+            self addOpt("Bacon", ::changeCamo, 28);
+            self addOpt("Dragon", ::changeCamo, 32);
+            self addOpt("Cyborg", ::changeCamo, 31);
+            self addOpt("Aqua", ::changeCamo, 34);
+            self addOpt("Breach", ::changeCamo, 35);
+            self addOpt("Coyote", ::changeCamo, 36);
+            self addOpt("Glam", ::changeCamo, 37);
+            self addOpt("Rogue", ::changeCamo, 38);
+            self addOpt("Pack-a-Punch", ::changeCamo, 39);
+            self addOpt("UK Punk", ::changeCamo, 20);
+            self addOpt("Paladin", ::changeCamo, 30);
+            self addOpt("Comics", ::changeCamo, 33);
+            self addOpt("Afterlife", ::changeCamo, 44);
+            self addOpt("Dead Mans Hand", ::changeCamo, 40);
+            self addOpt("Beast", ::changeCamo, 41);
+            self addOpt("Octane", ::changeCamo, 42);
+            self addOpt("Weaponized 115", ::changeCamo, 43);
+            break;
 
-case "secretCamos":
-    self addMenu("secretCamos", "Secret Camos");
-    self addOpt("Digital", ::changeCamo, 18);
-    self addOpt("Ghosts", ::changeCamo, 29);
-    self addOpt("Advanced Warfare", ::changeCamo, 45);
-    break;
+        case "secretCamos":
+            self addMenu("secretCamos", "Secret Camos");
+            self addOpt("Digital", ::changeCamo, 18);
+            self addOpt("Ghosts", ::changeCamo, 29);
+            self addOpt("Advanced Warfare", ::changeCamo, 45);
+            break;
 
-case "lethals":
-    self addMenu("lethals", "Lethals");
-    self addOpt("Frag", ::giveUserLethal, "frag_grenade_mp");
-    self addOpt("Semtex", ::giveUserLethal, "sticky_grenade_mp");
-    self addOpt("Combat Axe", ::giveUserLethal, "hatchet_mp");
-    self addOpt("Bouncing Betty", ::giveUserLethal, "bouncingbetty_mp");
-    self addOpt("C4", ::giveUserLethal, "satchel_charge_mp");
-    self addOpt("Claymore", ::giveUserLethal, "claymore_mp");
-    break;
+        case "lethals":
+            self addMenu("lethals", "Lethals");
+            self addOpt("Frag", ::giveUserLethal, "frag_grenade_mp");
+            self addOpt("Semtex", ::giveUserLethal, "sticky_grenade_mp");
+            self addOpt("Combat Axe", ::giveUserLethal, "hatchet_mp");
+            self addOpt("Bouncing Betty", ::giveUserLethal, "bouncingbetty_mp");
+            self addOpt("C4", ::giveUserLethal, "satchel_charge_mp");
+            self addOpt("Claymore", ::giveUserLethal, "claymore_mp");
+            break;
 
-case "tacticals":
-    self addMenu("tacticals", "Tacticals");
-    self addOpt("Concussion Grenade", ::giveUserTactical, "concussion_grenade_mp");
-    self addOpt("Smoke Grenade", ::giveUserTactical, "willy_pete_mp");
-    self addOpt("Sensor Grenade", ::giveUserTactical, "sensor_grenade_mp");
-    self addOpt("EMP Grenade", ::giveUserTactical, "emp_grenade_mp");
-    self addOpt("Shock Charge", ::giveUserTactical, "proximity_grenade_aoe_mp");
-    self addOpt("Black Hat", ::giveUserTactical, "pda_hack_mp");
-    self addOpt("Flashbang", ::giveUserTactical, "flash_grenade_mp");
-    self addOpt("Trophy System", ::giveUserTactical, "trophy_system_mp");
-    self addOpt("Tactical Insertion", ::giveUserTactical, "tactical_insertion_mp");
-    break;
-
-
-        case "afthit":  // Afterhits Menu
-    self addMenu("afthit", "Afterhits Menu");
-    self addOpt("Assault Rifles", ::newMenu, "afthit_ar");
-    self addOpt("Submachine Guns", ::newMenu, "afthit_smg");
-    self addOpt("Shotguns", ::newMenu, "afthit_shot");
-    self addOpt("Light Machine Guns", ::newMenu, "afthit_lmg");
-    self addOpt("Sniper Rifles", ::newMenu, "afthit_snp");
-    self addOpt("Pistols", ::newMenu, "afthit_pist");
-    self addOpt("Launchers", ::newMenu, "afthit_lchr");
-    self addOpt("Special Weapons", ::newMenu, "afthit_spec");
-    break;
-
-case "afthit_ar":
-    self addMenu("afthit_ar", "Assault Rifles");
-    self addOpt("TAR-21", ::AfterHit, "tar21_mp");
-    self addOpt("Type 95", ::AfterHit, "type95_mp");
-    self addOpt("Sig 556", ::AfterHit, "sig556_mp");
-    self addOpt("SA58", ::AfterHit, "sa58_mp");
-    self addOpt("HK416", ::AfterHit, "hk416_mp");
-    self addOpt("SCAR-H", ::AfterHit, "scar_mp");
-    self addOpt("M27", ::AfterHit, "saritch_mp");
-    self addOpt("XM8", ::AfterHit, "xm8_mp");
-    self addOpt("AN-94", ::AfterHit, "an94_mp");
-    break;
-
-case "afthit_smg":
-    self addMenu("afthit_smg", "Submachine Guns");
-    self addOpt("MP7", ::AfterHit, "mp7_mp");
-    self addOpt("PDW-57", ::AfterHit, "pdw57_mp");
-    self addOpt("Vector", ::AfterHit, "vector_mp");
-    self addOpt("Chicom CQB", ::AfterHit, "insas_mp");
-    self addOpt("QCW-05", ::AfterHit, "qcw05_mp");
-    self addOpt("Skorpion EVO", ::AfterHit, "evoskorpion_mp");
-    self addOpt("Peacekeeper", ::AfterHit, "peacekeeper_mp");
-    break;
-
-case "afthit_shot":
-    self addMenu("afthit_shot", "Shotguns");
-    self addOpt("870 MCS", ::AfterHit, "870mcs_mp");
-    self addOpt("Saiga 12", ::AfterHit, "saiga12_mp");
-    self addOpt("KSG", ::AfterHit, "ksg_mp");
-    self addOpt("SRM 1216", ::AfterHit, "srm1216_mp");
-    break;
-
-case "afthit_lmg":
-    self addMenu("afthit_lmg", "Light Machine Guns");
-    self addOpt("MK48", ::AfterHit, "mk48_mp");
-    self addOpt("QBB-95", ::AfterHit, "qbb95_mp");
-    self addOpt("LSAT", ::AfterHit, "lsat_mp");
-    self addOpt("HAMR", ::AfterHit, "hamr_mp");
-    break;
-
-case "afthit_snp":
-    self addMenu("afthit_snp", "Sniper Rifles");
-    self addOpt("SVU-AS", ::AfterHit, "svu_mp");
-    self addOpt("DSR-50", ::AfterHit, "dsr50_mp");
-    self addOpt("Ballista", ::AfterHit, "ballista_mp");
-    self addOpt("XPR-50", ::AfterHit, "as50_mp");
-    break;
-
-case "afthit_pist":
-    self addMenu("afthit_pist", "Pistols");
-    self addOpt("Dual Kap-40", ::AfterHit, "kard_dw_mp");
-    self addOpt("Dual TAC-45", ::AfterHit, "fnp45_dw_mp");
-    self addOpt("Dual Five-Seven", ::AfterHit, "fiveseven_dw_mp");
-    self addOpt("Dual Executioner", ::AfterHit, "judge_dw_mp");
-    self addOpt("Dual B23R", ::AfterHit, "beretta93r_dw_mp");
-    self addOpt("Dual Five-Seven", ::AfterHit, "fiveseven_mp");
-    self addOpt("TAC-45", ::AfterHit, "fnp45_mp");
-    self addOpt("B23R", ::AfterHit, "beretta93r_mp");
-    self addOpt("Executioner", ::AfterHit, "judge_mp");
-    self addOpt("Kap-40", ::AfterHit, "kard_mp");
-    break;
-
-case "afthit_lchr":
-    self addMenu("afthit_lchr", "Launchers");
-    self addOpt("War Machine", ::AfterHit, "m32_mp");
-    self addOpt("SMAW", ::AfterHit, "smaw_mp");
-    self addOpt("FHJ-18", ::AfterHit, "fhj18_mp");
-    self addOpt("RPG", ::AfterHit, "usrpg_mp");
-    break;
-
-case "afthit_spec":
-    self addMenu("afthit_spec", "Special Weapons");
-    self addOpt("CSGO Knife", ::AfterHit, "knife_held_mp");
-    self addOpt("Default Weapon", ::AfterHit, "defaultweapon_mp");
-    self addOpt("Death Machine", ::AfterHit, "minigun_mp");
-    self addOpt("Riot Shield", ::AfterHit, "riotshield_mp");
-    self addOpt("Crossbow", ::AfterHit, "crossbow_mp");
-    self addOpt("Ballistic Knife", ::AfterHit, "knife_ballistic_mp");
-    self addOpt("Bomb", ::AfterHit, "briefcase_bomb_mp");
-    self addOpt("Claymore", ::AfterHit, "claymore_mp");
-    self addOpt("Car", ::AfterHit, "destructible_car_mp");
-    break;
+        case "tacticals":
+            self addMenu("tacticals", "Tacticals");
+            self addOpt("Concussion Grenade", ::giveUserTactical, "concussion_grenade_mp");
+            self addOpt("Smoke Grenade", ::giveUserTactical, "willy_pete_mp");
+            self addOpt("Sensor Grenade", ::giveUserTactical, "sensor_grenade_mp");
+            self addOpt("EMP Grenade", ::giveUserTactical, "emp_grenade_mp");
+            self addOpt("Shock Charge", ::giveUserTactical, "proximity_grenade_aoe_mp");
+            self addOpt("Black Hat", ::giveUserTactical, "pda_hack_mp");
+            self addOpt("Flashbang", ::giveUserTactical, "flash_grenade_mp");
+            self addOpt("Trophy System", ::giveUserTactical, "trophy_system_mp");
+            self addOpt("Tactical Insertion", ::giveUserTactical, "tactical_insertion_mp");
+            break;
 
 
-      case "kstrks": 
-    self addMenu("kstrks", "Killstreak Menu");
-    self addOpt("Fill Streaks", ::fillStreaks); 
-    self addOpt("UAV", ::doKillstreak, "radar_mp");
-    self addOpt("RC-XD", ::doKillstreak, "rcbomb_mp");
-    self addOpt("Hunter Killer", ::doKillstreak, "inventory_missile_drone_mp");
-    self addOpt("Care Package", ::doKillstreak, "inventory_supply_drop_mp");
-    self addOpt("Counter-UAV", ::doKillstreak, "counteruav_mp");
-    self addOpt("Guardian", ::doKillstreak, "microwaveturret_mp");
-    self addOpt("Hellstorm", ::doKillstreak, "remote_missile_mp");
-    self addOpt("Lightning Strike", ::doKillstreak, "planemortar_mp");
-    self addOpt("Sentry Gun", ::doKillstreak, "autoturret_mp");
-    self addOpt("Death Machine", ::doKillstreak, "inventory_minigun_mp");
-    self addOpt("War Machine", ::doKillstreak, "inventory_m32_mp");
-    self addOpt("Dragonfire", ::doKillstreak, "qrdrone_mp");
-    self addOpt("AGR", ::doKillstreak, "inventory_ai_tank_drop_mp");
-    self addOpt("Stealth Chopper", ::doKillstreak, "helicopter_comlink_mp");
-    self addOpt("VSAT", ::doKillstreak, "radardirection_mp");
-    self addOpt("Escort Drone", ::doKillstreak, "helicopter_guard_mp");
-    self addOpt("EMP Systems", ::doKillstreak, "emp_mp");
-    self addOpt("Warthog", ::doKillstreak, "straferun_mp");
-    self addOpt("Lodestar", ::doKillstreak, "remote_mortar_mp");
-    self addOpt("VTOL Warship", ::doKillstreak, "helicopter_player_gunner_mp");
-    self addOpt("K9 Unit", ::doKillstreak, "dogs_mp");
-    self addOpt("Swarm", ::doKillstreak, "missile_swarm_mp");
-    break;
+                case "afthit":  // Afterhits Menu
+            self addMenu("afthit", "Afterhits Menu");
+            self addOpt("Assault Rifles", ::newMenu, "afthit_ar");
+            self addOpt("Submachine Guns", ::newMenu, "afthit_smg");
+            self addOpt("Shotguns", ::newMenu, "afthit_shot");
+            self addOpt("Light Machine Guns", ::newMenu, "afthit_lmg");
+            self addOpt("Sniper Rifles", ::newMenu, "afthit_snp");
+            self addOpt("Pistols", ::newMenu, "afthit_pist");
+            self addOpt("Launchers", ::newMenu, "afthit_lchr");
+            self addOpt("Special Weapons", ::newMenu, "afthit_spec");
+            break;
+
+        case "afthit_ar":
+            self addMenu("afthit_ar", "Assault Rifles");
+            self addOpt("TAR-21", ::AfterHit, "tar21_mp");
+            self addOpt("Type 95", ::AfterHit, "type95_mp");
+            self addOpt("Sig 556", ::AfterHit, "sig556_mp");
+            self addOpt("SA58", ::AfterHit, "sa58_mp");
+            self addOpt("HK416", ::AfterHit, "hk416_mp");
+            self addOpt("SCAR-H", ::AfterHit, "scar_mp");
+            self addOpt("M27", ::AfterHit, "saritch_mp");
+            self addOpt("XM8", ::AfterHit, "xm8_mp");
+            self addOpt("AN-94", ::AfterHit, "an94_mp");
+            break;
+
+        case "afthit_smg":
+            self addMenu("afthit_smg", "Submachine Guns");
+            self addOpt("MP7", ::AfterHit, "mp7_mp");
+            self addOpt("PDW-57", ::AfterHit, "pdw57_mp");
+            self addOpt("Vector", ::AfterHit, "vector_mp");
+            self addOpt("Chicom CQB", ::AfterHit, "insas_mp");
+            self addOpt("QCW-05", ::AfterHit, "qcw05_mp");
+            self addOpt("Skorpion EVO", ::AfterHit, "evoskorpion_mp");
+            self addOpt("Peacekeeper", ::AfterHit, "peacekeeper_mp");
+            break;
+
+        case "afthit_shot":
+            self addMenu("afthit_shot", "Shotguns");
+            self addOpt("870 MCS", ::AfterHit, "870mcs_mp");
+            self addOpt("Saiga 12", ::AfterHit, "saiga12_mp");
+            self addOpt("KSG", ::AfterHit, "ksg_mp");
+            self addOpt("SRM 1216", ::AfterHit, "srm1216_mp");
+            break;
+
+        case "afthit_lmg":
+            self addMenu("afthit_lmg", "Light Machine Guns");
+            self addOpt("MK48", ::AfterHit, "mk48_mp");
+            self addOpt("QBB-95", ::AfterHit, "qbb95_mp");
+            self addOpt("LSAT", ::AfterHit, "lsat_mp");
+            self addOpt("HAMR", ::AfterHit, "hamr_mp");
+            break;
+
+        case "afthit_snp":
+            self addMenu("afthit_snp", "Sniper Rifles");
+            self addOpt("SVU-AS", ::AfterHit, "svu_mp");
+            self addOpt("DSR-50", ::AfterHit, "dsr50_mp");
+            self addOpt("Ballista", ::AfterHit, "ballista_mp");
+            self addOpt("XPR-50", ::AfterHit, "as50_mp");
+            break;
+
+        case "afthit_pist":
+            self addMenu("afthit_pist", "Pistols");
+            self addOpt("Dual Kap-40", ::AfterHit, "kard_dw_mp");
+            self addOpt("Dual TAC-45", ::AfterHit, "fnp45_dw_mp");
+            self addOpt("Dual Five-Seven", ::AfterHit, "fiveseven_dw_mp");
+            self addOpt("Dual Executioner", ::AfterHit, "judge_dw_mp");
+            self addOpt("Dual B23R", ::AfterHit, "beretta93r_dw_mp");
+            self addOpt("Dual Five-Seven", ::AfterHit, "fiveseven_mp");
+            self addOpt("TAC-45", ::AfterHit, "fnp45_mp");
+            self addOpt("B23R", ::AfterHit, "beretta93r_mp");
+            self addOpt("Executioner", ::AfterHit, "judge_mp");
+            self addOpt("Kap-40", ::AfterHit, "kard_mp");
+            break;
+
+        case "afthit_lchr":
+            self addMenu("afthit_lchr", "Launchers");
+            self addOpt("War Machine", ::AfterHit, "m32_mp");
+            self addOpt("SMAW", ::AfterHit, "smaw_mp");
+            self addOpt("FHJ-18", ::AfterHit, "fhj18_mp");
+            self addOpt("RPG", ::AfterHit, "usrpg_mp");
+            break;
+
+        case "afthit_spec":
+            self addMenu("afthit_spec", "Special Weapons");
+            self addOpt("CSGO Knife", ::AfterHit, "knife_held_mp");
+            self addOpt("Default Weapon", ::AfterHit, "defaultweapon_mp");
+            self addOpt("Death Machine", ::AfterHit, "minigun_mp");
+            self addOpt("Riot Shield", ::AfterHit, "riotshield_mp");
+            self addOpt("Crossbow", ::AfterHit, "crossbow_mp");
+            self addOpt("Ballistic Knife", ::AfterHit, "knife_ballistic_mp");
+            self addOpt("Bomb", ::AfterHit, "briefcase_bomb_mp");
+            self addOpt("Claymore", ::AfterHit, "claymore_mp");
+            self addOpt("Car", ::AfterHit, "destructible_car_mp");
+            break;
 
 
+        case "kstrks": 
+            self addMenu("kstrks", "Killstreak Menu");
+            self addOpt("Fill Streaks", ::fillStreaks); 
+            self addOpt("UAV", ::doKillstreak, "radar_mp");
+            self addOpt("RC-XD", ::doKillstreak, "rcbomb_mp");
+            self addOpt("Hunter Killer", ::doKillstreak, "inventory_missile_drone_mp");
+            self addOpt("Care Package", ::doKillstreak, "inventory_supply_drop_mp");
+            self addOpt("Counter-UAV", ::doKillstreak, "counteruav_mp");
+            self addOpt("Guardian", ::doKillstreak, "microwaveturret_mp");
+            self addOpt("Hellstorm", ::doKillstreak, "remote_missile_mp");
+            self addOpt("Lightning Strike", ::doKillstreak, "planemortar_mp");
+            self addOpt("Sentry Gun", ::doKillstreak, "autoturret_mp");
+            self addOpt("Death Machine", ::doKillstreak, "inventory_minigun_mp");
+            self addOpt("War Machine", ::doKillstreak, "inventory_m32_mp");
+            self addOpt("Dragonfire", ::doKillstreak, "qrdrone_mp");
+            self addOpt("AGR", ::doKillstreak, "inventory_ai_tank_drop_mp");
+            self addOpt("Stealth Chopper", ::doKillstreak, "helicopter_comlink_mp");
+            self addOpt("VSAT", ::doKillstreak, "radardirection_mp");
+            self addOpt("Escort Drone", ::doKillstreak, "helicopter_guard_mp");
+            self addOpt("EMP Systems", ::doKillstreak, "emp_mp");
+            self addOpt("Warthog", ::doKillstreak, "straferun_mp");
+            self addOpt("Lodestar", ::doKillstreak, "remote_mortar_mp");
+            self addOpt("VTOL Warship", ::doKillstreak, "helicopter_player_gunner_mp");
+            self addOpt("K9 Unit", ::doKillstreak, "dogs_mp");
+            self addOpt("Swarm", ::doKillstreak, "missile_swarm_mp");
+            break;
 
         case "bots":  // Bot Menu (host/dev only)
             self addMenu("bots", "Bot Menu");
@@ -1011,7 +1009,7 @@ case "afthit_spec":
 
 
 
-    menuMonitor()
+menuMonitor()
 {
     self endon("disconnect");
     self endon("end_menu");
@@ -1126,162 +1124,159 @@ case "afthit_spec":
 }
 
 
-    menuOpen()
-    {
-        self.menu["isOpen"] = true;
+menuOpen()
+{
+    self.menu["isOpen"] = true;
 
-        self newMenus();
-        self drawMenu();
-        self drawText();
-        self setMenuText(); 
-        self updateScrollbar();
-    }
+    self newMenus();
+    self drawMenu();
+    self drawText();
+    self setMenuText(); 
+    self updateScrollbar();
+}
 
-    menuClose()
-    {
-        self destroyAll(self.menu["UI"]); 
-        self destroyAll(self.menu["OPT"]);
-        self destroyAll(self.menu["UI_TOG"]);
-        self destroyAll(self.menu["UI_SLIDE"]);
-        self.menu["isOpen"] = false;
-
-        //self thread OpenMenuInfo();
-    }
+menuClose()
+{
+    self destroyAll(self.menu["UI"]); 
+    self destroyAll(self.menu["OPT"]);
+    self destroyAll(self.menu["UI_TOG"]);
+    self destroyAll(self.menu["UI_SLIDE"]);
+    self.menu["isOpen"] = false;
+    //self thread OpenMenuInfo();
+}
 
     
 
-    DestroyMenuInfo()
-    {
-        self.menu["UI"]["InfoBG"] thread hudfadendestroy(0, 0.01);
-        self.menu["UI"]["InfoBorder"] thread hudfadendestroy(0, 0.01);
-        self.menu["UI"]["InfoText"] thread hudfadendestroy(0, 0.01);
-    }
+DestroyMenuInfo()
+{
+    self.menu["UI"]["InfoBG"] thread hudfadendestroy(0, 0.01);
+    self.menu["UI"]["InfoBorder"] thread hudfadendestroy(0, 0.01);
+    self.menu["UI"]["InfoText"] thread hudfadendestroy(0, 0.01);
+}
 
-    drawMenu()
-    {
-        self thread DestroyMenuInfo();
-        wait 0.01;
+drawMenu()
+{
+    self thread DestroyMenuInfo();
+    wait 0.01;
 
-        if(!isDefined(self.menu["UI"]))
-            self.menu["UI"] = [];
-        if(!isDefined(self.menu["UI_TOG"]))
-            self.menu["UI_TOG"] = [];    
-        if(!isDefined(self.menu["UI_SLIDE"]))
-            self.menu["UI_SLIDE"] = [];
-        if(!isDefined(self.menu["UI_STRING"]))
-            self.menu["UI_STRING"] = [];    
+    if(!isDefined(self.menu["UI"]))
+        self.menu["UI"] = [];
+    if(!isDefined(self.menu["UI_TOG"]))
+        self.menu["UI_TOG"] = [];    
+    if(!isDefined(self.menu["UI_SLIDE"]))
+        self.menu["UI_SLIDE"] = [];
+    if(!isDefined(self.menu["UI_STRING"]))
+        self.menu["UI_STRING"] = [];    
             
-        #ifdef STEAM self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
-        self.menu["UI"]["MENU_TITLE"] = self createtext( "Objective", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 87, self.presets["Y"] - 117, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
-        #ifdef XBOX self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
-        self.menu["UI"]["MENU_TITLE"] = self createtext("Objective", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 106, self.presets["Y"] - 100, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
-        self.menu["UI"]["OPT_BG"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 70, 204, 182, self.presets["Option_BG"], "white", 1, 1);    
-        self.menu["UI"]["OUTLINE"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 56.4, self.presets["Y"] - 121.5, 204, 234, self.presets["Outline_BG"], "white", 0, .7); 
-        self.menu["UI"]["SCROLLER"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 108, 200, 10, self.presets["Scroller_BG"], self.presets["Scroller_Shader"], 2, 1);
-        self.menu["UI"]["SCROLLERICON"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 40, self.presets["Y"] - 108, 14, 14, self.presets["ScrollerIcon_BG"], self.presets["Scroller_ShaderIcon"], 3, 1);
-        self resizeMenu();
-    }
+    #ifdef STEAM self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
+    self.menu["UI"]["MENU_TITLE"] = self createtext( "Objective", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 87, self.presets["Y"] - 117, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
+    #ifdef XBOX self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
+    self.menu["UI"]["MENU_TITLE"] = self createtext("Objective", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 106, self.presets["Y"] - 100, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
+    self.menu["UI"]["OPT_BG"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 70, 204, 182, self.presets["Option_BG"], "white", 1, 1);    
+    self.menu["UI"]["OUTLINE"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 56.4, self.presets["Y"] - 121.5, 204, 234, self.presets["Outline_BG"], "white", 0, .7); 
+    self.menu["UI"]["SCROLLER"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 108, 200, 10, self.presets["Scroller_BG"], self.presets["Scroller_Shader"], 2, 1);
+    self.menu["UI"]["SCROLLERICON"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 40, self.presets["Y"] - 108, 14, 14, self.presets["ScrollerIcon_BG"], self.presets["Scroller_ShaderIcon"], 3, 1);
+    self resizeMenu();
+}
 
-    drawText()
+drawText()
+{
+    self destroyAll(self.menu["OPT"]);
+
+    if(!isDefined(self.menu["OPT"]))
+        self.menu["OPT"] = [];
+
+    for(e=0;e<10;e++)
+        self.menu["OPT"][e] = self createText(self.presets["Option_Font"], self.presets["Font_Scale"], "LEFT", "CENTER", self.presets["X"] + 5, self.presets["Y"] - 62 + (e * 15), 3, 1, "", self.presets["Text"]);
+}
+
+refreshTitle()
+{
+    self.menu["UI"]["MENU_TITLE"] setSafeText(level.MenuName);
+}
+        
+scrollingSystem()
+{
+    if(self getCursor() >= self.eMenu.size || self getCursor() < 0 || self getCursor() == 9)
     {
-        self destroyAll(self.menu["OPT"]);
-
-        if(!isDefined(self.menu["OPT"]))
-            self.menu["OPT"] = [];
-
-        for(e=0;e<10;e++)
-            self.menu["OPT"][e] = self createText(self.presets["Option_Font"], self.presets["Font_Scale"], "LEFT", "CENTER", self.presets["X"] + 5, self.presets["Y"] - 62 + (e * 15), 3, 1, "", self.presets["Text"]);
-    }
-
-    refreshTitle()
-    {
-        self.menu["UI"]["MENU_TITLE"] setSafeText(level.MenuName);
+        if(self getCursor() <= 0)
+            self.menu[ self getCurrentMenu() + "_cursor" ] = self.eMenu.size -1;
+        else if(self getCursor() >= self.eMenu.size)
+            self.menu[ self getCurrentMenu() + "_cursor" ] = 0;
     }
         
-    scrollingSystem()
-    {
-        if(self getCursor() >= self.eMenu.size || self getCursor() < 0 || self getCursor() == 9)
-        {
-            if(self getCursor() <= 0)
-                self.menu[ self getCurrentMenu() + "_cursor" ] = self.eMenu.size -1;
-            else if(self getCursor() >= self.eMenu.size)
-                self.menu[ self getCurrentMenu() + "_cursor" ] = 0;
-        }
-        
-        self setMenuText();
-        self updateScrollbar();
-    }
+    self setMenuText();
+    self updateScrollbar();
+}
 
-    updateScrollbar()
-    {
-        curs = (self getCursor() >= 10) ? 9 : self getCursor();  
-        self.menu["UI"]["SCROLLER"].y = (self.menu["OPT"][curs].y);
-        self.menu["UI"]["SCROLLERICON"].y = (self.menu["OPT"][curs].y);
+updateScrollbar()
+{
+    curs = (self getCursor() >= 10) ? 9 : self getCursor();  
+    self.menu["UI"]["SCROLLER"].y = (self.menu["OPT"][curs].y);
+    self.menu["UI"]["SCROLLERICON"].y = (self.menu["OPT"][curs].y);
         
-        size       = (self.eMenu.size >= 10) ? 10 : self.eMenu.size;
-        height     = int(15 * size); // 18
-        math   = (self.eMenu.size > 10) ? ((180 / self.eMenu.size) * size) : (height - 15);
-        position_Y = (self.eMenu.size-1) / ((height - 15) - math);
-    } 
+    size       = (self.eMenu.size >= 10) ? 10 : self.eMenu.size;
+    height     = int(15 * size); // 18
+    math   = (self.eMenu.size > 10) ? ((180 / self.eMenu.size) * size) : (height - 15);
+    position_Y = (self.eMenu.size-1) / ((height - 15) - math);
+} 
 
-    setMenuText()
-    {
-        self endon("disconnect");
-        self newMenus();
-        self resizeMenu();
+setMenuText()
+{
+    self endon("disconnect");
+    self newMenus();
+    self resizeMenu();
 
-        ary = (self getCursor() >= 10) ? (self getCursor() - 9) : 0;  
-        self destroyAll(self.menu["UI_TOG"]);
-        self destroyAll(self.menu["UI_SLIDE"]);
+    ary = (self getCursor() >= 10) ? (self getCursor() - 9) : 0;  
+    self destroyAll(self.menu["UI_TOG"]);
+    self destroyAll(self.menu["UI_SLIDE"]);
         
-        for(e=0;e<10;e++)
-        {
-            self.menu["OPT"][e].x = self.presets["X"] + 61; 
+    for(e=0;e<10;e++)
+    {
+        self.menu["OPT"][e].x = self.presets["X"] + 61; 
             
-            if(isDefined(self.eMenu[ ary + e ].opt))
-                self.menu["OPT"][e] setSafeText( self.eMenu[ ary + e ].opt );
-            else 
-                self.menu["OPT"][e] setSafeText("");
+        if(isDefined(self.eMenu[ ary + e ].opt))
+            self.menu["OPT"][e] setSafeText( self.eMenu[ ary + e ].opt );
+        else 
+            self.menu["OPT"][e] setSafeText("");
                 
-            if(IsDefined( self.eMenu[ ary + e ].toggle ))
-            {
-                self.menu["OPT"][e].x += 0; 
-                #ifdef STEAM self.menu["UI_TOG"][e] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 184, self.menu["OPT"][e].y, 8, 8, self.presets["Toggle_BG"], "white", 4, 1); #endif //BG
-                #ifdef STEAM self.menu["UI_TOG"][e + 10] = self createRectangle("CENTER", "CENTER", self.menu["UI_TOG"][e].x + 4, self.menu["UI_TOG"][e].y, 7, 7, (self.eMenu[ ary + e ].toggle) ? self.presets["Toggle_BG"] : dividecolor(150, 150, 150), "white", 5, 1); #endif //INNER
-                #ifdef XBOX self.menu["UI_TOG"][e + 10] = self createRectangle("CENTER", "CENTER", self.menu["OPT"][e].x + 189, self.menu["OPT"][e].y, 7, 7, (self.eMenu[ ary + e ].toggle) ? self.presets["Toggle_BG"] : dividecolor(150, 150, 150), "white", 5, 1); #endif
-            }
-            if(IsDefined( self.eMenu[ ary + e ].val ))
-            {
-                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1); //BG
-                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1); //INNER
-                if( self getCursor() == ( ary + e ) )
-                    self.menu["UI_SLIDE"]["VAL"] = self createText("default", 1, "RIGHT", "CENTER", self.menu["OPT"][e].x + 150, self.menu["OPT"][e].y, 5, 1, self.sliders[ self getCurrentMenu() + "_" + self getCursor() ] + "", self.presets["Text"]);
-                self updateSlider( "", e, ary + e );
-            }
-            if(IsDefined( self.eMenu[ (ary + e) ].ID_list ) )
-            {
-                if(!isDefined( self.sliders[ self getCurrentMenu() + "_" + (ary + e)] ))
-                    self.sliders[ self getCurrentMenu() + "_" + (ary + e) ] = 0;
+        if(IsDefined( self.eMenu[ ary + e ].toggle ))
+        {
+            self.menu["OPT"][e].x += 0; 
+            #ifdef STEAM self.menu["UI_TOG"][e] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 184, self.menu["OPT"][e].y, 8, 8, self.presets["Toggle_BG"], "white", 4, 1); #endif //BG
+            #ifdef STEAM self.menu["UI_TOG"][e + 10] = self createRectangle("CENTER", "CENTER", self.menu["UI_TOG"][e].x + 4, self.menu["UI_TOG"][e].y, 7, 7, (self.eMenu[ ary + e ].toggle) ? self.presets["Toggle_BG"] : dividecolor(150, 150, 150), "white", 5, 1); #endif //INNER
+            #ifdef XBOX self.menu["UI_TOG"][e + 10] = self createRectangle("CENTER", "CENTER", self.menu["OPT"][e].x + 189, self.menu["OPT"][e].y, 7, 7, (self.eMenu[ ary + e ].toggle) ? self.presets["Toggle_BG"] : dividecolor(150, 150, 150), "white", 5, 1); #endif
+        }
+        if(IsDefined( self.eMenu[ ary + e ].val ))
+        {
+            self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1); //BG
+            self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1); //INNER
+            if( self getCursor() == ( ary + e ) )
+                self.menu["UI_SLIDE"]["VAL"] = self createText("default", 1, "RIGHT", "CENTER", self.menu["OPT"][e].x + 150, self.menu["OPT"][e].y, 5, 1, self.sliders[ self getCurrentMenu() + "_" + self getCursor() ] + "", self.presets["Text"]);
+            self updateSlider( "", e, ary + e );
+        }
+        if(IsDefined( self.eMenu[ (ary + e) ].ID_list ) )
+        {
+            if(!isDefined( self.sliders[ self getCurrentMenu() + "_" + (ary + e)] ))
+                self.sliders[ self getCurrentMenu() + "_" + (ary + e) ] = 0;
                     
-                self.menu["UI_SLIDE"]["STRING_"+e] = self createText("default", 1, "RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 6, 1, "", self.presets["Text"]);
-                self updateSlider( "", e, ary + e );
-            }
-            if(self.eMenu[ ary + e ].func == ::newMenu && IsDefined( self.eMenu[ ary + e ].func ) )
-            {
-                self.menu["UI_SLIDE"]["newMenu"+e] = self createrectangle( "RIGHT", "CENTER", self.menu["OPT"][e].x + 196, self.menu["OPT"][e].y, 9, 9, self.presets["Toggle_BG"], "ui_arrow_right", 5, 1);
-                self.menu["UI_SLIDE"]["newMenu"+e].foreground = true;
-            }
+            self.menu["UI_SLIDE"]["STRING_"+e] = self createText("default", 1, "RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 6, 1, "", self.presets["Text"]);
+            self updateSlider( "", e, ary + e );
+        }
+        if(self.eMenu[ ary + e ].func == ::newMenu && IsDefined( self.eMenu[ ary + e ].func ) )
+        {
+            self.menu["UI_SLIDE"]["newMenu"+e] = self createrectangle( "RIGHT", "CENTER", self.menu["OPT"][e].x + 196, self.menu["OPT"][e].y, 9, 9, self.presets["Toggle_BG"], "ui_arrow_right", 5, 1);
+            self.menu["UI_SLIDE"]["newMenu"+e].foreground = true;
         }
     }
+}
         
-    resizeMenu()
-    {
-        size   = (self.eMenu.size >= 10) ? 10 : self.eMenu.size;
-        height = int(15 * size);
-        math   = (self.eMenu.size > 10) ? ((180 / self.eMenu.size) * size) : (height - 15);
+resizeMenu()
+{
+    size   = (self.eMenu.size >= 10) ? 10 : self.eMenu.size;
+    height = int(15 * size);
+    math   = (self.eMenu.size > 10) ? ((180 / self.eMenu.size) * size) : (height - 15);
         
-        self.menu["UI"]["OPT_BG"] SetShader( "white", 200, height + 1 );
-        self.menu["UI"]["OUTLINE"] SetShader( "white", 204, height + 54 );
-    }
-
-
+    self.menu["UI"]["OPT_BG"] SetShader( "white", 200, height + 1 );
+    self.menu["UI"]["OUTLINE"] SetShader( "white", 204, height + 54 );
+}

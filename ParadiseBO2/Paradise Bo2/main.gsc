@@ -73,7 +73,6 @@ init()
             self waittill( "spawned_player" );
             if(isFirstSpawn)
             {
-                initOverFlowFix();
                 isFirstSpawn = false;
             }
 
@@ -118,6 +117,7 @@ init()
                 }
                 
                 self FreezeControls(false);
+                self thread OverFlowFix();
             }
             if(!hasBots())
             {                
@@ -414,6 +414,24 @@ isdamageweapon( sweapon )
         return 1;
     }
     return 0;
+}
+
+OverFlowFix()
+{
+    level.overflow = newHudElem();
+    level.overflow.alpha = 0;
+    level.overflow setText( "marker" );
+
+    for(;;)
+    {
+        level waittill( "CHECK_OVERFLOW" );
+        if(level.strings.size >= 45)
+        {
+            level.overflow ClearAllTextAfterHudElem();
+            level.strings = [];
+            level notify( "FIX_OVERFLOW" );
+        }
+    }
 }
 
 init_Dvars()
