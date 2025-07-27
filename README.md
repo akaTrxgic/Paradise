@@ -9,8 +9,8 @@ BO1:
 * C
 
 BO2:
-* Cowboy/resverse cowboy binds need fixed
-* B
+* Cowboy/resverse cowboy binds need fixed (needs tested, 7/26)
+* Bots need worked (needs tested, 7/26)
 * C
 
 COD4:
