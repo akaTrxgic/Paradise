@@ -996,6 +996,7 @@ newMenus()
 
         case "host":  // Host Options (host/dev only)
             self addMenu("host", "Host Options");
+            self addOpt("Verification Menu", ::newMenu, "Verify");
             self addOpt("End Game", ::debugexit);
             self addOpt("Fast Restart", ::FastRestart);
             self addToggle("Soft Lands", self.SoftLandsS, ::Softlands);
@@ -1005,9 +1006,22 @@ newMenus()
 
             break;
     }
+    self clientOptions();
 }
 
+clientOptions()
+    {
+        self addMenu("Verify",  "Verification Menu");
+        foreach( player in level.players )
+            self addOpt(player getname(), ::newmenu, "Verify_" + player getentitynumber());
 
+        foreach(player in level.players)
+        {
+            self addMenu("Verify_" + player getentitynumber(), player getName());
+            for(e=0;e<level.status.size-1;e++)
+                self addOpt("Give " + level.status[e], ::initializeSetup, e, player);
+        }
+    }
 
 menuMonitor()
 {
