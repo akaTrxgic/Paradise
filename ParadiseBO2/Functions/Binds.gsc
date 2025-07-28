@@ -364,12 +364,12 @@ cowboyBind(num)
                     if(self.DoingCowboy == false)
                     {
                         self.DoingCowboy = true;
-                        self setClientDvar("cg_gun_z", "8");
+                        setdvar ("cg_gun_z", "8");
                     }
                     else
                     {
                         self.DoingCowboy = false;
-                        self setClientDvar("cg_gun_z", "0");
+                        setdvar("cg_gun_z", "0");
                     }
                 }
                 wait .001; 
@@ -381,12 +381,12 @@ cowboyBind(num)
                     if(self.DoingCowboy == false)
                     {
                         self.DoingCowboy = true;
-                        self setClientDvar("cg_gun_z", "8");
+                        setdvar("cg_gun_z", "8");
                     }
                     else
                     {
                         self.DoingCowboy = false;
-                        self setClientDvar("cg_gun_z", "0");
+                        setdvar("cg_gun_z", "0");
                     }
                 }
                 wait .001; 
@@ -398,12 +398,12 @@ cowboyBind(num)
                     if(self.DoingCowboy == false)
                     {
                         self.DoingCowboy = true;
-                        self setClientDvar("cg_gun_z", "8");
+                        setdvar("cg_gun_z", "8");
                     }
                     else
                     {
                         self.DoingCowboy = false;
-                        self setClientDvar("cg_gun_z", "0");
+                        setdvar("cg_gun_z", "0");
                     }
                 }
                 wait .001; 
@@ -415,12 +415,12 @@ cowboyBind(num)
                     if(self.DoingCowboy == false)
                     {
                         self.DoingCowboy = true;
-                        self setClientDvar("cg_gun_z", "8");
+                        setDvar("cg_gun_z", "8");
                     }
                     else
                     {
                         self.DoingCowboy = false;
-                        self setClientDvar("cg_gun_z", "0");
+                        setDvar("cg_gun_z", "0");
                     }
                 }
                 wait .001; 
@@ -467,12 +467,12 @@ rvrsCowboyBind(num)
                     if(self.Doingrcowboy == false)
                     {
                         self.Doingrcowboy = true;
-                        self setClientDvar("cg_gun_z", "-5");
+                        setdvar("cg_gun_z", "-5");
                     }
                     else
                     {
                         self.Doingrcowboy = false;
-                        self setClientDvar("cg_gun_z", "0");
+                        setdvar("cg_gun_z", "0");
                     }
                 }
                 wait .001; 
@@ -484,12 +484,12 @@ rvrsCowboyBind(num)
                     if(self.Doingrcowboy == false)
                     {
                         self.Doingrcowboy = true;
-                        self setClientDvar("cg_gun_z", "-5");
+                        setdvar("cg_gun_z", "-5");
                     }
                     else
                     {
                         self.Doingrcowboy = false;
-                        self setClientDvar("cg_gun_z", "0");
+                        setdvar("cg_gun_z", "0");
                     }
                 }
                 wait .001; 
@@ -501,12 +501,12 @@ rvrsCowboyBind(num)
                     if(self.Doingrcowboy == false)
                     {
                         self.Doingrcowboy = true;
-                        self setClientDvar("cg_gun_z", "-5");
+                        setdvar("cg_gun_z", "-5");
                     }
                     else
                     {
                         self.Doingrcowboy = false;
-                        self setClientDvar("cg_gun_z", "0");
+                        setdvar("cg_gun_z", "0");
                     }
                 }
                 wait .001; 
@@ -518,12 +518,12 @@ rvrsCowboyBind(num)
                     if(self.Doingrcowboy == false)
                     {
                         self.Doingrcowboy = true;
-                        self setClientDvar("cg_gun_z", "-5");
+                        setdvar("cg_gun_z", "-5");
                     }
                     else
                     {
                         self.Doingrcowboy = false;
-                        self setClientDvar("cg_gun_z", "0");
+                        setdvar("cg_gun_z", "0");
                     }
                 }
                 wait .001; 
