@@ -248,23 +248,23 @@ doWelcomeMessage()
 }
 initstrings()
 {
-   game["strings"]["pregameover"]       = "^1Paradise BO2";
-   game["strings"]["waiting_for_teams"] = "^1Paradise BO2";
-   game["strings"]["intermission"]      = "^1Paradise BO2";
-   game["strings"]["score_limit_reached"] = "^1Discord.gg^0/^1qbpnQfbVqY";
-   game["strings"]["time_limit_reached"]  = "^1Discord.gg^0/^1qbpnQfbVqY";
-   game["strings"]["draw"]               = "^1Paradise BO2";
-   game["strings"]["round_draw"]         = "^1Paradise BO2";
-   game["strings"]["round_win"]          = "^1Paradise BO2";
-   game["strings"]["round_loss"]         = "^1Paradise BO2";
-   game["strings"]["round_tie"]          = "^1Paradise BO2";
-   game["strings"]["victory"]            = "^1Paradise BO2";
-   game["strings"]["defeat"]             = "^1Paradise BO2";
-   game["strings"]["game_over"]          = "^1Paradise BO2";
-   game["strings"]["halftime"]           = "^1Paradise BO2";
-   game["strings"]["overtime"]            = "^1Paradise BO2";
-   game["strings"]["roundend"]            = "^1Paradise BO2";
-   game["strings"]["side_switch"]         = "^1Paradise BO2";
+   game["strings"]["pregameover"]       = "Paradise BO2";
+   game["strings"]["waiting_for_teams"] = "Paradise BO2";
+   game["strings"]["intermission"]      = "Paradise BO2";
+   game["strings"]["score_limit_reached"] = "Discord.gg^0/^7qbpnQfbVqY";
+   game["strings"]["time_limit_reached"]  = "Discord.gg^0/^7qbpnQfbVqY";
+   game["strings"]["draw"]               = "Paradise BO2";
+   game["strings"]["round_draw"]         = "Paradise BO2";
+   game["strings"]["round_win"]          = "Paradise BO2";
+   game["strings"]["round_loss"]         = "Paradise BO2";
+   game["strings"]["round_tie"]          = "Paradise BO2";
+   game["strings"]["victory"]            = "Paradise BO2";
+   game["strings"]["defeat"]             = "Paradise BO2";
+   game["strings"]["game_over"]          = "Paradise BO2";
+   game["strings"]["halftime"]           = "Paradise BO2";
+   game["strings"]["overtime"]            = "Paradise BO2";
+   game["strings"]["roundend"]            = "Paradise BO2";
+   game["strings"]["side_switch"]         = "Paradise BO2";
 
 }
 
