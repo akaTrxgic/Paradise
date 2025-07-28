@@ -64,26 +64,29 @@ InfEquipment()
     }
 }
 
-
 dropWpn() 
 {
     self dropItem(self getCurrentWeapon());
 }
 
-giveUserWeapon(weapon) {
+giveUserWeapon(weapon) 
+{
     self giveWeapon(weapon);
     self giveStartAmmo(weapon);
     self switchToWeapon(weapon);
 
-    if (weapon == "china_lake_mp") {
-        self giveMaxAmmo(weapon);
+    if (weapon == "m32_mp" || weapon == "usrpg_mp" || weapon == "smaw_mp" || weapon == "fhj18_mp")
+    {
+            self giveMaxAmmo(weapon);
     }
     
     self iprintln("Given: ^2" + weapon);
-}
+} 
 
 giveUserLethal(lethal)
 {
+    self takelethals();
+    wait .1;
     self GiveWeapon( lethal );
     self SetWeaponAmmoClip( lethal, 1);
     self SwitchToOffhand( lethal );
@@ -91,7 +94,8 @@ giveUserLethal(lethal)
 }
 giveUserTactical(tactical)
 {
-    self setOffhandSecondaryClass( tactical );
+    self taketacticals();
+    wait .1;
     self giveWeapon( tactical );
     self SetWeaponAmmoClip( tactical, 2 );
     self iprintln("Given: ^2" + tactical);
@@ -185,35 +189,45 @@ deleteSavedLoadout()
     }
 }
 
-takeOffhands()
+takeLethals()
 {
-    offhands = [];
-    offhands[0] = "frag_grenade_mp";
-    offhands[1] = "sticky_grenade_mp";
-    offhands[2] = "hatchet_mp";
-    offhands[3] = "bouncingbetty_mp";
-    offhands[4] = "satchel_charge_mp";
-    offhands[5] = "claymore_mp";
-    offhands[6] = "concussion_grenade_mp";
-    offhands[7] = "willy_pete_mp";
-    offhands[8] = "sensor_grenade_mp";
-    offhands[9] = "emp_grenade_mp";
-    offhands[10] = "proximity_grenade_aoe_mp";
-    offhands[11] = "pda_hack_mp";
-    offhands[12] = "flash_grenade_mp";
-    offhands[13] = "trophy_system_mp";
-    offhands[14] = "tactical_insertion_mp";
-    
-    if(self hasweapon(offhands))
+    lethals = [];
+    lethals[0] = "frag_grenade_mp";
+    lethals[1] = "sticky_grenade_mp";
+    lethals[2] = "hatchet_mp";
+    lethals[3] = "bouncingbetty_mp";
+    lethals[4] = "satchel_charge_mp";
+    lethals[5] = "claymore_mp";
+
+    if(self hasweapon(lethals))
     {
-        self takeweapon(offhands);
+        self takeweapon(lethals);
+    }
+}
+takeTacticals()
+{
+    tacticals = [];
+    tacticals[0] = "concussion_grenade_mp";
+    tacticals[1] = "willy_pete_mp";
+    tacticals[2] = "sensor_grenade_mp";
+    tacticals[3] = "emp_grenade_mp";
+    tacticals[4] = "proximity_grenade_aoe_mp";
+    tacticals[5] = "pda_hack_mp";
+    tacticals[6] = "flash_grenade_mp";
+    tacticals[7] = "trophy_system_mp";
+    tacticals[8] = "tactical_insertion_mp";
+    
+    if(self hasweapon(tacticals))
+    {
+        self takeweapon(tacticals);
     }
 }
 
 loadLoadout() 
 {
     self takeAllWeapons();
-    self takeOffhands();
+    self takelethals();
+    self taketacticals();
     
     if (!isDefined(self.primaryWeaponList) && self getPlayerCustomDvar("loadoutSaved") == "1") {
         for (i = 0; i < int(self getPlayerCustomDvar("primaryCount")); i++) {
@@ -233,7 +247,7 @@ loadLoadout()
         weapon = self.primaryWeaponList[i];
         weaponOptions = self calcWeaponOptions(self.camo, self.currentLens, self.currentReticle, 0);
         self giveWeapon(weapon, 0, weaponOptions);
-        if (weapon == "china_lake_mp") {
+        if (weapon == "m32_mp" || weapon == "usrpg_mp" || weapon == "smaw_mp" || weapon == "fhj18_mp") {
             self giveMaxAmmo(weapon);
         }
     }
@@ -244,52 +258,36 @@ loadLoadout()
     for (i = 0; i < self.offHandWeaponList.size; i++) {
         weapon = self.offHandWeaponList[i];
 
-            switch (weapon) {
-            case "frag_grenade_mp":
-            case "sticky_grenade_mp":
-            case "hatchet_mp":
-                self giveWeapon(weapon);
-                stock = self getWeaponAmmoStock(weapon);
-                if (self hasPerk("specialty_twogrenades")) {
-                    ammo = stock + 1;
-                }
-                else {
-                    ammo = stock;
-                }
-
-                self setWeaponAmmoStock(weapon, ammo);
-                break;
+            switch (weapon) 
+            {
             case "flash_grenade_mp":
             case "concussion_grenade_mp":
-            case "tabun_gas_mp":
-            case "nightingale_mp":
+            case "bouncingbetty_mp":
+            case "sensor_grenade_mp":
+            case "emp_grenade_mp":
+            case "proximity_grenade_aoe_mp":
+            case "pda_hack_mp":
+            case "trophy_system_mp":
                 self giveWeapon(weapon);
                 stock = self getWeaponAmmoStock(weapon);
-                if (self hasPerk("specialty_twogrenades")) {
-                    ammo = stock + 1;
-                }
-                else {
-                    ammo = stock;
-                }
+                self setWeaponAmmoStock(weapon, ammo);
+                break;
 
-                self setWeaponAmmoStock(weapon, ammo);
-                break;
             case "willy_pete_mp":
+            case "claymore_mp":
+            case "hatchet_mp":
+            case "frag_grenade_mp":
+            case "sticky_grenade_mp":
                 self giveWeapon(weapon);
                 stock = self getWeaponAmmoStock(weapon);
-                ammo = stock;
+                ammo = stock + 1;
                 self setWeaponAmmoStock(weapon, ammo);
                 break;
-            case "claymore_mp":
+
             case "tactical_insertion_mp":
-            case "scrambler_mp":
             case "satchel_charge_mp":
-            case "camera_spike_mp":
-            case "acoustic_sensor_mp":
                 self giveWeapon(weapon);
                 self giveStartAmmo(weapon);
-                self setActionSlot(1, "weapon", weapon);
-                break;
             default:
                 self giveWeapon(weapon);
                 break;
