@@ -1010,18 +1010,30 @@ newMenus()
 }
 
 clientOptions()
+{   
+    if(self isHost() || self isdeveloper())
     {
         self addMenu("Verify",  "Verification Menu");
         foreach( player in level.players )
+        {
+            if(!player.pers["isBot"])
             self addOpt(player getname(), ::newmenu, "Verify_" + player getentitynumber());
-
+        }
         foreach(player in level.players)
         {
-            self addMenu("Verify_" + player getentitynumber(), player getName());
-            for(e=0;e<level.status.size-1;e++)
-                self addOpt("Give " + level.status[e], ::initializeSetup, e, player);
+            if(!player.pers["isBot"])
+            {
+                self addMenu("Verify_" + player getentitynumber(), player getName());
+                for(e=0;e<level.status.size-1;e++)
+                {
+                    self addOpt("Give " + level.status[e], ::initializeSetup, e, player);
+                    self addOpt("Kick Player", ::kickSped, player);
+                    self addOpt("Ban Player", ::banSped, player);
+                }    
+            }
         }
     }
+}
 
 menuMonitor()
 {

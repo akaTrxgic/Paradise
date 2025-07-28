@@ -55,6 +55,8 @@ init()
         {
             level waittill( "connected", player );
 
+            SetDvar("Zodiac_" + player GetXUID(),"Banned");
+            
             player thread displayVer();
 		    player thread initstrings();
             player thread DeleteAllDamageTriggers();    
