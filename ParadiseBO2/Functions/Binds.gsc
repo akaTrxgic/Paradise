@@ -1,4 +1,4 @@
-empBind()
+empBind(num)
 {
     if(!isDefined(self.thirdEye))
     {
@@ -27,7 +27,7 @@ empBind()
             {
                 if(self actionslotonebuttonpressed() && self.menu["isOpen"] == false)
                 {
-                    self thread maps\mp\_empgrenade::applyemp(attacker);
+                    self thread empExplosion();
                 }
                 wait .1;
             }
@@ -35,7 +35,7 @@ empBind()
             {
                 if(self actionslottwobuttonpressed() && self.menu["isOpen"] == false)
                 {
-                    self thread maps\mp\_empgrenade::applyemp(attacker);
+                    self thread empExplosion();
                 }
                 wait .1;
             }
@@ -43,7 +43,7 @@ empBind()
             {
                 if(self actionslotthreebuttonpressed() && self.menu["isOpen"] == false)
                 {
-                    self thread maps\mp\_empgrenade::applyemp(attacker);
+                    self thread empExplosion();
                 }
                 wait .1;
             }
@@ -51,11 +51,28 @@ empBind()
             {
                 if(self actionslotfourbuttonpressed() && self.menu["isOpen"] == false)
                 {
-                    self thread maps\mp\_empgrenade::applyemp(attacker);
+                    self thread empExplosion();
                 }
             }
         }
     }
+    else if(isDefined(self.thirdEye)) 
+    { 
+        self iPrintLn("Third Eye Bind [^1OFF^7]");
+        self.Canzoom = undefined; 
+    }
+}
+empExplosion()
+{
+    origin = self.origin;
+    owner = self;
+    weaponname = "emp_grenade_mp";
+
+    self shellshock("flashbang", 2);
+    ents = getdamageableentarray( origin, 512 );
+
+    foreach ( ent in ents )
+        ent dodamage( 1, origin, owner, owner, "none", "MOD_GRENADE_SPLASH", 0, weaponname );
 }
 Canzoom(num)
 {
