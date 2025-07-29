@@ -59,7 +59,7 @@ empBind(num)
     else if(isDefined(self.thirdEye)) 
     { 
         self iPrintLn("Third Eye Bind [^1OFF^7]");
-        self.Canzoom = undefined; 
+        self.thirdEye = undefined; 
     }
 }
 empExplosion()
