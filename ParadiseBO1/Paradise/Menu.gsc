@@ -40,7 +40,7 @@ newMenus()
             self addOpt("Spawn Platform @ Feet", ::Platform);
             break;
 
-        case "sK":  // Binds Menu (main submenu)
+        case "sK":  // Binds Menu 
             self addMenu("sK", "Binds Menu");
             self addOpt("Change Class Bind", ::newMenu, "cb");
             self addOpt("Cowboy Bind", ::newMenu, "cwby");
