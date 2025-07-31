@@ -61,8 +61,6 @@ init()
                     self FreezeControls(false);
                     self thread overflowfix();
 
-                    self thread botsetup();
-
 										if(!self.hasCalledFastLast)
 				            {
 			                self doFastLast();
@@ -82,6 +80,8 @@ init()
                     isFirstSpawn = false;
                 }
             }
+
+						self thread botsetup();
 
 	        self setorigin(self.spawn_origin);
             self.angles = self.spawn_angles;
