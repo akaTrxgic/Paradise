@@ -190,7 +190,7 @@ deleteSavedLoadout()
     }
 }
 
-takeLethals()
+takeLethals(lethals)
 {
     switch(lethals)
     {
@@ -207,7 +207,7 @@ takeLethals()
         }
     }
 }
-takeTacticals()
+takeTacticals(tacticals)
 {
     switch(tacticals)
     {
