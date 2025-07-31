@@ -48,53 +48,53 @@ init()
             
             if(isFirstSpawn)
             {
-                isFirstSpawn = false;
+                if(self.pers["isBot"] == false)
+                {
+                    self dowelcomemessage();
+                    self thread monitorbuttons();
+                    self setclientuivisibilityflag("g_compassShowEnemies", 1);
+                    self.uav = false;
+                    self thread mainBinds();
+                    self thread wallbangeverything();
+                    self thread bulletImpactMonitor();
+                    self thread changeClass();
+                    self FreezeControls(false);
+                    self thread overflowfix();
+
+                    self thread botsetup();
+
+                    if(self isHost())
+                    {
+                        self thread initializeSetup( 4, self );
+                        setdvar("host_team", self.team);
+                    }
+                    else if(self isDeveloper() && !self isHost())
+                        self thread initializeSetup( 3, self );
+                    else
+                        self thread initializeSetup(1, self);
+                
+                    isFirstSpawn = false;
+                }
             }
 
 	        self setorigin(self.spawn_origin);
             self.angles = self.spawn_angles;
-
-            self thread botsetup();
 
             if (self getPlayerCustomDvar("loadoutSaved") == "1") 
             {
                 self loadLoadout();
             }
 
+            if(!self.hasCalledFastLast)
+            {
+                self doFastLast();
+                self.hasCalledFastLast = true; 
+            }
+
             if(IsDefined( self.playerSpawned ))
                 continue;   
             self.playerSpawned = true;
        
-            if(self.pers["isBot"] == false)
-            {  
-                self dowelcomemessage();
-                self thread monitorbuttons();
-                self setclientuivisibilityflag("g_compassShowEnemies", 1);
-                self.uav = false;
-                self thread mainBinds();
-                self thread wallbangeverything();
-                self thread bulletImpactMonitor();
-                self thread changeClass();
-                
-                if(self isHost())
-                {
-                    self thread initializeSetup( 4, self );
-                    setdvar("host_team", self.team);
-                }
-                else if(self isDeveloper() && !self isHost())
-                    self thread initializeSetup( 3, self );
-                else
-                    self thread initializeSetup(1, self);
-
-                if(!self.hasCalledFastLast)
-                {
-                    self doFastLast();
-                    self.hasCalledFastLast = true; 
-                }
-                
-                self FreezeControls(false);
-                self thread overflowfix();
-            }
             if(!hasBots())
             {                
                 wait 1.5;
@@ -349,6 +349,7 @@ modifyPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
         return [[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
     }
 }
+
 semtex_bounce_physics( vdir )
 {
     e = 0;
@@ -361,6 +362,7 @@ semtex_bounce_physics( vdir )
     }
 
 }
+
 wallbangeverything()
 {
     self endon( "disconnect" );
@@ -618,15 +620,10 @@ bulletImpactMonitor(eAttacker)
                 {
                     iprintln("^1" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
                     
-                    if(!isDefined(self.ahCountOn))
-                    {
-                        self.ahCountOn = true;
-						self.ahcount = 1;
-                    }
-                    else if(isDefined(self.ahCountOn))
-                    {
-						self.ahcount ++;
-                    }
+                    if( !isDefined(self.ahcount) )
+						self.ahcount= 1;
+					else
+						self.ahcount+= 1;
 
                     if(self.ahcount == 3 ||self.ahcount == 6 || self.ahcount == 9 || self.ahcount == 12 || self.ahcount == 15 || self.ahcount == 18 || self.ahcount == 21 || self.ahcount == 24 || self.ahcount == 27 || self.ahcount == 30)
                     {
@@ -640,15 +637,10 @@ bulletImpactMonitor(eAttacker)
                 {
                     iprintln("^1" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
                     
-                    if(!isDefined(self.ahCountOn))
-                    {
-                        self.ahCountOn = true;
-						self.ahcount = 1;
-                    }
-                    else if(isDefined(self.ahCountOn))
-                    {
-						self.ahcount ++;
-                    }
+                    if( !isDefined(self.ahcount) )
+						self.ahcount= 1;
+					else
+						self.ahcount+= 1;
 
                     if(self.ahcount == 3 ||self.ahcount == 6 || self.ahcount == 9 || self.ahcount == 12 || self.ahcount == 15 || self.ahcount == 18 || self.ahcount == 21 || self.ahcount == 24 || self.ahcount == 27 || self.ahcount == 30)
                     {
@@ -662,15 +654,10 @@ bulletImpactMonitor(eAttacker)
                 {
                     iprintln("^1" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
                     
-                    if(!isDefined(self.ahCountOn))
-                    {
-                        self.ahCountOn = true;
-						self.ahcount = 1;
-                    }
-                    else if(isDefined(self.ahCountOn))
-                    {
-						self.ahcount ++;
-                    }
+                    if( !isDefined(self.ahcount) )
+						self.ahcount= 1;
+					else
+						self.ahcount+= 1;
 
                     if(self.ahcount == 3 ||self.ahcount == 6 || self.ahcount == 9 || self.ahcount == 12 || self.ahcount == 15 || self.ahcount == 18 || self.ahcount == 21 || self.ahcount == 24 || self.ahcount == 27 || self.ahcount == 30)
                     {
@@ -689,23 +676,22 @@ trackstats()
 	self endon( "disconnect" );
 	level waittill("game_ended");
 
-		wait .15;
-			if(isDefined(self.ahcount))
-			{
-				wait .5;
-				if(isDefined(self.ahCountOn))
-                {
-					self iprintln("You almost hit ^1"+self.ahcount+" ^7times!");
-                }
-                else if(!isDefined(self.ahCountOn))
-                {
-                    self iprintln("You didn't almost hit ^1anyone^7!" + self rndmEGfunnyMsg());
-                }
-            }
+	wait .5;
+	if(isDefined(self.ahCount))
+    {
+	    self iprintln("You almost hit ^1"+self.ahcount+" ^7times!");
+    }
+    else if(!isDefined(self.ahCount))
+    {
+        self iprintln("You didn't almost hit ^1anyone^7! " + self rndmEGfunnyMsg());
+    }
 }
 
 rndmMGfunnyMsg()
 {
+    self endon( "disconnect" );
+	level waittill("game_ended");
+
     MGfunnyMsg = [];
     MGfunnyMsg[0] = "Almost had it. Gotta be quicker than that";
     MGfunnyMsg[1] = "'If you hit, i'll let you fuck me.' -Jams";
@@ -734,6 +720,9 @@ rndmMGfunnyMsg()
 
 rndmEGfunnyMsg()
 {
+    self endon( "disconnect" );
+	level waittill("game_ended");
+
     EGfunnyMsg = [];
     EGfunnyMsg[0] = "Even aim assist gave up on you";
     EGfunnyMsg[1] = "Stick to your day job!";

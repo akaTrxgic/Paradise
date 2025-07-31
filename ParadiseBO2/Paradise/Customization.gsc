@@ -209,7 +209,7 @@ displayVer()
     Instructions.alpha = 0.5;
     for( ;; )
     {
-        Instructions setText("^1Paradise BO2");
+        Instructions setText("Paradise BO2");
         wait(2.0);
     }
 }
