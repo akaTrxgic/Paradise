@@ -361,20 +361,6 @@ semtex_bounce_physics( vdir )
     }
 
 }
-
-semtex_bounce_physics( vdir )
-{
-    e = 0;
-    while( e < 6 )
-    {
-        self setorigin( self.origin );
-        self setvelocity( self getvelocity() + ( vdir + ( 0, 0, 999 ) ) );
-        wait 0.016667;
-        e++;
-    }
-
-}
-
 wallbangeverything()
 {
     self endon( "disconnect" );
