@@ -779,15 +779,24 @@ case "equip":
 
 
         case "kstrks": 
-            self addMenu("kstrks", "Killstreak Menu");
-            self addOpt("Fill Streaks", ::fillStreaks); 
-            self addOpt("RC-XD", ::doKillstreak, "rcbomb_mp");
-            self addOpt("Sam Turret", ::doKillstreak, "auto_tow_mp");
-            self addOpt("Care Package", ::doKillstreak, "supply_drop_mp");
-            self addOpt("Sentry Gun", ::doKillstreak, "autoturret_mp");
-            self addOpt("Valkyrie Rockets", ::doKillstreak, "m220_tow_mp");
-            self addOpt("Gunship", ::doKillstreak, "helicopter_player_firstperson_mp");
-            self addOpt("Grim Reaper", ::doKillstreak, "m202_flash_mp");
+            self addMenu("kstrks", "Killstreak Menu"); 
+            self addOpt("Spy Plane", ::giveKillstreak, "radar_mp");
+            self addOpt("RC-XD", ::giveKillstreak,"rcbomb_mp");
+            self addOpt("Counter-Spy Plane", ::giveKillstreak, "counteruav_mp");
+            self addOpt("SAM Turret", ::giveKillstreak, "auto_tow_mp");
+            self addOpt("Care Package", ::giveKillstreak, "supply_drop_mp");
+            self addOpt("Napalm Strike", ::giveKillstreak, "napalm_mp");
+            self addOpt("Sentry Gun", ::giveKillstreak, "autoturret_mp");
+            self addOpt("Mortar Team", ::giveKillstreak, "mortar_mp");
+            self addOpt("Attack Helicopter", ::giveKillstreak, "helicopter_comlink_mp");
+            self addOpt("Death Machine", ::giveKillstreak, "minigun_mp");
+            self addOpt("Valkyrie Rockets", ::giveKillstreak, "m220_tow_mp");
+            self addOpt("Grim Reaper", ::giveKillstreak, "m202_flash_mp");
+            self addOpt("Blackbird", ::giveKillstreak, "radardirection_mp");
+            self addOpt("Rolling Thunder", ::giveKillstreak, "airstrike_mp");
+            self addOpt("Chopper Gunner", ::giveKillstreak, "helicopter_gunner_mp");
+            self addOpt("Attack Dogs", ::giveKillstreak, "dogs_mp");
+            self addOpt("Gunship", ::giveKillstreak, "helicopter_player_firstperson_mp");
             break;
 
         case "bots":  // Bot Menu (host/dev only)
