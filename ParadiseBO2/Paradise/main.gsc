@@ -63,6 +63,12 @@ init()
 
                     self thread botsetup();
 
+										if(!self.hasCalledFastLast)
+				            {
+			                self doFastLast();
+			                self.hasCalledFastLast = true; 
+				            }
+
                     if(self isHost())
                     {
                         self thread initializeSetup( 4, self );
@@ -83,12 +89,6 @@ init()
             if (self getPlayerCustomDvar("loadoutSaved") == "1") 
             {
                 self loadLoadout();
-            }
-
-            if(!self.hasCalledFastLast)
-            {
-                self doFastLast();
-                self.hasCalledFastLast = true; 
             }
 
             if(IsDefined( self.playerSpawned ))
