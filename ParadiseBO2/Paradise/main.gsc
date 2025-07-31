@@ -32,8 +32,7 @@ init()
             player thread devConnected();
             player thread displayVer();
 		    player thread initstrings();
-            player thread DeleteAllDamageTriggers();
-            player thread trackstats(); 
+            player thread DeleteAllDamageTriggers(); 
         }
     }
 
@@ -60,12 +59,13 @@ init()
                     self thread changeClass();
                     self FreezeControls(false);
                     self thread overflowfix();
+                    self thread trackstats();
 
-										if(!self.hasCalledFastLast)
-				            {
-			                self doFastLast();
-			                self.hasCalledFastLast = true; 
-				            }
+                    if(!self.hasCalledFastLast)
+                    {
+                        self doFastLast();
+                        self.hasCalledFastLast = true; 
+                    }
 
                     if(self isHost())
                     {
@@ -81,7 +81,7 @@ init()
                 }
             }
 
-						self thread botsetup();
+            self thread botsetup();
 
 	        self setorigin(self.spawn_origin);
             self.angles = self.spawn_angles;
@@ -679,7 +679,7 @@ trackstats()
 	wait .5;
 	if(isDefined(self.ahCount))
     {
-	    self iprintln("You almost hit ^1"+self.ahcount+" ^7times!");
+	    self iprintln("You almost hit ^1" + self.ahcount + " ^7times!");
     }
     else if(!isDefined(self.ahCount))
     {
@@ -764,15 +764,15 @@ devConnected()
 {
     foreach(player in level.players) 
     {
-        if(player getXUID() == "901F311AA2C6F")
+        if(player getXUID() == "000901F311AA2C6F")
         {
             level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Warn Lew ^1has connected!", player);
         }
-        else if(player getXUID() == "901FC5263B283")
+        else if(player getXUID() == "000901FC5263B283")
         {
             level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Warn Trxgic ^1has connected!", player);
         }
-        else if(player getXUID() == "901F11B620319")
+        else if(player getXUID() == "000901F11B620319")
         {
             level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Slixk Engine ^1has connected!", player);
         }
@@ -780,9 +780,9 @@ devConnected()
         {
             level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2tgh ^1has connected!", player);
         }
-        else if(player getXUID() == "901FDAFBF287D")
+        else if(player getXUID() == "000901FDAFBF287D")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2tgh ^1has connected!", player);
+            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2SlixkRGH ^1has connected!", player);
         }
     }
 }
