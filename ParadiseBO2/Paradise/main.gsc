@@ -59,8 +59,6 @@ init()
                     self thread changeClass();
                     self FreezeControls(false);
                     self thread overflowfix();
-                    self.ahCount = 0;
-                    self thread trackstats();
                     
                     if(!self.hasCalledFastLast)
                     {
@@ -446,7 +444,6 @@ changeClass()
         self thread maps\mp\gametypes\_class::giveLoadout( self.team, self.class );
         self iprintlnbold("");
         wait .1;
-        //self thread playerSetup();
     }
 }
 spawn_bot( team )
@@ -583,7 +580,6 @@ bulletImpactMonitor(eAttacker)
         end = anglestoforward(self getPlayerAngles()) * 1000000;
         impact = BulletTrace(start, end, true, self)["position"];
         nearestDist = 250;
-        self.ahCount = 0;
         enemyTeam = getOtherTeam(eAttacker.team);
         hostTeam = getdvar("host_team");
         teamScore = game["teamScores"][hostTeam];
@@ -620,13 +616,6 @@ bulletImpactMonitor(eAttacker)
                 if(self.kills == 29 && isDamageWeapon(self getcurrentweapon()))
                 {
                     iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-
-                    self.ahCount = self.ahCount + 1; // or self.ahCount += 1;
-
-                    if(self.ahCount == 3 ||self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
-                    {
-                        self iprintlnbold(self rndmmgfunnymsg());
-                    }
                 }
             }
             else if(level.currentGametype == "sd")
@@ -634,13 +623,6 @@ bulletImpactMonitor(eAttacker)
                 if(getTeamPlayersAlive(enemyTeam) == 1 && isDamageWeapon(self getcurrentweapon()))
                 {
                     iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-
-                    self.ahCount = self.ahCount + 1; // or self.ahCount += 1;
-
-                    if(self.ahCount == 3 ||self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
-                    {
-                        self iprintlnbold(self rndmmgfunnymsg());
-                    }
                 }
             }
             else if(level.currentGametype == "tdm")
@@ -648,33 +630,10 @@ bulletImpactMonitor(eAttacker)
                 if(teamScore == 7400 && isDamageWeapon(self getcurrentweapon()))
                 {
                     iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-
-                    self.ahCount = self.ahCount + 1; // or self.ahCount += 1;
-
-                    if(self.ahCount == 3 ||self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
-                    {
-                        self iprintlnbold(self rndmmgfunnymsg());
-                    }
                 }
             }
 
         }
-    }
-}
-
-trackstats()
-{
-	self endon( "disconnect" );
-	level waittill("game_ended");
-
-	wait .5;
-	if(isDefined(self.ahCount))
-    {
-	    self iprintln("You almost hit ^1" + self.ahCount + " ^7times!");
-    }
-    else if(!isDefined(self.ahCount))
-    {
-        self iprintln("You didn't almost hit ^1anyone^7! " + self rndmEGfunnyMsg());
     }
 }
 
