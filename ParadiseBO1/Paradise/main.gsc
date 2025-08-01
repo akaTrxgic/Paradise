@@ -37,7 +37,6 @@ init()
         player thread displayVer();
         player thread initstrings();
         player thread DeleteAllDamageTriggers();
-        player thread trackstats();   
     }
 }
 
@@ -655,55 +654,24 @@ bulletImpactMonitor(eAttacker)
                 if(self.kills == 29 && isDamageWeapon(self getcurrentweapon()))
                 {
                     iprintln("^2" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    if(!isDefined(self.timesAlmHit))
-                        self.timesAlmHit = 1;
-                    else
-                        self.timesAlmHit += 1;
                 }
             }
             else if(level.currentGametype == "sd")
             {
                 if(getTeamPlayersAlive(enemyTeam) == 1 && isDamageWeapon(self getcurrentweapon()))
                 {
-                    iprintln("^2" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    if(!isDefined(self.timesAlmHit))
-                        self.timesAlmHit = 1;
-                    else
-                        self.timesAlmHit += 1;
-                }
+                    iprintln("^2" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^
+								 }
             }
             else if(level.currentGametype == "tdm")
             {
                 if(teamScore == 7400 && isDamageWeapon(self getcurrentweapon()))
                 {
                     iprintln("^2" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    if(!isDefined(self.timesAlmHit))
-                        self.timesAlmHit = 1;
-                    else
-                        self.timesAlmHit += 1;
                 }
             }
 
         }
-    }
-}
-
-trackstats()
-{
-	self endon( "disconnect" );
-	level waittill("game_ended");
-
-	wait .5;
-	if(isDefined(self.ahCount))
-    {
-	    self iprintln("You almost hit ^1"+self.ahcount+" ^7times!");
-    }
-    else if(!isDefined(self.ahCount))
-    {
-        self iprintln("You didn't almost hit ^1anyone^7! " + self rndmEGfunnyMsg());
     }
 }
 
