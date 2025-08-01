@@ -677,48 +677,6 @@ trackstats()
         self iprintln("You didn't almost hit ^1anyone^7! " + self rndmEGfunnyMsg());
     }
 }
-teamwinnerbyscore()
-{
-    teamkeys = getarraykeys( level.teams );
-    winner = teamkeys[0];
-    previous_winner_score = [[ level._getteamscore ]]( winner );
-
-    for ( teamindex = 1; teamindex < teamkeys.size; teamindex++ )
-    {
-        winner = compareteambyteamscore( winner, teamkeys[teamindex], previous_winner_score );
-
-        if ( winner != "tie" )
-            previous_winner_score = [[ level._getteamscore ]]( winner );
-    }
-
-    return winner;
-}
-compareteambyteamscore( teama, teamb, previous_winner_score )
-{
-    winner = undefined;
-    teambscore = [[ level._getteamscore ]]( teamb );
-
-    if ( teama == "tie" )
-    {
-        winner = "tie";
-
-        if ( previous_winner_score < teambscore )
-            winner = teamb;
-
-        return winner;
-    }
-
-    teamascore = [[ level._getteamscore ]]( teama );
-
-    if ( teambscore == teamascore )
-        winner = "tie";
-    else if ( teambscore > teamascore )
-        winner = teamb;
-    else
-        winner = teama;
-
-    return winner;
-}
 
 rndmMGfunnyMsg()
 {
