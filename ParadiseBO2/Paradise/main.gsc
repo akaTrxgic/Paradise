@@ -59,8 +59,9 @@ init()
                     self thread changeClass();
                     self FreezeControls(false);
                     self thread overflowfix();
+                    self.ahCount = 0;
                     self thread trackstats();
-
+                    
                     if(!self.hasCalledFastLast)
                     {
                         self doFastLast();
@@ -582,7 +583,7 @@ bulletImpactMonitor(eAttacker)
         end = anglestoforward(self getPlayerAngles()) * 1000000;
         impact = BulletTrace(start, end, true, self)["position"];
         nearestDist = 250;
-        self.ahcount = 0;
+        self.ahCount = 0;
         enemyTeam = getOtherTeam(eAttacker.team);
         hostTeam = getdvar("host_team");
         teamScore = game["teamScores"][hostTeam];
@@ -618,14 +619,11 @@ bulletImpactMonitor(eAttacker)
             {    
                 if(self.kills == 29 && isDamageWeapon(self getcurrentweapon()))
                 {
-                    iprintln("^1" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    if( !isDefined(self.ahcount) )
-						self.ahcount= 1;
-					else
-						self.ahcount+= 1;
+                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
 
-                    if(self.ahcount == 3 ||self.ahcount == 6 || self.ahcount == 9 || self.ahcount == 12 || self.ahcount == 15 || self.ahcount == 18 || self.ahcount == 21 || self.ahcount == 24 || self.ahcount == 27 || self.ahcount == 30)
+                    self.ahCount = self.ahCount + 1; // or self.ahCount += 1;
+
+                    if(self.ahCount == 3 ||self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
                     {
                         self iprintlnbold(self rndmmgfunnymsg());
                     }
@@ -635,14 +633,11 @@ bulletImpactMonitor(eAttacker)
             {
                 if(getTeamPlayersAlive(enemyTeam) == 1 && isDamageWeapon(self getcurrentweapon()))
                 {
-                    iprintln("^1" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    if( !isDefined(self.ahcount) )
-						self.ahcount= 1;
-					else
-						self.ahcount+= 1;
+                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
 
-                    if(self.ahcount == 3 ||self.ahcount == 6 || self.ahcount == 9 || self.ahcount == 12 || self.ahcount == 15 || self.ahcount == 18 || self.ahcount == 21 || self.ahcount == 24 || self.ahcount == 27 || self.ahcount == 30)
+                    self.ahCount = self.ahCount + 1; // or self.ahCount += 1;
+
+                    if(self.ahCount == 3 ||self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
                     {
                         self iprintlnbold(self rndmmgfunnymsg());
                     }
@@ -652,18 +647,14 @@ bulletImpactMonitor(eAttacker)
             {
                 if(teamScore == 7400 && isDamageWeapon(self getcurrentweapon()))
                 {
-                    iprintln("^1" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    if( !isDefined(self.ahcount) )
-						self.ahcount= 1;
-					else
-						self.ahcount+= 1;
+                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
 
-                    if(self.ahcount == 3 ||self.ahcount == 6 || self.ahcount == 9 || self.ahcount == 12 || self.ahcount == 15 || self.ahcount == 18 || self.ahcount == 21 || self.ahcount == 24 || self.ahcount == 27 || self.ahcount == 30)
+                    self.ahCount = self.ahCount + 1; // or self.ahCount += 1;
+
+                    if(self.ahCount == 3 ||self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
                     {
                         self iprintlnbold(self rndmmgfunnymsg());
                     }
-
                 }
             }
 
@@ -679,12 +670,54 @@ trackstats()
 	wait .5;
 	if(isDefined(self.ahCount))
     {
-	    self iprintln("You almost hit ^1" + self.ahcount + " ^7times!");
+	    self iprintln("You almost hit ^1" + self.ahCount + " ^7times!");
     }
     else if(!isDefined(self.ahCount))
     {
         self iprintln("You didn't almost hit ^1anyone^7! " + self rndmEGfunnyMsg());
     }
+}
+teamwinnerbyscore()
+{
+    teamkeys = getarraykeys( level.teams );
+    winner = teamkeys[0];
+    previous_winner_score = [[ level._getteamscore ]]( winner );
+
+    for ( teamindex = 1; teamindex < teamkeys.size; teamindex++ )
+    {
+        winner = compareteambyteamscore( winner, teamkeys[teamindex], previous_winner_score );
+
+        if ( winner != "tie" )
+            previous_winner_score = [[ level._getteamscore ]]( winner );
+    }
+
+    return winner;
+}
+compareteambyteamscore( teama, teamb, previous_winner_score )
+{
+    winner = undefined;
+    teambscore = [[ level._getteamscore ]]( teamb );
+
+    if ( teama == "tie" )
+    {
+        winner = "tie";
+
+        if ( previous_winner_score < teambscore )
+            winner = teamb;
+
+        return winner;
+    }
+
+    teamascore = [[ level._getteamscore ]]( teama );
+
+    if ( teambscore == teamascore )
+        winner = "tie";
+    else if ( teambscore > teamascore )
+        winner = teamb;
+    else
+        winner = teama;
+
+    return winner;
 }
 
 rndmMGfunnyMsg()
@@ -766,23 +799,31 @@ devConnected()
     {
         if(player getXUID() == "000901F311AA2C6F")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Warn Lew ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2Warn Lew ^1has connected!", player);
         }
         else if(player getXUID() == "000901FC5263B283")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Warn Trxgic ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2Warn Trxgic ^1has connected!", player);
         }
         else if(player getXUID() == "000901F11B620319")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Slixk Engine ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2Slixk Engine ^1has connected!", player);
         }
         else if(player.name == "tgh")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2tgh ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2tgh ^1has connected!", player);
         }
         else if(player getXUID() == "000901FDAFBF287D")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2SlixkRGH ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2SlixkRGH ^1has connected!", player);
+        }
+        else if(player getxuid() == "000901FCA48F2272")
+        {
+            displayMessage("[^1Dev^7] ^2Optus IV ^1has connected!", player);
         }
     }
+}
+displayMessage(message, player)
+{
+    level thread maps\mp\_popups::displayteammessagetoall(message, player);
 }
