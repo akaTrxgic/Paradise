@@ -82,8 +82,9 @@ init()
                     self thread overflowfix();
                 }
                 
-                    isFirstSpawn = false;
-            }
+                isFirstSpawn = false;
+                
+                }
 
             self thread botSetup();
 
@@ -206,10 +207,9 @@ modifyPlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
     dist = GetDistance(self, eAttacker);
     if(level.currentGametype == "dm")
     {
-        // Handle melee attacks for verified players and bots
         if(sMeansOfDeath == "MOD_MELEE")
         {
-            if(eAttacker.verified == true)
+            if(eAttacker.access == 0)
                 iDamage = 0;
             else if(isDefined(eAttacker.pers["isBot"]) && eAttacker.pers["isBot"] == true)
                 iDamage = 999;
@@ -252,10 +252,9 @@ modifyPlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
     }
     else if(level.currentGametype == "sd")
     {
-        // Handle melee attacks for verified players and bots
     if(sMeansOfDeath == "MOD_MELEE")
     {
-        if(eAttacker.verified == true)
+        if(eAttacker.access == 0)
             iDamage = 0;
         else if(isDefined(eAttacker.pers["isBot"]) && eAttacker.pers["isBot"] == true)
             iDamage = 999;
@@ -300,7 +299,7 @@ modifyPlayerDamage( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
     {     
         if(sMeansOfDeath == "MOD_MELEE")
         {
-            if(eAttacker.verified == true)
+            if(eAttacker.access == 0)
             iDamage = 0;
             else if(isDefined(eAttacker.pers["isBot"]) && eAttacker.pers["isBot"] == true)
             iDamage = 999;
@@ -514,7 +513,7 @@ botSetup()
 {
     if(!IsDefined(self.pers["isBot"]) || !self.pers["isBot"])
         return;
-
+    self.access = 0;
     self clearperks();
     self setRank(randomintrange(0, 49), randomintrange(0, 15));
     
@@ -785,27 +784,35 @@ devConnected()
 {
     foreach(player in level.players) 
     {
-        if(player getXUID() == "901F311AA2C6F")
+        if(player getXUID() == "000901F311AA2C6F")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Warn Lew ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2Warn Lew ^1has connected!", player);
         }
-        else if(player getXUID() == "901FC5263B283")
+        else if(player getXUID() == "000901FC5263B283")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Warn Trxgic ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2Warn Trxgic ^1has connected!", player);
         }
-        else if(player getXUID() == "901F11B620319")
+        else if(player getXUID() == "000901F11B620319")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2Slixk Engine ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2Slixk Engine ^1has connected!", player);
         }
         else if(player.name == "tgh")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2tgh ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2tgh ^1has connected!", player);
         }
-        else if(player getXUID() == "901FDAFBF287D")
+        else if(player getXUID() == "000901FDAFBF287D")
         {
-            level thread maps\mp\_popups::displayteammessagetoall("[^1Dev^7] ^2tgh ^1has connected!", player);
+            displayMessage("[^1Dev^7] ^2SlixkRGH ^1has connected!", player);
+        }
+        else if(player getxuid() == "000901FCA48F2272")
+        {
+            displayMessage("[^1Dev^7] ^2Optus IV ^1has connected!", player);
         }
     }
+}
+displayMessage(message, player)
+{
+    level thread maps\mp\_popups::displayteammessagetoall(message, player);
 }
 removeSkyBarrier()
 {
