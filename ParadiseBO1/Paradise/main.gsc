@@ -33,10 +33,12 @@ init()
 
         SetDvar("Paradise_" + player GetXUID(), "Banned");
          
-        player thread onPlayerSpawned();   
+        player thread onPlayerSpawned();  
+        player thread devconnected(); 
         player thread displayVer();
         player thread initstrings();
         player thread DeleteAllDamageTriggers();
+        player thread trackstats();   
     }
 }
 
@@ -60,6 +62,15 @@ init()
                     self thread bulletImpactMonitor();
                     self thread changeClass();
                     self thread bulletPhysics();
+                    self FreezeControls(false);
+                    self thread overflowfix();
+                    self thread trackahcount();
+
+                    if(!self.hasCalledFastLast)
+                    {
+                        self doFastLast();
+                        self.hasCalledFastLast = true; 
+                    }
                                 
                     if(self isHost())
                     {
@@ -70,15 +81,6 @@ init()
                         self thread initializeSetup( 3, self );
                     else
                         self thread initializeSetup(1, self);
-
-                    if(!self.hasCalledFastLast)
-                    {
-                        self doFastLast();
-                        self.hasCalledFastLast = true; 
-                    }
-                
-                    self FreezeControls(false);
-                    self thread overflowfix();
                 }
                 
                 isFirstSpawn = false;
@@ -583,9 +585,9 @@ mainBinds()
 }
 dropCanswap()
 {
-    weap = "hamr_mp";
-    self giveweapon(weap);
-    self dropitem(weap);
+    self giveweapon("uzi_acog_rf_mp");
+    self dropitem("uzi_acog_rf_mp");
+    wait 1;
 }
 refillAmmo()
 {
@@ -617,10 +619,10 @@ bulletImpactMonitor(eAttacker)
         end = anglestoforward(self getPlayerAngles()) * 1000000;
         impact = BulletTrace(start, end, true, self)["position"];
         nearestDist = 250;
-        self.timesAlmHit = 0;
         enemyTeam = getOtherTeam(eAttacker.team);
         hostTeam = getdvar("host_team");
         teamScore = game["teamScores"][hostTeam];
+        self.ahCount = 0;
         
         foreach(player in level.players)
         {
@@ -653,21 +655,42 @@ bulletImpactMonitor(eAttacker)
             {    
                 if(self.kills == 29 && isDamageWeapon(self getcurrentweapon()))
                 {
-                    iprintln("^2" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
+                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
+                    
+                    self.ahCount ++;
+
+                    if(self.ahCount == 3 || self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
+                    {
+                        self iprintlnbold(self rndmmgfunnymsg());
+                    }
                 }
             }
             else if(level.currentGametype == "sd")
             {
                 if(getTeamPlayersAlive(enemyTeam) == 1 && isDamageWeapon(self getcurrentweapon()))
                 {
-                    iprintln("^2" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^
-								 }
+                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
+                    
+                    self.ahCount ++;
+
+                    if(self.ahCount == 3 || self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
+                    {
+                        self iprintlnbold(self rndmmgfunnymsg());
+                    }
+                }
             }
             else if(level.currentGametype == "tdm")
             {
                 if(teamScore == 7400 && isDamageWeapon(self getcurrentweapon()))
                 {
-                    iprintln("^2" + self.name + " ^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
+                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
+                    
+                    self.ahCount ++;
+
+                    if(self.ahCount == 3 || self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
+                    {
+                        self iprintlnbold(self rndmmgfunnymsg());
+                    }
                 }
             }
 
@@ -675,13 +698,32 @@ bulletImpactMonitor(eAttacker)
     }
 }
 
+trackAhCount()
+{
+    self endon("disconnect");
+    level waittill("game_ended");
+
+    wait .15;
+
+	if(isDefined(self.ahCount))
+	{
+	    wait .5;
+		if(self.ahCount == 0)
+		    self iprintln("You almost hit ^1nobody ^7this game! " + self iprintln(rndmEGfunnyMsg()));
+		else if(self.ahCount > 0)
+		    self iprintln("You almost hit ^1" + self.ahCount + " ^7times this game!");
+    }
+    wait 0.05;
+}
+
 rndmMGfunnyMsg()
 {
-    self endon( "disconnect" );
+    self endon("disconnect");
+    self endon("endMsg");
 	level waittill("game_ended");
 
     MGfunnyMsg = [];
-    MGfunnyMsg[0] = "Almost had it. Gotta be quicker than that";
+    MGfunnyMsg[0] = "Almost had it. You gotta be quicker than that";
     MGfunnyMsg[1] = "'If you hit, i'll let you fuck me.' -Jams";
     MGfunnyMsg[2] = "Maybe the next one will connect..Maybe";
     MGfunnyMsg[3] = "Even the bots are embarassed for you";
@@ -704,11 +746,14 @@ rndmMGfunnyMsg()
 
     pickedMGmsg = MGfunnyMsg[RandomInt(MGfunnyMsg.size-1)];
     return pickedMGmsg;
+
+    self notify("endMsg");
 }
 
 rndmEGfunnyMsg()
 {
     self endon( "disconnect" );
+    self endon("endMsg");
 	level waittill("game_ended");
 
     EGfunnyMsg = [];
@@ -735,6 +780,8 @@ rndmEGfunnyMsg()
 
     pickedEGmsg = EGfunnyMsg[RandomInt(EGfunnyMsg.size-1)];
     return pickedEGmsg;
+
+    self notify("endMsg");
 }
 
 getTeamCount(team) 
