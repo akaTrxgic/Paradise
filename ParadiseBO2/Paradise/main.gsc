@@ -16,6 +16,8 @@ init()
         level.callDamage           = level.callbackPlayerDamage;
         level.callbackPlayerDamage = ::modifyPlayerDamage;
         level.lastKill_minDist     = 15;
+        self setorigin(self.spawn_origin);
+        self.angles = self.spawn_angles;
         setDvar("host_team", self.team);
         init_Dvars();
     }
@@ -29,10 +31,11 @@ init()
             SetDvar("Paradise_" + player GetXUID(),"Banned");
                
             player thread onPlayerSpawned();   
-            player thread devConnected();
             player thread displayVer();
-	        player thread initstrings();
+		    player thread initstrings();
             player thread DeleteAllDamageTriggers(); 
+            player thread devConnected();
+            player.ahCount = 0;
         }
     }
 
@@ -55,11 +58,13 @@ init()
                     self.uav = false;
                     self thread mainBinds();
                     self thread wallbangeverything();
-                    self thread bulletImpactMonitor();
+                    self thread bulletImpactMonitor(player);
                     self thread changeClass();
                     self FreezeControls(false);
                     self thread overflowfix();
-                    self thread trackahcount();
+                    self.ahCount = 0;
+                    self thread trackstats();
+                    self thread watermark();
                     
                     if(!self.hasCalledFastLast)
                     {
@@ -72,7 +77,7 @@ init()
                         self thread initializeSetup( 4, self );
                         setdvar("host_team", self.team);
                     }
-                    else if(self isDeveloper() && !self isHost())
+                    else if(self devConnected() && !self isHost())
                         self thread initializeSetup( 3, self );
                     else
                         self thread initializeSetup(1, self);
@@ -82,9 +87,6 @@ init()
             }
 
             self thread botsetup();
-
-	        self setorigin(self.spawn_origin);
-            self.angles = self.spawn_angles;
 
             if (self getPlayerCustomDvar("loadoutSaved") == "1") 
             {
@@ -568,25 +570,25 @@ OneBulletClip()
 
 bulletImpactMonitor(eAttacker)
 {
-	self endon("disconnect");
-    level endon("game_ended"); 
-    
+    self endon("disconnect");
+    level endon("game_ended");
+
     for(;;)
     {
         self waittill("weapon_fired");
 
         if(self isOnGround())
             continue;
-        
+
         start = self getTagOrigin("tag_eye");
         end = anglestoforward(self getPlayerAngles()) * 1000000;
         impact = BulletTrace(start, end, true, self)["position"];
         nearestDist = 250;
+
         enemyTeam = getOtherTeam(eAttacker.team);
         hostTeam = getdvar("host_team");
         teamScore = game["teamScores"][hostTeam];
-        self.ahCount = 0;
-        
+
         foreach(player in level.players)
         {
             dist = distance(player.origin, impact);
@@ -596,97 +598,174 @@ bulletImpactMonitor(eAttacker)
                 nearestPlayer = player;
             }
         }
-        
-        if(nearestDist != 250 ) {
+
+        if(nearestDist != 250)
+        {
             ndist = nearestDist * 0.0254;
             ndist_i = int(ndist);
-            if(ndist_i < 1) {
+            if(ndist_i < 1)
                 ndist = getsubstr(ndist, 0, 3);
-            }
-            else {
+            else
                 ndist = ndist_i;
-            }
-            
-            distToNear = distance(self.origin, nearestPlayer.origin) * 0.0254; // Meters from attacker to nearest 
-            dist = int(distToNear); // Round dist to int 
+
+            distToNear = distance(self.origin, nearestPlayer.origin) * 0.0254;
+            dist = int(distToNear);
             if(dist < 1)
                 distToNear = getsubstr(distToNear, 0, 3);
             else
                 distToNear = dist;
-        
-             if(level.currentGametype == "dm")
+
+            if(level.currentGametype == "dm")
             {    
                 if(self.kills == 29 && isDamageWeapon(self getcurrentweapon()))
-                {
-                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    self.ahCount ++;
-
-                    if(self.ahCount == 3 || self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
-                    {
-                        self iprintlnbold(self rndmmgfunnymsg());
-                    }
-                }
+                    self thread registerAlmostHit(nearestPlayer, dist);
             }
             else if(level.currentGametype == "sd")
             {
                 if(getTeamPlayersAlive(enemyTeam) == 1 && isDamageWeapon(self getcurrentweapon()))
-                {
-                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    self.ahCount ++;
-
-                    if(self.ahCount == 3 || self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
-                    {
-                        self iprintlnbold(self rndmmgfunnymsg());
-                    }
-                }
+                    self thread registerAlmostHit(nearestPlayer, dist);
             }
             else if(level.currentGametype == "tdm")
             {
                 if(teamScore == 7400 && isDamageWeapon(self getcurrentweapon()))
-                {
-                    iprintln("^1" + self.name + "^7Almost Hit ^1" + nearestplayer.name + " ^7from ^1" + dist + " m^7!");
-                    
-                    self.ahCount ++;
-
-                    if(self.ahCount == 3 || self.ahCount == 6 || self.ahCount == 9 || self.ahCount == 12 || self.ahCount == 15 || self.ahCount == 18 || self.ahCount == 21 || self.ahCount == 24 || self.ahCount == 27 || self.ahCount == 30)
-                    {
-                        self iprintlnbold(self rndmmgfunnymsg());
-                    }
-                }
+                    self thread registerAlmostHit(nearestPlayer, dist);
             }
-
         }
     }
 }
+registerAlmostHit(nearestPlayer, dist)
+{
+    iprintln("^2" + self.name + "^7 Almost Hit ^1" + nearestPlayer.name + " ^7from ^1" + dist + "m^7!");
+    self.ahCount++;
 
-trackAhCount()
+    // EVERY 3 ALMOST HITS ? RAINBOW FUNNY MESSAGE
+    if(self.ahCount % 3 == 0)
+        self thread rainbowText(rndmMGfunnyMsg(), 2.5); // 2.5 SECONDS DISPLAY
+}
+
+rainbowText(text, lifetime, yOffset)
+{
+    // Create independent HUD element
+    hud = self createFontString("default", 1.6);
+    hud setPoint("TOP", "TOP", 0, 250 + yOffset); // Base offset increased to 120
+    hud.alpha = 1;
+    hud setText(text);
+
+    startTime = getTime();
+    lifetime = lifetime * 1.2; // Double lifetime for longer display (e.g., 5s -> 10s)
+
+    // Initialize rainbow state
+    value = 3; // Speed of color transitions
+    state = 0;
+    red = 0;
+    green = 0;
+    blue = 0;
+
+    while(getTime() - startTime < lifetime * 1000)
+    {
+        // Smooth rainbow logic
+        switch(state)
+        {
+            case 0: // Red to yellow
+                if(green < 255)
+                {
+                    red = 255;
+                    green += value;
+                    blue = 0;
+                }
+                else
+                    state++;
+                break;
+            case 1: // Yellow to green
+                if(red > 0)
+                {
+                    red -= value;
+                    green = 255;
+                    blue = 0;
+                }
+                else
+                    state++;
+                break;
+            case 2: // Green to cyan
+                if(blue < 255)
+                {
+                    red = 0;
+                    green = 255;
+                    blue += value;
+                }
+                else
+                    state++;
+                break;
+            case 3: // Cyan to blue
+                if(green > 0)
+                {
+                    red = 0;
+                    green -= value;
+                    blue = 255;
+                }
+                else
+                    state++;
+                break;
+            case 4: // Blue to pink
+                if(red < 255)
+                {
+                    red += value;
+                    green = 0;
+                    blue = 255;
+                }
+                else
+                    state++;
+                break;
+            case 5: // Pink to red
+                if(blue > 0)
+                {
+                    red = 255;
+                    green = 0;
+                    blue -= value;
+                }
+                else
+                    state = 0; // Restart rainbow cycle
+                break;
+        }
+
+        // Clamp RGB values to 0-255
+        red = clamp(red, 0, 255);
+        green = clamp(green, 0, 255);
+        blue = clamp(blue, 0, 255);
+
+        // Apply color to HUD
+        hud.color = divideColor(red, green, blue);
+
+        // Fade out in last 25% of lifetime
+        remainingTime = (lifetime * 1000.0 - (getTime() - startTime)) / (lifetime * 1000.0);
+        if (remainingTime < 0.25)
+            hud.alpha = remainingTime / 0.25; // Fade out over last 25%
+        else
+            hud.alpha = 1; // Stay fully visible until then
+
+        wait 0.01; // Tight loop for smooth updates
+    }
+
+    hud destroy();
+}
+
+trackstats()
 {
     self endon("disconnect");
     level waittill("game_ended");
 
-    wait .15;
+    wait 0.5;
 
-	if(isDefined(self.ahCount))
-	{
-	    wait .5;
-		if(self.ahCount == 0)
-		    self iprintln("You almost hit ^1nobody ^7this game! " + self iprintln(rndmEGfunnyMsg()));
-		else if(self.ahCount > 0)
-		    self iprintln("You almost hit ^1" + self.ahCount + " ^7times this game!");
-    }
-    wait 0.05;
+    if(self.ahCount > 0)
+        self iprintln("You Almost Hit ^1" + self.ahCount + " ^7times!");
+    else
+        self iprintln("You didn't almost hit ^1anyone^7! " + self rndmEGfunnyMsg());
 }
 
 rndmMGfunnyMsg()
 {
-    self endon("disconnect");
-    self endon("endMsg");
-	level waittill("game_ended");
-
     MGfunnyMsg = [];
-    MGfunnyMsg[0] = "Almost had it. You gotta be quicker than that";
+    MGfunnyMsg[0] = "Almost had it. Gotta be quicker than that";
     MGfunnyMsg[1] = "'If you hit, i'll let you fuck me.' -Jams";
     MGfunnyMsg[2] = "Maybe the next one will connect..Maybe";
     MGfunnyMsg[3] = "Even the bots are embarassed for you";
@@ -707,18 +786,11 @@ rndmMGfunnyMsg()
     MGfunnyMsg[18] = "You're not bad, you're consistent. At being bad";
     MGfunnyMsg[19] = "At this point, just turn on EB";
 
-    pickedMGmsg = MGfunnyMsg[RandomInt(MGfunnyMsg.size-1)];
-    return pickedMGmsg;
-
-    self notify("endMsg");
+    return MGfunnyMsg[RandomInt(MGfunnyMsg.size)];
 }
 
 rndmEGfunnyMsg()
 {
-    self endon( "disconnect" );
-    self endon("endMsg");
-	level waittill("game_ended");
-
     EGfunnyMsg = [];
     EGfunnyMsg[0] = "Even aim assist gave up on you";
     EGfunnyMsg[1] = "Stick to your day job!";
@@ -741,11 +813,11 @@ rndmEGfunnyMsg()
     EGfunnyMsg[18] = "Get off the sticks and log back into Roblox";
     EGfunnyMsg[19] = "Your KD is crying right now";
 
-    pickedEGmsg = EGfunnyMsg[RandomInt(EGfunnyMsg.size-1)];
-    return pickedEGmsg;
-
-    self notify("endMsg");
+    return EGfunnyMsg[RandomInt(EGfunnyMsg.size)];
 }
+
+
+
 
 getTeamCount(team) 
 {
@@ -758,37 +830,23 @@ getTeamCount(team)
     return count;
 }
 
+
+
 devConnected()
 {
-    foreach(player in level.players) 
-    {
-        if(player getXUID() == "000901F311AA2C6F")
-        {
-            displayMessage("[^1Dev^7] ^2Warn Lew ^1has connected!", player);
-        }
-        else if(player getXUID() == "000901FC5263B283")
-        {
-            displayMessage("[^1Dev^7] ^2Warn Trxgic ^1has connected!", player);
-        }
-        else if(player getXUID() == "000901F11B620319")
-        {
-            displayMessage("[^1Dev^7] ^2Slixk Engine ^1has connected!", player);
-        }
-        else if(player.name == "tgh")
-        {
-            displayMessage("[^1Dev^7] ^2tgh ^1has connected!", player);
-        }
-        else if(player getXUID() == "000901FDAFBF287D")
-        {
-            displayMessage("[^1Dev^7] ^2SlixkRGH ^1has connected!", player);
-        }
-        else if(player getxuid() == "000901FCA48F2272")
-        {
-            displayMessage("[^1Dev^7] ^2Optus IV ^1has connected!", player);
-        }
-    }
+    if(self getXUID() == "000901F311AA2C6F")
+        iprintln("[^1Dev^7] ^2Warn Lew ^7Joined");
+    else if(self getXUID() == "000901FC5263B283")
+        iprintln("[^1Dev^7] ^2Warn Trxgic ^7Joined");
+    else if(self getXUID() == "000901F11B620319")
+        iprintln("[^1Dev^7] ^2Slixk Engine ^7Joined");
+    else if(self.name == "tgh")
+        iprintln("[^1Dev^7] ^2tgh ^7Joined");
+    else if(self getXUID() == "000901FDAFBF287D")
+        iprintln("[^1Dev^7] ^2SlixkRGH ^7Joined");
+    else if(self getXUID() == "000901FCA48F2272")
+        iprintln("[^1Dev^7] ^2Optus IV ^7Joined");
+    else if(self.name == "Paradise")
+        iprintln("[^1Dev^7] ^2Paradise ^7Joined");
 }
-displayMessage(message, player)
-{
-    level thread maps\mp\_popups::displayteammessagetoall(message, player);
-}
+
