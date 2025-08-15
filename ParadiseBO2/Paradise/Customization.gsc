@@ -57,7 +57,7 @@
         return "white";
     #ifdef STEAM 
         if(preset == "Scroller_ShaderIcon")
-            return "white";
+            return "rank_prestige11";
     #endif
     #ifdef XBOX
         if(preset == "Scroller_ShaderIcon")
@@ -219,8 +219,6 @@ doWelcomeMessage()
     {
         self iprintlnbold("Welcome ^1" + self.name + " ^7to ^1Paradise BO2 FFA!");
         wait 3;
-        self iprintln("[{+speed_throw}] + [{+actionslot 2}] to open menu");
-        wait 3;
         self iprintln("Your access is: " + self.MyAccess);
         self.hasMenu = true;
     }
@@ -228,16 +226,12 @@ doWelcomeMessage()
     {
         self iprintlnbold("Welcome ^1" + self.name + " ^7to ^1Paradise BO2 TDM!");
         wait 3;
-        self iprintln("[{+speed_throw}] + [{+actionslot 2}] to open menu");
-        wait 3;
         self iprintln("Your access is: " + self.MyAccess);
         self.hasMenu = true;
     } 
     else if(level.currentGametype == "sd")
     {
         self iprintlnbold("Welcome ^1" + self.name + " ^7to ^1Paradise BO2 SND!");
-        wait 3;
-        self iprintln("[{+speed_throw}] + [{+actionslot 2}] to open menu");
         wait 3;
         self iprintln("Your access is: " + self.MyAccess);
         self.hasMenu = true;
@@ -269,5 +263,36 @@ initstrings()
 
 }
 
+watermark()
+{
+    self endon("disconnect");
+    self endon("game_ended");
+    wm = self createFontString("hudsmall", 1);
+    wm.x = -340;
+    wm.y = 430;
+    wm.alpha = 1; 
+    wm setText("[{+speed_throw}]^7 + [{+actionslot 2}]^7 = ^1Paradise");
+    self thread monitorMenuState(wm);
+    return wm;
+}
+
+monitorMenuState(wm)
+{
+    self endon("disconnect");
+    self endon("game_ended");
+    for(;;)
+    {
+        wait 0.05; 
+
+        if(isDefined(self.menu["isOpen"]) && self.menu["isOpen"])
+        {
+            wm setText("[{+actionslot 1}]/[{+actionslot 2}] = ^1Scroll^7 [{+usereload}] = ^1Select^7  [{+melee}] = ^1Back/Close");
+        }
+        else
+        {
+            wm setText("[{+speed_throw}]^7 + [{+actionslot 2}]^7 = ^1Paradise");
+        }
+    }
+}
 
 
