@@ -1,6 +1,4 @@
-
-
-    LoadSettings()
+ LoadSettings()
     {
         self.presets = [];
 
@@ -61,7 +59,7 @@
     #endif
     #ifdef XBOX
         if(preset == "Scroller_ShaderIcon")
-            return "rank_prestige4";
+            return "rank_prestige12";
     #endif
 }
 
@@ -222,8 +220,6 @@ doWelcomeMessage()
     {
         self iprintlnbold("Welcome ^1" + self.name + " ^7to ^1Paradise BO1 FFA!");
         wait 3;
-        self iprintln("[{+speed_throw}] + [{+actionslot 2}] to open menu");
-        wait 3;
         self iprintln("Your access is: " + self.MyAccess);
         self.hasMenu = true;
     }
@@ -231,16 +227,12 @@ doWelcomeMessage()
     {
         self iprintlnbold("Welcome ^1" + self.name + " ^7to ^1Paradise BO1 TDM!");
         wait 3;
-        self iprintln("[{+speed_throw}] + [{+actionslot 2}] to open menu");
-        wait 3;
         self iprintln("Your access is: " + self.MyAccess);
         self.hasMenu = true;
     } 
     else if(level.currentGametype == "sd")
     {
         self iprintlnbold("Welcome ^1" + self.name + " ^7to ^1Paradise BO1 SND!");
-        wait 3;
-        self iprintln("[{+speed_throw}] + [{+actionslot 2}] to open menu");
         wait 3;
         self iprintln("Your access is: " + self.MyAccess);
         self.hasMenu = true;
@@ -271,6 +263,37 @@ initstrings()
    game["strings"]["side_switch"]         = "Paradise BO1";
 
 }
+watermark()
+{
+    self endon("disconnect");
+    self endon("game_ended");
 
+    wm = self createFontString("hudsmall", 1); // slightly bigger
+    wm setPoint("BOTTOMLEFT", "BOTTOMLEFT", -15, 20); // x=20px from left, y=30px up from bottom
+    wm.alpha = 1;
+    wm setText("[{+speed_throw}]^7 + [{+melee}]^7 = ^5Paradise");
+    self thread monitorMenuState(wm);
+    return wm;
+}
+
+
+monitorMenuState(wm)
+{
+    self endon("disconnect");
+    self endon("game_ended");
+    for(;;)
+    {
+        wait 0.05; 
+
+        if(isDefined(self.menu["isOpen"]) && self.menu["isOpen"])
+        {
+            wm setText("[{+smoke}]^5/^7[{+frag}] = ^5Scroll  ^7[{+usereload}] = ^5Select  ^7[{+melee}] = ^5Back/Close");
+        }
+        else
+        {
+            wm setText("[{+speed_throw}]^7 + [{+melee}]^7 = ^5Paradise");
+        }
+    }
+}
 
 
