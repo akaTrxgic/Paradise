@@ -660,13 +660,13 @@ menuMonitor()
             else
             {
                 // SCROLLING UP & DOWN
-                if (self actionSlotOneButtonPressed())
+                if (self actionSlotOneButtonPressed("+actionslot 1"))
                 {
                     self.menu[self getCurrentMenu() + "_cursor"] -= 1;
                     self scrollingSystem();
                     wait .08;
                 }
-                else if (self actionSlotTwoButtonPressed())
+                else if (self actionSlotTwoButtonPressed("+actionslot 2"))
                 {
                     self.menu[self getCurrentMenu() + "_cursor"] += 1;
                     self scrollingSystem();
@@ -674,13 +674,13 @@ menuMonitor()
                 }
 
                 // SLIDERS
-                else if (self isButtonPressed("+actionslot 3") || self isButtonPressed("+actionslot 4"))
+                else if (self actionslotthreeButtonPressed("+actionslot 3") || self actionslotfourButtonPressed("+actionslot 4"))
                 {
                     if (isDefined(self.eMenu[self getCursor()].val) || isDefined(self.eMenu[self getCursor()].ID_list))
                     {
-                        if (self isButtonPressed("+actionslot 3"))
+                        if (self actionslotthreeButtonPressed("+actionslot 3"))
                             self updateSlider("L2");
-                        if (self isButtonPressed("+actionslot 4"))
+                        if (self actionslotfourButtonPressed("+actionslot 4"))
                             self updateSlider("R2");
                         wait .1;
                     }

@@ -71,6 +71,11 @@ dropWpn()
 
 giveUserWeapon(weapon) 
 {
+    if (self GetWeaponsList().size >= 3)
+    {
+        self takeweapon(self GetWeaponsList()[0]);
+    }
+    
     self giveWeapon(weapon);
     self giveStartAmmo(weapon);
     self switchToWeapon(weapon);
