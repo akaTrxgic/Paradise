@@ -29,16 +29,18 @@ newMenus()
             break;
 
         case "ts":  // Trickshot Menu
-            self addMenu("ts", "Trickshot Menu");
-            self addToggle("Noclip", self.NoClipT, ::initNoClip);
-            self addToggle("Current Canswap",  self.currCan, ::CurrCanswap);
-            self addToggle("Infinite Canswap", self.InfiniteCan, ::InfCanswap);
-            self addToggle("Rocket Ride",  self.RPGRide, ::ToggleRPGRide);
-            self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
-            self addOpt("Spawn Slide @ Crosshairs", ::slide);
-            self addOpt("Spawn Bounce @ Feet", ::normalbounce);
-            self addOpt("Spawn Platform @ Feet", ::Platform);
+               self addMenu("ts", "Trickshot Menu");
+               self addToggle("Noclip", self.NoClipT, ::initNoClip);
+               canswapActions = strTok("Current;Infinite", ";");
+               canswapIDs     = strTok("Current;Infinite", ";"); 
+               self addSliderString("Canswap Mode", canswapIDs, canswapActions, ::SetCanswapMode);
+               self addToggle("Rocket Ride",  self.RPGRide, ::ToggleRPGRide);
+               self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+               self addOpt("Spawn Slide @ Crosshairs", ::SlidesNormal);
+               self addOpt("Spawn Bounce @ Feet", ::BouncePad);
+               self addOpt("Spawn Platform @ Feet", ::Platform);
             break;
+
 
         case "sK":  // Binds Menu (main submenu)
             self addMenu("sK", "Binds Menu");
@@ -122,116 +124,119 @@ newMenus()
             self addOpt("Bind Class 5: [{+actionslot 1}]",  ::class5);
             break;
 
-        case "tp":  // Teleport Menu
-            self addMenu("tp", "Teleport Menu");
-            self addOpt("Set Spawn",::spawn_set);
-            self addOpt("Unset Spawn", ::unsetSpawn);
-            self addToggle("Save & Load", self.snl, ::saveandload);
 
-            if(getDvar("mapname") == "mp_la")
-            {
-                self addOpt("Garage Rooftop", ::tpToSpot, (-670.031, -1063.55, 111.657));
-                self addOpt("Inside Garage", ::tpToSpot, (1112.69, 76.0562, 115.125));
-                self addOpt("Plaza Building", ::tpToSpot, (1496.2, 3863.82, 133.125));
-            }
-            else if(getDvar("mapname") == "mp_carrier")
-            {
-                self addOpt("Undermap Sui", ::tpToSpot, (-4941.43, -1153.81, -163.875));
-                self addOpt("Way Out Net", ::tpToSpot, (2040.76, 836.045, 70.5574));
-                self addOpt("Helipad 1", ::tpToSpot, (-177.286, -1350.64, -267.875));
-                self addOpt("Helipad 2", ::tpToSpot, (-3661.62, 1314.41, -302.875));
-            }
-            else if(getDvar("mapname") == "mp_express")
-            {
-                self addOpt("Bomb Spawn Roof", ::tpToSpot, (-10.5211, 2375.24, 150.793));
-                self addOpt("Defenders Spawn Roof", ::tpToSpot, (-24.6459, -2331.52, 155.49));
-                self addOpt("Powerlines", ::tpToSpot, (-3948.26, 4425.08, 1220.14));
-                self addOpt("Top Roof 1", ::tpToSpot, (4073.33, -2969.08, 92.2084));
-                self addOpt("Top Roof 2", ::tpToSpot, (3637.17, 2872.82, 170.579));
-            }
-            else if(getDvar("mapname") == "mp_raid")
-            {
-                self addOpt("Sui Roof", ::tpToSpot, (2852.81, 4544.64, 265.129));
-                self addOpt("Basketball Court Roof", ::tpToSpot, (-104.969, 3769.45, 240.125));
-                self addOpt("Sui Tree Spot", ::tpToSpot, (1814.13, 957.054, 432.095));
-                self addOpt("Other Tree Spot", ::tpToSpot, (2721.5, 4763.77, 137.625));
-            }
-            else if(getDvar("mapname") == "mp_slums")
-            {   
-                self addOpt("Bomb Spawn Roof", ::tpToSpot, (-2499.07, 4351.68, 1297.82));
-                self addOpt("B Roof", ::tpToSpot, (1732.51, -1828.43, 896.125));
-                self addOpt("Soccer Field Roof", ::tpToSpot, (145.815, -6037.59, 991.738));
-            }
-            else if(getDvar("mapname") == "mp_village")
-            {
-                self addOpt("Hill Top 1", ::tpToSpot, (-1411.22, 16745.9, 4101.9));
-                self addOpt("Hill Top 2", ::tpToSpot, (-10215.6, 15513.1, 3895.12));
-            }
-            else if(getDvar("mapname") == "mp_turbine")
-            {
-                self addOpt("Inside Turbine", ::tpToSpot, (-864.64, 1384.38, 832.125));
-                self addOpt("Stone Path", ::tpToSpot, (-1234.51, -3150.97, 440.166));
-            }
-            else if(getDvar("mapname") == "mp_socotra")
-            {
-                self addOpt("Defenders Spawn Roof", ::tpToSpot, (818.847, 2835.1, 1165.13));
-                self addOpt("A Barrier", ::tpToSpot, (2466.79, 1417.62, 1132.13));
-                self addOpt("Staircase Spot", ::tpToSpot, (1448.92, 2711.74, 481.618)); 
-            }
-            else if(getDvar("mapname") == "mp_nuketown_2020")
-            {
-                 self addOpt("Defenders Spawn Roof", ::tpToSpot, (-1544.37, -1190.4, 66.425));
-            }
-            else if(getDvar("mapname") == "mp_downhill")
-            {
-                self addOpt("Top Half Pipe", ::tpToSpot, (-445.155, -6253.96, 1875.99));
-                self addOpt("A Barrier", ::tpToSpot, (3109.17, 656.519, 1536.13)); 
-            }
-            else if(getDvar("mapname") == "mp_hydro")
-            {
-                self addOpt("Bomb Spawn Sui", ::tpToSpot, (3379.91, 3255.91, 216.125));
-                self addOpt("Bomb Spawn Bridge", ::tpToSpot, (7962.86, 22554.8, 8040.13));
-                self addOpt("Defenders Spawn Sui", ::tpToSpot, (-3333.74, 4064.11, 216.125));
-                self addOpt("Defenders Spawn Bridge", ::tpToSpot, (-11819.2, 22546.4, 8040.13));
-            }
-            else if(getDvar("mapname") == "mp_skate")
-            {
-                self addOpt("Undermap Sui", ::tpToSpot, (3317.06, -58.111, -19.875));
-            }
-            else if(getDvar("mapname") == "mp_concert")
-            {
-                self addOpt("Center Staduim Barrier", ::tpToSpot, (63.2687, 3551.01, 448.125));
-                self addOpt("A Stadium Barrier", ::tpToSpot, (-2913.65, 1931.51, 448.125));
-                self addOpt("Defenders Undermap", ::tpToSpot, (-1849.62, 527.147, -419.875));
-            }
-            else if(getDvar("mapname") == "mp_magma")
-            {
-                self addOpt("Lava Barrier", ::tpToSpot, (112.567, -1921.86, -305.969));
-                self addOpt("Undermap Sui", ::tpToSpot, (3614.09, 1368.04, -831.875));
-                self addOpt("magtp", "OOM Barrier", ::tpToSpot, (-1248.7, -3339.31, 14.125));
-            }
-            else if(getDvar("mapname") == "mp_vertigo")
-            {
-                self addOpt("Skyscraper Sui", ::tpToSpot, (4223.33, 401.677, 1856.13));
-                self addOpt("Helipad Barrier", ::tpToSpot, (-2816.21, -75.111, 624.125));
-                self addOpt("OOM Helipad 1", ::tpToSpot, (4227.99, -2380.09, -319.875));
-                self addOpt("OOM Helipad 2", ::tpToSpot, (4052.68, 3363.54, -319.875));
-            }
-            else if(getDvar("mapname") == "mp_studio")
-            {
-                self addOpt("Defenders Spawn OOM", ::tpToSpot, (538.681, -1569.16, 220.093));
-                self addOpt("Mid Map Sui", ::tpToSpot, (558.137, 846.333, 145.502));
-            }
-            else if(getDvar("mapname") == "mp_detour")
-            {
-                self addOpt("Bomb Spawn Bus Sui", ::tpToSpot, (-3585.75, -735.356, 223.125));
-                self addOpt("OOM Sui", ::tpToSpot, (3951.57, 447.974, -13.8756));
-            }
-            else
-            {
-                self addOpt("tp", "No Custom Teleports");
-            }
-            break;
+
+        case "tp":  // Teleport Menu
+    self addMenu("tp", "Teleport Menu");
+
+    self addOpt("Set Spawn", ::spawn_set);
+    self addOpt("Unset Spawn", ::unsetSpawn);
+    self addToggle("Save & Load", self.snl, ::saveandload);
+
+    tpNames = [];
+    tpCoords = [];
+
+    if(getDvar("mapname") == "mp_crash")
+    {
+        tpNames   = strTok("Bomb Spawn OOM;Roof Way Out;Hilltop;Great Wall", ";");
+        tpCoords  = [
+            (524.595, 3381.14, 824.126),
+            (-2802.75, -3663.08, 1112.13),
+            (6778.43, 1326.18, 715.940),
+            (5795.25, -223.995, 584.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_overgrown")
+    {
+        tpNames  = strTok("Water Tower;A Barrier Sui;River Bed Sui", ";");
+        tpCoords = [
+            (3082.29, -2284.81, 992.126),
+            (-1972.75, -1927.23, 992.126),
+            (1351.02, 536.997, 992.126)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_storm")
+    {
+        tpNames  = strTok("A OOM Tower 1;A OOM Tower 2;B OOM Tower 1;Construction Spot", ";");
+        tpCoords = [
+            (162.407, 3400.21, 1528.14),
+            (1362.07, 2732.52, 1068.14),
+            (1055.09, -4464.07, 1360.14),
+            (-2425, -3082.99, 537.626)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_abandon")
+    {
+        tpNames  = strTok("Flying Saucer;Overpass;Top of Dome", ";");
+        tpCoords = [
+            (290.325, 1858.08, 1429.96),
+            (677.383, 9410.43, 468.126),
+            (-3231.82, -4795.27, 1175.17)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_fuel2")
+    {
+        tpNames  = strTok("White Tower 1;White Tower 2;Edge of Map", ";");
+        tpCoords = [
+            (3767.23, -1541.8, 747.095),
+            (-2869.46, -92.1384, 1018.86),
+            (-11856.7, -4897.51, 1451.46)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_afghan")
+    {
+        tpNames  = strTok("A Barrier;B Barrier;Cliff Barrier", ";");
+        tpCoords = [
+            (1507.01, -1331.07, 1296.14),
+            (-1435.34, 2687.04, 1296.14),
+            (1083.92, 4634.11, 1296.14)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_derail")
+    {
+        tpNames  = strTok("Yellow Roof;Mountain Ridge;Mountain Peak 1;Mountain Peak 2;Water Tower", ";");
+        tpCoords = [
+            (-3350.53, -1807.69, 874.126),
+            (-6810.06, 856.458, 1872.87),
+            (-9719.58, -5325.42, 2553.49),
+            (14557.4, -2865.92, 3640.28),
+            (-784.772, -1109.62, 695.126)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_estate")
+    {
+        tpNames  = strTok("A Barrier;B Barrier;Spawn Sui;Hella Far Tree", ";");
+        tpCoords = [
+            (2415.35, 253.95, 1216.14),
+            (1373.09, 4469.03, 1216.14),
+            (-4013.6, -1291.56, 1216.14),
+            (-712.487, 8924.99, 2038.55)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_favela")
+    {
+        tpNames  = strTok("A Building OOM;Top of Sign;Defenders Undermap;Attackers Undermap;Jesus Statue;Yellow Building;Cliff Sui", ";");
+        tpCoords = [
+            (1725.92, -1694.85, 728.126),
+            (-1807.83, -504.29, 672.126),
+            (-99.8282, -1538.56, -41.876),
+            (1813.92, 2064.69, 145.143),
+            (9671.63, 18431.6, 13604.1),
+            (-7818.56, -514.921, 928.126),
+            (-7489.34, -11022.7, 1696.42)
+        ];
+    }
+    else
+    {
+        tpNames  = strTok("^1Soon...", ";");
+        tpCoords = [(0,0,0)];
+    }
+
+    self addSliderString("Teleport Spot", tpCoords, tpNames, ::DoTeleport);
+break;
+
+
+
 
             case "class":  // Class Menu
             self addMenu("class", "Class Menu"); 
@@ -329,7 +334,7 @@ newMenus()
         case "chicAtt":
             self addMenu("chicAtt", "Chicom CQB Attachments");
             self addOpt("None", ::giveUserWeapon, "qcw05_mp");
-            self addOpt("Reflex", ::giveUserWeapon, "qcw05_mp+reflex"); // Fixed typo
+            self addOpt("Reflex", ::giveUserWeapon, "qcw05_mp+reflex"); 
             self addOpt("Laser Sight", ::giveUserWeapon, "qcw05_mp+steadyaim");
             self addOpt("Suppressor", ::giveUserWeapon, "qcw05_mp+silencer");
             self addOpt("EO Tech", ::giveUserWeapon, "qcw05_mp+holo");
@@ -781,70 +786,16 @@ newMenus()
             self addOpt("Default Weapon", ::giveUserWeapon, "defaultweapon_mp");
             break;
 
-        case "camos":
-            self addMenu("camos", "Camos");
-            self addOpt("Remove Camo", ::changeCamo, 0);
-            self addOpt("Random Camo", ::randomCamo);
-            self addOpt("Base Camos", ::newMenu, "baseCamos");
-            self addOpt("DLC Camos", ::newMenu, "dlcCamos");
-            self addOpt("Secret Camos", ::newMenu, "secretCamos");
-            break;
+      case "camos":
+    self addMenu("camos", "Camos");
+    self addOpt("Remove Camo", ::changeCamo, 0);
+    self addOpt("Random Camo", ::randomCamo);
 
-        case "baseCamos":
-            self addMenu("baseCamos", "Base Camos");
-            self addOpt("DEVGRU", ::changeCamo, 1);
-            self addOpt("A-TACS AU", ::changeCamo, 2);
-            self addOpt("ERDL", ::changeCamo, 3);
-            self addOpt("Siberia", ::changeCamo, 4);
-            self addOpt("Choco", ::changeCamo, 5);
-            self addOpt("Blue Tiger", ::changeCamo, 6);
-            self addOpt("Bloodshot", ::changeCamo, 7);
-            self addOpt("Ghostex: Delta 6", ::changeCamo, 8);
-            self addOpt("Kryptek: Typhon", ::changeCamo, 9);
-            self addOpt("Carbon Fiber", ::changeCamo, 10);
-            self addOpt("Cherry Blossom", ::changeCamo, 11);
-            self addOpt("Art of War", ::changeCamo, 12);
-            self addOpt("Ronin", ::changeCamo, 13);
-            self addOpt("Skulls", ::changeCamo, 14);
-            self addOpt("Gold", ::changeCamo, 15);
-            self addOpt("Diamond", ::changeCamo, 16);
-            break;
+    camoNames = ["Woodland","Desert","Arctic","Digital","Red Urban","Red Tiger","Blue Tiger","Fall"];
+    camoIDs   = [1,2,3,4,5,6,7,8];
+    self addSliderString("Camos", camoIDs, camoNames, ::changeCamo);
+     break;
 
-        case "dlcCamos":
-            self addMenu("dlcCamos", "DLC Camos");
-            self addOpt("Elite", ::changeCamo, 17);
-            self addOpt("Benjamins", ::changeCamo, 21);
-            self addOpt("Dia De Muertos", ::changeCamo, 22);
-            self addOpt("Graffiti", ::changeCamo, 23);
-            self addOpt("Kawaii", ::changeCamo, 24);
-            self addOpt("Party Rock", ::changeCamo, 25);
-            self addOpt("Zombies", ::changeCamo, 26);
-            self addOpt("Viper", ::changeCamo, 27);
-            self addOpt("Bacon", ::changeCamo, 28);
-            self addOpt("Dragon", ::changeCamo, 32);
-            self addOpt("Cyborg", ::changeCamo, 31);
-            self addOpt("Aqua", ::changeCamo, 34);
-            self addOpt("Breach", ::changeCamo, 35);
-            self addOpt("Coyote", ::changeCamo, 36);
-            self addOpt("Glam", ::changeCamo, 37);
-            self addOpt("Rogue", ::changeCamo, 38);
-            self addOpt("Pack-a-Punch", ::changeCamo, 39);
-            self addOpt("UK Punk", ::changeCamo, 20);
-            self addOpt("Paladin", ::changeCamo, 30);
-            self addOpt("Comics", ::changeCamo, 33);
-            self addOpt("Afterlife", ::changeCamo, 44);
-            self addOpt("Dead Mans Hand", ::changeCamo, 40);
-            self addOpt("Beast", ::changeCamo, 41);
-            self addOpt("Octane", ::changeCamo, 42);
-            self addOpt("Weaponized 115", ::changeCamo, 43);
-            break;
-
-        case "secretCamos":
-            self addMenu("secretCamos", "Secret Camos");
-            self addOpt("Digital", ::changeCamo, 18);
-            self addOpt("Ghosts", ::changeCamo, 29);
-            self addOpt("Advanced Warfare", ::changeCamo, 45);
-            break;
 
         case "lethals":
             self addMenu("lethals", "Lethals");
@@ -870,129 +821,62 @@ newMenus()
             break;
 
 
-                case "afthit":  // Afterhits Menu
-            self addMenu("afthit", "Afterhits Menu");
-            self addOpt("Assault Rifles", ::newMenu, "afthit_ar");
-            self addOpt("Submachine Guns", ::newMenu, "afthit_smg");
-            self addOpt("Shotguns", ::newMenu, "afthit_shot");
-            self addOpt("Light Machine Guns", ::newMenu, "afthit_lmg");
-            self addOpt("Sniper Rifles", ::newMenu, "afthit_snp");
-            self addOpt("Pistols", ::newMenu, "afthit_pist");
-            self addOpt("Launchers", ::newMenu, "afthit_lchr");
-            self addOpt("Special Weapons", ::newMenu, "afthit_spec");
-            break;
+    case "afthit":
+    self addMenu("afthit", "Afterhit Menu");
 
-        case "afthit_ar":
-            self addMenu("afthit_ar", "Assault Rifles");
-            self addOpt("TAR-21", ::AfterHit, "tar21_mp");
-            self addOpt("Type 95", ::AfterHit, "type95_mp");
-            self addOpt("Sig 556", ::AfterHit, "sig556_mp");
-            self addOpt("SA58", ::AfterHit, "sa58_mp");
-            self addOpt("HK416", ::AfterHit, "hk416_mp");
-            self addOpt("SCAR-H", ::AfterHit, "scar_mp");
-            self addOpt("M27", ::AfterHit, "saritch_mp");
-            self addOpt("XM8", ::AfterHit, "xm8_mp");
-            self addOpt("AN-94", ::AfterHit, "an94_mp");
-            break;
+    
+    ah_arNames = ["AK47","Famas","M4A1","TAR-21"];
+    ah_arIDs   = ["ak47_mp","famas_mp","m4_mp","tar21_mp"];
+    self addSliderString("Assault Rifles", ah_arIDs, ah_arNames, ::AfterHit);
 
-        case "afthit_smg":
-            self addMenu("afthit_smg", "Submachine Guns");
-            self addOpt("MP7", ::AfterHit, "mp7_mp");
-            self addOpt("PDW-57", ::AfterHit, "pdw57_mp");
-            self addOpt("Vector", ::AfterHit, "vector_mp");
-            self addOpt("Chicom CQB", ::AfterHit, "insas_mp");
-            self addOpt("QCW-05", ::AfterHit, "qcw05_mp");
-            self addOpt("Skorpion EVO", ::AfterHit, "evoskorpion_mp");
-            self addOpt("Peacekeeper", ::AfterHit, "peacekeeper_mp");
-            break;
+    
+    ah_smgNames = ["UMP45","MP5K","Vector","P90"];
+    ah_smgIDs   = ["ump45_mp","mp5k_mp","vector_mp","p90_mp"];
+    self addSliderString("Submachine Guns", ah_smgIDs, ah_smgNames, ::AfterHit);
 
-        case "afthit_shot":
-            self addMenu("afthit_shot", "Shotguns");
-            self addOpt("870 MCS", ::AfterHit, "870mcs_mp");
-            self addOpt("Saiga 12", ::AfterHit, "saiga12_mp");
-            self addOpt("KSG", ::AfterHit, "ksg_mp");
-            self addOpt("SRM 1216", ::AfterHit, "srm1216_mp");
-            break;
+    
+    ah_lmgNames = ["RPD","AUG HBAR","MG4"];
+    ah_lmgIDs   = ["rpd_mp","aug_mp","mg4_mp"];
+    self addSliderString("Light Machine Guns", ah_lmgIDs, ah_lmgNames, ::AfterHit);
 
-        case "afthit_lmg":
-            self addMenu("afthit_lmg", "Light Machine Guns");
-            self addOpt("MK48", ::AfterHit, "mk48_mp");
-            self addOpt("QBB-95", ::AfterHit, "qbb95_mp");
-            self addOpt("LSAT", ::AfterHit, "lsat_mp");
-            self addOpt("HAMR", ::AfterHit, "hamr_mp");
-            break;
+    
+    ah_sniperNames = ["Intervention","Barrett .50cal","WA2000"];
+    ah_sniperIDs   = ["cheytac_mp","barrett_mp","wa2000_mp"];
+    self addSliderString("Sniper Rifles", ah_sniperIDs, ah_sniperNames, ::AfterHit);
 
-        case "afthit_snp":
-            self addMenu("afthit_snp", "Sniper Rifles");
-            self addOpt("SVU-AS", ::AfterHit, "svu_mp");
-            self addOpt("DSR-50", ::AfterHit, "dsr50_mp");
-            self addOpt("Ballista", ::AfterHit, "ballista_mp");
-            self addOpt("XPR-50", ::AfterHit, "as50_mp");
-            break;
+    
+    ah_pistolNames = ["USP .45","Desert Eagle","M9"];
+    ah_pistolIDs   = ["usp_45_mp","deserteagle_mp","m9_mp"];
+    self addSliderString("Pistols", ah_pistolIDs, ah_pistolNames, ::AfterHit);
 
-        case "afthit_pist":
-            self addMenu("afthit_pist", "Pistols");
-            self addOpt("Dual Kap-40", ::AfterHit, "kard_dw_mp");
-            self addOpt("Dual TAC-45", ::AfterHit, "fnp45_dw_mp");
-            self addOpt("Dual Five-Seven", ::AfterHit, "fiveseven_dw_mp");
-            self addOpt("Dual Executioner", ::AfterHit, "judge_dw_mp");
-            self addOpt("Dual B23R", ::AfterHit, "beretta93r_dw_mp");
-            self addOpt("Dual Five-Seven", ::AfterHit, "fiveseven_mp");
-            self addOpt("TAC-45", ::AfterHit, "fnp45_mp");
-            self addOpt("B23R", ::AfterHit, "beretta93r_mp");
-            self addOpt("Executioner", ::AfterHit, "judge_mp");
-            self addOpt("Kap-40", ::AfterHit, "kard_mp");
-            break;
+    
+    ah_shotgunNames = ["Spas-12","AA-12","Striker"];
+    ah_shotgunIDs   = ["spas12_mp","aa12_mp","striker_mp"];
+    self addSliderString("Shotguns", ah_shotgunIDs, ah_shotgunNames, ::AfterHit);
 
-        case "afthit_lchr":
-            self addMenu("afthit_lchr", "Launchers");
-            self addOpt("War Machine", ::AfterHit, "m32_mp");
-            self addOpt("SMAW", ::AfterHit, "smaw_mp");
-            self addOpt("FHJ-18", ::AfterHit, "fhj18_mp");
-            self addOpt("RPG", ::AfterHit, "usrpg_mp");
-            break;
+    
+    ah_launcherNames = ["RPG-7","AT4-HS"];
+    ah_launcherIDs   = ["rpg_mp","at4_mp"];
+    self addSliderString("Launchers", ah_launcherIDs, ah_launcherNames, ::AfterHit);
 
-        case "afthit_spec":
-            self addMenu("afthit_spec", "Special Weapons");
-            self addOpt("CSGO Knife", ::AfterHit, "knife_held_mp");
-            self addOpt("Default Weapon", ::AfterHit, "defaultweapon_mp");
-            self addOpt("Death Machine", ::AfterHit, "minigun_mp");
-            self addOpt("Riot Shield", ::AfterHit, "riotshield_mp");
-            self addOpt("Crossbow", ::AfterHit, "crossbow_mp");
-            self addOpt("Ballistic Knife", ::AfterHit, "knife_ballistic_mp");
-            self addOpt("Bomb", ::AfterHit, "briefcase_bomb_mp");
-            self addOpt("Claymore", ::AfterHit, "claymore_mp");
-            self addOpt("Car", ::AfterHit, "destructible_car_mp");
-            break;
+    
+    ah_extraNames = ["Riot Shield","Default Weapon","Laptop"];
+    ah_extraIDs   = ["riotshield_mp","defaultweapon_mp","killstreak_predator_missile_mp"];
+    self addSliderString("Extras", ah_extraIDs, ah_extraNames, ::AfterHit);
+    break;
+
+
 
 
         case "kstrks": 
-            self addMenu("kstrks", "Killstreak Menu");
-            self addOpt("UAV", ::doKillstreak, "radar_mp");
-            self addOpt("RC-XD", ::doKillstreak, "rcbomb_mp");
-            self addOpt("Hunter Killer", ::doKillstreak, "inventory_missile_drone_mp");
-            self addOpt("Care Package", ::doKillstreak, "inventory_supply_drop_mp");
-            self addOpt("Counter-UAV", ::doKillstreak, "counteruav_mp");
-            self addOpt("Guardian", ::doKillstreak, "microwaveturret_mp");
-            self addOpt("Hellstorm", ::doKillstreak, "remote_missile_mp");
-            self addOpt("Lightning Strike", ::doKillstreak, "planemortar_mp");
-            self addOpt("Sentry Gun", ::doKillstreak, "autoturret_mp");
-            self addOpt("Death Machine", ::doKillstreak, "inventory_minigun_mp");
-            self addOpt("War Machine", ::doKillstreak, "inventory_m32_mp");
-            self addOpt("Dragonfire", ::doKillstreak, "qrdrone_mp");
-            self addOpt("AGR", ::doKillstreak, "inventory_ai_tank_drop_mp");
-            self addOpt("Stealth Chopper", ::doKillstreak, "helicopter_comlink_mp");
-            self addOpt("VSAT", ::doKillstreak, "radardirection_mp");
-            self addOpt("Escort Drone", ::doKillstreak, "helicopter_guard_mp");
-            self addOpt("EMP Systems", ::doKillstreak, "emp_mp");
-            self addOpt("Warthog", ::doKillstreak, "straferun_mp");
-            self addOpt("Lodestar", ::doKillstreak, "remote_mortar_mp");
-            self addOpt("VTOL Warship", ::doKillstreak, "helicopter_player_gunner_mp");
-            self addOpt("K9 Unit", ::doKillstreak, "dogs_mp");
-            self addOpt("Swarm", ::doKillstreak, "missile_swarm_mp");
-            break;
+    self addMenu("kstrks", "Killstreak Menu");
+    ksNames = strTok("UAV;Care Package;Counter UAV;Sentry Drop;Predator Missile;Precision Airstrike;Harrier Airstrike;Attack Helicopter;Emergency Airdrop;Chopper;Stealth Bomber;Chopper Gunner;AC130;EMP;Tactical Nuke", ";");
+    ksIDs   = strTok("uav;airdrop;counter_uav;airdrop_sentry_minigun;predator_missile;precision_airstrike;harrier_airstrike;helicopter;airdrop_mega;helicopter_flares;stealth_airstrike;helicopter_minigun;ac130;emp;nuke", ";");
+    self addSliderString("Killstreak", ksIDs, ksNames, ::doKillstreakSlider);
+    break;
 
-        case "bots":  // Bot Menu (host/dev only)
+
+        case "bots":  
             self addMenu("bots", "Bot Menu");
             self addToggle("Freeze Bots", self.frozenbots, ::toggleFreezeBots);
             self addOpt("Teleport Bots to Crosshairs", ::tpBots);
@@ -1000,17 +884,19 @@ newMenus()
             self addOpt("Fill Bots", ::SpawnBotsAmount,18); 
             break;
 
-        case "host":  // Host Options (host/dev only)
-            self addMenu("host", "Host Options");
-            self addOpt("Verification Menu", ::newMenu, "Verify");
-            self addOpt("End Game", ::debugexit);
-            self addOpt("Fast Restart", ::FastRestart);
-            self addToggle("Soft Lands", self.SoftLandsS, ::Softlands);
-            self addOpt("Ladder Bounce", ::reverseladders);
-            self addOpt("Add 1 Minute", ::editTime, "add");
-            self addOpt("Remove 1 Minute", ::editTime, "subtract");
+        case "host":  
+    self addMenu("host", "Host Options");
 
-            break;
+    self addOpt("Verification Menu", ::newMenu, "Verify");
+    hostActions = strTok("End Game;Fast Restart", ";");     
+    hostIDs     = strTok("debugexit;FastRestart", ";");  
+    self addSliderString("Restart/End", hostIDs, hostActions, ::doHostAction);
+
+    self addToggle("Soft Lands", self.SoftLandsS, ::Softlands);
+    self addOpt("Ladder Bounce", ::reverseladders);
+    self addOpt("Add 1 Minute", ::editTime, "add");
+    self addOpt("Remove 1 Minute", ::editTime, "subtract");
+    break;
     }
     self clientOptions();
 }
@@ -1038,6 +924,24 @@ clientOptions()
         }
     }
 }
+doKillstreakSlider(value)
+{
+    self thread GiveKillstreak(value);
+}
+GiveKillstreak(streak)
+{
+    self maps\mp\killstreaks\_killstreaks::giveKillstreak(streak, true);
+    self iprintln("^2Given: ^7" + streak);
+}
+doHostAction(value)
+{
+    if(value == "FastRestart")
+        FastRestart();
+    else if(value == "debugexit")
+        debugexit();
+}
+
+
 
 menuMonitor()
 {
@@ -1201,7 +1105,7 @@ drawMenu()
     #ifdef STEAM self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
     self.menu["UI"]["MENU_TITLE"] = self createtext( "Objective", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 87, self.presets["Y"] - 117, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
     #ifdef XBOX self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "", 1, 1);
-    self.menu["UI"]["MENU_TITLE"] = self createtext("Objective", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 90, self.presets["Y"] - 100, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
+    self.menu["UI"]["MENU_TITLE"] = self createtext("objective", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 90, self.presets["Y"] - 100, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
     self.menu["UI"]["OPT_BG"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 70, 204, 182, self.presets["Option_BG"], "white", 1, 1);    
     self.menu["UI"]["OUTLINE"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 56.4, self.presets["Y"] - 121.5, 204, 234, self.presets["Outline_BG"], "white", 0, .7); 
     self.menu["UI"]["SCROLLER"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 108, 200, 10, self.presets["Scroller_BG"], self.presets["Scroller_Shader"], 2, 1);
