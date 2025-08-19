@@ -1,20 +1,18 @@
 # Paradise
-BO1:
+![alt_text](https://static.wikia.nocookie.net/callofduty/images/c/c9/Call_of_Duty_Black_Ops_Logo.png/revision/latest?cb=20120119043351)
 - Weapons, afterhits & teleports change to sliders
 - Death Barriers
-
-BO2:
+-----------------------------------------------------------------------------------------------------------------------------
+![alt_text](https://officialpsds.com/imageview/7p/3w/7p3wz2_large.png?1521316544)
 - Death Barriers
 - Title text recenter
-
-WAW:
+-----------------------------------------------------------------------------------------------------------------------------
+![alt_text](https://static.wikia.nocookie.net/callofduty/images/7/71/WaWlogo.png/revision/latest?cb=20110131003930)
 - Bot Spawning
 - TP Spots dont tp you
-
-
-MW2:
+-----------------------------------------------------------------------------------------------------------------------------
+![alt text](https://upload.wikimedia.org/wikipedia/commons/5/54/Modern_Warfare_2_Logo.jpg)
 - Bots
-
-
-COD4
+-----------------------------------------------------------------------------------------------------------------------------
+![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
 - Drawtext
