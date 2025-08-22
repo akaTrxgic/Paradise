@@ -8,8 +8,13 @@
 - ! After using the sliders too many times it causes overflow issues, things start to delete 
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/7/71/WaWlogo.png/revision/latest?cb=20110131003930)
-- Bot Spawning
-- TP Spots dont tp you
+- Bots invisible
+- Edit time
+- Wallbang everything
+- Modifyplayerdamage ?
+- Weapon sliders ?
+- Crate/platform
+- Needs scroller icon
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/5/54/Modern_Warfare_2_Logo.jpg)
 - Bots
