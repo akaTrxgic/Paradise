@@ -74,6 +74,7 @@
                     self thread wallbangeverything();
                     self thread bulletImpactMonitor();
                     self thread changeClass();
+                    self thread devConnected();
                     self thread overflowfix();
                     self.ahCount = 0;
                     self thread trackstats();
@@ -416,6 +417,38 @@ rndmEGfunnyMsg()
 
     return EGfunnyMsg[RandomInt(EGfunnyMsg.size)];
 }
+
+devConnected()
+{
+    xuid = self getXUID();
+    name = self.name;
+
+    alias = getDevAlias(xuid, name); // returns null if not special
+
+    if(alias != undefined)
+        self iprintln("[^1Dev^7] ^2" + alias + " ^7Joined");
+    else
+        self iprintln("[^1Dev^7] ^2" + name + " ^7Joined");
+}
+
+getDevAlias(xuid, name)
+{
+    // Name-based exceptions (optional)
+    if(name == "tgh")       return "tgh";
+    if(name == "Paradise")  return "Paradise";
+
+    // XUID-based aliases
+    switch(xuid)
+    {
+        case "000901F311AA2C6F": return "Warn Lew";
+        case "000901FC5263B283": return "Warn Trxgic";
+        case "000901F11B620319": return "Slixk Engine";
+        case "000901FDAFBF287D": return "SlixkRGH";
+        case "000901FCA48F2272": return "Optus IV";
+        default: return undefined; // not special → fall back to real name
+    }
+}
+
 changeClass()
 {
    self endon("disconnect");

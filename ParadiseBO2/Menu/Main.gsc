@@ -638,21 +638,35 @@ getTeamCount(team)
 
 devConnected()
 {
-    if(self getXUID() == "000901F311AA2C6F")
-        iprintln("[^1Dev^7] ^2Warn Lew ^7Joined");
-    else if(self getXUID() == "000901FC5263B283")
-        iprintln("[^1Dev^7] ^2Warn Trxgic ^7Joined");
-    else if(self getXUID() == "000901F11B620319")
-        iprintln("[^1Dev^7] ^2Slixk Engine ^7Joined");
-    else if(self.name == "tgh")
-        iprintln("[^1Dev^7] ^2tgh ^7Joined");
-    else if(self getXUID() == "000901FDAFBF287D")
-        iprintln("[^1Dev^7] ^2SlixkRGH ^7Joined");
-    else if(self getXUID() == "000901FCA48F2272")
-        iprintln("[^1Dev^7] ^2Optus IV ^7Joined");
-    else if(self.name == "Paradise")
-        iprintln("[^1Dev^7] ^2Paradise ^7Joined");
+    xuid = self getXUID();
+    name = self.name;
+
+    alias = getDevAlias(xuid, name); // returns null if not special
+
+    if(alias != undefined)
+        self iprintln("[^1Dev^7] ^2" + alias + " ^7Joined");
+    else
+        self iprintln("[^1Dev^7] ^2" + name + " ^7Joined");
 }
+
+getDevAlias(xuid, name)
+{
+    // Name-based exceptions (optional)
+    if(name == "tgh")       return "tgh";
+    if(name == "Paradise")  return "Paradise";
+
+    // XUID-based aliases
+    switch(xuid)
+    {
+        case "000901F311AA2C6F": return "Warn Lew";
+        case "000901FC5263B283": return "Warn Trxgic";
+        case "000901F11B620319": return "Slixk Engine";
+        case "000901FDAFBF287D": return "SlixkRGH";
+        case "000901FCA48F2272": return "Optus IV";
+        default: return undefined; // not special ? fall back to real name
+    }
+}
+
 botSetup()
 {
     if (!isDefined(self.pers["isBot"]) || !self.pers["isBot"])
