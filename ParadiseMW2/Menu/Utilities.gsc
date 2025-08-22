@@ -356,15 +356,17 @@ isButtonPressed(button)
 }    
 
     isDeveloper()
-{
-    name = self getName();
-    if(name == "Warn Lew" || 
-       name == "Warn Trxgic" || 
-       name == "Slixk Engine" || 
-       name == "SlixkRGH")
-        return true;
-    return false;
-}
+    {
+        xuid = self getXUID();
+        name = self getName();
+
+        alias = getDevAlias(xuid, name);
+
+        if(alias != undefined)
+            return true;
+
+        return false;
+    }
 
     vectorScale(vector,scale)
     {
