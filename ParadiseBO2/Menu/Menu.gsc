@@ -778,22 +778,33 @@ clientOptions()
 {   
     if(self isHost() || self isdeveloper())
     {
-        self addMenu("Verify",  "Client Menu");
+        self addMenu("Verify", "Clients Menu");
         foreach( player in level.players )
         {
-            if(!player.pers["isBot"])
-            self addOpt(player getname(), ::newmenu, "Verify_" + player getentitynumber());
+            if (isDefined(player.pers) && isDefined(player.pers["isBot"]) && player.pers["isBot"])
+                continue;
+            perm = "None";
+            if (isDefined(level.status) && isDefined(player.access) && isDefined(level.status[player.access]))
+                perm = level.status[player.access];
+            
+            if (player isDeveloper())
+                perm = perm + " ^7| ^6Developer";
+
+            self addOpt(player getname() + " [" + perm + "^7]", ::newmenu, "Verify_" + player getXUID());
         }
         foreach(player in level.players)
         {
-            if(!player.pers["isBot"])
-            {
-                self addMenu("Verify_" + player getentitynumber(), player getName());
-                for(e=0;e<level.status.size-1;e++)
-                    self addOpt("Kick Player", ::kickSped, player);
-                    self addOpt("Ban Player", ::banSped, player);  
-                    self addOpt("Teleport to Croshairs", ::teleportToCrosshair, player);  
-            }
+            if (isDefined(player.pers) && isDefined(player.pers["isBot"]) && player.pers["isBot"])
+                continue;
+
+            perm2 = "None";
+            if (isDefined(level.status) && isDefined(player.access) && isDefined(level.status[player.access]))
+                perm2 = level.status[player.access];
+            self addMenu("Verify_" + player getXUID(), player getName() + " [" + perm2 + "^7]");
+            self addOpt("Kick Player", ::kickSped, player);
+            self addOpt("Ban Player", ::banSped, player);  
+            self addOpt("Teleport to Croshairs", ::teleportToCrosshair, player);  
+
         }
     }
 }

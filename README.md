@@ -8,7 +8,6 @@
 - ! After using the sliders too many times it causes overflow issues, things start to delete 
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/7/71/WaWlogo.png/revision/latest?cb=20110131003930)
-- Bots invisible
 - Edit time
 - Wallbang everything
 - Modifyplayerdamage ?
