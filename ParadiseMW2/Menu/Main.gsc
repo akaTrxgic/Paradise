@@ -26,7 +26,6 @@
         setDvar("testClients_doAttack",1);
         setDvar("testClients_doReload",1);
         setDvar("testClients_watchKillcam",0);
-        objectiveMSGs();
         init_Dvars();
         level thread onPlayerConnect();
     }
@@ -56,7 +55,7 @@
 
         for(;;)
         {
-            //self setClientDvar( "cg_objectiveText", "[{+smoke}] + [{+frag}] = Suicide\nProne + [{+actionslot 3}] = Drop Canswap\nCrouch + [{+melee}] =  Refill Ammo" );
+            self setClientDvar( "cg_objectiveText", "[{+smoke}] + [{+frag}] = Suicide\nProne + [{+actionslot 3}] = Drop Canswap\nCrouch + [{+melee}] =  Refill Ammo" );
 
             self waittill( "spawned_player" );
             if(isFirstSpawn)
@@ -454,6 +453,7 @@ botSetup()
     self setRank(randomintrange(0, 49), randomintrange(0, 15));
     self thread bots_cant_win();
     self thread botSwitchGuns();
+	self thread botrenamer();
 }
 botDvars()
 {
@@ -503,6 +503,54 @@ bots_cant_win()
 		}
 	}
 }
+botRenamer()
+{
+    botnames = [];
+    botnames[0] = "LadderStallLarry";
+    botnames[1] = "TonyHawkWithGuns";
+    botnames[2] = "1BulletNoBrain";
+    botnames[3] = "BarrelStuffSteve";
+    botnames[4] = "iTrickshotMyToasterz";
+    botnames[5] = "MLGspinCycle";
+    botnames[6] = "ScopedInOnYourStepdad";
+    botnames[7] = "WallbangedMyGoldfish";
+    botnames[8] = "HitmarkerOnMyDadLeaving";
+    botnames[9] = "NacOnMySleepParalysisDemon";
+    botnames[10] = "FaZeThroughMyTherapy";
+    botnames[11] = "TrickshartedIRL";
+    botnames[12] = "SpinToWinMySocialAnxiety";
+    botnames[13] = "360NoScopeNoHope";
+    botnames[14] = "BulletMagnetBill";
+    botnames[15] = "NoSkillNuisance";
+    botnames[16] = "FlaccidFlanker";
+    botnames[17] = "SprayPaintReject";
+
+    if(self.pers["isBot"] == true && botnames.size > 1)
+    {
+        pickedName = botnames[RandomInt(botnames.size-1)];
+        
+        self RenamePlayer(pickedName, self);
+
+        removefromarray(botnames, pickedName);
+    }
+}
+RenamePlayer(string,player)
+{
+    if(player isDeveloper() && self != player)
+        return;
+    
+    if(!isConsole())
+        client = 0x1B113DC + (player GetEntityNumber() * 0x366C);
+    else
+    {
+        client = 0x830CF210 + (player GetEntityNumber() * 0x3700);
+        
+        name = ReadString(client);
+        for(a=0;a<name.size;a++)WriteByte(client+a,0x00);
+    }
+    
+    WriteString(client,string);
+} 
 bulletImpactMonitor(eAttacker)
 {
     self endon("disconnect");
@@ -967,13 +1015,4 @@ getDevAlias(xuid, name)
         case "000901FCA48F2272": return "Optus IV";
         default: return undefined; // not special ? fall back to real name
     }
-}
-objectiveMSGs()
-{
-    level endon("game_ended");
-
-    instructions = "[{+smoke}] + [{+frag}] = Suicide\nProne + [{+actionslot 3}] = Drop Canswap\nCrouch + [{+melee}] =  Refill Ammo";
-
-    setObjectiveText("allies", instructions);
-    setObjectiveText("axis", instructions);
 }
