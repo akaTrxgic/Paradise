@@ -22,7 +22,7 @@
 - Some equipment/grenades dont work
 - Slides/bounces launch you
 - Platform not working
-- TPp spots need reworked
+- TP spots need reworked
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
 - Drawtext
