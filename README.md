@@ -16,7 +16,14 @@
 - Needs scroller icon
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/5/54/Modern_Warfare_2_Logo.jpg)
-- Bots
+- Bots stop moving
+- Add killcam nuke
+- Save loadout function messed up
+- Some equipment/grenades dont work
+- Slides/bounces launch you
+- Platform not working
+- TPp spots need reworked
+- Rename bots needs finished
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
 - Drawtext
