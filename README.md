@@ -1,6 +1,7 @@
 # Paradise
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/c/c9/Call_of_Duty_Black_Ops_Logo.png/revision/latest?cb=20120119043351)
 - Platforms dont delete old or spawn new
+- Weapon menu needs completed 
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://officialpsds.com/imageview/7p/3w/7p3wz2_large.png?1521316544)
 - Death Barriers
