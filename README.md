@@ -21,8 +21,8 @@
 - Save loadout function messed up
 - Some equipment/grenades dont work
 - Slides/bounces launch you
-- Platform not working
-- TP spots need reworked
+- Platform & Crate collisions?
+- Platform, bounces, and slides dont delete on respawn
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
 - Drawtext
