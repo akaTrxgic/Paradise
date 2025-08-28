@@ -44,14 +44,18 @@ SetCanswapMode()
 {
     value = self.sliders[self getCurrentMenu() + "_" + self getCursor()]; 
 
-    if(value == 0)
+    if(value == 0) 
     {
-        self.currCan = 1;
-        self.currCanWpn = self getcurrentweapon();
-        self iprintln("Canswap Weapon: [^2" + self.currCanWpn + "]");
-        self thread CurrCanswapLoop();
+        if(!self.currCan)
+        {
+            self.currCan = 1;
+            self.InfiniteCan = 0;
+            self.currCanWpn = self getcurrentweapon();
+            self iprintln("Canswap Weapon: (^2" + self.currCanWpn + "^7)");
+            self thread CurrCanswapLoop();
+        }
 
-        if(self.currCan)
+        else if(self.currCan && self.currCanWpn == self getCurrentWeapon())
         {
             self.currCan = 0;
             self iprintln("Canswap Mode: [^1OFF^7]");
@@ -60,12 +64,14 @@ SetCanswapMode()
     }
     else if(value == 1) 
     {
-        self.InfiniteCan = 1;
-        self.currCan     = 0;       
-        self iprintln("Canswap Mode: [^2Infinite^7]");
-        self thread InfiniteCanswapLoop();
-
-        if(self.InfiniteCan)
+        if(!self.InfiniteCan)
+        {
+            self.InfiniteCan = 1;
+            self.currCan     = 0;       
+            self iprintln("Canswap Mode: ^2Infinite^7");
+            self thread InfiniteCanswapLoop();
+        }
+        else if(self.InfiniteCan)
         {
             self.InfiniteCan = 0;
             self iprintln("Canswap Mode: [^1OFF^7]");
@@ -287,4 +293,5 @@ SpawnScriptModel(origin,model,angles,time,clip)
     if(isDefined(clip))
         ent CloneBrushModelToScriptModel(clip);
     return ent;
+
 }
