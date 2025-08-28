@@ -113,32 +113,37 @@ SetCanswapMode()
 
     if(value == 0) 
     {
-
-        if(self.currCan == 1 && self.currCanWpn == self getCurrentWeapon())
+        if(!self.currCan)
         {
-            self.currCan = 0;
-            self iprintln("Canswap Mode: ^7OFF");
-            return;
+            self.currCan = 1;
+            self.InfiniteCan = 0;
+            self.currCanWpn = self getcurrentweapon();
+            self iprintln("Canswap Weapon: (^2" + self.currCanWpn + "^7)");
+            self thread CurrCanswapLoop();
         }
 
-        self.currCan     = 1;
-        self.InfiniteCan = 0;    
-        self.currCanWpn  = self getCurrentWeapon();
-        self iprintln("Canswap Weapon: (" + self.currCanWpn + ")");
-        thread CurrCanswapLoop();
+        else if(self.currCan && self.currCanWpn == self getCurrentWeapon())
+        {
+            self.currCan = 0;
+            self iprintln("Canswap Mode: [^1OFF^7]");
+            return;
+        }
     }
     else if(value == 1) 
     {
-        if(self.InfiniteCan == 1)
+        if(!self.InfiniteCan)
+        {
+            self.InfiniteCan = 1;
+            self.currCan     = 0;       
+            self iprintln("Canswap Mode: ^2Infinite^7");
+            self thread InfiniteCanswapLoop();
+        }
+        else if(self.InfiniteCan)
         {
             self.InfiniteCan = 0;
-            self iprintln("Canswap Mode: ^7OFF");
+            self iprintln("Canswap Mode: [^1OFF^7]");
             return;
         }
-        self.InfiniteCan = 1;
-        self.currCan     = 0;       
-        self iprintln("Canswap Mode: ^2Infinite^7");
-        thread InfiniteCanswapLoop();
     }
 }
 
@@ -390,4 +395,5 @@ doSpawnOption(selection)
             self thread Crate();
             break;
     }
+
 }
