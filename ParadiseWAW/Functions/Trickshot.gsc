@@ -110,36 +110,39 @@ SetCanswapMode()
 {
     value = self.sliders[self getCurrentMenu() + "_" + self getCursor()]; 
 
-    if(value == 0) // Current Weapon
+    if(value == 0) 
     {
-        // If already active with same weapon, toggle off
-        if(self.currCan == 1 && self.currCanWpn == self getCurrentWeapon())
+        if(!self.currCan)
         {
-            self.currCan = 0;
-            self iprintln("Canswap Mode: [^1OFF^]");
-            return;
+            self.currCan = 1;
+            self.InfiniteCan = 0;
+            self.currCanWpn = self getcurrentweapon();
+            self iprintln("Canswap Weapon: (^2" + self.currCanWpn + "^7)");
+            self thread CurrCanswapLoop();
         }
 
-        // Otherwise, enable Current Canswap
-        self.currCan     = 1;
-        self.InfiniteCan = 0;          // turn off infinite
-        self.currCanWpn  = self getCurrentWeapon();
-        self iprintln("Canswap Weapon: (^2" + self.currCanWpn + "^7)");
-        thread CurrCanswapLoop();
+        else if(self.currCan && self.currCanWpn == self getCurrentWeapon())
+        {
+            self.currCan = 0;
+            self iprintln("Canswap Mode: [^1OFF^7]");
+            return;
+        }
     }
-    else if(value == 1) // Infinite Canswap
+    else if(value == 1) 
     {
-        // If already active, toggle off
-        if(self.InfiniteCan == 1)
+        if(!self.InfiniteCan)
+        {
+            self.InfiniteCan = 1;
+            self.currCan     = 0;       
+            self iprintln("Canswap Mode: ^2Infinite^7");
+            self thread InfiniteCanswapLoop();
+        }
+        else if(self.InfiniteCan)
         {
             self.InfiniteCan = 0;
             self iprintln("Canswap Mode: [^1OFF^7]");
             return;
         }
-        self.InfiniteCan = 1;
-        self.currCan     = 0;       
-        self iprintln("Canswap Mode: [^2Infinite^7]");
-        thread InfiniteCanswapLoop();
     }
 }
 
@@ -361,4 +364,5 @@ doSpawnOption(selection)
             self thread Crate();
             break;
     }
+
 }
