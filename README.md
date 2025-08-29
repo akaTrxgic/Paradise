@@ -27,5 +27,5 @@
 - Canswaps need fixed
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
-- fix text moving
-- Add Gamesetup
+- Finish Setup
+- Fix Bots
