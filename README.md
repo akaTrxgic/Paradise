@@ -5,8 +5,9 @@
 - Needs give attachments written
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://officialpsds.com/imageview/7p/3w/7p3wz2_large.png?1521316544)
-- Death Barriers
-- ! After using the sliders too many times it causes overflow issues, things start to delete 
+- Give attachments ?
+- Different shader ?
+- Lethals/tacticals only work if you do take all weapons
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/7/71/WaWlogo.png/revision/latest?cb=20110131003930)
 - Edit time
