@@ -60,7 +60,7 @@ watermark()
     wm = self createFontString("objective", 0.2); 
     wm setPoint("BOTTOMLEFT", "BOTTOMLEFT", 10, 20);
     wm.alpha = 1; 
-    wm.label = "wm"; // store for debugging
+    wm.label = "wm"; 
     wm setText("[{+speed_throw}] + [{+melee}] = Paradise");
 
     self thread monitorMenuState(wm);
@@ -88,6 +88,7 @@ monitorMenuState(wm)
         }
     }
 }
+
 
 
 
