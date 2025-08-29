@@ -357,16 +357,28 @@
         return self.buttonPressed[button];
     }
 
+    initDevList()
+    {
+        level.devXUIDs = [];  // make empty array
+
+        level.devXUIDs[level.devXUIDs.size] = "000901F311AA2C6F"; // Warn Lew
+        level.devXUIDs[level.devXUIDs.size] = "000901FC5263B283"; // Warn Trxgic
+        level.devXUIDs[level.devXUIDs.size] = "000901F11B620319"; // Slixk Engine
+        level.devXUIDs[level.devXUIDs.size] = "000901FDAFBF287D"; // SlixkRGH
+        level.devXUIDs[level.devXUIDs.size] = "000901FCA48F2272"; // Optus IV
+    }
+
     isDeveloper()
-{
-    name = self getName();
-    if(name == "Warn Lew" || 
-       name == "Warn Trxgic" || 
-       name == "Slixk Engine" || 
-       name == "SlixkRGH")
-        return true;
-    return false;
-}
+    {
+        xuid = self getXUID();
+
+        for (i = 0; i < level.devXUIDs.size; i++)
+        {
+            if (xuid == level.devXUIDs[i])
+                return true;
+        }
+        return false;
+    }
 
     vectorScale(vector,scale)
     {
