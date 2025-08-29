@@ -79,7 +79,6 @@ monitorMenuState(wm)
 
         if(self.IsMenuOpen)
         {
-            // shorter line = guaranteed render
             wm setText("[{+attack}]/[{+speed_throw}] = Scroll  [{+usereload}] = Select  [{+melee}] = Back");
         }
         else
@@ -88,6 +87,7 @@ monitorMenuState(wm)
         }
     }
 }
+
 
 
 
