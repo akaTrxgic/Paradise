@@ -57,7 +57,7 @@ watermark()
     self endon("disconnect");
     self endon("game_ended");
 
-    wm = self createFontString("objective", 0.2); // clean font, good scale
+    wm = self createFontString("objective", 0.2); 
     wm setPoint("BOTTOMLEFT", "BOTTOMLEFT", 10, 20);
     wm.alpha = 1; 
     wm.label = "wm"; // store for debugging
@@ -88,5 +88,6 @@ monitorMenuState(wm)
         }
     }
 }
+
 
 
