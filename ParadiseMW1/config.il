@@ -1,1 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Project><Title>ParadiseWAW Base</Title><Author /><Game>MW1</Game><Mode>MP</Mode><Platform>Xbox</Platform><Symbols>DEBUG;EXAMPLE</Symbols></Project>
