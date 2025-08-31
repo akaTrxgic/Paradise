@@ -129,8 +129,8 @@ initializeSetup(access, player)
         
         if(!IsDefined( RL_list ))
             RL_list = ID_list;
-        option.ID_list = (isInArray(ID_list)) ? ID_list : strTok(ID_list, ";");
-        option.RL_list = (isInArray(RL_list)) ? RL_list : strTok(RL_list, ";");
+        option.ID_list = (isArray(ID_list)) ? ID_list : strTok(ID_list, ";");
+        option.RL_list = (isArray(RL_list)) ? RL_list : strTok(RL_list, ";");
         
         option.opt  = opt;
         option.func = func;
@@ -140,6 +140,17 @@ initializeSetup(access, player)
         option.p4   = p4;
         option.p5   = p5;
         self.eMenu[self.eMenu.size] = option;
+    }
+
+IsArray(arry)
+    {
+        if(!isDefined(arry) || IsString(arry))
+            return false;
+
+        if(arry.size)
+            return true;
+        
+        return false;
     }
 
     updateSlider( pressed, curs = self getCursor(), rcurs = self getCursor() )
@@ -209,3 +220,4 @@ initializeSetup(access, player)
             return true;
         return false;
     }
+
