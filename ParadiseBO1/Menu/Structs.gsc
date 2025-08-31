@@ -142,6 +142,17 @@ addSliderString( opt, ID_list, RL_list, func, p1, p2, p3, p4, p5 )
         self.eMenu[self.eMenu.size] = option;
     }
 
+IsArray(arry)
+    {
+        if(!isDefined(arry) || IsString(arry))
+            return false;
+
+        if(arry.size)
+            return true;
+        
+        return false;
+    } 
+
     updateSlider( pressed, curs = self getCursor(), rcurs = self getCursor() )
     {    
         cap_curs = (curs >= 10) ? 9 : curs;
@@ -209,3 +220,4 @@ addSliderString( opt, ID_list, RL_list, func, p1, p2, p3, p4, p5 )
             return true;
         return false;
     }
+
