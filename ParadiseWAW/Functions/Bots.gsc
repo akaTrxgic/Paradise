@@ -91,11 +91,10 @@ addTestClients()
 {
     setDvar("sv_botsPressAttackBtn", "1");
     setDvar("sv_botsRandomInput", "1");
-    
-    for(i = 0; i < 1; i++) 
+
+    for (i = 0; i < 1; i++)
     {
         bot = addtestclient();
-
         if (!isdefined(bot))
         {
             println("^1FAILED TO ADD BOT");
@@ -104,37 +103,40 @@ addTestClients()
         }
 
         bot.pers["isBot"] = true;
-        bot.sessionteam = "axis"; // OR "allies"
-        bot.team = "axis";
-        bot.pers["team"] = "axis";
-        bot notify("menuresponse", game["menu_team"], "autoassign");
 
+        // FFA: force the implicit team via the menu system, not by writing fields
         bot thread TestClient();
     }
 }
-
 TestClient()
 {
     self endon("disconnect");
+
+    // In FFA, treat as allies; don't set self.team/sessionteam yourself.
+    self notify("menuresponse", game["menu_team"], "allies");
     wait 0.1;
+
+    // Build valid stock classes
     classes = getArrayKeys(level.classMap);
     okclasses = [];
-
-    for(i = 0; i < classes.size; i++)
+    for (i = 0; i < classes.size; i++)
     {
         if (!issubstr(classes[i], "sniper") && isDefined(level.default_perk[level.classMap[classes[i]]]))
             okclasses[okclasses.size] = classes[i];
     }
-
-    assert(okclasses.size > 0);
+    assert(okclasses.size);
 
     for (;;)
     {
         randomClass = okclasses[randomint(okclasses.size)];
+
         if (!level.oldschool)
             self notify("menuresponse", "changeclass", randomClass);
-        self.sessionstate = "playing"; 
+
+        // DO NOT force sessionstate; let the engine finish spawning (sets model/viewhands)
         self waittill("spawned_player");
+
+        // tiny debounce so we don’t spam
         wait 0.1;
     }
 }
