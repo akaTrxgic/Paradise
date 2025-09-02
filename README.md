@@ -10,7 +10,6 @@
 - Lethals/tacticals only work if you do take all weapons
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/7/71/WaWlogo.png/revision/latest?cb=20110131003930)
-- Edit time
 - Modifyplayerdamage ?
 - Crate/platform
 -----------------------------------------------------------------------------------------------------------------------------
