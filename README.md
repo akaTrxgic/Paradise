@@ -1,27 +1,22 @@
 # Paradise
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/c/c9/Call_of_Duty_Black_Ops_Logo.png/revision/latest?cb=20120119043351)
+- Take equipment stuff (either try to fix or change menu binds)
 - Bots bunch up
-- Equipment change issues on menu open/close
-- Needs give attachments written
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://officialpsds.com/imageview/7p/3w/7p3wz2_large.png?1521316544)
-- Give attachments ?
-- Different shader ?
-- Lethals/tacticals only work if you do take all weapons
+- Different shader (not sure which ones to try)
+- Lethals/tacticals only work if you take all weapons (tried several things)
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/7/71/WaWlogo.png/revision/latest?cb=20110131003930)
-- Modifyplayerdamage ?
-- Crate/platform
+- Save n load doesnt work
+- Fix broken teleport spots
+- TDM/SND bot spawning not working
+- Rainbow text needs fixed
+- Needs time limit add/sub 
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/5/54/Modern_Warfare_2_Logo.jpg)
-- Bots stop moving
-- Add killcam nuke
-- Save loadout function messed up
-- Some equipment/grenades dont work
-- Slides/bounces launch you
-- Platform & Crate collisions?
-- Platform, bounces, and slides dont delete on respawn
-- Canswaps need fixed
+- Bots stop moving when host dies and respawns (idek how to fix this, tried multiple placements)
+- Save loadout function messed up (loads consistently, just issues loading some items)
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
 - Finish Setup
