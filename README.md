@@ -8,11 +8,7 @@
 - Lethals/tacticals only work if you take all weapons (tried several things)
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/7/71/WaWlogo.png/revision/latest?cb=20110131003930)
-- Save n load doesnt work
-- Fix broken teleport spots
-- TDM/SND bot spawning not working
-- Rainbow text needs fixed
-- Needs time limit add/sub 
+- ✅✅✅✅
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/5/54/Modern_Warfare_2_Logo.jpg)
 - Bots stop moving when host dies and respawns (idek how to fix this, tried multiple placements)
