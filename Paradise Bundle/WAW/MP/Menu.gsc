@@ -393,7 +393,7 @@ clientOptions()
                                 self.menu[ self getCurrentMenu() + "_cursor" ] -= self adsbuttonpressed();
 
                             self scrollingSystem();
-                            wait .1;
+                            wait .5;
                         }
                     }
                     else if(self fragButtonPressed() || self secondaryOffhandButtonPressed()){
@@ -405,7 +405,7 @@ clientOptions()
                                     self updateSlider( "L2" );
                                 if( self fragButtonPressed())    
                                     self updateSlider( "R2" );
-                                wait .1;
+                                wait .5;
                             }
                         }
                     }
@@ -603,3 +603,4 @@ clientOptions()
         self.menu["UI"]["OPT_BG"] SetShader( "white", 200, height + 1 );
         self.menu["UI"]["OUTLINE"] SetShader( "white", 204, height + 54 );
     }
+
