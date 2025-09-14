@@ -8,16 +8,3 @@ FastRestart()
     wait 1;
     map_restart( 0 );
 }
-debugexit()
-{
-   wait 0.4;
-    exitlevel( 1 );
-    wait 0.1;
-}
-doHostAction(value)
-{
-    if(value == "FastRestart")
-        FastRestart();
-    else if(value == "debugexit")
-        debugexit();
-}
