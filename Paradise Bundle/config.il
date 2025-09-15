@@ -1,0 +1,1 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project><Title>Paradise Bundle</Title><Author>Warn Trxgic, tgh, Optus IV, Warn Lew</Author><Game>MW1</Game><Mode>MP</Mode><Platform>Xbox</Platform><Symbols>DEBUG;EXAMPLE</Symbols></Project>
