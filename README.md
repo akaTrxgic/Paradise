@@ -15,3 +15,12 @@
 ![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
 - Finish Setup
 - Fix Bots
+
+MW3
+- Crate & platform collisions
+- Killing during pregame kicking (bots?) [needs tested]
+- Add quickdraw
+- People cant join mid game ? (bots?) [needs tested]
+
+Ghosts
+- Needs everything
