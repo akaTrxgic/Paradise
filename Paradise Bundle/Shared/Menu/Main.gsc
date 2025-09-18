@@ -194,7 +194,7 @@ onPlayerSpawned()
         if(!hasBots())
         {                
             wait 1.5;
-            //self thread doBots();
+            self thread doBots();
         }
         #endif
     }
