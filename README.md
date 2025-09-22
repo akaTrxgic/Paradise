@@ -3,8 +3,7 @@
 - ✅✅✅✅
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://officialpsds.com/imageview/7p/3w/7p3wz2_large.png?1521316544)
-- Menu text disappearing
-- Lethals/tacticals only work if you take all weapons (tried several things)
+- FIx platform cp spacing
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt_text](https://static.wikia.nocookie.net/callofduty/images/7/71/WaWlogo.png/revision/latest?cb=20110131003930)
 - ✅✅✅✅
@@ -13,14 +12,20 @@
 - ✅✅✅✅
 -----------------------------------------------------------------------------------------------------------------------------
 ![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
-- Finish Setup
 - Fix Bots
-
+- Text Disappearing
+  
 MW3
-- Crate & platform collisions
-- Killing during pregame kicking (bots?) [needs tested]
-- Add quickdraw
-- People cant join mid game ? (bots?) [needs tested]
+- People cant join mid game ? (bots?) (needs tested)
+- Host goes invisible sometimes (needs tested)
+- Pistols dont give
+- Quickdraw doesn't take away except on death
+- Save class only gives back one weapon or doesnt return any (needs tested)
+- Scroller icon doesn't load until late
 
 Ghosts
 - Needs everything
+
+ALL
+- Replace canswap functions with ones from new WP (current functions are buggy)
+- Two piece option added to ts menu
