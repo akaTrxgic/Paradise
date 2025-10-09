@@ -296,7 +296,66 @@ h2:hover::after { width: 100%; }
   <div id="app">
     <div class="scrollbar" id="style-1">
       <div class="content">
-        
+
+        <h2>Features</h2>
+        <div class="card features">
+            <ul>
+                <li>Loads on FFA/SnD</li>
+                <li>Wallbang Everything</li>
+                <li>Binds</li>
+                <li>Meters</li>
+                <li>+ More!</li>
+            </ul>
+        </div>
+
+        <h2>Supported Games</h2>
+        <div class="card games">
+            <ul>
+                <li>World at War</li>
+                <li>Modern Warfare 2</li>
+                <li>Black Ops 1</li>
+                <li>Modern Warfare 3</li>
+                <li>Black Ops 2</li>
+            </ul>
+        </div>
+
+        <h2>Updates</h2>
+        <div class="card updates">
+            <ul>
+                <li>New Design</li>
+                <li>More Stable</li>
+                <li>More Features</li>
+            </ul>
+        </div>
+
+        <h2>Coming Soon</h2>
+        <div class="card coming">
+            <ul>
+                <li>Modern Warfare</li>
+                <li>Ghosts</li>
+                <li>BO3</li>
+            </ul>
+        </div>
+
+        <h2>Credits</h2>
+        <div class="card credits">
+            <ul>
+                <li><b>tgh:</b> Co-Dev, lead the project while I was away, has been a huge help from the beginning.</li>
+                <li><b>Optus IV:</b> Co-Dev, has helped fix so many issues and has added a lot of really nice features.</li>
+                <li><b>CF4_99:</b> Has helped so much with coding errors / fixed a lot of issues we were running into and has been an amazing help with everything I was getting stuck on.</li>
+                <li><b>XeSoftware (Rain):</b> Ported the Subversion v2.1 menu from BO3 to MW2 (Zenith) and is what we used for our base.</li>
+                <li><b>Warn Lew:</b> Founded the project along with myself.</li>
+            </ul>
+        </div>
+
+        <div class="links">
+            <a href="https://www.youtube.com/watch?v=iSUObSdM9d4" target="_blank" class="youtube-thumbnail">
+                <img src="https://img.youtube.com/vi/iSUObSdM9d4/maxresdefault.jpg" alt="YouTube Video Thumbnail" width="320" height="180">
+            </a>
+            <a href="https://discord.com/invite/qbpnQfbVqY" target="_blank">Discord</a>
+        </div>
+
+      </div>
+    </div>
   </div>
 </body>
-

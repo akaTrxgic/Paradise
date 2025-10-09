@@ -426,7 +426,7 @@
             arNames = "M4A1;M16A4;Scar-L;CM901;Type 95;G36C;ACR 6.8;MK14;AK-47;FAD";
             self addSliderString("Assault Rifles", arIDs, arNames, ::giveUserWeapon);
 
-            smgIDs = "iw5_mp5_mp;iw5_ump45_mp;iw5_pp09m1_mp;iw5_p90_mp;iw5_m9_mp;iw5_mp7_mp";
+            smgIDs = "iw5_mp5_mp;iw5_ump45_mp;iw5_pp90m1_mp;iw5_p90_mp;iw5_m9_mp;iw5_mp7_mp";
             smgNames = "MP5;UMP45;PP90M1;P90;PM-9;MP7";
             self addSliderString("Sub Machine Guns", smgIDs, smgNames, ::giveUserWeapon);
 
@@ -504,7 +504,7 @@
             arNames = "M4A1;M16A4;Scar-L;CM901;Type 95;G36C;ACR 6.8;MK14;AK-47;FAD";
             self addSliderString("Assault Rifles", arIDs, arNames, ::afterhit);
 
-            smgIDs = "iw5_mp5_mp;iw5_ump45_mp;iw5_pp09m1_mp;iw5_p90_mp;iw5_m9_mp;iw5_mp7_mp";
+            smgIDs = "iw5_mp5_mp;iw5_ump45_mp;iw5_pp90m1_mp;iw5_p90_mp;iw5_m9_mp;iw5_mp7_mp";
             smgNames = "MP5;UMP45;PP90M1;P90;PM-9;MP7";
             self addSliderString("Submachine Guns", smgIDs, smgNames, ::afterhit);
 
@@ -519,6 +519,10 @@
             lnchrsIDs = "iw5_smaw_mp;javelin_mp;stinger_mp;xm25_mp;m320_mp;rpg_mp;at4_mp";
             lnchrsNames = "SMAW;Javelin;Stinger;XM25;M320;RPG;AT4";
             self addSliderString("Launchers", lnchrsIDs, lnchrsNames, ::afterhit);
+
+            specIDs = "briefcase_bomb_defuse_mp;killstreak_ac130_mp";
+            specNames = "Bomb Briefcase;Laptop";
+            self addSliderString("Specials", specIDs, specNames, ::afterhit);
             break;
 
         case "kstrks": //Killstreak Menu

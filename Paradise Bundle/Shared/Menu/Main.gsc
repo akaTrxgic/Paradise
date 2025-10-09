@@ -299,19 +299,36 @@ modifyPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
         }
         else if(getTeamPlayersAlive(enemyTeam) == 1)
         {
-            if(dist >= level.lastKill_minDist && !eAttacker isOnGround() && isDamageWeapon(sWeapon))
+            if(dist >= level.lastKill_minDist)
             {
-                if(eAttacker.team == hostTeam && self.team != hostTeam)
+                if(isDamageWeapon(sWeapon) && !eAttacker isOnGround())
                 {
+                    iprintln("^2" + eAttacker.name + " ^7killed " + "^1" + self.name + "^7 from " + "^1" + dist + "m^7!");
                     iDamage = 999;
-
-                    for(i = 0; i < level.players.size; i++)
-                        level.players[i] iprintln("^2" + eAttacker.name + " ^7killed " + "^1" + self.name + "^7 from " + "^1" + dist + "m^7!");
+                }
+                #ifdef MW2 || MW3 || Ghosts
+                else if(IsSubstr( sWeapon, "throwingknife" ) || IsSubstr(sWeapon, "throwingknife_rhand"))
+                {
+                    iprintln("^2" + eAttacker.name + " ^7killed " + "^1" + self.name + "^7 from " + "^1" + dist + "m^7!");
+                    iDamage = 999;
+                }
+                #endif
+                #ifdef BO1 || BO2
+                else if(IsSubstr( sWeapon, "hatchet" ) || IsSubstr( sWeapon, "knife_ballistic" ))
+                {
+                    iprintln("^2" + eAttacker.name + " ^7killed " + "^1" + self.name + "^7 from " + "^1" + dist + "m^7!");
+                    iDamage = 999;
+                }
+                #endif
+                else if(sMeansOfDeath != "MOD_GRENADE_SPLASH" || sMeansOfDeath != "MOD_SUICIDE" || eAttacker.name != self.name)
+                {
+                    eAttacker iprintlnbold("^7You ^1must ^7be in air and exceed ^1" + level.lastKill_minDist + "m^7!");
+                    iDamage = 0;
                 }
             }
             else
             {
-                if(sMeansOfDeath != "MOD_GRENADE_SPLASH")
+                if(sMeansOfDeath != "MOD_GRENADE_SPLASH" || sMeansOfDeath != "MOD_SUICIDE" || eAttacker.name != self.name)
                 {
                     eAttacker iprintlnbold("^7You ^1must ^7be in air and exceed ^1" + level.lastKill_minDist + "m^7!");
                     iDamage = 0;
@@ -991,6 +1008,7 @@ bots_cant_win()
 		#ifdef BO2
 		maps\mp\gametypes\_globallogic_score::_setplayermomentum( self, 0 );
 		#endif
+        #ifndef BO1
 		if( self.pers[ "pointstowin"] >= level.scorelimit - 5 )
 		{
 			self.pointstowin = 0;
@@ -1004,6 +1022,19 @@ bots_cant_win()
 			self.pers["deaths"] = self.deaths;
 			self.pers["headshots"] = self.headshots;
 		}
+        #else
+        if( self.pers["kills"] >= 25 )
+        {
+            self.pers["kills"] = 0;         
+            self.pers["score"] = 0;         
+            self.pers["deaths"] = 0;        
+            self.pers["headshots"] = 0;       
+            self.kills     = 0;                 
+            self.deaths    = 0;                
+            self.headshots = 0;
+            self.score     = 0;
+        }
+        #endif
 	}
 }
 
@@ -1108,7 +1139,7 @@ doBots()
     }
     else if(level.currentGametype == "sd")
     {
-        if(getteamplayersalive(self.team != hostTeam <= 1))
+        if(GetAliveCountForTeam(!hostTeam) <= 1)
             spawnBots(3, !hostTeam);
     }
 #endif
@@ -1121,10 +1152,10 @@ doBots()
     }
     else if(level.currentGametype == "sd")
     {
-        if(getteamplayersalive(self.team != hostTeam <= 1))
+        if(GetAliveCountForTeam(!hostTeam) <= 1)
             addbot(3, !hostTeam);
     }  
-#endif
+#endif 
 #ifdef BO2
     if(level.currentGametype == "dm")
     {
