@@ -1,0 +1,1 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project><Title>Paradise Online MW2.MW3</Title><Author /><Game>MW3</Game><Mode>MP</Mode><Platform>Xbox</Platform><Symbols>DEBUG;EXAMPLE</Symbols></Project>
