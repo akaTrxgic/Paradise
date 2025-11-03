@@ -33,6 +33,7 @@
     case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addOpt("Unstuck", ::doUnstuck);
+            self addToggle("Lazy Elevators", self.lazyEles, ::lazyeletggl);
             self addOpt("Tp to Spawn", ::tpToSpawn);
 
             canOpts = ["Current","Infinite"];
@@ -761,26 +762,61 @@
             for(a=0;a<9;a++)
             self addOpt(camos[a], ::changeCamo, a );
             #endif
-
+ 
             #ifdef STEAM
-            baseCamos = [ "None", "Woodland", "Desert", "Artic", "Digital", "Urban", "Red Tiger", "Blue Tiger", "Fall" ];
-            for(a=0;a<baseCamos.size;a++)
-            self addSliderString("Base Camos", a, baseCamos[a], ::changecamo);
+            self addOpt("Base Camos", ::newMenu, "base");
+            self addOpt("Treyarch Camos", ::newMenu, "3arc");
+            self addOpt("Infinity Ward Camos", ::newMenu, "iw");
+            self addOpt("Minecraft Camos", ::newMenu, "mc");
+            self addOpt("Animated Camos", ::newMenu, "anim");
+            self addOpt("Test Camos", ::newMenu, "test");
 
-            tarcCamos = ["Ghosts", "Seducer"];
-            tarcCamoIDs = ["ghosts", "sdcr"];
-            for(a=0;a<tarcCamos.size;a++)
-            self addSliderString("Treyarch Camos", tarcCamoIDs[a], tarcCamos[a], ::customCamos);
+        case "base":
+            self addMenu("base", "Base Camos");
+            camos = [ "None", "Woodland", "Desert", "Artic", "Digital", "Urban", "Red Tiger", "Blue Tiger", "Fall" ];
+            for(a=0;a<9;a++)
+            self addOpt(camos[a], ::changeCamo, a );
+        break;
 
-            iwCamos = ["Damascus", "Bloodshot", "Obsidian"];
-            iwCamoIDs = ["dmscs", "lat", "obsid"];
-            for(a=0;a<iwCamos.size;a++)
-            self addSliderString("Infinity Ward Camos", iwCamoIDs[a], iwCamos[a], ::customCamos);
+        case "3arc":
+            self addMenu("3arc", "Treyarch Camos");
+            camoNames = ["Ghosts", "Seducer"];
+            camoIDs = ["ghosts", "sdcr"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
 
-            cstmCamos = ["Molten", "Galaxy", "Purple Obsidian"];
-            cstmCamoIDs = ["molten", "galaxy", "prplob"];
-            for(a=0;a<cstmCamos.size;a++)
-            self addSliderString("Custom Camos", cstmCamoIDs[a], cstmCamos[a], ::customCamos);
+        case "iw":
+            self addMenu("iw", "Infinity Ward Camos");
+            camoNames = ["Comic", "Damascus", "Bloodshot", "Obsidian", "Purple Obsidian", "Spectrum"];
+            camoIDs = ["Comic", "dmscs", "lat", "obsid", "prplob", "Spectrum"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
+
+        case "mc":
+            self addMenu("mc", "Minecraft Camos");
+            camoNames = ["Coal Ore", "Iron Ore", "Redstone Ore", "Gold Ore", "Lapis Ore", "Diamond Ore", "Emerald Ore", "Creeper Skin"];
+            camoIDs = ["MCCoal", "MCIron", "MCRed", "MCGold", "MCLap", "MCDia", "MCEm", "MCCreep"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
+
+        case "anim":
+            self addMenu("anim", "Animated Camos");
+            camoNames = ["Ghosts", "Temple", "Seducer", "Molten"];
+            camoIDs = ["animGhosts", "animTemp", "animSdcr", "animMolten"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::animCamoTggl, camoIDs[a]);
+        break;
+
+        case "test":
+            self addMenu("test", "Test Camos");
+            camoNames = ["abs1", "bbgtgr", "blobsid", "blrltgr", "blupal", "bo3aowgl", "bo3aow", "coral", "ffood", "graf", "grpal", "jack", "mlg", "mop", "nb4c", "paradise", "prplpal", "rpal", "space", "tgh2", "tgh", "trxgic", "wf1", "wf2", "wfnewTEST", "wfnew"];
+            camoIDs = ["abs1", "bbgtgr", "blobsid", "blrltgr", "blupal", "bo3aowgl", "bo3aow", "coral", "ffood", "graf", "grpal", "jack", "mlg", "mop", "nb4c", "paradise", "prplpal", "rpal", "space", "tgh2", "tgh", "trxgic", "wf1", "wf2", "wfnewTEST", "wfnew"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
             #endif
             break;
 
