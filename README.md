@@ -1,13 +1,13 @@
 # Paradise
-![alt text](https://oyster.ignimgs.com/mediawiki/apis.ign.com/call-of-duty-4-modern-warfare/c/c0/Callofduty4-logo-large.png)
+XBOX:
+
+COD 4
 - Text Disappearing
   
 MW2
 * Auto killcam nuke
 
-
-
-PC Versions
+STEAM:
 
 MW2:
 * UAV doesn't work
@@ -17,7 +17,7 @@ BO2:
 * Uav goes in and out ?
 
 MW3:
-* Title text
+* 
 
 WAW:
 * 
