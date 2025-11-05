@@ -304,7 +304,7 @@
         self endon("disconnect");
         
         self.buttonPressed[button] = false;
-#ifdef MW2 || MW3
+#ifdef MW2 || MW3 || MWR
     	self NotifyOnPlayerCommand("button_pressed_"+button,button);
 #endif
         while(1)

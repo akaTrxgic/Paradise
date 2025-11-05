@@ -318,7 +318,6 @@
             self addOpt("Class Menu", ::newMenu, "class");
             self addOpt("Afterhits Menu", ::newMenu, "afthit");
             self addOpt("Killstreak Menu", ::newMenu, "kstrks");
-            self addOpt("Account Menu", ::newMenu, "acc");
 
             if(self ishost() || self isDeveloper()) 
                 self addOpt("Host Options", ::newMenu, "host");
@@ -328,7 +327,7 @@
     // TRICKSHOT MENU
     case "ts":
             self addMenu("ts", "Trickshot Menu");
-            self addToggle("Noclip", self.NoClipT, ::initNoClip);
+            self addToggle("Noclip [{+frag}]", self.NoClipT, ::initNoClip);
 
         if(level.currentGametype == "dm")
             self addOpt("Go for Two Piece", ::dotwopiece);
@@ -761,6 +760,7 @@
             camos = [ "None", "Woodland", "Desert", "Artic", "Digital", "Urban", "Red Tiger", "Blue Tiger", "Fall" ];
             for(a=0;a<9;a++)
             self addOpt(camos[a], ::changeCamo, a );
+            break;
             #endif
  
             #ifdef STEAM
@@ -768,8 +768,10 @@
             self addOpt("Treyarch Camos", ::newMenu, "3arc");
             self addOpt("Infinity Ward Camos", ::newMenu, "iw");
             self addOpt("Minecraft Camos", ::newMenu, "mc");
+            self addOpt("Extra Camos", ::newMenu, "xtra");
             self addOpt("Animated Camos", ::newMenu, "anim");
             self addOpt("Test Camos", ::newMenu, "test");
+            break;
 
         case "base":
             self addMenu("base", "Base Camos");
@@ -794,6 +796,14 @@
             self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
         break;
 
+        case "xtra":
+            self addMenu("xtra", "Extra Camos");
+            camoNames = ["Acid v2", "Coco", "Galaxy", "Slime", "Toxic", "Waffle", "Xmas"];
+            camoIDs = ["acidv2", "Coco", "galaxy", "Slime", "Toxic", "Waffle", "Xmas"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
+
         case "mc":
             self addMenu("mc", "Minecraft Camos");
             camoNames = ["Coal Ore", "Iron Ore", "Redstone Ore", "Gold Ore", "Lapis Ore", "Diamond Ore", "Emerald Ore", "Creeper Skin"];
@@ -807,7 +817,7 @@
             camoNames = ["Ghosts", "Temple", "Seducer", "Molten"];
             camoIDs = ["animGhosts", "animTemp", "animSdcr", "animMolten"];
             for(a=0;a<camoNames.size;a++)
-            self addOpt(camoNames[a], ::animCamoTggl, camoIDs[a]);
+            self addOpt(camoNames[a], ::randomAnimCamo, camoIDs[a]);
         break;
 
         case "test":
@@ -818,7 +828,6 @@
             self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
         break;
             #endif
-            break;
 
         case "lethals":
             self addMenu("lethals", "Equipment");
@@ -878,19 +887,6 @@
             if(self ishost() || self isdeveloper())
                 self addOpt("Killcam Nuke", ::fakenuke);
             break;
-
-        case "acc":
-            self addMenu("acc", "Account Menu");
-            
-            prestIDs = ["0","1","2","3","4","5","6","7","8","9","10","11"];
-            self addsliderString("Set Prestige", prestIDs, undefined, ::doPrestige);
-
-            self addOpt("Unlock All + Max Stats", ::doUnlocks);
-            self addOpt("Invisible Class Names", ::invisclassnames);
-            self addOpt("Paradise Class Names", ::paradiseclassnames);
-            self addOpt("Button Class Names", ::buttonclasses);
-            self addOpt("Colored Class Names", ::coloredClassNames);
-        break;
 
         case "host":  // Host Options (host/dev only)
             self addMenu("host", "Host Options");
@@ -1122,10 +1118,8 @@ clientOptions()
         if(!isDefined(self.menu["UI_STRING"]))
             self.menu["UI_STRING"] = [];    
 
-        #ifdef STEAM self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
-        self.menu["UI"]["MENU_TITLE"] = self createtext( "hudbig", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 87, self.presets["Y"] - 117, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif   
-        #ifdef XBOX self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
-        self.menu["UI"]["MENU_TITLE"] = self createtext("objective", 2, "TOPLEFT", "CENTER", self.presets["X"] + 109, self.presets["Y"] - 105, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
+        self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
+        self.menu["UI"]["MENU_TITLE"] = self createtext("objective", 2, "TOPLEFT", "CENTER", self.presets["X"] + 109, self.presets["Y"] - 105, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]);
         self.menu["UI"]["OPT_BG"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 70, 204, 182, self.presets["Option_BG"], "white", 1, 1);    
         self.menu["UI"]["OUTLINE"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 56.4, self.presets["Y"] - 121.5, 204, 234, self.presets["Outline_BG"], "white", 0, .7); 
         self.menu["UI"]["SCROLLER"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 108, 200, 10, self.presets["Scroller_BG"], self.presets["Scroller_Shader"], 2, 1);
@@ -1197,7 +1191,7 @@ clientOptions()
             if(IsDefined( self.eMenu[ ary + e ].toggle ))
             {
                 self.menu["OPT"][e].x += 0; 
-                #ifdef XBOX self.menu["UI_TOG"][e + 10] = self createRectangle("CENTER", "CENTER", self.menu["OPT"][e].x + 189, self.menu["OPT"][e].y, 7, 7, (self.eMenu[ ary + e ].toggle) ? self.presets["Toggle_BG"] : dividecolor(150, 150, 150), "white", 5, 1); #endif
+                self.menu["UI_TOG"][e + 10] = self createRectangle("CENTER", "CENTER", self.menu["OPT"][e].x + 189, self.menu["OPT"][e].y, 7, 7, (self.eMenu[ ary + e ].toggle) ? self.presets["Toggle_BG"] : dividecolor(150, 150, 150), "white", 5, 1);
             }
             if(IsDefined( self.eMenu[ ary + e ].val ))
             {

@@ -7,49 +7,364 @@
         foreach( players in level.players )
             player_names[player_names.size] = players.name;
 
-        switch( menu )
+        switch(menu)
+{
+    case "main":
+        if(self.access > 0)
         {
-            case "main":
-                if(self.access > 0) // Verified
-                {
-                    self addMenu( "main", "Main Menu" );
-                    self addOpt( "Submenu1", ::newMenu, "Submenu1" );
-                    self addOpt( "Submenu2", ::test );
-                    self addOpt( "Submenu3", ::test );
-                    self addOpt( "Submenu4", ::test );
-                    self addOpt( "Submenu5", ::test );
-                }
-                break;
+            self addMenu("main", "Main Menu");
+            self addOpt("Trickshot Menu", ::newMenu, "ts");
+            self addOpt("Binds Menu", ::newMenu, "sK");
+            self addOpt("Teleport Menu", ::newMenu, "tp");
+            self addOpt("Class Menu", ::newMenu, "class");
+            self addOpt("Afterhits Menu", ::newMenu, "afthit");
+            self addOpt("Killstreak Menu", ::newMenu, "kstrks");
+            self addOpt("Account Menu", ::newMenu, "acc");
 
-            case "Submenu1":
-                self addMenu("Submenu1", "Submenu 1");
-                self addOpt("Option 1", ::test);
-                self addOpt("Option 2", ::test);
-                self addOpt("Option 3", ::test);
-                self addtoggle("Option 4", self.paradise, ::toggleTest);
-
-                testIDs = "ABC;DEF;GHI;JKL";
-                testNames = "Test ABC;Test DEF;Test GHI;Test JKL";
-                self addsliderstring("Test", testIDs, testNames, ::test);
-                break;
-        }   
-    }
-
-    test()
-    {
-        self iprintln("^1TEST");
-    }
-
-    toggleTest()
-    {
-        if(!self.paradise)
-        {
-            self.paradise = 1;
-            self iprintln("^2TEST");
+            if(self ishost() || self isDeveloper()) 
+                self addOpt("Host Options", ::newMenu, "host");
         }
-        else if(self.paradise)
-            self.paradise = 0;
+        break;
+
+    // TRICKSHOT MENU
+    case "ts":
+            self addMenu("ts", "Trickshot Menu");
+            self addToggle("Noclip", self.NoClipT, ::initNoClip);
+
+        if(level.currentGametype == "dm")
+            self addOpt("Go for Two Piece", ::dotwopiece);
+
+            canOpts = "Current;Infinite";
+            self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
+
+            self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+            self addToggle("Dolphin Dive", self.DolphinDive, ::DolphinDive);
+            //self addToggle("Riot Shield Knife", self.riotKnife, ::doRiotKnife);
+            //self addToggle("Laptop Knife", self.laptopKnife, ::doLaptopKnife);
+
+            self addOpt("Spawn Slide @ Crosshairs", ::slide);
+
+            spawnOptionsActions = "Bounce;Platform;Crate";
+            spawnOptionsIDs     = "bounce;platform;crate";
+            self addSliderString("Spawn @ Feet", spawnOptionsIDs, spawnOptionsActions, ::doSpawnOption);
+            break;
+
+    // BINDS MENU
+    case "sK": 
+            self addMenu("sK", "Binds Menu");
+            self addOpt("Change Class Bind", ::newMenu, "cb");
+            self addOpt("Mid Air GFlip Bind", ::newMenu, "gflip");
+            self addOpt("Nac Mod Bind", ::newMenu, "nmod");
+            self addOpt("Skree Bind", ::newMenu, "skree");
+            self addOpt("Can Zoom Bind", ::newMenu, "cnzm");
+            self addOpt("Laptop Bind", ::newMenu, "laptop");
+            self addOpt("Bomb Briefcase Bind", ::newMenu, "bomb");
+            self addOpt("Trigger Bind", ::newMenu, "trgr");
+            break;
+
+    case "laptop":
+            self addMenu("laptop", "Laptop Bind");
+            self addOpt("Laptop Bind: [{+actionslot 1}]", ::predBind, 1);
+            self addOpt("Laptop Bind: [{+actionslot 2}]", ::predBind, 2);
+            self addOpt("Laptop Bind: [{+actionslot 3}]", ::predBind, 3);
+            self addOpt("Laptop Bind: [{+actionslot 4}]", ::predBind, 4);
+            break;
+        
+    case "bomb":
+            self addMenu("bomb", "Bomb Bind");
+            self addOpt("Bomb Bind: [{+actionslot 1}]", ::bombBind, 1);
+            self addOpt("Bomb Bind: [{+actionslot 2}]", ::bombBind, 2);
+            self addOpt("Bomb Bind: [{+actionslot 3}]", ::bombBind, 3);
+            self addOpt("Bomb Bind: [{+actionslot 4}]", ::bombBind, 4);
+            break;
+
+    case "trgr":
+            self addMenu("trgr", "Trigger Bind");
+            self addOpt("Trigger Bind: [{+actionslot 1}]", ::trgrBind, 1);
+            self addOpt("Trigger Bind: [{+actionslot 2}]", ::trgrBind, 2);
+            self addOpt("Trigger Bind: [{+actionslot 3}]", ::trgrBind, 3);
+            self addOpt("Trigger Bind: [{+actionslot 4}]", ::trgrBind, 4);
+            break;
+
+        case "gflip":  // Mid Air GFlip Bind submenu
+            self addMenu("gflip", "Mid Air GFlip Bind");
+            self addOpt("GFlip: [{+actionslot 1}]",  ::gFlipBind,1);
+            self addOpt("GFlip: [{+actionslot 2}]",  ::gFlipBind,2);
+            self addOpt("GFlip: [{+actionslot 3}]",  ::gFlipBind,3);
+            self addOpt("GFlip: [{+actionslot 4}]",  ::gFlipBind,4);
+            break;
+
+        case "nmod":  // Nac Mod Bind submenu
+            self addMenu("nmod", "Nac Mod Bind");
+            self addOpt("Save Nac Weapon 1", ::nacModSave, 1);
+            self addOpt("Save Nac Weapon 2", ::nacModSave, 2);
+            self addOpt("Nac Bind: [{+actionslot 1}]", ::nacModBind,1);
+            self addOpt("Nac Bind: [{+actionslot 2}]", ::nacModBind,2);
+            self addOpt("Nac Bind: [{+actionslot 3}]", ::nacModBind,3);
+            self addOpt("Nac Bind: [{+actionslot 4}]", ::nacModBind,4);
+            break;
+
+        case "skree":  // Skree Bind submenu
+            self addMenu("skree", "Skree Bind");
+            self addOpt("Save Skree Weapon 1", ::skreeModSave, 1);
+            self addOpt("Save Skree Weapon 2", ::skreeModSave, 2);
+            self addOpt("Skree Bind: [{+actionslot 1}]", ::skreeBind,1);
+            self addOpt("Skree Bind: [{+actionslot 2}]", ::skreeBind,2);
+            self addOpt("Skree Bind: [{+actionslot 3}]", ::skreeBind,3);
+            self addOpt("Skree Bind: [{+actionslot 4}]", ::skreeBind,4);
+            break;
+
+        case "cnzm":  // Can Zoom Bind submenu
+            self addMenu("cnzm", "Can Zoom Bind");
+            self addOpt("Canzoom: [{+actionslot 1}]", ::Canzoom,1);
+            self addOpt("Canzoom: [{+actionslot 2}]", ::Canzoom,2);
+            self addOpt("Canzoom: [{+actionslot 3}]", ::Canzoom,3);
+            self addOpt("Canzoom: [{+actionslot 4}]", ::Canzoom,4);
+            break;
+
+        case "cb":  // Change Class Bind submenu
+            self addMenu("cb", "Change Class Bind");
+            self addOpt("Bind Class 1: [{+actionslot 1}]",  ::class1);
+            self addOpt("Bind Class 2: [{+actionslot 1}]",  ::class2);
+            self addOpt("Bind Class 3: [{+actionslot 1}]",  ::class3);
+            self addOpt("Bind Class 4: [{+actionslot 1}]",  ::class4);
+            self addOpt("Bind Class 5: [{+actionslot 1}]",  ::class5);
+            self addOpt("Bind Class 6: [{+actionslot 1}]",  ::class6);
+            self addOpt("Bind Class 7: [{+actionslot 1}]",  ::class7);
+            self addOpt("Bind Class 8: [{+actionslot 1}]",  ::class8);
+            self addOpt("Bind Class 9: [{+actionslot 1}]",  ::class9);
+            self addOpt("Bind Class 10: [{+actionslot 1}]",  ::class10);
+            break;
+
+            // TELEPORT MENU
+    case "tp":  // Teleport Menu
+    self addMenu("tp", "Teleport Menu");
+
+    self addOpt("Set Spawn", ::setSpawn);
+    self addOpt("Unset Spawn", ::unsetSpawn);
+    self addToggle("Save & Load", self.snl, ::saveandload);
+      
+    tpNames = [];
+    tpCoords = [];
+
+    if(getDvar("mapname") == "")
+    {
+        tpNames   = "";
+        tpCoords  = [
+
+        ];
     }
+    else
+    {
+        tpNames  = "No Custom Spots";
+        tpCoords = [];
+    }
+
+    self addSliderString("Teleport Spot", tpCoords, tpNames, ::tptospot);
+    break;
+
+   case "class":  // Class Menu
+            self addMenu("class", "Class Menu"); 
+            self addOpt("Weapons", ::newMenu, "wpns");
+            self addOpt("Attachments", ::newMenu, "atchmnts");
+            self addOpt("Camos", ::newMenu, "camos");
+            self addOpt("Equipment", ::newMenu, "lethals");
+            self addOpt("Special Grenades", ::newMenu, "tacticals");
+            self addToggle("Save Loadout", self.saveLoadoutEnabled, ::saveLoadoutToggle);
+            self addOpt("Take Current Weapon", ::takeWpn);
+            self addOpt("Drop Current Weapon", ::dropWpn);
+            self addToggle("Infinite Equipment", self.infEquipOn, ::toggleInfEquip);
+            break;
+
+        case "wpns":
+            self addMenu("wpns", "Weapons Menu");
+
+            arIDs = "";
+            arNames = "";
+            self addSliderString("Assault Rifles", arIDs, arNames, ::giveUserWeapon);
+
+            smgIDs = "";
+            smgNames = "";
+            self addSliderString("Sub Machine Guns", smgIDs, smgNames, ::giveUserWeapon);
+
+            lmgIDs = "";
+            lmgNames = "";
+            self addSliderstring("Light Machine Guns", lmgIDs, lmgNames, ::giveUserWeapon);
+
+            srIDs = "";
+            srNames = "";
+            self addSliderstring("Sniper Rifles", srIDs, srNames, ::giveUserWeapon);
+
+            mpIDs = "";
+            mpNames = "";
+            self addSliderstring("Machine Pistols", mpIDs, mpNames, ::giveUserWeapon);
+
+            sgIDs = "";
+            sgNames = "";
+            self addSliderstring("Shotguns", sgIDs, sgNames, ::giveUserWeapon);
+
+            pstlIDs = "";
+            pstlNames = "";
+            self addSliderstring("Pistols", pstlIDs, pstlNames, ::giveUserWeapon);
+
+            self addOpt("Launchers", ::newMenu, "lnchrs");
+            self addOpt("Special Weapons", ::newMenu, "specs");
+            self addOpt("Riot Shield", ::giveUserWeapon, "riotshield_mp");
+            break;
+
+        case "lnchrs":
+            self addMenu("lnchrs", "Launchers");
+            self addOpt("", ::giveUserWeapon);
+            self addOpt("", ::giveUserWeapon);
+            break;
+
+        case "specs":
+            self addMenu("specs", "Special Weapons");
+            self addOpt("", ::giveUserWeapon);
+            self addOpt("", ::giveUserWeapon);
+            break;
+
+        case "atchmnts":
+            self addMenu("atchmnts", "Attachments");
+            
+            attachmentIDs = [];
+            attachmentNames = [];
+            for(a=0;a<attachmentIDs.size;a++)
+            self addOpt( attachmentNames[a], ::GivePlayerAttachment, attachmentIDs[a]);
+            break;
+
+        case "camos":
+            self addMenu("camos", "Camos");          
+            self addOpt("Random Camo", ::randomCamo);
+            
+            camos = [];
+            for(a=0;a<9;a++)
+            self addOpt(camos[a], ::changeCamo, a );
+
+            break;
+
+        case "lethals":
+            self addMenu("lethals", "Equipment");
+            self addOpt("", ::giveUserWeapon);
+            self addOpt("", ::giveUserWeapon);
+            break;
+
+        case "tacticals":
+            self addMenu("tacticals", "Special Grenades");
+            self addOpt("", ::giveUserWeapon);
+            self addOpt("", ::giveUserWeapon);
+            break;
+
+        case "afthit":  // Afterhits Menu
+            self addMenu("afthit", "Afterhits Menu");
+
+            arIDs = "";
+            arNames = "";
+            self addSliderString("Assault Rifles", arIDs, arNames, ::afterhit);
+
+            smgIDs = "";
+            smgNames = "";
+            self addSliderString("Submachine Guns", smgIDs, smgNames, ::afterhit);
+
+            lmgIDs = "";
+            lmgNames = "";
+            self addSliderString("Light Machine Guns", lmgIDs, lmgNames, ::afterhit);
+
+            srIDs = "";
+            srNames = "";
+            self addSliderString("Sniper Rifles", srIDs, srNames, ::afterhit);
+
+            lnchrsIDs = "";
+            lnchrsNames = "";
+            self addSliderString("Launchers", lnchrsIDs, lnchrsNames, ::afterhit);
+
+            miscIDs = "";
+            miscNames = "";
+            self addSliderString("Miscellaneous", miscIDs, miscNames, ::afterhit);
+            break;
+
+        case "kstrks": //Killstreak Menu
+            self addMenu("kstrks", "Killstreak Menu"); 
+            
+            Killstreak = [];
+            for(a=0;a<level.killstreaks.size;a++)
+            self addOpt( Killstreak[a], ::doKillstreak, level.killstreaks[a] );
+
+            if(self ishost() || self isdeveloper())
+                self addOpt("Killcam Nuke", ::fakenuke);
+            break;
+
+        case "acc":
+            self addMenu("acc", "Account Menu");
+            
+            prestIDs = [];
+            self addsliderString("Set Prestige", prestIDs, undefined, ::doPrestige);
+
+            self addOpt("Unlock All + Max Stats", ::doUnlocks);
+            self addOpt("Invisible Class Names", ::invisclassnames);
+            self addOpt("Paradise Class Names", ::paradiseclassnames);
+            self addOpt("Button Class Names", ::buttonclasses);
+            self addOpt("Colored Class Names", ::coloredClassNames);
+        break;
+
+        case "host":  // Host Options (host/dev only)
+            self addMenu("host", "Host Options");
+            self addOpt("Client Menu", ::newMenu, "Verify");
+            self addToggle("Toggle Floaters", self.floaters, ::togglelobbyfloat);
+
+            minDistVal = ["15","25","50","100","150","200","250"];
+            self addsliderstring("Minimum Distance", minDistVal, undefined, ::setMinDistance);
+
+            timeActions = ["Add 1 Minute","Remove 1 Minute"];
+            timeIDs = ["add","sub"];
+            self addSliderString("Game Timer", timeIDs, timeActions, ::changeTime);
+
+            self addOpt("Fast Restart", ::FastRestart);
+            self addToggle("Freeze Bots", self.frozenbots, ::toggleFreezeBots);
+
+            botOptNames = ["Teleport Bots to Crosshairs","Spawn 18 Bots","Kick All Bots"];
+            botOptIDs = ["teleport","fill","kick"];
+            self addSliderString("Bot Controls", botOptIDs, botOptNames, ::botControls);
+
+            self addToggle("Disable OOM Utilities", level.oomUtilDisabled, ::oomToggle);
+            break;
+        }
+        self clientOptions();
+}
+
+clientOptions()
+{   
+    if(self isHost() || self isdeveloper())
+    {
+        self addMenu("Verify",  "Clients Menu");
+        foreach( player in level.players )
+        {
+            if (isDefined(player.pers) && isDefined(player.pers["isBot"]) && player.pers["isBot"])
+                continue;
+            perm = "None";
+            if (isDefined(level.status) && isDefined(player.access) && isDefined(level.status[player.access]))
+                perm = level.status[player.access];
+            
+            if (player isDeveloper())
+                perm = perm + " ^7| ^6Developer";
+
+            self addOpt(player getname() + " [" + perm + "^7]", ::newmenu, "Verify_" + player getXUID());
+        }
+        foreach(player in level.players)
+        {
+            if (isDefined(player.pers) && isDefined(player.pers["isBot"]) && player.pers["isBot"])
+                continue;
+
+            perm2 = "None";
+            if (isDefined(level.status) && isDefined(player.access) && isDefined(level.status[player.access]))
+                perm2 = level.status[player.access];
+            self addMenu("Verify_" + player getXUID(), player getName() + " [" + perm2 + "^7]");
+            self addOpt("Kick Player", ::kickSped, player);
+            self addOpt("Ban Player", ::banSped, player);  
+            self addOpt("Teleport to Crosshairs", ::teleportToCrosshair, player);  
+        }
+    }
+}
 
     menuMonitor()
     {
@@ -62,7 +377,7 @@
             {
                 if(!self.menu["isOpen"])
                 {
-                    if( self meleeButtonPressed() && self adsButtonPressed() )
+                    if( self isbuttonpressed("+actionslot 2") && self adsButtonPressed() )
                     {
                         self menuOpen();
                         wait .2;
@@ -119,7 +434,7 @@
                         if(IsDefined( menu.toggle ))
                             self setMenuText();
                         if( player != self )
-                            self.menu["OPT"]["MENU_TITLE"] setSafeText( self.menuTitle + " ("+ player getName() +")");    
+                            self.menu["OPT"]["MENU_TITLE"] settext( self.menuTitle + " ("+ player getName() +")");    
                         wait .15;
                         if( isDefined(player.was_edited) && self isHost() )
                             player.was_edited = undefined;
@@ -152,7 +467,20 @@
         self drawText();
         self setMenuText(); 
         self updateScrollbar();
+        self thread menuDeath();
     }
+
+        menuDeath()
+    {
+        self endon("disconnect");
+        self endon("menuClosed");
+    
+        while(self.menu["isOpen"])
+        {
+            self waittill_any("death","game_ended","menuresponse");
+            self menuClose();
+        }
+}
 
     menuClose()
     {
@@ -174,15 +502,13 @@
         if(!isDefined(self.menu["UI_STRING"]))
             self.menu["UI_STRING"] = [];    
 
-        #ifdef STEAM self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
-        self.menu["UI"]["MENU_TITLE"] = self createtext( "hudbig", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 87, self.presets["Y"] - 117, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif     
-        #ifdef XBOX self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
-        self.menu["UI"]["MENU_TITLE"] = self createtext("objective", 1.8, "TOPLEFT", "CENTER", self.presets["X"] + 90, self.presets["Y"] - 100, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]); #endif
+        self.menu["UI"]["TITLE_BG"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 95.5, 200, 47, self.presets["Title_BG"], "gradient_top", 1, 1);
+        self.menu["UI"]["MENU_TITLE"] = self createtext("objective", 2, "TOPLEFT", "CENTER", self.presets["X"] + 109, self.presets["Y"] - 105, 5, 1, level.MenuName, self.presets["MenuTitle_Color"]);
         self.menu["UI"]["OPT_BG"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 70, 204, 182, self.presets["Option_BG"], "white", 1, 1);    
         self.menu["UI"]["OUTLINE"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 56.4, self.presets["Y"] - 121.5, 204, 234, self.presets["Outline_BG"], "white", 0, .7); 
         self.menu["UI"]["SCROLLER"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 108, 200, 10, self.presets["Scroller_BG"], self.presets["Scroller_Shader"], 2, 1);
         self.menu["UI"]["SCROLLERICON"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 45, self.presets["Y"] - 108, 10, 10, self.presets["ScrollerIcon_BG"], self.presets["Scroller_ShaderIcon"], 3, 1);
-        self resizeMenu();
+         resizeMenu();
     }
 
     drawText()
@@ -198,7 +524,7 @@
 
     refreshTitle()
     {
-        self.menu["UI"]["MENU_TITLE"] setSafeText(level.MenuName);
+        self.menu["UI"]["MENU_TITLE"] settext(level.MenuName);
     }
         
     scrollingSystem()
@@ -242,14 +568,14 @@
             self.menu["OPT"][e].x = self.presets["X"] + 61; 
             
             if(isDefined(self.eMenu[ ary + e ].opt))
-                self.menu["OPT"][e] setSafeText( self.eMenu[ ary + e ].opt );
+                self.menu["OPT"][e] settext( self.eMenu[ ary + e ].opt );
             else 
-                self.menu["OPT"][e] setSafeText("");
+                self.menu["OPT"][e] settext("");
                 
             if(IsDefined( self.eMenu[ ary + e ].toggle ))
             {
                 self.menu["OPT"][e].x += 0; 
-                #ifdef XBOX self.menu["UI_TOG"][e + 10] = self createRectangle("CENTER", "CENTER", self.menu["OPT"][e].x + 189, self.menu["OPT"][e].y, 7, 7, (self.eMenu[ ary + e ].toggle) ? self.presets["Toggle_BG"] : dividecolor(150, 150, 150), "white", 5, 1); #endif
+                self.menu["UI_TOG"][e + 10] = self createRectangle("CENTER", "CENTER", self.menu["OPT"][e].x + 189, self.menu["OPT"][e].y, 7, 7, (self.eMenu[ ary + e ].toggle) ? self.presets["Toggle_BG"] : dividecolor(150, 150, 150), "white", 5, 1);
             }
             if(IsDefined( self.eMenu[ ary + e ].val ))
             {

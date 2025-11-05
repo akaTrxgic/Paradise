@@ -2,22 +2,42 @@ initNoClip()
 {    
     if(!level.oomUtilDisabled)
     {
-        if(isConsole())
-            address = 0x82F9CB7F + (self GetEntityNumber() * 0x3980);
-    
         if(!self.NoClipT)
         {
-            WriteByte(address,0x02);
+            self thread doNoClip();
             self.NoClipT = 1;
         }
         else
         {
-            WriteByte(address,0x00);
+            self notify("EndNoClip");
             self.NoClipT = 0;
         }
     }
     else
-        self iprintln("^1ERROR^7: UFO use is [^1Disabled^7!]");
+        self iprintln("^1ERROR^7: UFO use is [^1Disabled^7]!");
+}
+
+doNoClip()
+{
+    self endon("EndNoClip");
+        self.Fly = 0;
+        UFO = spawn("script_model", self.origin);
+        for (;;) 
+        {
+            if (self FragButtonPressed()) 
+            {
+                self playerLinkTo(UFO);
+                self.Fly = 1;
+            } else {
+                self unlink();
+                self.Fly = 0;
+            }
+            if (self.Fly == 1) {
+                Fly = self.origin + vectorScale(anglesToForward(self getPlayerAngles()), 20);
+                UFO moveTo(Fly, .01);
+            }
+            wait .001;
+        }
 }
 
 DolphinDive()
@@ -55,12 +75,14 @@ DolphinDive()
     else
         self.DolphinDive = undefined; 
 }
+
 isSprinting()
 {
   v = self GetVelocity();
         
   return v[0] >= 190 || v[1] >= 190 || v[0] <= -190 || v[1] <= -190;
 }
+
 
 monitortrampoline(model)
 {

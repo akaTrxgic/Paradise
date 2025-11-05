@@ -61,12 +61,19 @@ LoadSettings()
     self.presets["Scroller_Shader"] = "hudsoftline";
     self.presets["Scroller_ShaderIcon"] = "cardicon_prestige_classic9";
 #endif
+#ifdef MWR
+    self.presets["Toggle_BG"] = dividecolor(148,75,151);
+    self.presets["MenuTitle_Color"] = dividecolor(148,75,151);
+    self.presets["Scroller_BG"] = dividecolor(148,75,151);
+    self.presets["Scroller_Shader"] = "line_horizontal";
+    self.presets["Scroller_ShaderIcon"] = "rank_prestige10";
+#endif
 }
 
 displayVer()
 {
     self endon( "disconnect");
-#ifdef MW2 || MW3
+#ifdef MW2 || MW3 || MWR
     Instructions = createFontString("objective", 1 );
     Instructions setPoint( "TOPRIGHT", "TOPRIGHT", 0, 0);
 #endif

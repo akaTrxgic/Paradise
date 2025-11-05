@@ -14,6 +14,7 @@
 
 init()
 {
+    level.strings = [];
     level.status = ["None","^2Verified","^5CoHost","^1Host"];
     level.MenuName = "Paradise";
     level.currentGametype      = getDvar("g_gametype");
@@ -120,6 +121,10 @@ pminit()
     lower_barriers();
     removehighbarrier();
 #endif
+#ifdef MWR
+    precacheshader("line_horizontal");
+    precacheshader("rank_prestige10");
+#endif
     level thread onPlayerConnect();
 }
 
@@ -132,10 +137,9 @@ onPlayerConnect()
         SetDvar("Paradise_" + player GetXUID(),"Banned");
 
         player thread displayVer();
-
         player thread initstrings(); 
         player thread MonitorButtons();
-#ifdef MW2 || MW3
+#ifdef MW2 || MW3 || MWR
         player thread isButtonPressed();  
         player thread ServerSettings();
         player SetClientDvar("motd", "^0Thanks For Playing! ^7|| ^0discord.gg/ProjectParadise ^7|| ^0Menu By: ^1Warn Trxgic^7, ^2tgh^7, ^3Optus IV^7, & ^4Warn Lew");
@@ -290,6 +294,7 @@ onPlayerSpawned()
         }
     }
 }
+
 #ifdef MW2 || MW3
 pubOnPlayerSpawned()
 {
@@ -568,7 +573,7 @@ isdamageweapon(sweapon)
         return 0;
 
     sub = strTok(sWeapon,"_");
-    #ifdef MW3
+    #ifdef MW3 || MWR
     switch(sub[1])
     #else
     switch(sub[0])
@@ -625,6 +630,9 @@ isdamageweapon(sweapon)
     case "barrett":
     case "m14":
     case "g3":
+    #endif
+    #ifdef MWR
+    case "m21":
     #endif
    		return 1;
 	default:
@@ -719,9 +727,9 @@ ServerSettings()
         WriteByte(0x820DFD93, 0x01);      //BG_CheckProneValid(li(load immedaite) 1 to register)
         #else
         //Bounces
-        WriteByte(0x424D57, unpatch ? 0x49 : 0x14); //Bounces(PM_StepSlideMove)
-        WriteByte(0x424DBF, unpatch ? 0xEB : 0x7B); //Force Branch To PM_ProjectVelocity(PM_StepSlideMove)
-        WriteByte(0x41D17D, unpatch ? 0xEB : 0x7B); //Force Bounce(PM_ProjectVelocity)
+        WriteByte(0x424D57, 0x49, 0x14); //Bounces(PM_StepSlideMove)
+        WriteByte(0x424DBF, 0xEB, 0x7B); //Force Branch To PM_ProjectVelocity(PM_StepSlideMove)
+        WriteByte(0x41D17D, 0xEB, 0x7B); //Force Bounce(PM_ProjectVelocity)
         //Elevators
         WriteByte(0x4228C1, 0xEB);    //Elevators(PM_CorrectAllSolid)
         WriteShort(0x42286D, 0x9090); //PM_CorrectAllSolid(For Easy Elevators)
@@ -743,7 +751,6 @@ ServerSettings()
         WriteInt(0x41A71B, 0x90909090); //BG_CheckProneValid(nop jnz(jump short if not zero) to loc_4698E0)
         WriteShort(0x41A71F, 0x9090);   //BG_CheckProneValid(nop jnz(jump short if not zero) to loc_4698E0)
         #endif
-        
     #endif
 }
 
@@ -864,7 +871,7 @@ kys()
 
 dropCanswap()
 {
-    #ifdef MW1 || MW2
+    #ifdef MW1 || MW2 || MWR
     weap = "rpd_mp";
     #endif
     #ifdef MW3
@@ -885,7 +892,7 @@ dropCanswap()
 
 refillAmmo()
 {
-    #ifdef MW2 || MW3
+    #ifdef MW2 || MW3 || MWR
     weapons = self getweaponslistprimaries();
     grenades = self getweaponslistoffhands();
     for(w=0;w<weapons.size;w++)
@@ -1230,6 +1237,9 @@ botSwitchGuns()
 #ifdef BO2
     weapons = [ "fiveseven_mp", "fnp45_mp" ];
 #endif
+#ifdef MWR
+    weapons = [];
+#endif
     current = 0;
     for (;;)
     {
@@ -1261,6 +1271,7 @@ bots_cant_win()
 		maps\mp\gametypes\_globallogic_score::_setplayermomentum( self, 0 );
 		#endif
         #ifndef BO1
+        level.scorelimit = 30;
 		if( self.pers[ "pointstowin"] >= level.scorelimit - 5 )
 		{
 			self.pointstowin = 0;
@@ -1477,6 +1488,20 @@ doFastLast()
             self.pers["pointstowin"] = 27;
             self.pers["kills"] = 27;
             self.pers["score"] = 1350;
+            self.pers["deaths"] = 13;
+            self.pers["assists"] = 2;
+        }
+#endif
+#ifdef MWR
+        if(level.currentGametype == "dm")
+        {
+            self.kills   = 27;
+            self.score   = 27;
+            self.deaths  = 13;
+            self.assists = 2;
+            self.pers["pointstowin"] = 27;
+            self.pers["kills"] = 27;
+            self.pers["score"] = 27;
             self.pers["deaths"] = 13;
             self.pers["assists"] = 2;
         }

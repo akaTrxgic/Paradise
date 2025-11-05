@@ -16,6 +16,9 @@ botControls(action)
     #ifdef BO1
         self filllobby();
     #endif
+    #ifdef MWR
+        self iprintln("nigger");
+    #endif
     
     else if(action == "kick")
         self kickallbots();
