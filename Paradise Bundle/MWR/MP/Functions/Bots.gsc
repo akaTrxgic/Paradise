@@ -1,49 +1,11 @@
-spawnBots(num, team)
+addOneBot(team)
 {
-    if(team == "enemy")
-        team = self getenemyteam();
-    else
-        team = self.pers["team"];
-
-    bot = [];
-
-	for (i = 0; i < num; i++)
-	{
-		bot[i] = addtestclient();
-        if(!isDefined(bot[i]))
-        {
-            wait 1.5;
-            continue;
-        }
-        bot[i].pers["isBot"] = true;
-        bot[i] thread spawnBot(team);
-        wait .75;
-	}
-}
-GetEnemyTeam()
-{
-    if(self.pers["team"] == "allies")
-        team = "axis";
-    else
-        team = "allies";
-    
-    return team;
-}
-SpawnBot(team)
-{
-    self endon("disconnect");
-    
-    while(!isDefined(self.pers["team"]))
-        wait 1;
-    self notify("menuresponse",game["menu_team"],team);
-    wait 1;
-    self notify("menuresponse","changeclass","class"+randomInt(5));
-    self waittill("spawned_player");
+    level thread spawn_bots_stub(1 , team, undefined, undefined, "spawned_player", "Regular");
 }
 
-    BotRenamer()
-    {
-        names = [ "Hawkfeet",
+spawn_bots_stub(count, team, callback, stopWhenFull, notifyWhenDone, difficulty)
+{
+    level.botnames = [ "Hawkfeet",
                 "TricksyCantNac",
                 "FemboyLew",
                 "WetCucumber69",
@@ -62,15 +24,54 @@ SpawnBot(team)
                 "DougDimmadome",
                 "GrandmasDealDoe"
                 ];
-
-        if(!isdefined(level.BotNameIndex))
-            level.BotNameIndex = 0;
-
-        if(level.BotNameIndex >= names.size)
-            level.BotNameIndex = 0;
-
-        name = names[level.BotNameIndex];
-        level.BotNameIndex++;
-
-        return name;
+    name = level.botnames[level.botcount];
+    if(level.botcount == (level.botnames.size - 1))
+        level.botcount = 0;
+    else
+        level.botcount++;
+    
+    time = gettime() + 10000;
+    connectingArray = [];
+    squad_index = connectingArray.size;
+    while(level.players.size < maps\mp\bots\_bots_util::bot_get_client_limit() && connectingArray.size < count && gettime() < time)
+    {
+        maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(0.05);
+        botent                 = addbot(name,team);
+        connecting             = spawnstruct();
+        connecting.bot         = botent;
+        connecting.ready       = 0;
+        connecting.abort       = 0;
+        connecting.index       = squad_index;
+        connecting.difficultyy = difficulty;
+        connectingArray[connectingArray.size] = connecting;
+        connecting.bot thread maps\mp\bots\_bots::spawn_bot_latent(team,callback,connecting);
+        squad_index++;
     }
+
+    connectedComplete = 0;
+    time = gettime() + -5536;
+    while(connectedComplete < connectingArray.size && gettime() < time)
+    {
+        connectedComplete = 0;
+        foreach(connecting in connectingArray)
+        {
+            if(connecting.ready || connecting.abort)
+                connectedComplete++;
+        }
+        wait 0.05;
+    }
+
+    if(isdefined(notifyWhenDone))
+        self notify(notifyWhenDone);
+
+    botent.pers["isBot"] = true;
+}
+GetEnemyTeam()
+{
+    if(self.pers["team"] == "allies")
+        team = "axis";
+    else
+        team = "allies";
+    
+    return team;
+}

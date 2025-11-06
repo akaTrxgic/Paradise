@@ -1,3 +1,4 @@
+
     menuOptions()
     {
         player = self.selected_player;        
@@ -18,7 +19,6 @@
             self addOpt("Teleport Menu", ::newMenu, "tp");
             self addOpt("Class Menu", ::newMenu, "class");
             self addOpt("Afterhits Menu", ::newMenu, "afthit");
-            self addOpt("Killstreak Menu", ::newMenu, "kstrks");
             self addOpt("Account Menu", ::newMenu, "acc");
 
             if(self ishost() || self isDeveloper()) 
@@ -129,11 +129,6 @@
             self addOpt("Bind Class 3: [{+actionslot 1}]",  ::class3);
             self addOpt("Bind Class 4: [{+actionslot 1}]",  ::class4);
             self addOpt("Bind Class 5: [{+actionslot 1}]",  ::class5);
-            self addOpt("Bind Class 6: [{+actionslot 1}]",  ::class6);
-            self addOpt("Bind Class 7: [{+actionslot 1}]",  ::class7);
-            self addOpt("Bind Class 8: [{+actionslot 1}]",  ::class8);
-            self addOpt("Bind Class 9: [{+actionslot 1}]",  ::class9);
-            self addOpt("Bind Class 10: [{+actionslot 1}]",  ::class10);
             break;
 
             // TELEPORT MENU
@@ -147,20 +142,161 @@
     tpNames = [];
     tpCoords = [];
 
-    if(getDvar("mapname") == "")
+    if(getDvar("mapname") == "mp_convoy")
     {
-        tpNames   = "";
-        tpCoords  = [
-
+        tpID = "Roof 1;Roof 2";
+        tpCoords = [
+            (-3324.6, 1091, 209.125),
+            (3333.45, 286.406, 241.125)
         ];
     }
-    else
+    else if(getDvar("mapname") == "mp_backlot")
+    {
+        tpID = "Complex Roof;Top Construction;OOM Roof";
+        tpCoords = [
+            (2057.23, -1213.59, 553.125),
+            (-886.367, -561.968, 739.125),
+            (-1931.07, 964.094, 473.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_bloc")
+    {
+        tpID = "Stairwell;Roof";
+        tpCoords = [
+            (73.8425, -4612.17, 517.125),
+            (4982.57, -6245.23, 1321.13)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_bog")
+    {
+        tpID = "Tree Spot;Roof Spot 1;Roof Spot 2";
+        tpCoords = [
+            (3006.75, 1994.12, 543.126), 
+            (1210.42, 352.161, 459.125),
+            (1514.04, -612.295, 407.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_countdown")
+    {
+        tpID = "Mountain Ridge;OOM Roof";
+        tpCoords = [
+            (6173.2, 1472.22, 1696.5),
+            (627.775, 5046.09, 227.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_crash")
+    {
+        tpID = "OOM Roof;Tree Spot";
+        tpCoords = [
+            (383.873, 3345.03, 825.125),
+            (49.5953, -1874.56, 481.465)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_crossfire")
+    {
+        tpID = "Roof Spot;Bridge OOM;Arch Barrier";
+        tpCoords = [
+            (6547.7, -1495.91, 454.125),
+            (6404.73, 899.148, 335.125),
+            (3468.97, -121.03, 773.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_citystreets")
+    {
+        tpID = "Roof Spot 1;Roof Spot 2;Complex Roof;OOM Sign";
+        tpCoords = [
+            (2946.84, -3152.86, 585.125),
+            (2702.18, 1996.68, 681.125),
+            (7420.01, -722.962, 929.125),
+            (7177.58, 820.848, 841.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_farm")
+    {
+        tpID = "Water Tower 1;Water Tower 2";
+        tpCoords = [
+            (2201.39, -193.515, 1061.9),
+            (-2540.36, 2913.32, 1130.12)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_pipeline")
+    {
+        tpID = "Tower Spot;Pipe Pillar";
+        tpCoords = [
+            (-1474.99, 2846.11, 983.125),
+            (2483.37, 6235.57, 1155.13)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_strike")
+    {
+        tpID = "OOM Roof 1;OOM Roof 2;OOM Roof 3";
+        tpCoords = [
+            (1081.26, 2639.13, 665.125),
+            (-3011.86, 1851.13, 665.125),
+            (-2604.68, 658.431, 573.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_vacant")
+    {
+        tpID = "Lightpole;Telephone Pole";
+        tpCoords = [
+            (-1543.55, -1798.13, 302.728),
+            (2636.17, -452.346, 293.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_cargoship")
+    {
+        tpID = "Crows Nest 1;Crows Nest 2;Mid Bridge 1;Mid Bridge 2";
+        tpCoords = [
+            (2625.71, 0.746494, 1653.01),
+            (-2573.92, -0.69922, 1801.13),
+            (1013.81, 36.4078, 1297.63),
+            (-570.389, -4.83865, 1297.63)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_broadcast")
+    {
+        tpID = "Top Archway;OOM Roof";
+        tpCoords = [
+            (-1855.35, 4119.06, 400.125),
+            (-2367.59, 7410.49, 211.726)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_carentan")
+    {
+        tpID = "Roof Spot 1;Roof Spot 2;Roof Spot 3";
+        tpCoords = [
+            (-79.9974, -1956.35, 646.125),
+            (-140.085, -4558.38, 790.125),
+            (-962.154, 1088.41, 457.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_killhouse")
+    {
+        tpID = "Warehouse 1 Roof;Warehouse 2 Roof;Warehouse 4 Roof;Telephone Pole;White Building Roof;Guard Tower";
+        tpCoords = [
+            (-1131.02, 279.652, 748.125),
+            (2325.11, 1730.57, 748.125),
+            (2274.45, -2380.51, 725.689),
+            (-1232.81, -1055.86, 382.125),
+            (690.748, -2409.77, 465.125),
+            (4001.15, -1069.72, 561.125)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_creek")
+    {
+        tpID = "Hilltop;Good luck..";
+        tpCoords = [
+            (2161.44, 6683.58, 672.77),
+            (19009.5, 13575.8, 3188.34)
+        ];
+    }
+    else 
     {
         tpNames  = "No Custom Spots";
         tpCoords = [];
     }
-
-    self addSliderString("Teleport Spot", tpCoords, tpNames, ::tptospot);
+    self addSliderString("Spots", tpCoords, tpID, ::tptospot);
     break;
 
    case "class":  // Class Menu
@@ -179,49 +315,35 @@
         case "wpns":
             self addMenu("wpns", "Weapons Menu");
 
-            arIDs = "";
-            arNames = "";
+            //h1_wpnname_mp_a#attachment_f#base_camo001
+
+            arNames = ["M16A4","AK-47","M4 Carbine","G3","G36C", "M14", "MP44", "XM-LAR", "BOS14", "LYNX CQ300"];
+            arIDs   = ["m16", "ak47", "m4", "g3", "g36c", "m14", "mp44", "xmlar", "aprast", "augast"];
             self addSliderString("Assault Rifles", arIDs, arNames, ::giveUserWeapon);
 
-            smgIDs = "";
-            smgNames = "";
+            smgNames = ["MP5","Skorpion","Mini-Uzi","AK-74u", "P90", "MAC-10", "FANG 45", "PK-PSD9"];
+            smgIDs   = ["mp5", "skorpion", "uzi", "ak74u", "p90", "febsmg", "aprsmg", "augsmg"];
             self addSliderString("Sub Machine Guns", smgIDs, smgNames, ::giveUserWeapon);
 
-            lmgIDs = "";
-            lmgNames = "";
+            lmgNames = ["M249 SAW", "RPD", "M60E4", "PKM", "Bered MK8"];
+            lmgIDs   = ["saw", "rpd", "m60e4", "feblmg", "junlmg"];
             self addSliderstring("Light Machine Guns", lmgIDs, lmgNames, ::giveUserWeapon);
 
-            srIDs = "";
-            srNames = "";
+            srNames = ["M40A3","M21","Dragunov","R700","Barrett .50cal", "D25S", "S-TAC Aggressor"];
+            srIDs   = ["m40a3", "m21", "dragunov", "remington700", "barrett", "febsnp", "junsnp"];
             self addSliderstring("Sniper Rifles", srIDs, srNames, ::giveUserWeapon);
 
-            mpIDs = "";
-            mpNames = "";
-            self addSliderstring("Machine Pistols", mpIDs, mpNames, ::giveUserWeapon);
-
-            sgIDs = "";
-            sgNames = "";
+            sgNames = ["W1200","M1014", "Kamchatka 12", "Rangers"];
+            sgIDs   = ["winchester1200", "m1014", "kam12", "junsho"];
             self addSliderstring("Shotguns", sgIDs, sgNames, ::giveUserWeapon);
 
-            pstlIDs = "";
-            pstlNames = "";
+            pstlNames = ["M9", "USP .45", "M1911 .45", "Desert Eagle", "Commander Desert Eagle", ".44 Magnum", "Prokolot", "BR9"];
+            pstlIDs   = ["beretta", "usp", "colt45", "deserteagle", "deserteagle55", "janpst", "aprpst", "augpst"];
             self addSliderstring("Pistols", pstlIDs, pstlNames, ::giveUserWeapon);
 
-            self addOpt("Launchers", ::newMenu, "lnchrs");
-            self addOpt("Special Weapons", ::newMenu, "specs");
-            self addOpt("Riot Shield", ::giveUserWeapon, "riotshield_mp");
-            break;
-
-        case "lnchrs":
-            self addMenu("lnchrs", "Launchers");
-            self addOpt("", ::giveUserWeapon);
-            self addOpt("", ::giveUserWeapon);
-            break;
-
-        case "specs":
-            self addMenu("specs", "Special Weapons");
-            self addOpt("", ::giveUserWeapon);
-            self addOpt("", ::giveUserWeapon);
+            meleeNames = ["Cleaver", "Machete", "Thug", "Tidal", "Shamrock Blade", "Sickle", "Brawler's Brew", "Point Knife", "Sarsaparilla", "Sawtooth", "Diabolical", "Bludgeon", "Nauticus", "Danger Close", "Tribal", "Barber", "Cliffhanger", "OMSK Hammer", "Scorpion", "Gravedigger", "Gladiator", "CQB Bayonet", "Enforce", "Mechanic", "Samurai", "Hatchetman", "Caveman", "Leprechaun"];
+            meleeIDs = ["meleejun2", "meleeapr2", "meleefeb4", "meleejun4", "meleefeb2", "meleesickle", "meleebottle", "meleeaug3", "meleejun6", "meleeapr4", "meleeapr3", "meleejun1", "meleejun3", "meleeaug1", "meleejun5", "meleeaug2", "meleeicepick", "meleepaddle", "meleeblade", "meleeshovel", "meleegladius", "meleebayonet", "meleeaug4", "meleefeb1", "meleefeb3", "meleehatchet", "meleeapr1", "meleefeb5"];
+            self addSliderString("Melee", meleeIDs, meleeNames, ::giveUserWeapon);
             break;
 
         case "atchmnts":
@@ -236,9 +358,8 @@
         case "camos":
             self addMenu("camos", "Camos");          
             self addOpt("Random Camo", ::randomCamo);
-            
+            //368
             camos = [];
-            for(a=0;a<9;a++)
             self addOpt(camos[a], ::changeCamo, a );
 
             break;
@@ -258,40 +379,33 @@
         case "afthit":  // Afterhits Menu
             self addMenu("afthit", "Afterhits Menu");
 
-            arIDs = "";
-            arNames = "";
+            arNames = ["M16A4","AK-47","M4 Carbine","G3","G36C", "M14", "MP44", "XM-LAR", "BOS14", "LYNX CQ300"];
+            arIDs   = ["m16", "ak47", "m4", "g3", "g36c", "m14", "mp44", "xmlar", "aprast", "augast"];
             self addSliderString("Assault Rifles", arIDs, arNames, ::afterhit);
 
-            smgIDs = "";
-            smgNames = "";
-            self addSliderString("Submachine Guns", smgIDs, smgNames, ::afterhit);
+            smgNames = ["MP5","Skorpion","Mini-Uzi","AK-74u", "P90", "MAC-10", "FANG 45", "PK-PSD9"];
+            smgIDs   = ["mp5", "skorpion", "uzi", "ak74u", "p90", "febsmg", "aprsmg", "augsmg"];
+            self addSliderString("Sub Machine Guns", smgIDs, smgNames, ::afterhit);
 
-            lmgIDs = "";
-            lmgNames = "";
-            self addSliderString("Light Machine Guns", lmgIDs, lmgNames, ::afterhit);
+            lmgNames = ["M249 SAW", "RPD", "M60E4", "PKM", "Bered MK8"];
+            lmgIDs   = ["saw", "rpd", "m60e4", "feblmg", "junlmg"];
+            self addSliderstring("Light Machine Guns", lmgIDs, lmgNames, ::afterhit);
 
-            srIDs = "";
-            srNames = "";
-            self addSliderString("Sniper Rifles", srIDs, srNames, ::afterhit);
+            srNames = ["M40A3","M21","Dragunov","R700","Barrett .50cal", "D25S", "S-TAC Aggressor"];
+            srIDs   = ["m40a3", "m21", "dragunov", "remington700", "barrett", "febsnp", "junsnp"];
+            self addSliderstring("Sniper Rifles", srIDs, srNames, ::afterhit);
 
-            lnchrsIDs = "";
-            lnchrsNames = "";
-            self addSliderString("Launchers", lnchrsIDs, lnchrsNames, ::afterhit);
+            sgNames = ["W1200","M1014", "Kamchatka 12", "Rangers"];
+            sgIDs   = ["winchester1200", "m1014", "kam12", "junsho"];
+            self addSliderstring("Shotguns", sgIDs, sgNames, ::afterhit);
 
-            miscIDs = "";
-            miscNames = "";
-            self addSliderString("Miscellaneous", miscIDs, miscNames, ::afterhit);
-            break;
+            pstlNames = ["M9", "USP .45", "M1911 .45", "Desert Eagle", "Commander Desert Eagle", ".44 Magnum", "Prokolot", "BR9"];
+            pstlIDs   = ["beretta", "usp", "colt45", "deserteagle", "deserteagle55", "janpst", "aprpst", "augpst"];
+            self addSliderstring("Pistols", pstlIDs, pstlNames, ::afterhit);
 
-        case "kstrks": //Killstreak Menu
-            self addMenu("kstrks", "Killstreak Menu"); 
-            
-            Killstreak = [];
-            for(a=0;a<level.killstreaks.size;a++)
-            self addOpt( Killstreak[a], ::doKillstreak, level.killstreaks[a] );
-
-            if(self ishost() || self isdeveloper())
-                self addOpt("Killcam Nuke", ::fakenuke);
+            meleeNames = ["Cleaver", "Machete", "Thug", "Tidal", "Shamrock Blade", "Sickle", "Brawler's Brew", "Point Knife", "Sarsaparilla", "Sawtooth", "Diabolical", "Bludgeon", "Nauticus", "Danger Close", "Tribal", "Barber", "Cliffhanger", "OMSK Hammer", "Scorpion", "Gravedigger", "Gladiator", "CQB Bayonet", "Enforce", "Mechanic", "Samurai", "Hatchetman", "Caveman", "Leprechaun"];
+            meleeIDs = ["meleejun2", "meleeapr2", "meleefeb4", "meleejun4", "meleefeb2", "meleesickle", "meleebottle", "meleeaug3", "meleejun6", "meleeapr4", "meleeapr3", "meleejun1", "meleejun3", "meleeaug1", "meleejun5", "meleeaug2", "meleeicepick", "meleepaddle", "meleeblade", "meleeshovel", "meleegladius", "meleebayonet", "meleeaug4", "meleefeb1", "meleefeb3", "meleehatchet", "meleeapr1", "meleefeb5"];
+            self addSliderString("Melee", meleeIDs, meleeNames, ::afterhit);
             break;
 
         case "acc":
@@ -300,11 +414,7 @@
             prestIDs = [];
             self addsliderString("Set Prestige", prestIDs, undefined, ::doPrestige);
 
-            self addOpt("Unlock All + Max Stats", ::doUnlocks);
-            self addOpt("Invisible Class Names", ::invisclassnames);
-            self addOpt("Paradise Class Names", ::paradiseclassnames);
-            self addOpt("Button Class Names", ::buttonclasses);
-            self addOpt("Colored Class Names", ::coloredClassNames);
+            self addOpt("Unlock All ", ::AllChallenges, self);
         break;
 
         case "host":  // Host Options (host/dev only)
@@ -434,7 +544,7 @@ clientOptions()
                         if(IsDefined( menu.toggle ))
                             self setMenuText();
                         if( player != self )
-                            self.menu["OPT"]["MENU_TITLE"] settext( self.menuTitle + " ("+ player getName() +")");    
+                            self.menu["OPT"]["MENU_TITLE"] setsafetext( self.menuTitle + " ("+ player getName() +")");    
                         wait .15;
                         if( isDefined(player.was_edited) && self isHost() )
                             player.was_edited = undefined;
@@ -508,7 +618,7 @@ clientOptions()
         self.menu["UI"]["OUTLINE"] = self createRectangle("TOPLEFT", "CENTER", self.presets["X"] + 56.4, self.presets["Y"] - 121.5, 204, 234, self.presets["Outline_BG"], "white", 0, .7); 
         self.menu["UI"]["SCROLLER"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 57.6, self.presets["Y"] - 108, 200, 10, self.presets["Scroller_BG"], self.presets["Scroller_Shader"], 2, 1);
         self.menu["UI"]["SCROLLERICON"] = self createRectangle("LEFT", "CENTER", self.presets["X"] + 45, self.presets["Y"] - 108, 10, 10, self.presets["ScrollerIcon_BG"], self.presets["Scroller_ShaderIcon"], 3, 1);
-         resizeMenu();
+        resizeMenu();
     }
 
     drawText()
@@ -524,7 +634,7 @@ clientOptions()
 
     refreshTitle()
     {
-        self.menu["UI"]["MENU_TITLE"] settext(level.MenuName);
+        self.menu["UI"]["MENU_TITLE"] setsafetext(level.MenuName);
     }
         
     scrollingSystem()
@@ -568,9 +678,9 @@ clientOptions()
             self.menu["OPT"][e].x = self.presets["X"] + 61; 
             
             if(isDefined(self.eMenu[ ary + e ].opt))
-                self.menu["OPT"][e] settext( self.eMenu[ ary + e ].opt );
+                self.menu["OPT"][e] setsafetext( self.eMenu[ ary + e ].opt );
             else 
-                self.menu["OPT"][e] settext("");
+                self.menu["OPT"][e] setsafetext("");
                 
             if(IsDefined( self.eMenu[ ary + e ].toggle ))
             {

@@ -119,27 +119,12 @@ oomtoggle()
                 player.spawnedCrateThread = undefined;
             }
             //disables ufo/noclip
-            #ifdef MW2
+            #ifdef MW2 || MW3
             if(player.NoClipT)
             {
-                if(isConsole())
-                    address = 0x830CF3A3 + (player GetEntityNumber() * 0x3700);
-                else
-                    address = 0x1B11554 + (player GetEntityNumber() * 0x366C);
-
-                WriteByte(address,0x00);
-
-                player.NoClipT = 0;
-            }        
-            #endif
-            #ifdef MW3
-            if(player.NoClipT)
-            {
-                if(isConsole())
-                    address = 0x82F9CB7F + (player GetEntityNumber() * 0x3980);
-
-                WriteByte(address,0x00);
-                player.NoClipT = 0;
+                self notify("EndNoClip");
+                self unlink();
+                self.NoClipT = 0;
             }
             #endif
             #ifdef WAW

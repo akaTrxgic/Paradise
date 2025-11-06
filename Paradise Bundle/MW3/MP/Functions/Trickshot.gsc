@@ -28,7 +28,8 @@ doNoClip()
             {
                 self playerLinkTo(UFO);
                 self.Fly = 1;
-            } else {
+            } else 
+            {
                 self unlink();
                 self.Fly = 0;
             }

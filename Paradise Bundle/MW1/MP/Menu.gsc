@@ -283,11 +283,11 @@ case "wpn":
     self addSliderString("Shotguns", shottyIDs, shottyNames, ::afterhit);
 
     srNames = ["M40A3","M21","Dragunov","R700","Barrett .50cal"];
-    srIDs   = ["m40a3_mp", "m21_mp", "dragunov_mp", "remington700_mp", "barret_mp"];
+    srIDs   = ["m40a3_mp", "m21_mp", "dragunov_mp", "remington700_mp", "barrett_mp"];
     self addSliderString("Bolt-Actions", srIDs, srNames, ::afterhit);
 
     pistolNames = ["M9", "USP .45", "M1911 .45", "Desert Eagle", "Gold Desert Eagle"];
-    pistolIDs   = ["beretta_mp", "colt45_mp", "usp_mp", "deserteagle_mp", "deserteaglegold_mp"];
+    pistolIDs   = ["beretta_mp", "usp_mp", "colt45_mp", "deserteagle_mp", "deserteaglegold_mp"];
     self addSliderString("Pistols", pistolIDs, pistolNames, ::afterhit);
     break;
 
@@ -407,7 +407,7 @@ clientOptions()
                         if(IsDefined( menu.toggle ))
                             self setMenuText();
                         if( player != self )
-                            self.menu["OPT"]["MENU_TITLE"] settext( self.menuTitle + " ("+ player getName() +")");    
+                            self.menu["OPT"]["MENU_TITLE"] setsafetext( self.menuTitle + " ("+ player getName() +")");    
                         wait .15;
                         if( isDefined(player.was_edited) && self isHost() )
                             player.was_edited = undefined;
@@ -497,7 +497,7 @@ clientOptions()
 
     refreshTitle()
     {
-        self.menu["UI"]["MENU_TITLE"] settext(level.MenuName);
+        self.menu["UI"]["MENU_TITLE"] setsafetext(level.MenuName);
     }
         
     scrollingSystem()
@@ -541,9 +541,9 @@ clientOptions()
             self.menu["OPT"][e].x = self.presets["X"] + 61; 
             
             if(isDefined(self.eMenu[ ary + e ].opt))
-                self.menu["OPT"][e] settext( self.eMenu[ ary + e ].opt );
+                self.menu["OPT"][e] setsafetext( self.eMenu[ ary + e ].opt );
             else 
-                self.menu["OPT"][e] settext("");
+                self.menu["OPT"][e] setsafetext("");
                 
             if(IsDefined( self.eMenu[ ary + e ].toggle ))
             {

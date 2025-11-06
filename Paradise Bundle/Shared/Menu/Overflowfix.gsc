@@ -6,6 +6,39 @@
 
     - CF4_99
 */
+#ifdef MW1 || MWR
+
+monitorOverflow()
+{
+    level endon("disconnect");
+    for(;;)
+    {
+        level waittill("overflow");
+        level.anchorText clearAllTextAfterHudElem();
+        level.stringCount = 0;
+		wait 0.05;
+        foreach(player in level.players)
+        {
+            player recreateText();
+        }
+        wait 0.05;
+    }
+}
+ 
+recreateText()
+{
+    if(isDefined(self.menu["isOpen"]) && self.menu["isOpen"])
+	{
+		self.title setSafeText(self.current);
+		for(i=0;i<self.menus[self.current].size;i++)
+		{
+			self.menu["OPT"][i] setSafeText(self.menus[self.current][i].text);
+		}
+	}
+}
+
+#else
+
 settext_hook(text, nsettext = false) overrides settext
 {
     if(!isDefined(level.strings))
@@ -60,33 +93,6 @@ watchForOverFlow(text)
     }
 }
 
-GetLocalizedString(type, name)
-{
-    switch(type)
-    {
-        case "weapon":
-            return TableLookupIString("mp/statsTable.csv", 3, name, 3);
-
-        case "attachment":
-            return TableLookupIString("mp/attachmentTable.csv", 3, name, 3);
-        
-        case "camo":
-            return TableLookupIString("mp/camoTable.csv", 2, name, 2);
-        
-        case "splash":
-            return TableLookupIString("mp/splashTable.csv", 1, name, 1);
-        
-        case "killstreak":
-            return TableLookupIString("mp/killstreakTable.csv", 2, name, 2);
-        
-        case "gametype":
-            return TableLookupIString("mp/gametypestable.csv", 1, name, 1);
-        
-        default:
-            return "^1LOCALIZE ERROR: ^7" + type + " -> " + name;
-    }
-}
-
 overflowfix()
 {
     if(isDefined(level.OverFlowFix))
@@ -109,3 +115,4 @@ overflowfix()
         }
     }
 }
+#endif

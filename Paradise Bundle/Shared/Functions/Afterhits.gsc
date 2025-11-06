@@ -1,7 +1,14 @@
-AfterHit(gun)
+AfterHit(gunIn)
 {
     self endon("afterhit");
     self endon( "disconnect" );
+
+    #ifdef MWR
+        gun = "h1_"+gunIn+"_mp_a#none_f#base";
+    #else
+        gun = gunIn;
+    #endif
+
     if(self.AfterHit == 0)
     {
         self iprintln("Afterhit Weapon set: ^2" + gun);

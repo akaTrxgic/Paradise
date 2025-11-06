@@ -1,5 +1,6 @@
 changeCamo(num)
 {
+    //h1_barrett_mp_a#none_f#base_camo001
     Weapon  = self GetCurrentWeapon();
     oldammo = self GetWeaponAmmoStock(Weapon);
     oldclip = self GetWeaponAmmoClip(Weapon);
@@ -23,12 +24,9 @@ randomCamo()
     self SetSpawnWeapon(Weapon);
 }
 
-giveUserWeapon(weapon, akimbo) 
-{      
-    weap = StrTok(Weapon,"_");
-
-    if(weap[weap.size-1] != "mp")
-        Weapon += "_mp";
+giveUserWeapon(baseWpn) 
+{
+    weapon = "h1_"+baseWpn+"_mp_a#none_f#base";
         
     if(self hasWeapon(Weapon))
     {
@@ -36,13 +34,11 @@ giveUserWeapon(weapon, akimbo)
         return;
     }
 
-    if(issubstr(weapon, "akimbo"))
-        akimbo = true;
-
-    self GiveWeapon(Weapon,0,Akimbo);
+    self GiveWeapon(Weapon);
     self GiveMaxAmmo(Weapon);
     self SwitchToWeapon(Weapon);
 } 
+
 GiveSelfWeapon(weapon)
 {
         weap = StrTok(Weapon,"_");
@@ -53,6 +49,7 @@ GiveSelfWeapon(weapon)
         self GiveMaxAmmo(Weapon);
         self SwitchToWeapon(Weapon);
 }
+
 GivePlayerAttachment(attachment)
 {
     weapon      = self GetCurrentWeapon();
@@ -275,18 +272,6 @@ loadLoadout()
                 self thread givesecondaryoffhand(offhand);
                 break;
 
-                case "lightstick_mp":
-                self thread giveglowstick();
-                break;
-
-                case "throwingknife_rhand_mp":
-                self thread rhThrowingKnife();
-                break;
-  
-                case "specialty_blastshield":
-                self thread blastshield();
-                break;
-
                 default:
                 self giveWeapon(offhand);
                 break;
@@ -298,13 +283,9 @@ GiveEquipment(equipment)
     equip = StrTok(equipment,"_");
     if(equip[equip.size-1] != "mp" && !isSubStr(equipment,"specialty"))
         equipment += "_mp";
-
-    if(self hasperk("_specialty_blastshield"))
-        self thread maps\mp\perks\_perkfunctions::unsetblastshield();
     
     self TakeWeapon(self GetCurrentOffhand());
     self SetOffhandPrimaryClass("other");
-    self maps\mp\perks\_perks::givePerk(equipment);
     self GiveStartAmmo(equipment);
     self SetWeaponHudIconOverride( "primaryoffhand", equipment );
 }
@@ -333,42 +314,4 @@ GiveSecondaryOffhand(offhand)
     self TakeWeapon(self GetCurrentOffhand());
     self GiveWeapon(offhand);
     self SetWeaponHudIconOverride( "secondaryoffhand", offhand );
-}
-
-blastShield()
-{
-    if(self hasperk("_specialty_blastshield"))
-        self thread maps\mp\perks\_perkfunctions::unsetblastshield();
-
-    if(!self.blastshield)
-    {
-        self.blastshield = 1;
-        self thread maps\mp\perks\_perkfunctions::setblastshield();
-    }
-    else
-    {
-        self.blastshield = 0;
-        self thread maps\mp\perks\_perkfunctions::unsetblastshield();
-    }
-}
-
-GiveGlowstick()
-{
-    wait .1;
-    self TakeWeapon(self GetCurrentOffhand());
-    self SetOffhandPrimaryClass("other");
-    self GiveWeapon("lightstick_mp");
-    self SetWeaponHudIconOverride( "primaryoffhand", "lightstick_mp" );
-}
-
-rhThrowingKnife()
-{
-    wait .1;
-    self takeweapon(self getcurrentoffhand());
-    wait 0.01;
-    self giveweapon("throwingknife_mp",0,false);
-    wait 0.01;
-    self takeweapon("throwingknife_mp");
-    wait 0.01;
-    self giveweapon("throwingknife_rhand_mp",0,false); 
 }

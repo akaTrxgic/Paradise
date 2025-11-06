@@ -1,4 +1,18 @@
-
+#ifdef MW1 || MWR
+        createText(font, fontscale, align, relative, x, y, sort, alpha, text, color, isLevel) 
+{
+    textElem = createFontString(font, fontscale);
+    textElem setPoint(align, relative, x, y);
+    textElem.archived = false;
+    textElem.hidewheninmenu = true;
+    textElem.sort = sort;
+    textElem.alpha = alpha;
+    textElem.color = color;
+    textElem.type = "text";
+    textElem setSafeText(text);
+    return textElem;
+}
+#else
     createText(font, fontScale, align, relative, x, y, sort, alpha, text, color, isLevel)
     {
         if(isDefined(isLevel))
@@ -20,7 +34,7 @@
 
         return textElem;
     }
-
+#endif
     createRectangle(align, relative, x, y, width, height, color, shader, sort, alpha, server)
     {
         if(isDefined(server))

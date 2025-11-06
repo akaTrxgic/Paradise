@@ -40,12 +40,16 @@ LoadSettings()
     self.presets["Scroller_Shader"] = "line_horizontal";
     self.presets["Scroller_ShaderIcon"] = "rank_prestige09";
 #endif
-#ifdef MW1
+#ifdef MW1 || MWR
     self.presets["Toggle_BG"] = dividecolor(148,75,151);
     self.presets["MenuTitle_Color"] = dividecolor(148,75,151);
     self.presets["Scroller_BG"] = dividecolor(148,75,151);
-    self.presets["Scroller_Shader"] = "hudsoftline";
     self.presets["Scroller_ShaderIcon"] = "rank_prestige4";
+    #ifdef MW1
+    self.presets["Scroller_Shader"] = "hudsoftline";
+    #else
+    self.presets["Scroller_Shader"] = "line_horizontal";
+    #endif
 #endif
 #ifdef MW2
     self.presets["Toggle_BG"] = dividecolor(255, 20, 147);
@@ -60,13 +64,6 @@ LoadSettings()
     self.presets["Scroller_BG"] = dividecolor(255, 0, 0);
     self.presets["Scroller_Shader"] = "hudsoftline";
     self.presets["Scroller_ShaderIcon"] = "cardicon_prestige_classic9";
-#endif
-#ifdef MWR
-    self.presets["Toggle_BG"] = dividecolor(148,75,151);
-    self.presets["MenuTitle_Color"] = dividecolor(148,75,151);
-    self.presets["Scroller_BG"] = dividecolor(148,75,151);
-    self.presets["Scroller_Shader"] = "line_horizontal";
-    self.presets["Scroller_ShaderIcon"] = "rank_prestige10";
 #endif
 }
 
@@ -164,6 +161,10 @@ watermark()
 #ifdef MW3
     wm.x = 150;
     wm.y = 462;
+#endif
+#ifdef MWR
+    wm.x = 10;
+    wm.y = 470;
 #endif
     wm.alpha = 1; 
     #ifdef WAW || MW1

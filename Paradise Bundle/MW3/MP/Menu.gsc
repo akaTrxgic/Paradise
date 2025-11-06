@@ -292,7 +292,7 @@
     // TRICKSHOT MENU
     case "ts":
             self addMenu("ts", "Trickshot Menu");
-            self addToggle("Noclip", self.NoClipT, ::initNoClip);
+            self addToggle("Noclip [{+frag}]", self.NoClipT, ::initNoClip);
             self addOpt("Go for Two Piece", ::dotwopiece);
 
             canOpts = "Current;Infinite";

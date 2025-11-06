@@ -89,10 +89,15 @@ pminit()
     greencrateLocation1();
     level thread removeSkyBarrier();
 #endif
-#ifdef MW1
+#ifdef MW1 || MWR
+    #ifdef MW1
     precacheshader("hudsoftline");
+    #else
+    precacheshader("line_horizontal");
+    #endif
     precacheshader("rank_prestige4");
 #endif
+
 #ifdef MW2
     level.killstreaks = [ "uav", "airdrop", "counter_uav", "airdrop_sentry_minigun", "predator_missile", "precision_airstrike", "harrier_airstrike", "helicopter", "airdrop_mega", "helicopter_flares", "stealth_airstrike", "helicopter_minigun", "ac130", "emp" ];
     level.airDropCrates         = GetEntArray("care_package","targetname");
@@ -121,11 +126,19 @@ pminit()
     lower_barriers();
     removehighbarrier();
 #endif
-#ifdef MWR
-    precacheshader("line_horizontal");
-    precacheshader("rank_prestige10");
-#endif
     level thread onPlayerConnect();
+}
+
+menuinit()
+{
+    if(!isDefined(level.anchorText))
+	{
+		level.stringCount = 0;
+	    level.anchorText = createServerFontString("objective",1.5);
+	    level.anchorText setText("anchor");
+	    level.anchorText.alpha = 0;
+	    level thread monitorOverflow();
+	}
 }
 
 onPlayerConnect()
@@ -139,6 +152,7 @@ onPlayerConnect()
         player thread displayVer();
         player thread initstrings(); 
         player thread MonitorButtons();
+        player thread menuInit();
 #ifdef MW2 || MW3 || MWR
         player thread isButtonPressed();  
         player thread ServerSettings();
@@ -212,7 +226,7 @@ onPlayerSpawned()
         }
         self givePerk("specialty_falldamage", false);
     #endif
-    #ifdef BO1 || BO2
+    #ifdef BO1 || BO2 || MWR
         self thread botsGetKnives();
     #endif
     #ifdef BO1
@@ -254,7 +268,7 @@ onPlayerSpawned()
             else
                 self thread initializesetup(1, self); //Verified
 
-    #ifdef WAW || MW1
+    #ifdef WAW || MW1 || MWR
             self setClientDvar("g_compassShowEnemies", "1");
     #endif
     #ifdef MW2 || MW3
@@ -410,6 +424,12 @@ modifyplayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
 {
     dist = GetDistance(self, eAttacker);
 
+    #ifdef MWR
+        lastKill = 24;
+    #else
+        lastKill = 29;
+    #endif
+
         if(level.currentGametype == "dm")
         {
             if(sMeansOfDeath == "MOD_FALLING" || sMeansOfDeath != "MOD_SUICIDE")
@@ -425,13 +445,13 @@ modifyplayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
                     iDamage = 0;
             }
             // Handle sniper kills for players with less than 29 kills
-            else if(eAttacker.kills < 29)
+            else if(eAttacker.kills < lastKill)
             {
                 if(isDamageWeapon(sWeapon))
                     iDamage = 999;  
             }
             // Special handling for the 29th kill
-            else if(eAttacker.kills == 29)
+            else if(eAttacker.kills == lastKill)
             {
                 if(dist >= level.lastKill_minDist)
                 {
@@ -632,7 +652,15 @@ isdamageweapon(sweapon)
     case "g3":
     #endif
     #ifdef MWR
+    case "m40a3":
     case "m21":
+    case "dragunov":
+    case "remington700":
+    case "barrett":
+    case "febsnp":
+    case "junsnp":
+    case "g3":
+    case "m14":
     #endif
    		return 1;
 	default:
@@ -744,12 +772,6 @@ ServerSettings()
         //Range
         WriteByte(0x4F6C3A, 0xEB);       //Bullet_Fire_Internal
         WriteFloat(0x7F3344, 9999999.0); //Bullet_Fire_Internal
-        //Prone Anywhere
-        WriteShort(0x41F164, 0x2CEB);   //PlayerProneAllowed(patch in jump to loc_46DE60)
-        WriteByte(0x41F1B4, 0x01);      //PlayerProneAllowed(allows the function to return 1(when set to 0, it will never return 1))
-        WriteInt(0x41A7B9, 0x000A25E9); //BG_CheckProneValid(force jump to loc_46A2AB)
-        WriteInt(0x41A71B, 0x90909090); //BG_CheckProneValid(nop jnz(jump short if not zero) to loc_4698E0)
-        WriteShort(0x41A71F, 0x9090);   //BG_CheckProneValid(nop jnz(jump short if not zero) to loc_4698E0)
         #endif
     #endif
 }
@@ -957,10 +979,16 @@ bulletImpactMonitor(eAttacker)
             else
                 distToNear = dist;
 
+            #ifdef MWR
+                lastKill = 24;
+            #else
+                lastKill = 29;
+            #endif
+
 
                 if(level.currentGametype == "dm")
                 {     
-                    if(self.kills == 29 && isAlive(nearestplayer) && isDamageWeapon(self getcurrentweapon()))
+                    if(self.kills == lastKill && isAlive(nearestplayer) && isDamageWeapon(self getcurrentweapon()))
                         self thread registerAlmostHit(nearestPlayer, dist);
                 }
                 else if(level.currentGametype == "sd")
@@ -1238,7 +1266,7 @@ botSwitchGuns()
     weapons = [ "fiveseven_mp", "fnp45_mp" ];
 #endif
 #ifdef MWR
-    weapons = [];
+    weapons = ["beretta", "usp"];
 #endif
     current = 0;
     for (;;)
@@ -1270,8 +1298,25 @@ bots_cant_win()
 		#ifdef BO2
 		maps\mp\gametypes\_globallogic_score::_setplayermomentum( self, 0 );
 		#endif
-        #ifndef BO1
-        level.scorelimit = 30;
+            #ifdef MWR
+                level.scorelimit = 25;
+            #else
+                level.scorelimit = 30;
+            #endif
+
+        #ifdef MWR || BO1
+        if( self.pers["kills"] >= 25 )
+        {
+            self.pers["kills"] = 0;         
+            self.pers["score"] = 0;         
+            self.pers["deaths"] = 0;        
+            self.pers["headshots"] = 0;       
+            self.kills     = 0;                 
+            self.deaths    = 0;                
+            self.headshots = 0;
+            self.score     = 0;
+        }
+        #else
 		if( self.pers[ "pointstowin"] >= level.scorelimit - 5 )
 		{
 			self.pointstowin = 0;
@@ -1285,18 +1330,6 @@ bots_cant_win()
 			self.pers["deaths"] = self.deaths;
 			self.pers["headshots"] = self.headshots;
 		}
-        #else
-        if( self.pers["kills"] >= 25 )
-        {
-            self.pers["kills"] = 0;         
-            self.pers["score"] = 0;         
-            self.pers["deaths"] = 0;        
-            self.pers["headshots"] = 0;       
-            self.kills     = 0;                 
-            self.deaths    = 0;                
-            self.headshots = 0;
-            self.score     = 0;
-        }
         #endif
 	}
 }
@@ -1308,16 +1341,18 @@ changeClass()
     for(;;)
     {
 #ifdef WAW || MW1
-       self waittill("menuresponse",menu,className);
+       self waittill("menuresponse", menu, className);
        wait .1;
        self maps\mp\gametypes\_class::setClass(self.pers["class"]);
        self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],self.pers["class"]);
 #endif
-#ifdef BO1
+#ifdef BO1 || BO2
         self waittill("changed_class");
         self thread maps\mp\gametypes\_class::giveLoadout( self.team, self.class );
         wait .1;
+    #ifdef BO1
         self thread playersetup();
+    #endif
 #endif
 #ifdef MW2 || MW3
         self waittill("menuresponse", menu, className);
@@ -1334,10 +1369,24 @@ changeClass()
             self givePerk("specialty_falldamage", false);
         #endif
 #endif
-#ifdef BO2
-        self waittill("changed_class");
-        self thread maps\mp\gametypes\_class::giveLoadout( self.team, self.class );
-        wait .1;
+#ifdef MWR
+    game["strings"]["change_class"] = "";
+
+    self endon("disconnect");
+
+	for(;;)
+	{
+		self waittill("luinotifyserver", menu, className);
+
+		if(menu == "class_select" && className < 60)
+		{
+			self.class = "custom" + (className + 1);
+            self maps\mp\gametypes\_class::setclass(self.class);
+			self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],self.class);
+    		self maps\mp\gametypes\_class::applyloadout();
+		}
+		wait 0.05;
+    }
 #endif
     }
 }
@@ -1446,6 +1495,18 @@ doBots()
             spawnBots(3, team);
     }
 #endif
+#ifdef MWR
+if(level.currentGametype == "dm")
+    {
+        while(level.players.size < 18)
+            spawn_bots_stub(1, undefined, undefined, "spawned_player", "Easy");
+    }
+    else if(level.currentGametype == "sd")
+    {
+        if(GetAliveCountForTeam(team) <= 1)
+            spawn_bots_stub(3, undefined, undefined, "spawned_player", "Easy");
+    }
+#endif
 }
 
 GetAliveCountForTeam(team)
@@ -1495,13 +1556,13 @@ doFastLast()
 #ifdef MWR
         if(level.currentGametype == "dm")
         {
-            self.kills   = 27;
-            self.score   = 27;
+            self.kills   = 22;
+            self.score   = 22;
             self.deaths  = 13;
             self.assists = 2;
-            self.pers["pointstowin"] = 27;
-            self.pers["kills"] = 27;
-            self.pers["score"] = 27;
+            self.pers["pointstowin"] = 22;
+            self.pers["kills"] = 22;
+            self.pers["score"] = 22;
             self.pers["deaths"] = 13;
             self.pers["assists"] = 2;
         }
