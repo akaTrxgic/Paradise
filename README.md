@@ -23,11 +23,11 @@ WAW:
 * 
 
 MWR:
-* Text disappearing/sliders not showing
-* Boxes don't show
-* Import weapons, killstreaks, camos, etc
+* Import camos
 * Save loadout function modifications
 * Noclip
-* Map teleports (get from cod4 ?)
-* Major lag on spawn + "waiting for other players" ?
+* Map teleports (need double checked)
 * Bots
+* Unlim uav
+* Change class bind
+* trigger bind
