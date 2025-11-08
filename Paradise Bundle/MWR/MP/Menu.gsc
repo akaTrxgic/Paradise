@@ -1,4 +1,13 @@
+    pmapname()
+    {
+        self iprintln("^1" + getdvar("mapname"));
+    }
 
+    porigin()
+    {
+        self iprintln("^1" + self getorigin());
+    }
+    
     menuOptions()
     {
         player = self.selected_player;        
@@ -14,6 +23,8 @@
         if(self.access > 0)
         {
             self addMenu("main", "Main Menu");
+            self addOpt("Print Mapname", ::pmapname);
+            self addOpt("Print Origin", ::porigin);
             self addOpt("Trickshot Menu", ::newMenu, "ts");
             self addOpt("Binds Menu", ::newMenu, "sK");
             self addOpt("Teleport Menu", ::newMenu, "tp");
@@ -29,7 +40,7 @@
     // TRICKSHOT MENU
     case "ts":
             self addMenu("ts", "Trickshot Menu");
-            self addToggle("Noclip", self.NoClipT, ::initNoClip);
+            self addToggle("Noclip [{+frag}]", self.NoClipT, ::initNoClip);
 
         if(level.currentGametype == "dm")
             self addOpt("Go for Two Piece", ::dotwopiece);
@@ -39,8 +50,6 @@
 
             self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
             self addToggle("Dolphin Dive", self.DolphinDive, ::DolphinDive);
-            //self addToggle("Riot Shield Knife", self.riotKnife, ::doRiotKnife);
-            //self addToggle("Laptop Knife", self.laptopKnife, ::doLaptopKnife);
 
             self addOpt("Spawn Slide @ Crosshairs", ::slide);
 
@@ -57,17 +66,7 @@
             self addOpt("Nac Mod Bind", ::newMenu, "nmod");
             self addOpt("Skree Bind", ::newMenu, "skree");
             self addOpt("Can Zoom Bind", ::newMenu, "cnzm");
-            self addOpt("Laptop Bind", ::newMenu, "laptop");
             self addOpt("Bomb Briefcase Bind", ::newMenu, "bomb");
-            self addOpt("Trigger Bind", ::newMenu, "trgr");
-            break;
-
-    case "laptop":
-            self addMenu("laptop", "Laptop Bind");
-            self addOpt("Laptop Bind: [{+actionslot 1}]", ::predBind, 1);
-            self addOpt("Laptop Bind: [{+actionslot 2}]", ::predBind, 2);
-            self addOpt("Laptop Bind: [{+actionslot 3}]", ::predBind, 3);
-            self addOpt("Laptop Bind: [{+actionslot 4}]", ::predBind, 4);
             break;
         
     case "bomb":
@@ -76,14 +75,6 @@
             self addOpt("Bomb Bind: [{+actionslot 2}]", ::bombBind, 2);
             self addOpt("Bomb Bind: [{+actionslot 3}]", ::bombBind, 3);
             self addOpt("Bomb Bind: [{+actionslot 4}]", ::bombBind, 4);
-            break;
-
-    case "trgr":
-            self addMenu("trgr", "Trigger Bind");
-            self addOpt("Trigger Bind: [{+actionslot 1}]", ::trgrBind, 1);
-            self addOpt("Trigger Bind: [{+actionslot 2}]", ::trgrBind, 2);
-            self addOpt("Trigger Bind: [{+actionslot 3}]", ::trgrBind, 3);
-            self addOpt("Trigger Bind: [{+actionslot 4}]", ::trgrBind, 4);
             break;
 
         case "gflip":  // Mid Air GFlip Bind submenu
@@ -144,151 +135,142 @@
 
     if(getDvar("mapname") == "mp_convoy")
     {
-        tpID = "Roof 1;Roof 2";
+        tpID = "Roof 1;Roof 2;Roof 3; Water Tower; Roof 4";
         tpCoords = [
-            (-3324.6, 1091, 209.125),
-            (3333.45, 286.406, 241.125)
+            (-3324.6, 1091, 209),
+            (3333.45, 286.406, 262),
+            (-3611.36, 545.334, 215),
+            (-4996.65, -1593.61, 1005),
+            (833.212, 3168.46, 301)
         ];
     }
     else if(getDvar("mapname") == "mp_backlot")
     {
-        tpID = "Complex Roof;Top Construction;OOM Roof";
+        tpID = "OOM Roof;Roof Barrier";
         tpCoords = [
-            (2057.23, -1213.59, 553.125),
-            (-886.367, -561.968, 739.125),
-            (-1931.07, 964.094, 473.125)
+            (152.727, -4319.96, 765),
+            (2735.67, 145.16, 1030)
         ];
     }
     else if(getDvar("mapname") == "mp_bloc")
     {
-        tpID = "Stairwell;Roof";
+        tpID = "Roof 1;Roof 2";
         tpCoords = [
-            (73.8425, -4612.17, 517.125),
-            (4982.57, -6245.23, 1321.13)
+            (5084.75, -6298.82, 1321),
+            (-98.0987, -10996.9, 650)
         ];
     }
     else if(getDvar("mapname") == "mp_bog")
     {
-        tpID = "Tree Spot;Roof Spot 1;Roof Spot 2";
-        tpCoords = [
-            (3006.75, 1994.12, 543.126), 
-            (1210.42, 352.161, 459.125),
-            (1514.04, -612.295, 407.125)
+        tpID = "Roof 1;Roof 2;Highway Sign;Roof 3";
+        tpCoords = [ 
+            (1210.42, 352.161, 460),
+            (1514.04, -612.295, 408),
+            (5985.11, 4013.33, 795),
+            (5911.52, 6847.09, 694)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_bog_summer")
+    {
+        tpID = "Roof 1;Roof 2;Highway Sign;Roof 3";
+        tpCoords = [ 
+            (1210.42, 352.161, 460),
+            (1514.04, -612.295, 408),
+            (5985.11, 4013.33, 795),
+            (8447.37, 2359.74, 809)
         ];
     }
     else if(getDvar("mapname") == "mp_countdown")
     {
-        tpID = "Mountain Ridge;OOM Roof";
+        tpID = "Roof 1;Roof 2";
         tpCoords = [
-            (6173.2, 1472.22, 1696.5),
-            (627.775, 5046.09, 227.125)
+            (627.775, 5046.09, 227.125),
+            (2901.54, -2246.11, 212)
         ];
     }
-    else if(getDvar("mapname") == "mp_crash")
+    else if(getDvar("mapname") == "mp_crash" || getDvar("mapname") == "mp_crash_snow")
     {
-        tpID = "OOM Roof;Tree Spot";
+        tpID = "Roof 1;Roof Ledge";
         tpCoords = [
-            (383.873, 3345.03, 825.125),
-            (49.5953, -1874.56, 481.465)
+            (-1759.95, 3082.42, 875),
+            (-3681.95, -1688.14, 773)
         ];
     }
     else if(getDvar("mapname") == "mp_crossfire")
     {
-        tpID = "Roof Spot;Bridge OOM;Arch Barrier";
+        tpID = "Arch Barrier;Roof 1;Roof 2;Roof 3";
         tpCoords = [
-            (6547.7, -1495.91, 454.125),
-            (6404.73, 899.148, 335.125),
-            (3468.97, -121.03, 773.125)
+            (3317.95, 214.137, 2817),
+            (1851.86, -4002.45, 350),
+            (10394.7, -6591.26, 645),
+            (7752.83, -1682.19, 705)
         ];
     }
     else if(getDvar("mapname") == "mp_citystreets")
     {
-        tpID = "Roof Spot 1;Roof Spot 2;Complex Roof;OOM Sign";
+        tpID = "Roof 1;Roof 2";
         tpCoords = [
-            (2946.84, -3152.86, 585.125),
-            (2702.18, 1996.68, 681.125),
-            (7420.01, -722.962, 929.125),
-            (7177.58, 820.848, 841.125)
+            (7583.01, -107.11, 801),
+            (4007.13, 3370.43, 897)
         ];
     }
     else if(getDvar("mapname") == "mp_farm")
     {
-        tpID = "Water Tower 1;Water Tower 2";
+        tpID = "Barn Roof 1;Barn Roof 2;Roof 1";
         tpCoords = [
-            (2201.39, -193.515, 1061.9),
-            (-2540.36, 2913.32, 1130.12)
+            (4657.43, 2267.37, 762),
+            (-18022.4, -4800.22, 1025),
+            (2933.97, -1506.9, 548)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_farm_spring")
+    {
+        tpID = "Barn Roof 1;Roof 1";
+        tpCoords = [
+            (4562.39, 2379.87, 610),
+            (2933.97, -1506.9, 548)
         ];
     }
     else if(getDvar("mapname") == "mp_pipeline")
     {
-        tpID = "Tower Spot;Pipe Pillar";
+        tpID = "Pipe Pillar;Warehouse Rafters";
         tpCoords = [
-            (-1474.99, 2846.11, 983.125),
-            (2483.37, 6235.57, 1155.13)
+            (2439.66, 6253.07, 989),
+            (841.095, 786.229, 399)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_shipment")
+    {
+        tpID = "Roof 1; Roof 2;Roof 3";
+        tpCoords = [
+            (-1403.65, -2688.75, 1516),
+            (568.239, -3618.37, 1516),
+            (4269.6, -4634.83, 1516)
+        ];
+    }
+    else if(getDvar("mapname") == "mp_showdown")
+    {
+        tpID = "Roof Ledge 1;Roof Ledge 2;Roof Ledge 3";
+        tpCoords = [
+            (3159.01, 680.574, 823.625),
+            (4716.71, -2397.68, 1095),
+            (-3979.78, -57.2232, 1390)
         ];
     }
     else if(getDvar("mapname") == "mp_strike")
     {
-        tpID = "OOM Roof 1;OOM Roof 2;OOM Roof 3";
+        tpID = "Roof";
         tpCoords = [
-            (1081.26, 2639.13, 665.125),
-            (-3011.86, 1851.13, 665.125),
-            (-2604.68, 658.431, 573.125)
+            (1164.22, 4871.36, 500)
         ];
     }
     else if(getDvar("mapname") == "mp_vacant")
     {
-        tpID = "Lightpole;Telephone Pole";
+        tpID = "Roof 1;Roof 2;Roof 3";
         tpCoords = [
-            (-1543.55, -1798.13, 302.728),
-            (2636.17, -452.346, 293.125)
-        ];
-    }
-    else if(getDvar("mapname") == "mp_cargoship")
-    {
-        tpID = "Crows Nest 1;Crows Nest 2;Mid Bridge 1;Mid Bridge 2";
-        tpCoords = [
-            (2625.71, 0.746494, 1653.01),
-            (-2573.92, -0.69922, 1801.13),
-            (1013.81, 36.4078, 1297.63),
-            (-570.389, -4.83865, 1297.63)
-        ];
-    }
-    else if(getDvar("mapname") == "mp_broadcast")
-    {
-        tpID = "Top Archway;OOM Roof";
-        tpCoords = [
-            (-1855.35, 4119.06, 400.125),
-            (-2367.59, 7410.49, 211.726)
-        ];
-    }
-    else if(getDvar("mapname") == "mp_carentan")
-    {
-        tpID = "Roof Spot 1;Roof Spot 2;Roof Spot 3";
-        tpCoords = [
-            (-79.9974, -1956.35, 646.125),
-            (-140.085, -4558.38, 790.125),
-            (-962.154, 1088.41, 457.125)
-        ];
-    }
-    else if(getDvar("mapname") == "mp_killhouse")
-    {
-        tpID = "Warehouse 1 Roof;Warehouse 2 Roof;Warehouse 4 Roof;Telephone Pole;White Building Roof;Guard Tower";
-        tpCoords = [
-            (-1131.02, 279.652, 748.125),
-            (2325.11, 1730.57, 748.125),
-            (2274.45, -2380.51, 725.689),
-            (-1232.81, -1055.86, 382.125),
-            (690.748, -2409.77, 465.125),
-            (4001.15, -1069.72, 561.125)
-        ];
-    }
-    else if(getDvar("mapname") == "mp_creek")
-    {
-        tpID = "Hilltop;Good luck..";
-        tpCoords = [
-            (2161.44, 6683.58, 672.77),
-            (19009.5, 13575.8, 3188.34)
+            (9917.73, -338.348, 1033),
+            (11030.4, -2785.04, 1177),
+            (-5085.43, 2748.63, 1199)
         ];
     }
     else 
@@ -358,22 +340,73 @@
         case "camos":
             self addMenu("camos", "Camos");          
             self addOpt("Random Camo", ::randomCamo);
-            //368
-            camos = [];
-            self addOpt(camos[a], ::changeCamo, a );
-
+            
+            self addOpt("Base Camos", ::newMenu, "base");
+            self addOpt("Treyarch Camos", ::newMenu, "3arc");
+            self addOpt("Infinity Ward Camos", ::newMenu, "iw");
+            self addOpt("Minecraft Camos", ::newMenu, "mc");
+            self addOpt("Extra Camos", ::newMenu, "xtra");
+            self addOpt("Test Camos", ::newMenu, "test");
             break;
+
+        case "base":
+            self addMenu("base", "Base Camos");
+            for(a = 0; a < 368; a++)
+                    self addOpt(CamoNameTable(a), ::equip_camo, a);
+        break;
+
+        case "3arc":
+            self addMenu("3arc", "Treyarch Camos");
+            camoNames = ["Ghosts", "Seducer"];
+            camoIDs = ["ghosts", "sdcr"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
+
+        case "iw":
+            self addMenu("iw", "Infinity Ward Camos");
+            camoNames = ["Comic", "Damascus", "Bloodshot", "Obsidian", "Purple Obsidian", "Spectrum"];
+            camoIDs = ["Comic", "dmscs", "lat", "obsid", "prplob", "Spectrum"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
+
+        case "xtra":
+            self addMenu("xtra", "Extra Camos");
+            camoNames = ["Acid v2", "Coco", "Galaxy", "Slime", "Toxic", "Waffle", "Xmas"];
+            camoIDs = ["acidv2", "Coco", "galaxy", "Slime", "Toxic", "Waffle", "Xmas"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
+
+        case "mc":
+            self addMenu("mc", "Minecraft Camos");
+            camoNames = ["Coal Ore", "Iron Ore", "Redstone Ore", "Gold Ore", "Lapis Ore", "Diamond Ore", "Emerald Ore", "Creeper Skin"];
+            camoIDs = ["MCCoal", "MCIron", "MCRed", "MCGold", "MCLap", "MCDia", "MCEm", "MCCreep"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
+
+        case "test":
+            self addMenu("test", "Test Camos");
+            camoNames = ["abs1", "bbgtgr", "blobsid", "blrltgr", "blupal", "bo3aowgl", "bo3aow", "coral", "ffood", "graf", "grpal", "jack", "mlg", "mop", "nb4c", "paradise", "prplpal", "rpal", "space", "tgh2", "tgh", "trxgic", "trxgic2", "wf1", "wf2", "wfnewTEST", "wfnew"];
+            camoIDs = ["abs1", "bbgtgr", "blobsid", "blrltgr", "blupal", "bo3aowgl", "bo3aow", "coral", "ffood", "graf", "grpal", "jack", "mlg", "mop", "nb4c", "paradise", "prplpal", "rpal", "space", "tgh2", "tgh", "trxgic", "trxgic2", "wf1", "wf2", "wfnewTEST", "wfnew"];
+            for(a=0;a<camoNames.size;a++)
+            self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
+        break;
 
         case "lethals":
             self addMenu("lethals", "Equipment");
-            self addOpt("", ::giveUserWeapon);
-            self addOpt("", ::giveUserWeapon);
+            self addOpt("C4 x2", ::giveOffhand);
+            self addOpt("RPG-7 x2", ::giveOffhand);
+            self addOpt("Claymore x2", ::giveOffhand);
             break;
 
         case "tacticals":
-            self addMenu("tacticals", "Special Grenades");
-            self addOpt("", ::giveUserWeapon);
-            self addOpt("", ::giveUserWeapon);
+            self addMenu("tacticals", "Special Grenades");  
+            self addOpt("Flash Grenade", ::giveOffhand, "h1_flashgrenade_mp");
+            self addOpt("Stun Grenade", ::giveOffhand, "h1_concussiongrenade_mp");
+            self addOpt("Smoke Grenade", ::giveOffhand, "h1_smokegrenade_mp");
             break;
 
         case "afthit":  // Afterhits Menu
@@ -411,8 +444,8 @@
         case "acc":
             self addMenu("acc", "Account Menu");
             
-            prestIDs = [];
-            self addsliderString("Set Prestige", prestIDs, undefined, ::doPrestige);
+            //prestID = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"];
+            //self addsliderString("Set Prestige", prestID, undefined, ::doPrestige);
 
             self addOpt("Unlock All ", ::AllChallenges, self);
         break;
@@ -531,7 +564,7 @@ clientOptions()
                         }
                         
                         if( self.eMenu[ self getCursor() ].func == ::newMenu && self != player )
-                            self iPrintLnBold( "^1Error: ^7Cannot Access Menus While In A Selected Player" );
+                            self iPrintLnBold( "^1ERROR: ^7Cannot Access Menus While In A Selected Player" );
                         else if(isDefined(self.sliders[ self getCurrentMenu() + "_" + self getCursor() ])){
                             slider = self.sliders[ self getCurrentMenu() + "_" + self getCursor() ];
                             slider = (IsDefined( menu.ID_list ) ? menu.ID_list[slider] : slider);

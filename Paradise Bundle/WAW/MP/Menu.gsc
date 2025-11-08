@@ -76,7 +76,7 @@ case "wpn":
     self addSliderString("Pistols", pistolIDs, pistolNames, ::doGiveWeapon);
 
     self addOpt("Attachments", ::newMenu, "attach");
-    self addOpt("Grenades", ::newMenu, "grenades");
+    self addOpt("Lethals", ::newMenu, "lethals");
     self addOpt("Equipment", ::newMenu, "equipment");    
     self addOpt("Take Current Weapon", ::takeWpn);
     self addOpt("Drop Current Weapon", ::dropWpn);
@@ -88,6 +88,13 @@ case "wpn":
     attachIDs = ["scoped", "bayonet", "gl", "flash", "aperture", "telescopic", "silenced", "bigammo", "bigammo", "bigammo", "grip", "sawoff", "bipod"];
     for(a=0;a<attachNames.size;a++)
     self addOpt(attachNames[a], ::giveplayerattachment, attachIDs[a]);
+    break;
+
+    case "lethals":
+    self addMenu("lethals", "Lethals");
+    self addOpt();
+    self addOpt();
+    self addOpt();
     break;
 
     case "tp":  // Teleport Menu

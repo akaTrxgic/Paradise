@@ -1,4 +1,4 @@
-doPrestige(prest)
+doPrestige(prestIn)
 {
     wait 3;
     //prestige
@@ -6,6 +6,8 @@ doPrestige(prest)
     SetDvar("xblive_privatematch",0);
     level.onlineGame  = true;
     level.rankedMatch = true;
+/*
+    prest = int(prestIn);
     wait 1;
 
     self thread maps\mp\gametypes\_persistence::statset("prestige", prest);
@@ -18,19 +20,19 @@ doPrestige(prest)
         xP = 45800000;
 
     wait 1;
-
+*/
     if (self GetPlayerData("restXPGoal") > self maps\mp\gametypes\_rank::getRankXP())
-        self SetPlayerData("restXPGoal", self GetPlayerData("restXPGoal") + xP);
+        self SetPlayerData("restXPGoal", self GetPlayerData("restXPGoal") + 2516500);
 
     oldxp = self maps\mp\gametypes\_rank::getRankXP();
-    self maps\mp\gametypes\_rank::incRankXP(xP);
+    self maps\mp\gametypes\_rank::incRankXP(2516500);
 
     if (maps\mp\gametypes\_rank::updateRank(oldxp))
         self thread maps\mp\gametypes\_rank::updateRankAnnounceHUD();
 
     self maps\mp\gametypes\_rank::syncXPStat();
-    self.pers["summary"]["challenge"] += xP;
-    self.pers["summary"]["xp"] += xP;
+    self.pers["summary"]["challenge"] += 2516500;
+    self.pers["summary"]["xp"] += 2516500;
     wait 1.2;
     
     SetDvar("xblive_privatematch",type);

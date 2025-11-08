@@ -7,12 +7,14 @@ doGiveWeapon(weapon)
     self switchToWeapon(weapon);
     self iPrintln("Given Weapon: ^1" + weapon);
 }
+
 getBaseName(weapon)
 {
     prefix = strtok(weapon, "_");
     base = prefix[0];
     return base;
 }
+
 HasAttachment(weapon, attachment)
 {
     attachments = getattachments(weapon);
@@ -23,6 +25,7 @@ HasAttachment(weapon, attachment)
     
     return false;
 }
+
 getAttachments(weapon)
 {
     prefix = strtok(weapon, "_");
@@ -32,6 +35,7 @@ getAttachments(weapon)
 
     return attachments;
 }
+
 givePlayerAttachment(attachment)
 {
     weapon      = self GetCurrentWeapon(); 
@@ -75,7 +79,8 @@ givePlayerAttachment(attachment)
         
             if(newAttachments[1] == "")
                 newWeapon = baseName + "_" + newAttachments[0] + "_mp";
-    }
+        }
+        
         self TakeWeapon(weapon);
         self GiveWeapon(newWeapon, 0);
         self SetWeaponAmmoClip(newWeapon, clip);
@@ -88,4 +93,4 @@ givePlayerAttachment(attachment)
             self giveWeapon(weapon);
             self switchToWeapon(weapon);
         }
-    }       
+}       

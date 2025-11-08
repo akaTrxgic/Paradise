@@ -65,6 +65,7 @@ spawn_bots_stub(count, team, callback, stopWhenFull, notifyWhenDone, difficulty)
         self notify(notifyWhenDone);
 
     botent.pers["isBot"] = true;
+    wait .5;
 }
 GetEnemyTeam()
 {

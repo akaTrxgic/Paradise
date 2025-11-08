@@ -1,19 +1,25 @@
-changeCamo(num)
+equip_camo(camo) 
 {
-    //h1_barrett_mp_a#none_f#base_camo001
-    Weapon  = self GetCurrentWeapon();
-    oldammo = self GetWeaponAmmoStock(Weapon);
-    oldclip = self GetWeaponAmmoClip(Weapon);
-    self TakeWeapon(Weapon);
-    self GiveWeapon(Weapon,num);
-    self SetWeaponAmmoStock(Weapon,oldammo);
-    self SetWeaponAmmoClip(Weapon,oldclip);
-    self SetSpawnWeapon(Weapon);
+    weapon = getBaseWeaponName(self getCurrentWeapon()) + "_mp_a";
+    weapon_attachment = strtok(self getCurrentWeapon(), "#")[1];
+    weapon_kit = strtok(strtok(self getCurrentWeapon(), "#")[2], "_")[0];
+    
+    if(camo < 10) 
+        camo = "00" + camo;
+    else if(int(camo) > 9 && int(camo) < 100) 
+        camo = "0" + camo;
+
+    //iPrintString(camo);
+    weapon_painted = weapon + "#" + weapon_attachment + "#" + weapon_kit + "_camo" + camo;
+    
+    self takeweapon(self getCurrentWeapon());
+    self giveweapon(weapon_painted);
+    self switchToWeapon(weapon_painted);
 }
 
 randomCamo()
 {
-    numEro=randomIntRange(1,8);  
+    numEro=randomIntRange(1,368);  
     Weapon  = self GetCurrentWeapon();
     oldammo = self GetWeaponAmmoStock(Weapon);
     oldclip = self GetWeaponAmmoClip(Weapon);
@@ -257,19 +263,17 @@ loadLoadout()
 
             switch (offhand) 
             {
-                case "frag_grenade_mp":
-                case "sticky_grenade_mp":
                 case "claymore_mp":
                 case "c4_mp":
-                case "flare_mp":
-                case "throwingknife_mp":
-                self thread giveequipment(offhand);
+                case "rpg_mp":
+                self setPerkEquipment(offhand);
                 break;
 
-                case "concussion_grenade_mp":
-                case "flash_grenade_mp":
-                case "smoke_grenade_mp":
-                self thread givesecondaryoffhand(offhand);
+                case "h1_fraggrenade_mp":
+                case "h1_concussiongrenade_mp":
+                case "h1_flashgrenade_mp":
+                case "h1_smokegrenade_mp":
+                self giveoffhand(offhand);
                 break;
 
                 default:
@@ -278,40 +282,18 @@ loadLoadout()
         }
     }
 }
-GiveEquipment(equipment)
+
+setPerkEquipment(equipment)
 {
-    equip = StrTok(equipment,"_");
-    if(equip[equip.size-1] != "mp" && !isSubStr(equipment,"specialty"))
-        equipment += "_mp";
     
-    self TakeWeapon(self GetCurrentOffhand());
-    self SetOffhandPrimaryClass("other");
-    self GiveStartAmmo(equipment);
-    self SetWeaponHudIconOverride( "primaryoffhand", equipment );
 }
 
-GiveSecondaryOffhand(offhand)
+giveoffhand(offhand)
 {
-    equip = StrTok(offhand,"_");
-    if(equip[equip.size-1] != "mp")
-        offhand += "_mp";
-    
-    if(offhand == "flash_grenade_mp")
-    {
-        self SetOffhandSecondaryClass("flash");
-        self SetWeaponAmmoClip(offhand,2);
-    }
-    else if(offhand == "concussion_grenade_mp")
-    {
-        self SetOffhandSecondaryClass("concussion");
-        self SetWeaponAmmoClip(offhand,2);
-    }
-    else if(offhand == "smoke_grenade_mp")
-    {
-        self SetOffhandSecondaryClass("smoke");
-        self SetWeaponAmmoClip(offhand,1);
-    }
-    self TakeWeapon(self GetCurrentOffhand());
-    self GiveWeapon(offhand);
-    self SetWeaponHudIconOverride( "secondaryoffhand", offhand );
+
+}
+
+CamoNameTable(a)
+{
+    return TableLookupIString("mp/camoTable.csv", 0, a, 2);
 }

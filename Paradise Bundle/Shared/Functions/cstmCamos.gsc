@@ -10,6 +10,9 @@ customCamos(camoName)
     #ifdef BO2
     self changeCamo(9); 
     #endif
+    #ifdef MWR
+    self equip_camo(1);
+    #endif
 
     if(is3arcCamo(camoName))
     {
@@ -63,6 +66,16 @@ customCamos(camoName)
         #endif
         #ifdef BO2
         ReplaceImage(imagePath, "t6_camo_kryptek_typhon_pattern");
+        #endif
+        #ifdef MWR
+        ReplaceImage(imagePath, "wpn_h1_camo_desert");
+        ReplaceImage(imagePath, "h1_weapon_camo_desert");
+
+        /*
+        wpn_h1_camo_desert
+        camo_h1_desert
+        h1_weapon_camo_desert
+        */
         #endif
     }
 }
@@ -221,6 +234,9 @@ randomAnimCamo(camoName)
     #endif
     #ifdef BO2
     self changeCamo(9); 
+    #endif
+    #ifdef MWR
+    self equip_camo(1);
     #endif
     
     if(camoName == "animGhosts")

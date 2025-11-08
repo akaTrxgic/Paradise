@@ -6,8 +6,7 @@
 
     - CF4_99
 */
-#ifdef MW1 || MWR
-
+#ifdef MWR
 monitorOverflow()
 {
     level endon("disconnect");
@@ -36,9 +35,7 @@ recreateText()
 		}
 	}
 }
-
 #else
-
 settext_hook(text, nsettext = false) overrides settext
 {
     if(!isDefined(level.strings))

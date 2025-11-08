@@ -1,4 +1,4 @@
-#ifdef MW1 || MWR
+#ifdef MWR
         createText(font, fontscale, align, relative, x, y, sort, alpha, text, color, isLevel) 
 {
     textElem = createFontString(font, fontscale);
@@ -31,7 +31,6 @@
             textElem.color = color;
 
         textElem settext(text);
-
         return textElem;
     }
 #endif

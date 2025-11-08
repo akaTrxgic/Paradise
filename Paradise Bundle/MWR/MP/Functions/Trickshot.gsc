@@ -2,19 +2,14 @@ initNoClip()
 {    
     if(!level.oomUtilDisabled)
     {
-        if(isConsole())
-            address = 0x830CF3A3 + (self GetEntityNumber() * 0x3700);
-        else
-            address = 0x1B11554 + (self GetEntityNumber() * 0x366C);
-    
         if(!self.NoClipT)
         {
-            WriteByte(address,0x02);
+            self thread doNoClip();
             self.NoClipT = 1;
         }
         else
         {
-            WriteByte(address,0x00);
+            self notify("EndNoClip");
             self.NoClipT = 0;
         }
     }
@@ -22,51 +17,27 @@ initNoClip()
         self iprintln("^1ERROR^7: UFO use is [^1Disabled^7]!");
 }
 
-doRiotKnife()
+doNoClip()
 {
-    self endon("disconnect");
-
-    if(!self.riotKnife)
-    {
-        self.riotknife = 1;
-        self thread knifeMod("riot");
-    }
-    else
-        self.riotKnife = 0;
-}
-
-knifeMod(model)
-{
-    for (;;) 
-    {
-        self notifyonPlayercommand("knifeMod", "+melee");
-        self waittill("knifeMod");
-
-        if(model == "riot")
+    self endon("EndNoClip");
+        self.Fly = 0;
+        UFO = spawn("script_model", self.origin);
+        for (;;) 
         {
-            z = "riotshield_mp";
-            time = 0.7;
+            if (self FragButtonPressed()) 
+            {
+                self playerLinkTo(UFO);
+                self.Fly = 1;
+            } else {
+                self unlink();
+                self.Fly = 0;
+            }
+            if (self.Fly == 1) {
+                Fly = self.origin + vectorScale(anglesToForward(self getPlayerAngles()), 20);
+                UFO moveTo(Fly, .01);
+            }
+            wait .001;
         }
-
-        else if(model == "laptop")
-        {
-            z = "killstreak_ac130_mp";
-            time = 0.6;
-        }
-
-        if ((self.laptopKnife || self.riotKnife) && self GetCurrentWeapon() == self.primaryWeapon && !self.menu["isOpen"]) 
-        {
-            x = self.primaryWeapon;
-            y = self.loadoutPrimaryCamo;
-            self takeWeapon(x);
-            self giveWeapon(z);
-            self setSpawnWeapon(z);
-            wait time;
-            self takeWeapon(z);
-            self GiveWeapon(x, y);
-            self switchToWeapon(x);
-        }
-    }
 }
 
 lazyeletggl() 
@@ -108,21 +79,6 @@ lazyele()
         self setOrigin((int(x), int(z), self.origin[2]));
         wait .01;
     }
-}
-
-
-
-doLaptopKnife()
-{
-    self endon("disconnect");
-
-    if(!self.laptopKnife)
-    {
-        self.laptopKnife = 1;
-        self thread knifeMod("laptop");
-    }
-    else
-        self.laptopKnife = 0;
 }
 
 DolphinDive()
@@ -331,3 +287,35 @@ doSpawnOption(selection)
         break;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//test stuff
+monitor_headbounce()
+{
+  for(;;)  {
+    foreach(player in level.players) {
+      if(player != self) {
+        if(getDvarInt("rp_headbounce") == 1) {
+          self.if_touching = self getVelocity();
+          if(Distance(player.origin + (0,0,50), self.origin) <= 50 && self.if_touching[2] < -250 ) {
+            self.playervel = self getVelocity();
+            self setVelocity(self.playervel - (0,0,self.playervel[2] * 1.85));
+            wait .1;
+          }
+        }
+      }
+    }
+    wait .1;
+  }
+}
+

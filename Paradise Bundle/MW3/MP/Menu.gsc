@@ -1018,7 +1018,7 @@ clientOptions()
                         }
                         
                         if( self.eMenu[ self getCursor() ].func == ::newMenu && self != player )
-                            self iPrintLnBold( "^1Error: ^7Cannot Access Menus While In A Selected Player" );
+                            self iPrintLnBold( "^1ERROR: ^7Cannot Access Menus While In A Selected Player" );
                         else if(isDefined(self.sliders[ self getCurrentMenu() + "_" + self getCursor() ])){
                             slider = self.sliders[ self getCurrentMenu() + "_" + self getCursor() ];
                             slider = (IsDefined( menu.ID_list ) ? menu.ID_list[slider] : slider);

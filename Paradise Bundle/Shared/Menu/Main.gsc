@@ -129,6 +129,7 @@ pminit()
     level thread onPlayerConnect();
 }
 
+#ifdef MWR
 menuinit()
 {
     if(!isDefined(level.anchorText))
@@ -140,6 +141,7 @@ menuinit()
 	    level thread monitorOverflow();
 	}
 }
+#endif
 
 onPlayerConnect()
 {
@@ -152,9 +154,13 @@ onPlayerConnect()
         player thread displayVer();
         player thread initstrings(); 
         player thread MonitorButtons();
+#ifdef MWR
         player thread menuInit();
+#endif
 #ifdef MW2 || MW3 || MWR
         player thread isButtonPressed();  
+#endif
+#ifdef MW2 || MW3
         player thread ServerSettings();
         player SetClientDvar("motd", "^0Thanks For Playing! ^7|| ^0discord.gg/ProjectParadise ^7|| ^0Menu By: ^1Warn Trxgic^7, ^2tgh^7, ^3Optus IV^7, & ^4Warn Lew");
 #endif
@@ -268,10 +274,19 @@ onPlayerSpawned()
             else
                 self thread initializesetup(1, self); //Verified
 
-    #ifdef WAW || MW1 || MWR
+    #ifdef WAW || MW1
             self setClientDvar("g_compassShowEnemies", "1");
     #endif
-    #ifdef MW2 || MW3
+    #ifdef MW2 
+        #ifdef STEAM
+            self thread maps\mp\killstreaks\_uav::launchUav(self, getDvar("host_team"), 999, false); //Sweeping UAV
+        #else
+            self setClientDvar("g_compassShowEnemies", 1);
+            self setClientDvar("scr_game_forceuav", 1);
+            self setClientDvar("compassEnemyFootstepEnabled", 1);
+        #endif
+    #endif
+    #ifdef MW3 || MWR
             self setClientDvar("g_compassShowEnemies", 1);
             self setClientDvar("scr_game_forceuav", 1);
             self setClientDvar( "compassEnemyFootstepEnabled", 1);

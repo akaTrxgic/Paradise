@@ -35,6 +35,8 @@
             self addOpt("Unstuck", ::doUnstuck);
             self addToggle("Lazy Elevators", self.lazyEles, ::lazyeletggl);
             self addOpt("Tp to Spawn", ::tpToSpawn);
+            self addToggle("Riot Shield Knife", self.riotKnife, ::doRiotKnife);
+            self addToggle("Laptop Knife", self.laptopKnife, ::doLaptopKnife);
 
             canOpts = ["Current","Infinite"];
             self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
@@ -337,8 +339,8 @@
 
             self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
             self addToggle("Dolphin Dive", self.DolphinDive, ::DolphinDive);
-            //self addToggle("Riot Shield Knife", self.riotKnife, ::doRiotKnife);
-            //self addToggle("Laptop Knife", self.laptopKnife, ::doLaptopKnife);
+            self addToggle("Riot Shield Knife", self.riotKnife, ::doRiotKnife);
+            self addToggle("Laptop Knife", self.laptopKnife, ::doLaptopKnife);
 
             self addOpt("Spawn Slide @ Crosshairs", ::slide);
 
@@ -1037,7 +1039,7 @@ clientOptions()
                         }
                         
                         if( self.eMenu[ self getCursor() ].func == ::newMenu && self != player )
-                            self iPrintLnBold( "^1Error: ^7Cannot Access Menus While In A Selected Player" );
+                            self iPrintLnBold( "^1ERROR: ^7Cannot Access Menus While In A Selected Player" );
                         else if(isDefined(self.sliders[ self getCurrentMenu() + "_" + self getCursor() ])){
                             slider = self.sliders[ self getCurrentMenu() + "_" + self getCursor() ];
                             slider = (IsDefined( menu.ID_list ) ? menu.ID_list[slider] : slider);
