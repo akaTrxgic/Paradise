@@ -2,15 +2,17 @@
 PC Version fixes
 
 WAW:
-* move text
 * grenade / equipment sub menus ?
 * bots dont spawn
 
 CoD4:
-* ???
+* Untested
 
 Ghosts:
-* ???
+* Needs made
+
+BO1:
+* Untested
 
 MWR:
 * Save loadout function modifications
@@ -31,5 +33,3 @@ Ghosts:
 * Overflow needs fixed by IL
 * Make menu
 
-All:
-* Canswaps need fixed
