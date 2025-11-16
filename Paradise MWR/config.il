@@ -1,1 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Project><Title>Zenith</Title><Author>XeSoftware</Author><Game>MWR</Game><Mode>MP</Mode><Platform>Steam</Platform><Symbols>DEBUG;EXAMPLE</Symbols></Project>
