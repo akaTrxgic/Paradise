@@ -9,6 +9,9 @@ CoD4:
 Ghosts:
 * Untested
 
+BO1:
+* Untested
+
 MWR:
 * Save loadout function modifications
 * Unlim uav
