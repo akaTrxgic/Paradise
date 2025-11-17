@@ -1,17 +1,12 @@
-# Paradise
-PC Version fixes
+//////PC Versions
 
 WAW:
-* grenade / equipment sub menus ?
 * bots dont spawn
 
 CoD4:
 * Untested
 
 Ghosts:
-* Needs made
-
-BO1:
 * Untested
 
 MWR:
@@ -23,8 +18,7 @@ MWR:
 * Final hit distance not showing ?
 
 
-
-Console Version fixes
+//////Console Versions
 
 CoD4:
 * Fix menu text
@@ -32,4 +26,3 @@ CoD4:
 Ghosts:
 * Overflow needs fixed by IL
 * Make menu
-
