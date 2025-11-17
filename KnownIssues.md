@@ -7,7 +7,7 @@ CoD4:
 * Untested
 
 Ghosts:
-* Untested
+* Needs made
 
 BO1:
 * Untested
