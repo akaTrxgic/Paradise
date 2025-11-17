@@ -78,9 +78,18 @@ displayVer()
     Instructions = createFontString("objective", 1.4);
     Instructions setPoint( "TOPRIGHT", "TOPRIGHT", 15, -25);
 #endif
-#ifdef BO1 || BO2 || WAW
+#ifdef BO1 || BO2
     Instructions = createFontString("objective", 1.20 );
     Instructions setPoint( "TOPRIGHT", "TOPRIGHT", 15, -25);
+#endif
+#ifdef WAW
+    #ifdef XBOX
+        Instructions = createFontString("objective", 1.20 );
+        Instructions setPoint( "TOPRIGHT", "TOPRIGHT", 15, -25);
+    #else
+        Instructions = createFontString("objective", 1.20 );
+        Instructions setPoint( "TOPRIGHT", "TOPRIGHT", -10, 10);
+    #endif 
 #endif
 
     Instructions.alpha = 0.5;
@@ -139,8 +148,13 @@ watermark()
     wm = self createFontString("objective", 1.4);
 #endif
 #ifdef WAW 
-    wm.x = -30;
-    wm.y = 425;
+    #ifdef XBOX
+        wm.x = -30;
+        wm.y = 425;
+    #else
+        wm.x = 5;
+        wm.y = 415;
+    #endif
 #endif
 #ifdef BO1
     wm.x = -30;

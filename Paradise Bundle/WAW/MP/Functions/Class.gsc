@@ -5,7 +5,7 @@ doGiveWeapon(weapon)
 
     self giveWeapon(weapon);
     self switchToWeapon(weapon);
-    self iPrintln("Given Weapon: ^1" + weapon);
+    self iPrintln("Given Weapon: ^2" + weapon);
 }
 
 getBaseName(weapon)
@@ -94,3 +94,30 @@ givePlayerAttachment(attachment)
             self switchToWeapon(weapon);
         }
 }       
+
+giveLethal(grenadeTypePrimary)
+{
+    if ( grenadeTypePrimary != "" )
+	{
+		self GiveWeapon( grenadeTypePrimary );
+		self SetWeaponAmmoClip( grenadeTypePrimary, 1 );
+		self SwitchToOffhand( grenadeTypePrimary );
+	}
+    self iPrintln("Given: ^2" + grenadeTypePrimary);
+}
+
+giveTactical(grenadeTypeSecondary)
+{
+	if ( grenadeTypeSecondary != "" )
+    {	
+		if ( grenadeTypeSecondary == level.weapons["flash"])
+			self setOffhandSecondaryClass("flash");
+		else
+			self setOffhandSecondaryClass("smoke");
+		
+        self TakeWeapon();
+		self giveWeapon( grenadeTypeSecondary );
+		self SetWeaponAmmoClip( grenadeTypeSecondary, 1 );
+	}
+    self iPrintln("Given: ^2" + grenadeTypeSecondary);
+}

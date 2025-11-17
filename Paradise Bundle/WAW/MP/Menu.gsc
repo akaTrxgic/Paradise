@@ -15,7 +15,7 @@ menuOptions()
         {
             self addMenu("main", "Main Menu");
             self addOpt("Trickshot Menu", ::newMenu, "ts");
-            self addOpt("Weapon Menu", ::newMenu, "wpn");
+            self addOpt("Class Menu", ::newMenu, "class");
             self addOpt("Teleport Menu", ::newMenu, "tp");
             self addOpt("Afterhits Menu", ::newMenu, "afthit");
 
@@ -42,8 +42,8 @@ menuOptions()
             break;
 
 // WEAPON MENU
-case "wpn":
-    self addMenu("wpn", "Weapon Menu");
+case "class":
+    self addMenu("class", "Class Menu");
 
     //  Rifles 
     rifleNames = ["SVT-40","Gewehr 43","M1 Garand","STG-44","M1A1 Carbine"];
@@ -77,7 +77,7 @@ case "wpn":
 
     self addOpt("Attachments", ::newMenu, "attach");
     self addOpt("Lethals", ::newMenu, "lethals");
-    self addOpt("Equipment", ::newMenu, "equipment");    
+    self addOpt("Tacticals", ::newMenu, "equipment");    
     self addOpt("Take Current Weapon", ::takeWpn);
     self addOpt("Drop Current Weapon", ::dropWpn);
     break;
@@ -92,9 +92,16 @@ case "wpn":
 
     case "lethals":
     self addMenu("lethals", "Lethals");
-    self addOpt();
-    self addOpt();
-    self addOpt();
+    self addOpt("Frag Grenade", ::giveLethal, "frag_grenade_mp");
+    self addOpt("N*74", ::giveLethal, "sticky_grenade_mp");
+    self addOpt("Molotov", ::giveLethal, "molotov_mp");
+    break;
+
+    case "equipment":
+    self addMenu("equipment", "Tacticals");
+    self addOpt("Smoke Grenade", ::giveTactical, "m8_white_smoke_mp");
+    self addOpt("Tabun Gas", ::giveTactical, "tabun_gas_mp");
+    self addOpt("Signal Flare", ::giveTactical, "signal_flare_mp");
     break;
 
     case "tp":  // Teleport Menu
