@@ -6,26 +6,18 @@ WAW:
 CoD4:
 * Untested
 
-Ghosts:
-* Needs made
-
 BO1:
 * Untested
 
 MWR:
 * Save loadout function modifications
-* Unlim uav
 * Change class bind
-* Give secondary offhands fixed
-* Fall damage on ffa ?
+* Give offhands fixed
 * Final hit distance not showing ?
+* No SnD bots
 
 
 //////Console Versions
 
 CoD4:
 * Fix menu text
-
-Ghosts:
-* Overflow needs fixed by IL
-* Make menu
