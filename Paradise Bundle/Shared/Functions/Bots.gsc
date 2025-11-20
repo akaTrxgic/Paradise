@@ -34,7 +34,7 @@ toggleFreezeBots()
         self iPrintLn("All bots ^1Frozen");
 
         self.freezeBotsLoop = true;
-        self thread freezeBotsThread(); // Start loop in thread
+        self thread freezeBotsThread();
     }
     else
     {

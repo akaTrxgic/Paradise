@@ -11,7 +11,7 @@ menuOptions()
     switch(menu)
 {
     case "main":
-        if(self.access > 0) // Verified
+        if(self.access > 0)
         {
             self addMenu("main", "Main Menu");
             self addOpt("Trickshot Menu", ::newMenu, "ts");
@@ -24,7 +24,7 @@ menuOptions()
         }
         break;
 
-    case "ts":  // Trickshot Menu
+    case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addToggle("Noclip [{+smoke}]", self.ufo, ::NoClip);
             self addOpt("Go for Two Piece", ::dotwopiece);
@@ -41,36 +41,29 @@ menuOptions()
             self addSliderString("Spawn @ Feet", spawnOptionsIDs, spawnOptionsActions, ::doSpawnOption);
             break;
 
-// WEAPON MENU
 case "class":
     self addMenu("class", "Class Menu");
 
-    //  Rifles 
     rifleNames = ["SVT-40","Gewehr 43","M1 Garand","STG-44","M1A1 Carbine"];
     rifleIDs   = ["svt40_mp","gewehr43_mp","m1garand_mp","stg44_mp","m1carbine_mp"];
     self addSliderString("Rifles", rifleIDs, rifleNames, ::doGiveWeapon);
 
-    //  SMGs 
     smgNames = ["Thompson","MP40","Type 100","PPSh-41"];
     smgIDs   = ["thompson_mp","mp40_mp","type100smg_mp","ppsh_mp"];
     self addSliderString("SMGs", smgIDs, smgNames, ::doGiveWeapon);
 
-    //  LMGs 
     lmgNames = ["Type 99","BAR","DP-28","MG42","FG42","Browning M1919"];
     lmgIDs   = ["type99lmg_mp","bar_mp","dp28_mp","mg42_mp","fg42_mp","30cal_mp"];
     self addSliderString("LMGs", lmgIDs, lmgNames, ::doGiveWeapon);
 
-    //  Shotguns 
     shottyNames = ["Trench Gun","Double-Barrel"];
     shottyIDs   = ["shotgun_mp","doublebarreledshotgun_mp"];
     self addSliderString("Shotguns", shottyIDs, shottyNames, ::doGiveWeapon);
 
-    // Bolt-Actions 
     boltNames = ["Springfield","Arisaka","Mosin-Nagant","Kar98k","PTRS-41"];
     boltIDs   = ["springfield_scoped_mp","type99rifle_scoped_mp","mosinrifle_scoped_mp","kar98k_scoped_mp","ptrs41_mp"];
     self addSliderString("Bolt-Actions", boltIDs, boltNames, ::doGiveWeapon);
 
-    //  Pistols 
     pistolNames = ["Colt M1911","Nambu","Walther P38","Tokarev TT-33",".357 Magnum"];
     pistolIDs   = ["colt_mp","nambu_mp","walther_mp","tokarev_mp","357magnum_mp"];
     self addSliderString("Pistols", pistolIDs, pistolNames, ::doGiveWeapon);
@@ -104,7 +97,7 @@ case "class":
     self addOpt("Signal Flare", ::giveTactical, "signal_flare_mp");
     break;
 
-    case "tp":  // Teleport Menu
+    case "tp":
     self addMenu("tp", "Teleport Menu");
     self addOpt("Set Spawn", ::setSpawn);
     self addOpt("Unset Spawn", ::unsetSpawn);
@@ -286,46 +279,39 @@ case "class":
     self addSliderString("Custom Spot", tpCoords, tpID, ::tptospot);
     break;
 
-    case "afthit":  // Afterhits Menu
+    case "afthit":
     self addMenu("afthit", "Afterhits Menu");
 
-    //  Rifles 
     rifleNames = ["SVT-40","Gewehr 43","M1 Garand","STG-44","M1A1 Carbine"];
     rifleIDs   = ["svt40_mp","gewehr43_mp","m1garand_mp","stg44_mp","m1carbine_mp"];
     self addSliderString("Rifles", rifleIDs, rifleNames, ::AfterHit);
 
-    //  SMGs 
     smgNames = ["Thompson","MP40","Type 100","PPSh-41"];
     smgIDs   = ["thompson_mp","mp40_mp","type100smg_mp","ppsh_mp"];
     self addSliderString("SMGs", smgIDs, smgNames, ::AfterHit);
 
-    //  LMGs 
     lmgNames = ["Type 99","BAR","DP-28","MG42","FG42","Browning M1919"];
     lmgIDs   = ["type99lmg_mp","bar_mp","dp28_mp","mg42_mp","fg42_mp","30cal_mp"];
     self addSliderString("LMGs", lmgIDs, lmgNames, ::AfterHit);
 
-    //  Shotguns 
     shottyNames = ["Trench Gun","Double-Barrel"];
     shottyIDs   = ["shotgun_mp","doublebarreledshotgun_mp"];
     self addSliderString("Shotguns", shottyIDs, shottyNames, ::AfterHit);
 
-    //  Bolt-Actions 
     boltNames = ["Springfield","Arisaka","Mosin-Nagant","Kar98k","PTRS-41"];
     boltIDs   = ["springfield_mp","type99rifle_mp","mosinrifle_mp","kar98k_mp","ptrs41_mp"];
     self addSliderString("Bolt-Actions", boltIDs, boltNames, ::AfterHit);
 
-    //  Pistols 
     pistolNames = ["Colt M1911","Nambu","Walther P38","Tokarev TT-33",".357 Magnum"];
     pistolIDs   = ["colt_mp","nambu_mp","walther_mp","tokarev_mp","357magnum_mp"];
     self addSliderString("Pistols", pistolIDs, pistolNames, ::AfterHit);
 
-    //  Special 
     specialNames = ["Betty","Bomb","Artillery","Flamethrower"];
     specialIDs   = ["mine_bouncing_betty_mp","briefcase_bomb_mp","artillery_mp","m2_flamethrower_mp"];
     self addSliderString("Special", specialIDs, specialNames, ::AfterHit);
     break;
 
-        case "host":  // Host Options
+        case "host":
             self addMenu("host", "Host Options");
             self addOpt("Client Menu", ::newMenu, "Verify");
 
@@ -588,8 +574,8 @@ clientOptions()
             }
             if(IsDefined( self.eMenu[ ary + e ].val ))
             {
-                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1); //BG
-                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1); //INNER
+                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1);
+                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1); 
                 if( self getCursor() == ( ary + e ) )
                     self.menu["UI_SLIDE"]["VAL"] = self createText("default", 1, "RIGHT", "CENTER", self.menu["OPT"][e].x + 150, self.menu["OPT"][e].y, 5, 1, self.sliders[ self getCurrentMenu() + "_" + self getCursor() ] + "", self.presets["Text"]);
                 self updateSlider( "", e, ary + e );

@@ -29,7 +29,6 @@
         }
         break;
 
-    // TRICKSHOT MENU
     case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addOpt("Unstuck", ::doUnstuck);
@@ -46,7 +45,6 @@
             self addOpt("Suicide", ::kys);
             break;
 
-    // BINDS MENU
     case "sK": 
             self addMenu("sK", "Binds Menu");
             self addOpt("Change Class Bind", ::newMenu, "cb");
@@ -92,7 +90,7 @@
             self addOpt("Trigger Bind: [{+actionslot 4}]", ::trgrBind, 4);
             break;
 
-        case "gflip":  // Mid Air GFlip Bind submenu
+        case "gflip":
             self addMenu("gflip", "Mid Air GFlip Bind");
             self addOpt("GFlip: [{+actionslot 1}]",  ::gFlipBind,1);
             self addOpt("GFlip: [{+actionslot 2}]",  ::gFlipBind,2);
@@ -100,7 +98,7 @@
             self addOpt("GFlip: [{+actionslot 4}]",  ::gFlipBind,4);
             break;
 
-        case "nmod":  // Nac Mod Bind submenu
+        case "nmod":
             self addMenu("nmod", "Nac Mod Bind");
             self addOpt("Save Nac Weapon 1", ::nacModSave, 1);
             self addOpt("Save Nac Weapon 2", ::nacModSave, 2);
@@ -110,7 +108,7 @@
             self addOpt("Nac Bind: [{+actionslot 4}]", ::nacModBind,4);
             break;
 
-        case "skree":  // Skree Bind submenu
+        case "skree":
             self addMenu("skree", "Skree Bind");
             self addOpt("Save Skree Weapon 1", ::skreeModSave, 1);
             self addOpt("Save Skree Weapon 2", ::skreeModSave, 2);
@@ -120,7 +118,7 @@
             self addOpt("Skree Bind: [{+actionslot 4}]", ::skreeBind,4);
             break;
 
-        case "cnzm":  // Can Zoom Bind submenu
+        case "cnzm":
             self addMenu("cnzm", "Can Zoom Bind");
             self addOpt("Canzoom: [{+actionslot 1}]", ::Canzoom,1);
             self addOpt("Canzoom: [{+actionslot 2}]", ::Canzoom,2);
@@ -128,7 +126,7 @@
             self addOpt("Canzoom: [{+actionslot 4}]", ::Canzoom,4);
             break;
 
-        case "cb":  // Change Class Bind submenu
+        case "cb":
             self addMenu("cb", "Change Class Bind");
             self addOpt("Bind Class 1: [{+actionslot 1}]",  ::class1);
             self addOpt("Bind Class 2: [{+actionslot 1}]",  ::class2);
@@ -142,7 +140,7 @@
             self addOpt("Bind Class 10: [{+actionslot 1}]",  ::class10);
             break;
 
-   case "class":  // Class Menu
+   case "class":
             self addMenu("class", "Class Menu"); 
             self addOpt("Weapons", ::newMenu, "wpns");
             self addOpt("Attachments", ::newMenu, "atchmnts");
@@ -249,7 +247,7 @@
             self addOpt("Smoke Grenade", ::GiveSecondaryOffhand, "smoke_grenade_mp");
             break;
 
-        case "afthit":  // Afterhits Menu
+        case "afthit":
             self addMenu("afthit", "Afterhits Menu");
 
             arIDs = ["m4_mp","scar_mp","tavor_mp","masada_mp","fn2000_mp","ak47_mp"];
@@ -277,7 +275,7 @@
             self addSliderString("Miscellaneous", miscIDs, miscNames, ::afterhit);
             break;
 
-        case "kstrks": //Killstreak Menu
+        case "kstrks":
             self addMenu("kstrks", "Killstreak Menu"); 
             
             Killstreak = [ "UAV", "Care Package", "Counter-UAV", "Sentry Gun", "Predator Missile", "Precision Airstrike", "Harrier Strike", "Attack Helicopter", "Emergency Airdrop", "Pave Low", "Stealth Bomber", "Chopper Gunner", "AC130", "EMP" ];
@@ -288,7 +286,7 @@
                 self addOpt("Killcam Nuke", ::fakenuke);
             break;
 
-        case "host":  // Host Options (host/dev only)
+        case "host":
             self addMenu("host", "Host Options");
             self addOpt("Client Menu", ::newMenu, "Verify");
             self addOpt("Bomb Planting", ::disableBombs);
@@ -326,7 +324,6 @@
         }
         break;
 
-    // TRICKSHOT MENU
     case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addToggle("Noclip [{+frag}]", self.NoClipT, ::initNoClip);
@@ -349,7 +346,7 @@
             self addSliderString("Spawn @ Feet", spawnOptionsIDs, spawnOptionsActions, ::doSpawnOption);
             break;
 
-    // BINDS MENU
+
     case "sK": 
             self addMenu("sK", "Binds Menu");
             self addOpt("Change Class Bind", ::newMenu, "cb");
@@ -395,7 +392,7 @@
             self addOpt("Trigger Bind: [{+actionslot 4}]", ::trgrBind, 4);
             break;
 
-        case "gflip":  // Mid Air GFlip Bind submenu
+        case "gflip":
             self addMenu("gflip", "Mid Air GFlip Bind");
             self addOpt("GFlip: [{+actionslot 1}]",  ::gFlipBind,1);
             self addOpt("GFlip: [{+actionslot 2}]",  ::gFlipBind,2);
@@ -403,7 +400,7 @@
             self addOpt("GFlip: [{+actionslot 4}]",  ::gFlipBind,4);
             break;
 
-        case "nmod":  // Nac Mod Bind submenu
+        case "nmod":
             self addMenu("nmod", "Nac Mod Bind");
             self addOpt("Save Nac Weapon 1", ::nacModSave, 1);
             self addOpt("Save Nac Weapon 2", ::nacModSave, 2);
@@ -413,7 +410,7 @@
             self addOpt("Nac Bind: [{+actionslot 4}]", ::nacModBind,4);
             break;
 
-        case "skree":  // Skree Bind submenu
+        case "skree":
             self addMenu("skree", "Skree Bind");
             self addOpt("Save Skree Weapon 1", ::skreeModSave, 1);
             self addOpt("Save Skree Weapon 2", ::skreeModSave, 2);
@@ -423,7 +420,7 @@
             self addOpt("Skree Bind: [{+actionslot 4}]", ::skreeBind,4);
             break;
 
-        case "cnzm":  // Can Zoom Bind submenu
+        case "cnzm":
             self addMenu("cnzm", "Can Zoom Bind");
             self addOpt("Canzoom: [{+actionslot 1}]", ::Canzoom,1);
             self addOpt("Canzoom: [{+actionslot 2}]", ::Canzoom,2);
@@ -431,7 +428,7 @@
             self addOpt("Canzoom: [{+actionslot 4}]", ::Canzoom,4);
             break;
 
-        case "cb":  // Change Class Bind submenu
+        case "cb":
             self addMenu("cb", "Change Class Bind");
             self addOpt("Bind Class 1: [{+actionslot 1}]",  ::class1);
             self addOpt("Bind Class 2: [{+actionslot 1}]",  ::class2);
@@ -445,8 +442,7 @@
             self addOpt("Bind Class 10: [{+actionslot 1}]",  ::class10);
             break;
 
-            // TELEPORT MENU
-    case "tp":  // Teleport Menu
+    case "tp":
     self addMenu("tp", "Teleport Menu");
 
     self addOpt("Set Spawn", ::setSpawn);
@@ -677,7 +673,7 @@
     self addSliderString("Teleport Spot", tpCoords, tpNames, ::tptospot);
     break;
 
-   case "class":  // Class Menu
+   case "class":
             self addMenu("class", "Class Menu"); 
             self addOpt("Weapons", ::newMenu, "wpns");
             self addOpt("Attachments", ::newMenu, "atchmnts");
@@ -851,7 +847,7 @@
             self addOpt("Smoke Grenade", ::GiveSecondaryOffhand, "smoke_grenade_mp");
             break;
 
-        case "afthit":  // Afterhits Menu
+        case "afthit":
             self addMenu("afthit", "Afterhits Menu");
 
             arIDs = ["m4_mp","scar_mp","tavor_mp","masada_mp","fn2000_mp","ak47_mp"];
@@ -879,7 +875,7 @@
             self addSliderString("Miscellaneous", miscIDs, miscNames, ::afterhit);
             break;
 
-        case "kstrks": //Killstreak Menu
+        case "kstrks":
             self addMenu("kstrks", "Killstreak Menu"); 
             
             Killstreak = [ "UAV", "Care Package", "Counter-UAV", "Sentry Gun", "Predator Missile", "Precision Airstrike", "Harrier Strike", "Attack Helicopter", "Emergency Airdrop", "Pave Low", "Stealth Bomber", "Chopper Gunner", "AC130", "EMP" ];
@@ -890,7 +886,7 @@
                 self addOpt("Killcam Nuke", ::fakenuke);
             break;
 
-        case "host":  // Host Options (host/dev only)
+        case "host":
             self addMenu("host", "Host Options");
             self addOpt("Client Menu", ::newMenu, "Verify");
             self addToggle("Toggle Floaters", self.floaters, ::togglelobbyfloat);
@@ -1197,8 +1193,8 @@ clientOptions()
             }
             if(IsDefined( self.eMenu[ ary + e ].val ))
             {
-                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1); //BG
-                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1); //INNER
+                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1);
+                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1);
                 if( self getCursor() == ( ary + e ) )
                     self.menu["UI_SLIDE"]["VAL"] = self createText("default", 1, "RIGHT", "CENTER", self.menu["OPT"][e].x + 150, self.menu["OPT"][e].y, 5, 1, self.sliders[ self getCurrentMenu() + "_" + self getCursor() ] + "", self.presets["Text"]);
                 self updateSlider( "", e, ary + e );

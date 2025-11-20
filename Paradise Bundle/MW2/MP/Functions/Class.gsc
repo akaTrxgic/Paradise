@@ -109,7 +109,7 @@ GivePlayerAttachment(attachment)
     self SetSpawnWeapon(newWeapon);
 }
 
-GetWeaponValidAttachments(weapon) //Gets The Supported Attachments Of A Given Weapon
+GetWeaponValidAttachments(weapon)
 {
     attachments = [];
     

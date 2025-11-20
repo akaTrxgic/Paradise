@@ -56,7 +56,6 @@ oomtoggle()
     {
         foreach(player in level.players)
         {
-            //deletes all spawned platforms 
             #ifndef WAW
             if(isDefined(player.spawnedplat))
             {
@@ -107,7 +106,6 @@ oomtoggle()
                 }
             }
             #endif
-            //deletes all spawned crates
             if (isDefined(player.spawnedcrate))
             {
                 player.spawnedcrate delete();
@@ -118,7 +116,6 @@ oomtoggle()
                 player.spawnedCrateThread delete();
                 player.spawnedCrateThread = undefined;
             }
-            //disables ufo/noclip
             #ifdef MW2 || MW3
             if(player.NoClipT)
             {

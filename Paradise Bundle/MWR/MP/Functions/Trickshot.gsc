@@ -149,7 +149,6 @@ slide()
         slideOrigin = (bullettrace(self gettagorigin("j_head"), self gettagorigin("j_head") + anglesToForward(self getplayerangles()) * 100,0,self)["position"] + (0, 0, 20));
         self.spawnedSlide = spawnscriptmodel(slideOrigin, "com_plasticcase_enemy", self.spawnedSlide.angles, (0,0,0), level.airdropcratecollision);
         self.spawnedSlide.angles = (60, self getPlayerAngles()[1] - 180, 0);
-        //spawnscriptmodel(origin,model,angles,time,clip)
         self.slideThread = self thread makeSlide(self.spawnedSlide);
 }
 
@@ -287,35 +286,3 @@ doSpawnOption(selection)
         break;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//test stuff
-monitor_headbounce()
-{
-  for(;;)  {
-    foreach(player in level.players) {
-      if(player != self) {
-        if(getDvarInt("rp_headbounce") == 1) {
-          self.if_touching = self getVelocity();
-          if(Distance(player.origin + (0,0,50), self.origin) <= 50 && self.if_touching[2] < -250 ) {
-            self.playervel = self getVelocity();
-            self setVelocity(self.playervel - (0,0,self.playervel[2] * 1.85));
-            wait .1;
-          }
-        }
-      }
-    }
-    wait .1;
-  }
-}
-

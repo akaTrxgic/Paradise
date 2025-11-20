@@ -1,11 +1,3 @@
-pMapName()
-{
-    self iprintln("^1" + getdvar("mapname"));
-}
-pOrigin()
-{
-    self iprintln("^2" + self getorigin());
-}
 menuOptions()
 {
     player = self.selected_player;        
@@ -18,7 +10,7 @@ menuOptions()
     switch(menu)
 {
     case "main":
-        if(self.access > 0) // Verified
+        if(self.access > 0)
         {
             self addMenu("main", "Main Menu");
             self addOpt("Trickshot Menu", ::newMenu, "ts");
@@ -27,15 +19,11 @@ menuOptions()
             self addOpt("Afterhits Menu", ::newMenu, "afthit");
 
             if(self ishost() || self isDeveloper())
-            {
                 self addOpt("Host Options", ::newMenu, "host");
-                //self addOpt("Print Map Name", ::pMapName);
-                //self addOpt("Print Origin", ::pOrigin);
-            }
         }
         break;
 
-    case "ts":  // Trickshot Menu
+    case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addToggle("Noclip [{+smoke}]", self.ufo, ::NoClip);
             self addOpt("Go for Two Piece", ::dotwopiece);
@@ -52,7 +40,6 @@ menuOptions()
             self addSliderString("Spawn @ Feet", spawnOptionsIDs, spawnOptionsActions, ::doSpawnOption);
             break;
 
-// WEAPON MENU
 case "wpn":
     self addMenu("wpn", "Weapon Menu");
 
@@ -95,7 +82,7 @@ case "wpn":
     self addOpt(attachNames[a], ::giveplayerattachment, attachIDs[a]);
     break;
 
-    case "tp":  // Teleport Menu
+    case "tp":
     self addMenu("tp", "Teleport Menu");
     self addOpt("Set Spawn", ::setSpawn);
     self addOpt("Unset Spawn", ::unsetSpawn);
@@ -263,7 +250,7 @@ case "wpn":
     self addSliderString("Spots", tpCoords, tpID, ::tptospot);
     break;
 
-    case "afthit":  // Afterhits Menu
+    case "afthit":
     self addMenu("afthit", "Afterhits Menu");
 
     arNames = ["M16A4","AK-47","M4 Carbine","G3","G36C", "M14", "MP44"];
@@ -291,7 +278,7 @@ case "wpn":
     self addSliderString("Pistols", pistolIDs, pistolNames, ::afterhit);
     break;
 
-        case "host":  // Host Options
+        case "host":
             self addMenu("host", "Host Options");
             self addOpt("Client Menu", ::newMenu, "Verify");
 
@@ -552,8 +539,8 @@ clientOptions()
             }
             if(IsDefined( self.eMenu[ ary + e ].val ))
             {
-                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1); //BG
-                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1); //INNER
+                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1);
+                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1);
                 if( self getCursor() == ( ary + e ) )
                     self.menu["UI_SLIDE"]["VAL"] = self createText("default", 1.4, "RIGHT", "CENTER", self.menu["OPT"][e].x + 150, self.menu["OPT"][e].y, 5, 1, self.sliders[ self getCurrentMenu() + "_" + self getCursor() ] + "", self.presets["Text"]);
                 self updateSlider( "", e, ary + e );

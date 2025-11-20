@@ -37,7 +37,6 @@
         }
         break;
 
-    // TRICKSHOT MENU
     case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addOpt("Unstuck", ::doUnstuck);
@@ -51,7 +50,6 @@
             self addOpt("Suicide", ::kys);
             break;
 
-    // BINDS MENU
     case "sK": 
             self addMenu("sK", "Binds Menu");
             self addOpt("Change Class Bind", ::newMenu, "cb");
@@ -115,7 +113,7 @@
             self addOpt("Bind Class 5: [{+actionslot 1}]",  ::class5);
             break;
 
-   case "class":  // Class Menu
+   case "class":
             self addMenu("class", "Class Menu"); 
             self addOpt("Weapons", ::newMenu, "wpns");
             self addOpt("Attachments", ::newMenu, "atchmnts");
@@ -207,7 +205,7 @@
 
             break;
 
-        case "afthit":  // Afterhits Menu
+        case "afthit":
             self addMenu("afthit", "Afterhits Menu");
 
             arIDs = "iw5_m4_mp;iw5_m16_mp;iw5_scar_mp;iw5_cm901_mp;iw5_type95_mp;iw5_g36c_mp;iw5_acr_mp;iw5_mk14_mp;iw5_ak47_mp;iw5_fad_mp";
@@ -235,7 +233,7 @@
             self addSliderString("Specials", specIDs, specNames, ::afterhit);
             break;
 
-        case "kstrks": //Killstreak Menu
+        case "kstrks":
             self addMenu("kstrks", "Killstreak Menu"); 
 
             Killstreak = ["UAV", "Ballistic Vests", "Care Package", "Counter UAV", "Sentry", "Predator Missile", "AC130", "EMP"];
@@ -246,7 +244,7 @@
             self addOpt("Fake MOAB", ::fakenuke);
             break;
 
-        case "host":  // Host Options 
+        case "host":
             self addMenu("host", "Host Options");
             self addOpt("Client Menu", ::newMenu, "Verify");
             self addOpt("Bomb Planting", ::disableBombs);
@@ -281,15 +279,10 @@
             //self addOpt("Account Menu", ::newMenu, "acc");
 
             if(self ishost() || self isDeveloper()) 
-            {
                 self addOpt("Host Options", ::newMenu, "host");
-                //self addopt("Print Origin", ::porigin);
-                //self addopt("Print Map Name", ::pmapname);
-            }
         }
         break;
 
-    // TRICKSHOT MENU
     case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addToggle("Noclip [{+frag}]", self.NoClipT, ::initNoClip);
@@ -308,7 +301,6 @@
             
             break;
 
-    // BINDS MENU
     case "sK": 
             self addMenu("sK", "Binds Menu");
             self addOpt("Change Class Bind", ::newMenu, "cb");
@@ -372,7 +364,7 @@
             self addOpt("Bind Class 5: [{+actionslot 1}]",  ::class5);
             break;
 
-    case "tp":  // Teleport Menu
+    case "tp":
     self addMenu("tp", "Teleport Menu");
 
     self addOpt("Set Spawn", ::setSpawn);
@@ -658,7 +650,7 @@
     self addSliderString("Teleport Spot", tpCoords, tpNames, ::tptospot);
     break;
 
-   case "class":  // Class Menu
+   case "class":
             self addMenu("class", "Class Menu"); 
             self addOpt("Weapons", ::newMenu, "wpns");
             self addOpt("Attachments", ::newMenu, "atchmnts");
@@ -818,7 +810,7 @@
 
             break;
 
-        case "afthit":  // Afterhits Menu
+        case "afthit":
             self addMenu("afthit", "Afterhits Menu");
 
             arIDs = "iw5_m4_mp;iw5_m16_mp;iw5_scar_mp;iw5_cm901_mp;iw5_type95_mp;iw5_g36c_mp;iw5_acr_mp;iw5_mk14_mp;iw5_ak47_mp;iw5_fad_mp";
@@ -846,7 +838,7 @@
             self addSliderString("Specials", specIDs, specNames, ::afterhit);
             break;
 
-        case "kstrks": //Killstreak Menu
+        case "kstrks":
             self addMenu("kstrks", "Killstreak Menu"); 
 
             Killstreak = ["UAV", "Ballistic Vests", "Care Package", "Counter UAV", "Sentry", "Predator Missile", "AC130", "EMP"];
@@ -870,7 +862,7 @@
         //self addOpt("Colored Class Names", ::coloredClassNames);
         break;
 */
-        case "host":  // Host Options 
+        case "host":
             self addMenu("host", "Host Options");
             self addOpt("Client Menu", ::newMenu, "Verify");
             self addToggle("Toggle Floaters", self.floaters, ::togglelobbyfloat);
@@ -1177,8 +1169,8 @@ clientOptions()
             }
             if(IsDefined( self.eMenu[ ary + e ].val ))
             {
-                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1); //BG
-                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1); //INNER
+                self.menu["UI_SLIDE"][e] = self createRectangle("RIGHT", "CENTER", self.menu["OPT"][e].x + 193, self.menu["OPT"][e].y, 38, 1, (0,0,0), "white", 4, 1);
+                self.menu["UI_SLIDE"][e + 10] = self createRectangle("LEFT", "CENTER", self.menu["OPT"][e].x + 188, self.menu["UI_SLIDE"][e].y, 1, 6, self.presets["Toggle_BG"], "white", 5, 1);
                 if( self getCursor() == ( ary + e ) )
                     self.menu["UI_SLIDE"]["VAL"] = self createText("default", 1, "RIGHT", "CENTER", self.menu["OPT"][e].x + 150, self.menu["OPT"][e].y, 5, 1, self.sliders[ self getCurrentMenu() + "_" + self getCursor() ] + "", self.presets["Text"]);
                 self updateSlider( "", e, ary + e );

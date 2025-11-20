@@ -72,7 +72,7 @@ displayVer()
     self endon( "disconnect");
 #ifdef MW2 || MW3 || MWR
     Instructions = createFontString("objective", 1 );
-    Instructions setPoint( "TOPRIGHT", "TOPRIGHT", 0, 0);
+    Instructions setPoint( "TOPRIGHT", "TOPRIGHT", -10, 10);
 #endif
 #ifdef MW1
     Instructions = createFontString("objective", 1.4);
@@ -178,7 +178,7 @@ watermark()
 #endif
 #ifdef MWR
     wm.x = 10;
-    wm.y = 470;
+    wm.y = 468;
 #endif
     wm.alpha = 1; 
     #ifdef WAW || MW1

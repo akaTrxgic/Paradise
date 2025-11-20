@@ -219,7 +219,7 @@ onPlayerSpawned()
     {
         self waittill( "spawned_player" );
         
-    #ifdef BO1 || MW2 || MW3 || BO2
+    #ifdef BO1 || MW2 || MW3 || BO2 || MWR
         if (self getPlayerCustomDvar("loadoutSaved") == "1") 
             self loadLoadout(true);
     #endif  
@@ -269,16 +269,16 @@ onPlayerSpawned()
                     setDvar("host_team", self.team);
             }
             else if(self isDeveloper() && !self isHost())
-                self thread initializesetup(2, self); //Developer
+                self thread initializesetup(2, self);
             else
-                self thread initializesetup(1, self); //Verified
+                self thread initializesetup(1, self);
 
     #ifdef WAW || MW1
             self setClientDvar("g_compassShowEnemies", "1");
     #endif
     #ifdef MW2 
         #ifdef STEAM
-            self thread maps\mp\killstreaks\_uav::launchUav(self, getDvar("host_team"), 999, false); //Sweeping UAV
+            self thread maps\mp\killstreaks\_uav::launchUav(self, getDvar("host_team"), 999, false);
         #else
             self setClientDvar("g_compassShowEnemies", 1);
             self setClientDvar("scr_game_forceuav", 1);
@@ -294,9 +294,6 @@ onPlayerSpawned()
             self setclientuivisibilityflag("g_compassShowEnemies", 1);
             self.uav = false;
 	#endif
-    #ifdef MWR
-            self thread maps\mp\_portable_radar::test();
-    #endif
 
             self thread mainBinds();
             self thread wallbangeverything();
@@ -449,10 +446,6 @@ modifyplayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
 
         if(level.currentGametype == "dm")
         {
-            if(sMeansOfDeath == "MOD_FALLING" || sMeansOfDeath != "MOD_SUICIDE")
-                iDamage = 0;
-
-            // Handle melee attacks for verified players and bots
             if(sMeansOfDeath == "MOD_MELEE")
             {
                 if(isDefined(eAttacker.pers["isBot"]) && eAttacker.pers["isBot"])
@@ -461,13 +454,11 @@ modifyplayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
                 else
                     iDamage = 0;
             }
-            // Handle sniper kills for players with less than 29 kills
             else if(eAttacker.kills < lastKill)
             {
                 if(isDamageWeapon(sWeapon))
                     iDamage = 999;  
             }
-            // Special handling for the 29th kill
             else if(eAttacker.kills == lastKill)
             {
                 if(dist >= level.lastKill_minDist)
@@ -516,13 +507,10 @@ modifyplayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
                 }
             }
 	    #endif
-            // Apply the calculated damage
             return [[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
         }
         else if(level.currentGametype == "sd")
         {
-
-            // Handle melee attacks for verified players and bots
             if(sMeansOfDeath == "MOD_MELEE")
             {
                 if(isDefined(eAttacker.pers["isBot"]) && eAttacker.pers["isBot"])
@@ -815,7 +803,9 @@ initDvars()
         setDvar("scr_dm_timelimit", 10);
         setDvar("aim_aimAssistRangeScale", 0);
     #endif
-
+    #ifdef MWR
+        SetDvar("bg_compassShowEnemies", "1");
+    #endif
     #ifdef BO1
         setDvar("sv_botTargetLeadBias", 10);
         setDvar("scr_killcam_time", 5);
@@ -1034,18 +1024,15 @@ registerAlmostHit(nearestPlayer, dist)
 
 rainbowText(text, lifetime, yOffset)
 {
-    // Create independent HUD element
     hud = self createFontString("default", 1.6);
-    hud setPoint("TOP", "TOP", 0, 250 + yOffset); // Base offset increased to 120
+    hud setPoint("TOP", "TOP", 0, 250 + yOffset);
     hud.alpha = 1;
     hud settext(text);
 
     startTime = getTime();
-    lifetime = lifetime * 1.2; // Double lifetime for longer display (e.g., 5s -> 10s)
+    lifetime = lifetime * 1.2;
 
-    // Initialize rainbow state
-
-    value = 3; // Speed of color transitions
+    value = 3;
     state = 0;
     red = 0;
     green = 0;
@@ -1053,7 +1040,6 @@ rainbowText(text, lifetime, yOffset)
 
     while(getTime() - startTime < lifetime * 1000)
     {
-        // Smooth rainbow logic
         switch(state)
         {
             case 0: // Red to yellow
@@ -1132,14 +1118,13 @@ rainbowText(text, lifetime, yOffset)
 
         hud.color = divideColor(red, green, blue);
 
-        // Fade out in last 25% of lifetime
         remainingTime = (lifetime * 1000.0 - (getTime() - startTime)) / (lifetime * 1000.0);
         if (remainingTime < 0.25)
-            hud.alpha = remainingTime / 0.25; // Fade out over last 25%
+            hud.alpha = remainingTime / 0.25;
         else
-            hud.alpha = 1; // Stay fully visible until then
+            hud.alpha = 1;
 
-        wait 0.01; // Tight loop for smooth updates
+        wait 0.01;
     }
 
     hud destroy();
@@ -1264,26 +1249,15 @@ botsGetKnives()
 botSwitchGuns()
 {
     self endon("disconnect");
+    weapons = [];
 #ifdef WAW
     weapons = [ "colt_mp", "nambu_mp" ];
-#endif
-#ifdef MW1
-    weapons = ["beretta_mp", "colt45_mp"];
 #endif
 #ifdef MW2
     weapons = [ "usp_mp", "deserteagle_mp" ];
 #endif
 #ifdef MW3
     weapons = ["iw5_usp45", "iw5_deserteagle"];
-#endif
-#ifdef BO1
-    weapons = [ "asp_mp", "makarov_mp" ];
-#endif
-#ifdef BO2
-    weapons = [ "fiveseven_mp", "fnp45_mp" ];
-#endif
-#ifdef MWR
-    weapons = ["beretta", "usp"];
 #endif
     current = 0;
     for (;;)
@@ -1431,7 +1405,7 @@ doBots()
     }
     else if(level.currentGametype == "sd")
     {
-        if(getteamplayersalive(self.team != getDvar("host_team")) <= 1)
+        if(getteamplayersalive(self.team != hostTeam) <= 1)
         {
             self spawnEnemyBot();
             wait 0.125;
@@ -1459,7 +1433,7 @@ doBots()
             spawnBots(3, !hostTeam);
     }
 #endif
-#ifdef MW3
+#ifdef MW3 
     if(level.currentGametype == "dm")
     {
         emptySlots = 18 - level.players.size;
@@ -1493,7 +1467,7 @@ if(level.currentGametype == "dm")
     else if(level.currentGametype == "sd")
     {
         if(GetAliveCountForTeam(team) <= 1)
-            spawn_bots_stub(3, undefined, undefined, "spawned_player", "Easy");
+            spawn_bots_stub(1, team, undefined, "spawned_player", "Easy");
     }
 #endif
 }
@@ -2000,7 +1974,7 @@ PMColour() // Private Match
 }
 setRGB(addr, r, g, b)
 {
-    WriteFloat(addr,       r); // R
-    WriteFloat(addr + 0x4, g); // G
-    WriteFloat(addr + 0x8, b); // B
+    WriteFloat(addr,       r);
+    WriteFloat(addr + 0x4, g);
+    WriteFloat(addr + 0x8, b);
 }

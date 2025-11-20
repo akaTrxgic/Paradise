@@ -225,7 +225,6 @@ slide()
         slideOrigin = (bullettrace(self gettagorigin("j_head"), self gettagorigin("j_head") + anglesToForward(self getplayerangles()) * 100,0,self)["position"] + (0, 0, 20));
         self.spawnedSlide = spawnscriptmodel(slideOrigin, "com_plasticcase_enemy", self.spawnedSlide.angles, (0,0,0), level.airdropcratecollision);
         self.spawnedSlide.angles = (60, self getPlayerAngles()[1] - 180, 0);
-        //spawnscriptmodel(origin,model,angles,time,clip)
         self.slideThread = self thread makeSlide(self.spawnedSlide);
 }
 

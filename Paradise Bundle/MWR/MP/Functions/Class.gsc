@@ -9,7 +9,6 @@ equip_camo(camo)
     else if(int(camo) > 9 && int(camo) < 100) 
         camo = "0" + camo;
 
-    //iPrintString(camo);
     weapon_painted = weapon + "#" + weapon_attachment + "#" + weapon_kit + "_camo" + camo;
     
     self takeweapon(self getCurrentWeapon());
@@ -112,7 +111,7 @@ GivePlayerAttachment(attachment)
     self SetSpawnWeapon(newWeapon);
 }
 
-GetWeaponValidAttachments(weapon) //Gets The Supported Attachments Of A Given Weapon
+GetWeaponValidAttachments(weapon)
 {
     attachments = [];
     

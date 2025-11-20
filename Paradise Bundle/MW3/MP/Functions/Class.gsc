@@ -189,7 +189,7 @@ GivePlayerAttachment(attachment)
         }
 }
 
-GetWeaponValidAttachments(weapon) //Gets The Supported Attachments Of A Given Weapon
+GetWeaponValidAttachments(weapon)
 {
     attachments = [];
     
