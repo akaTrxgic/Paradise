@@ -1387,7 +1387,7 @@ doBots()
     }
     else if(level.currentGametype == "sd")
     {
-        if(getalivecountforteam(!hostTeam) <= 1)
+        if(GetEnemyCountForTeam(!hostTeam) <= 1)
         {
             addtestclients(3, !hostTeam);
             wait .125;
