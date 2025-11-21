@@ -9,14 +9,6 @@ CoD4:
 BO1:
 * Untested
 
-MWR:
-* Save loadout function modifications
-* Change class bind
-* Give offhands fixed
-* Final hit distance not showing ?
-* No SnD bots
-
-
 //////Console Versions
 
 CoD4:
