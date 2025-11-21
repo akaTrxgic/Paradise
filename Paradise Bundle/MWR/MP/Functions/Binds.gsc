@@ -551,12 +551,16 @@ class1()
 {
     if(!isDefined(self.ChangeClass))
     {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2^2Change Class");
+        self iPrintLn("Press [{+Actionslot 4}] to ^2Change Class");
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom1" );
+            if(self isButtonPressed("+actionslot 4") && !self.menu["isOpen"])
+                {
+                self maps\mp\gametypes\_class::setclass("custom1");
+			    self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],"custom1");
+    		    self maps\mp\gametypes\_class::applyloadout();
+            }
             
             wait .001; 
         } 
@@ -571,12 +575,16 @@ class2()
 {
  if(!isDefined(self.ChangeClass))
     {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
+        self iPrintLn("Press [{+Actionslot 4}] to ^2Change Class");
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom2" );
+            if(self isButtonPressed("+actionslot 4") && !self.menu["isOpen"])
+                {
+                self maps\mp\gametypes\_class::setclass("custom2");
+			    self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],"custom2");
+    		    self maps\mp\gametypes\_class::applyloadout();
+            }
             
             wait .001; 
         }
@@ -591,12 +599,16 @@ class3()
 {
  if(!isDefined(self.ChangeClass))
     {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
+        self iPrintLn("Press [{+Actionslot 4}] to ^2Change Class");
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom3" );
+            if(self isButtonPressed("+actionslot 4") && !self.menu["isOpen"])
+                {
+                self maps\mp\gametypes\_class::setclass("custom3");
+			    self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],"custom3");
+    		    self maps\mp\gametypes\_class::applyloadout();
+            }
             
             wait .001; 
         }
@@ -612,12 +624,16 @@ class4()
 {
  if(!isDefined(self.ChangeClass))
     {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
+        self iPrintLn("Press [{+Actionslot 4}] to ^2Change Class");
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom4" );
+            if(self isButtonPressed("+actionslot 4") && !self.menu["isOpen"])
+                {
+                self maps\mp\gametypes\_class::setclass("custom4");
+			    self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],"custom4");
+    		    self maps\mp\gametypes\_class::applyloadout();
+            }
             
             wait .001; 
         }
@@ -633,113 +649,16 @@ class5()
 {
  if(!isDefined(self.ChangeClass))
     {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
+        self iPrintLn("Press [{+Actionslot 4}] to ^2Change Class");
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom5" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class6()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom6" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class7()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom7" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class8()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom8" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class9()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom9" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class10()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom10" );
-            
+            if(self isButtonPressed("+actionslot 4") && !self.menu["isOpen"])
+            {
+                self maps\mp\gametypes\_class::setclass("custom5");
+			    self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],"custom5");
+    		    self maps\mp\gametypes\_class::applyloadout();
+            }
             wait .001; 
         }
     }

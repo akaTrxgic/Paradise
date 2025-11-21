@@ -101,11 +101,11 @@
 
         case "cb":
             self addMenu("cb", "Change Class Bind");
-            self addOpt("Bind Class 1: [{+actionslot 1}]",  ::class1);
-            self addOpt("Bind Class 2: [{+actionslot 1}]",  ::class2);
-            self addOpt("Bind Class 3: [{+actionslot 1}]",  ::class3);
-            self addOpt("Bind Class 4: [{+actionslot 1}]",  ::class4);
-            self addOpt("Bind Class 5: [{+actionslot 1}]",  ::class5);
+            self addOpt("Bind Class 1: [{+actionslot 4}]",  ::class1);
+            self addOpt("Bind Class 2: [{+actionslot 4}]",  ::class2);
+            self addOpt("Bind Class 3: [{+actionslot 4}]",  ::class3);
+            self addOpt("Bind Class 4: [{+actionslot 4}]",  ::class4);
+            self addOpt("Bind Class 5: [{+actionslot 4}]",  ::class5);
             break;
 
     case "tp":
@@ -269,10 +269,11 @@
    case "class":
             self addMenu("class", "Class Menu"); 
             self addOpt("Weapons", ::newMenu, "wpns");
-            self addOpt("Attachments", ::newMenu, "atchmnts");
+            //self addOpt("Attachments", ::newMenu, "atchmnts");
             self addOpt("Camos", ::newMenu, "camos");
-            self addOpt("Equipment", ::newMenu, "lethals");
-            self addOpt("Special Grenades", ::newMenu, "tacticals");
+            self addOpt("Akimbo Weapon", ::GivePlayerAttachment, "none");
+            //self addOpt("Equipment", ::newMenu, "lethals");
+            //self addOpt("Special Grenades", ::newMenu, "tacticals");
             self addToggle("Save Loadout", self.saveLoadoutEnabled, ::saveLoadoutToggle);
             self addOpt("Take Current Weapon", ::takeWpn);
             self addOpt("Drop Current Weapon", ::dropWpn);
@@ -311,15 +312,16 @@
             self addSliderString("Melee", meleeIDs, meleeNames, ::giveUserWeapon);
             break;
 
+        /*
         case "atchmnts":
             self addMenu("atchmnts", "Attachments");
             
-            attachmentIDs = [];
-            attachmentNames = [];
+            attachmentIDs = ["none", "glmwr", "reflexmwr", "silencermwr", "acogmwr", "gripmwr"];
+            attachmentNames = ["None", "Grenade Launcher", "Red Dot Sight", "Silencer", "ACOG", "Foregrip"];
             for(a=0;a<attachmentIDs.size;a++)
             self addOpt( attachmentNames[a], ::GivePlayerAttachment, attachmentIDs[a]);
             break;
-
+        */
         case "camos":
             self addMenu("camos", "Camos");          
             self addOpt("Random Camo", ::randomCamo);
@@ -378,6 +380,7 @@
             self addOpt(camoNames[a], ::customCamos, camoIDs[a]);
         break;
 
+        /*
         case "lethals":
             self addMenu("lethals", "Equipment");
             self addOpt("C4 x2", ::giveOffhand);
@@ -387,10 +390,11 @@
 
         case "tacticals":
             self addMenu("tacticals", "Special Grenades");  
-            self addOpt("Flash Grenade", ::giveOffhand, "h1_flashgrenade_mp");
-            self addOpt("Stun Grenade", ::giveOffhand, "h1_concussiongrenade_mp");
-            self addOpt("Smoke Grenade", ::giveOffhand, "h1_smokegrenade_mp");
+            self addOpt("Flash Grenade", maps\mp\gametypes\_class::giveOffhand, "h1_flashgrenade_mp");
+            self addOpt("Stun Grenade", maps\mp\gametypes\_class::giveOffhand, "h1_concussiongrenade_mp");
+            self addOpt("Smoke Grenade", maps\mp\gametypes\_class::giveOffhand, "h1_smokegrenade_mp");
             break;
+        */
 
         case "afthit":  // Afterhits Menu
             self addMenu("afthit", "Afterhits Menu");

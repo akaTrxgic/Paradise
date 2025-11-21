@@ -511,6 +511,9 @@ modifyplayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
         }
         else if(level.currentGametype == "sd")
         {
+            if(sMeansOfDeath == "MOD_FALLING")
+                iDamage = 0;
+
             if(sMeansOfDeath == "MOD_MELEE")
             {
                 if(isDefined(eAttacker.pers["isBot"]) && eAttacker.pers["isBot"])
@@ -1466,25 +1469,25 @@ if(level.currentGametype == "dm")
     }
     else if(level.currentGametype == "sd")
     {
-        if(GetAliveCountForTeam(team) <= 1)
+        while(GetEnemyCountForTeam(team) <= 1)
             spawn_bots_stub(1, team, undefined, "spawned_player", "Easy");
     }
 #endif
 }
 
-GetAliveCountForTeam(team)
+GetEnemyCountForTeam(team)
 {
-    alive = 0;
+    enemyCount = 0;
 
     foreach(player in level.players)
     {
-        if(!IsAlive(player) || player.team != team)
+        if(player.team != team)
             continue;
         
-        alive++;
+        enemyCount++;
     }
 
-    return alive;
+    return enemyCount;
 }
 
 doFastLast()

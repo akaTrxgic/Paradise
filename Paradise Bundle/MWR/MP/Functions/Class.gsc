@@ -240,31 +240,24 @@ loadLoadout()
 
     for (i = 0; i < self.primaryWeaponList.size; i++) 
     {
-        if (!isDefined(self.camo) || self.camo == 0) 
-            self.camo = self randomcamo();
-
         weapon = self.primaryWeaponList[i];
-        //weaponOptions = self calcWeaponOptions(self.camo, self.currentLens, self.currentReticle, 0);
-        if(issubstr(weapon, "akimbo"))
-            self giveuserweapon(weapon, true);
-        else
-            self giveWeapon(weapon, 0); //0, weaponOptions
-        if (weapon == "rpg_mp" || weapon == "m79_mp") 
-            self giveMaxAmmo(weapon);
+        self giveWeapon(weapon);
+        self giveMaxAmmo(weapon);
     }
 
     self switchToWeapon(self.primaryWeaponList[1]);
     self setSpawnWeapon(self.primaryWeaponList[1]);
     self giveWeapon("knife_mp");
+    /*
     for (i = 0; i < self.offHandWeaponList.size; i++) 
     {
         offhand = self.offHandWeaponList[i];
 
             switch (offhand) 
             {
-                case "claymore_mp":
-                case "c4_mp":
-                case "rpg_mp":
+                case "h1_claymore_mp":
+                case "h1_c4_mp":
+                case "h1_rpg_mp":
                 self setPerkEquipment(offhand);
                 break;
 
@@ -272,24 +265,14 @@ loadLoadout()
                 case "h1_concussiongrenade_mp":
                 case "h1_flashgrenade_mp":
                 case "h1_smokegrenade_mp":
-                self giveoffhand(offhand);
+                maps\mp\gametypes\_class::giveOffhand(offhand);
                 break;
 
                 default:
                 self giveWeapon(offhand);
                 break;
         }
-    }
-}
-
-setPerkEquipment(equipment)
-{
-    
-}
-
-giveoffhand(offhand)
-{
-
+    }*/
 }
 
 CamoNameTable(a)
