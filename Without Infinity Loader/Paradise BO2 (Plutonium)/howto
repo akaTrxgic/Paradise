@@ -1,0 +1,6 @@
+If you dont know how to install gsc menus with Plutonium:
+
+* Press WIN+R and paste %localappdata%\Plutonium\storage\t6 into the popup
+* Open the folder titled "scripts" (if you don't have one, make one)
+* Drop Paradise.gsc into the scripts folder
+* Menu will auto load
