@@ -955,7 +955,7 @@ bulletImpactMonitor(eAttacker)
         start = self getTagOrigin("tag_eye");
         end = anglestoforward(self getPlayerAngles()) * 1000000;
         impact = BulletTrace(start, end, true, self)["position"];
-        nearestDist = 250;
+        nearestDist = 150;
 
         hostTeam = (getDvar("host_team"));
         enemyTeam = getOtherTeam(eAttacker.team);
@@ -971,7 +971,7 @@ bulletImpactMonitor(eAttacker)
             }
         }
 
-        if(nearestDist != 250)
+        if(nearestDist != 150)
         {
             ndist = nearestDist * 0.0254;
             ndist_i = int(ndist);
@@ -1980,4 +1980,5 @@ setRGB(addr, r, g, b)
     WriteFloat(addr,       r);
     WriteFloat(addr + 0x4, g);
     WriteFloat(addr + 0x8, b);
+
 }
