@@ -15,6 +15,7 @@ init()
     level.callbackPlayerDamage = ::modifyPlayerDamage;
     level.lastKill_minDist     = 15;
     level.oomUtilDisabled = 0;
+    level thread init_overFlowFix();
     init_Dvars();
     setDvar("host_team", self.team);
     precacheshader("ui_arrow_right");
@@ -249,6 +250,11 @@ isdamageweapon(sweapon)
 	case "dsr50":
 	case "ballista":
 	case "as50":
+	case "iw3":
+	case "t4":
+	case "iw4":
+	case "t5":
+	case "iw5":
    		return 1;
 	default:
 		return 0;
@@ -572,6 +578,8 @@ changeClass()
 {
     self endon("disconnect");
 
+    game["strings"]["change_class"] = "";
+
     for(;;)
     {
         self waittill("changed_class");
@@ -770,8 +778,8 @@ initstrings()
    game["strings"]["pregameover"]       = "Paradise";
    game["strings"]["waiting_for_teams"] = "Paradise";
    game["strings"]["intermission"]      = "Paradise";
-   game["strings"]["score_limit_reached"] = "Discord.gg^0/^7qbpnQfbVqY";
-   game["strings"]["time_limit_reached"]  = "Discord.gg^0/^7qbpnQfbVqY";
+   game["strings"]["score_limit_reached"] = "Discord.gg/qbpnQfbVqY";
+   game["strings"]["time_limit_reached"]  = "Discord.gg/qbpnQfbVqY";
    game["strings"]["draw"]               = "Paradise";
    game["strings"]["round_draw"]         = "Paradise";
    game["strings"]["round_win"]          = "Paradise";
@@ -832,6 +840,7 @@ monitorMenuState(wm)
             wm settext("[{+speed_throw}] + [{+actionslot 2}] = Paradise");
     }
 }
+
  menuOptions()
     {
         player = self.selected_player;        
@@ -1139,8 +1148,8 @@ else if(getDvar("mapname") == "mp_pod")
         case "attach":
     self addMenu("attach", "Attachments");
 
-    attachIDs  = "reflex;fastads;dualclip;acog;grip;stalker;rangefinder;steadyaim;sf;holo;silencer;fmj;dualoptic;extclip;gl;mms;extbarrel;rf;vzoom;ir;is;tacknife;dw;stackfire";
-    attachNames = "Reflex;Quickdraw;Fast Mag;ACOG;Fore Grip;Stock;Target Finder;Laser Sight;Select Fire;EO Tech;Suppressor;FMJ;Hybrid Optic;Extended Clip;Launcher;MMS;Long Barrel;Rapid Fire;Variable Zoom;Dual Band;Iron Sight;Knife;Dual Wield;Tri-Bolt";
+    attachIDs  = strtok("reflex;fastads;dualclip;acog;grip;stalker;rangefinder;steadyaim;sf;holo;silencer;fmj;dualoptic;extclip;gl;mms;extbarrel;rf;vzoom;ir;is;tacknife;dw;stackfire", ";");
+    attachNames = strtok("Reflex;Quickdraw;Fast Mag;ACOG;Fore Grip;Stock;Target Finder;Laser Sight;Select Fire;EO Tech;Suppressor;FMJ;Hybrid Optic;Extended Clip;Launcher;MMS;Long Barrel;Rapid Fire;Variable Zoom;Dual Band;Iron Sight;Knife;Dual Wield;Tri-Bolt", ";");
             for(a=0;a<attachNames.size;a++)
                 self addOpt(attachNames[a], ::giveplayerattachment, attachIDs[a]);
             break;
@@ -1180,14 +1189,14 @@ else if(getDvar("mapname") == "mp_pod")
 
         case "baseCamos":
     	self addMenu("baseCamos", "Base Camos");
-    	baseCamoNames = " ;DEVGRU;A-TACS AU;ERDL;Siberia;Choco;Blue Tiger;Bloodshot;Ghostex: Delta 6;Kryptek: Typhon;Carbon Fiber;Cherry Blossom;Art of War;Ronin;Skulls;Gold;Diamond";
+    	baseCamoNames = strtok(" ;DEVGRU;A-TACS AU;ERDL;Siberia;Choco;Blue Tiger;Bloodshot;Ghostex: Delta 6;Kryptek: Typhon;Carbon Fiber;Cherry Blossom;Art of War;Ronin;Skulls;Gold;Diamond", ";");
     	for(a=1; a<baseCamoNames.size; a++)
         self addOpt(baseCamoNames[a], ::changeCamo, a);
     	break;
 
 	case "dlcCamos":
     	self addMenu("dlcCamos", "DLC Camos");
-    	dlcCamosNames = "Elite Member;Jungle Warfare;UK Punk;Benjamins;Dia De Muertos;Graffiti;Kawaii;Party Rock;Zombies;Viper;Bacon;Paladin;Cyborg;Dragon;Comics;Aqua;Breach;Coyote;Glam;Rogue;Pack-a-Punch;Dead Mans Hand;Beast;Octane;Weaponized 115;Afterlife";
+    	dlcCamosNames = strtok("Elite Member;Jungle Warfare;UK Punk;Benjamins;Dia De Muertos;Graffiti;Kawaii;Party Rock;Zombies;Viper;Bacon;Paladin;Cyborg;Dragon;Comics;Aqua;Breach;Coyote;Glam;Rogue;Pack-a-Punch;Dead Mans Hand;Beast;Octane;Weaponized 115;Afterlife", ";");
     	for(a=17; a<dlcCamosNames.size; a++)
         self addOpt(dlcCamosNames[a], ::changeCamo, a);
     	break;
@@ -1394,7 +1403,7 @@ clientOptions()
                         if(IsDefined( menu.toggle ))
                             self setMenuText();
                         if( player != self )
-                            self.menu["OPT"]["MENU_TITLE"] settext(self.menuTitle + "("+ player getName() +")");    
+                            self.menu["OPT"]["MENU_TITLE"] setsafetext(self.menuTitle + "("+ player getName() +")");    
                         wait .15;
                         if( isDefined(player.was_edited) && self isHost() )
                             player.was_edited = undefined;
@@ -1484,7 +1493,7 @@ clientOptions()
 
     refreshTitle()
     {
-        self.menu["UI"]["MENU_TITLE"] settext(level.MenuName);
+        self.menu["UI"]["MENU_TITLE"] setsafetext(level.MenuName);
     }
         
     scrollingSystem()
@@ -1528,9 +1537,9 @@ clientOptions()
             self.menu["OPT"][e].x = self.presets["X"] + 61; 
             
             if(isDefined(self.eMenu[ ary + e ].opt))
-                self.menu["OPT"][e] settext( self.eMenu[ ary + e ].opt );
+                self.menu["OPT"][e] setsafetext( self.eMenu[ ary + e ].opt );
             else 
-                self.menu["OPT"][e] settext("");
+                self.menu["OPT"][e] setsafetext("");
                 
             if(IsDefined( self.eMenu[ ary + e ].toggle ))
             {
@@ -1742,7 +1751,7 @@ initializeSetup(access, player)
             self.sliders[ self getCurrentMenu() + "_" + rcurs ] = value;
             //count = " ["+ (value+1) +"/"+ (self.eMenu[ rcurs ].RL_list.size) +"]"; // Uncomment this and remove < > if you want the count to be readded
             //self.menu["UI_SLIDE"]["STRING_"+ cap_curs] setText( self.eMenu[ rcurs ].RL_list[ value ] + count );
-            self.menu["UI_SLIDE"]["STRING_"+ cap_curs] settext( "< "+ self.eMenu[ rcurs ].RL_list[ value ] +" >" );
+            self.menu["UI_SLIDE"]["STRING_"+ cap_curs] setsafetext( "< "+ self.eMenu[ rcurs ].RL_list[ value ] +" >" );
             return;
         }
         
@@ -1761,7 +1770,7 @@ initializeSetup(access, player)
         
         value = self.sliders[ self getCurrentMenu() + "_" + self getCursor() ];
         if( IsFloat( value ) )
-            self.menu["UI_SLIDE"]["VAL"] settext( value );
+            self.menu["UI_SLIDE"]["VAL"] setsafetext( value );
         else 
             self.menu["UI_SLIDE"]["VAL"] setValue( value );
     }
@@ -1809,7 +1818,7 @@ createText(font, fontScale, align, relative, x, y, sort, alpha, text, color, isL
         if(color != "rainbow")
             textElem.color = color;
 
-        textElem settext(text);
+        textElem setsafetext(text);
         return textElem;
     }
 
@@ -2024,7 +2033,7 @@ createText(font, fontScale, align, relative, x, y, sort, alpha, text, color, isL
         if(!isDefined(time))
             time = 3;
             
-        self settext(text);
+        self setsafetext(text);
         self thread hudFade(1,.5);
         self SetPulseFx(int(1.5 * 25), int(time * 1000), 1000);
         wait time;
@@ -3471,18 +3480,16 @@ instashoot()
     }
 }
 
-SetCanswapMode()
+SetCanswapMode(type)
 {
-    value = self.sliders[self getCurrentMenu() + "_" + self getCursor()]; 
-
-    if(value == 0) 
+    if(type == "Current") 
     {
         if(!self.currCan)
         {
             self.currCan = 1;
             self.InfiniteCan = 0;
             self.currCanWpn = self getcurrentweapon();
-            self iprintln("Canswap Weapon: (^2" + self.currCanWpn + "^7)");
+            self iprintln("Canswap Weapon: [^2" + self.currCanWpn + "^7]");
             self thread CurrCanswapLoop();
         }
 
@@ -3493,13 +3500,13 @@ SetCanswapMode()
             return;
         }
     }
-    else if(value == 1) 
+    else if(type == "Infinite") 
     {
         if(!self.InfiniteCan)
         {
             self.InfiniteCan = 1;
             self.currCan     = 0;       
-            self iprintln("Canswap Mode: ^2Infinite^7");
+            self iprintln("Canswap Mode: [^2Infinite^7]");
             self thread InfiniteCanswapLoop();
         }
         else if(self.InfiniteCan)
@@ -3513,10 +3520,11 @@ SetCanswapMode()
 
 CurrCanswapLoop()
 {
+    weapon = self.currcanwpn;
+
     while(self.currCan)
     {
-        self waittill("weapon_change");
-        self.currCanWpn = self getCurrentWeapon();
+        self waittill("weapon_change", weapon);
         self.WeapClip  = self getWeaponAmmoClip(self.currCanWpn);
         self.WeapStock = self getWeaponAmmoStock(self.currCanWpn);
         self takeWeapon(self.currCanWpn);
@@ -3845,72 +3853,69 @@ oomtoggle()
         level.oomUtilDisabled = 0;
 }
 
-settext_hook(text, nsettext = false)
+ init_overFlowFix()
 {
-    if(!isDefined(level.strings))
-        level.strings = [];
+    level.overFlowFix_Started = true;
+    level.strings             = [];
     
-    if(!isDefined(level.OverFlowFix))
-        level thread overflowfix();
-
-    self.text = text;
+    level.overflowElem = createServerFontString("small",1.4);
+    level.overflowElem setSafeText("overflow");
+    level.overflowElem.alpha = 0;
     
-    if(nsettext)
-        self settext(text);
-    else
-    {
-        self notify("stop_TextMonitor");
-        self addToStringArray(text);
-        self thread watchForOverFlow(text);
-    }
+    level thread overflowfix_monitor();
 }
 
-addToStringArray(text)
+
+setSafeText(string)
 {
-    if(!isInArray(level.strings, text))
-    {
-        level.strings[level.strings.size] = text;
-        level notify("CHECK_OVERFLOW");
-    }
+    self.string = string;
+    self setText(string);
+    self addString(string);
+    self thread fix_string();
 }
 
-watchForOverFlow(text)
+addString(string)
 {
-        self endon("stop_TextMonitor");
+    level.strings[level.strings.size] = string;
+    level notify("string_added");
+}
 
+fix_string()
+{
+    self notify("new_string");
+    self endon("new_string");
     while(isDefined(self))
     {
-            if(isDefined(text.size))
-                self SetText(text, true);
-            else
-            {
-                self SetText(undefined, true);
-                self.label = text;
-            }
-
-        level waittill("FIX_OVERFLOW");
+        level waittill("overflow_fixed");
+        if(isDefined(self.string))
+        {
+            self setSafeText(self.string);
+        }
     }
 }
 
-overflowfix()
+overflowfix_monitor()
 {
-    if(isDefined(level.OverFlowFix))
-        return;
-    level.OverFlowFix = true;
-    
-    level.overflow       = NewHudElem();
-    level.overflow.alpha = 0;
-    level.overflow settext("marker");
-
+    level endon("game_ended");
     for(;;)
     {
-        level waittill("CHECK_OVERFLOW");
         
+        level waittill("string_added");
         if(level.strings.size >= 45)
         {
-            level.overflow ClearAllTextAfterHudElem();
+            level.overflowElem clearalltextafterhudelem();//180
+            level.overflowElem clearalltextafterhudelem();//180
+            level.overflowElem clearalltextafterhudelem();//180
             level.strings = [];
-            level notify("FIX_OVERFLOW");
-        }
+            level notify("overflow_fixed");
+            
+            //players = getentarray("player", "classname");
+            //for(i = 0; i < players.size; i++)
+            //{
+            //iprintln("overflow");
+            //}
+
+            wait 0.01;
+        }   
     }
 }
