@@ -844,11 +844,6 @@ monitorMenuState(wm)
     }
 }
 
-pwpn()
-{
-	self iprintln("^1" + self getcurrentweapon());
-}
-
  menuOptions()
     {
         player = self.selected_player;        
@@ -865,7 +860,6 @@ pwpn()
         {
             self addMenu("main", "Main Menu");
 
-	    self addOpt("Print Wpn Name", ::pwpn);
             self addOpt("Trickshot Menu", ::newMenu, "ts");
             self addOpt("Binds Menu", ::newMenu, "sK");
             self addOpt("Teleport Menu", ::newMenu, "tp");
