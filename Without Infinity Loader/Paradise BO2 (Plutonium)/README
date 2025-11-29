@@ -1,6 +1,12 @@
-If you dont know how to install gsc menus with Plutonium:
+To install the menu:
 
 * Press WIN+R and paste %localappdata%\Plutonium\storage\t6 into the popup
 * Open the folder titled "scripts" (if you don't have one, make one)
 * Drop Paradise.gsc into the scripts folder
 * Menu will auto load
+
+To install the snipers:
+* Press WIN+R and paste %localappdata%\Plutonium\storage\t6 into the popup
+* Open the folder titled "mods" (if you don't have one, make one)
+* Place the sloths_snipers folder (not the zip) into the mods folder
+* When you start pluto, click online, mods, and click on sloths_snipers to load them
