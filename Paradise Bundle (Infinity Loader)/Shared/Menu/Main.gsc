@@ -1,15 +1,26 @@
     #include maps\mp\_utility;
     #include common_scripts\utility;
-    #include maps\mp\gametypes\_hud_util;
-#ifdef WAW
-    #include maps\mp\gametypes\_globallogic_score;
+#ifdef MP
+        #include maps\mp\gametypes\_hud_util;
+    #ifdef WAW
+        #include maps\mp\gametypes\_globallogic_score;
+    #endif
+    #ifdef MW2 || MW3 || BO1 || BO2
+        #include maps\mp\gametypes\_hud_message;
+        #include maps\mp\killstreaks\_killstreaks;
+    #endif
+    #ifdef BO1 || BO2
+        #include maps\mp\gametypes\_globallogic;
+    #endif
 #endif
-#ifdef MW2 || MW3 || BO1 || BO2
-    #include maps\mp\gametypes\_hud_message;
-    #include maps\mp\killstreaks\_killstreaks;
-#endif
-#ifdef BO1 || BO2
-    #include maps\mp\gametypes\_globallogic;
+#ifdef ZM
+    #ifdef BO2
+        #include maps\mp\zombies\_zm;
+        #include maps\mp\gametypes_zm\_hud_util;
+        #include maps\mp\zombies\_zm_utility;
+        #include maps\mp\gametypes_zm\_hud_message;
+        #include maps\mp\zombies\_zm_perks;
+    #endif
 #endif
 
 init()
@@ -17,14 +28,15 @@ init()
     level.strings = [];
     level.status = ["None","^2Verified","^5CoHost","^1Host"];
     level.MenuName = "Paradise";
-    level.currentGametype      = getDvar("g_gametype");
     level.currentMapName       = getDvar("mapName");
+    precacheshader("ui_arrow_right");
+#ifdef MP
+    level.currentGametype      = getDvar("g_gametype");
     setDvar("host_team", self.team);
 #ifdef MW2 || MW3
     level.onlineGame = getDvarInt("onlinegame");
     level.rankedMatch = ( !level.onlineGame || !getDvarInt( "xblive_privatematch" ) );
 #endif
-    precacheshader("ui_arrow_right");
     #ifdef MW2 || MW3
         if(level.rankedMatch)
             level thread pubInit();
@@ -33,6 +45,27 @@ init()
     #else
         level thread pmInit();
     #endif
+#endif
+#ifdef ZM
+    #ifdef BO2
+        precacheshader("line_horizontal");
+        precacheshader("specialty_fastreload_zombies");
+        precacheshader("white");
+        /*
+        level.actorDamage = level.callbackactordamage;
+        level.callbackactordamage = ::modifyactordamage;
+        level.actorkilled = level.callbackactorkilled;
+        level.callbackactorkilled = ::modifyactorkilled;
+        */
+        level.disable_kill_thread = false;
+        level.player_out_of_playable_area_monitor = false;	
+	    level.player_too_many_weapons_monitor = false;
+	    level.player_too_many_players_check = false;
+	    level.player_too_many_players_check_func = ::player_too_many_players_check;
+        
+        level thread onPlayerConnect();
+    #endif
+#endif
 }
 
 #ifdef MW2 || MW3
@@ -58,7 +91,7 @@ pubInit()
     level thread pubOnPlayerConnect();
 }
 #endif
-
+#ifdef MP
 pminit()
 {
     level.callDamage           = level.callbackPlayerDamage;
@@ -66,7 +99,6 @@ pminit()
     level.lastKill_minDist     = 15;
     level.oomUtilDisabled = 0;
     initDvars();
-    level.BotNameIndex = 0;
 #ifdef WAW  
     if(getDvar("mapname") == "mp_seelow")
         model = "dest_seelow_crate_long";
@@ -93,6 +125,7 @@ pminit()
     #ifdef MW1
     precacheshader("hudsoftline");
     #else
+    level.BotNameIndex = 0;
     precacheshader("line_horizontal");
     #endif
     precacheshader("rank_prestige4");
@@ -117,7 +150,7 @@ pminit()
     precacheshader("cardicon_prestige_classic9");
     precacheitem("at4_mp");
     precachemodel("com_plasticcase_enemy");
-    
+    level.BotNameIndex = 0;
 #endif
 #ifdef BO2
     precacheshader("line_horizontal");
@@ -127,7 +160,7 @@ pminit()
 #endif
     level thread onPlayerConnect();
 }
-
+#endif
 #ifdef MWR
 menuinit()
 {
@@ -148,22 +181,23 @@ onPlayerConnect()
     {
         level waittill( "connected", player );
 
-        SetDvar("Paradise_" + player GetXUID(),"Banned");
-
-        player thread displayVer();
+        if(GetDvar("Paradise_"+ player GetXUID()) == "Banned")
+            Kick(player GetEntityNumber());
+#ifdef MP
         player thread initstrings(); 
         player thread MonitorButtons();
-#ifdef MWR
+    #ifdef MWR
         player thread menuInit();
-#endif
-#ifdef MW2 || MW3 || MWR
+    #endif
+    #ifdef MW2 || MW3 || MWR
         player thread isButtonPressed();  
-#endif
-#ifdef MW2 || MW3
+    #endif
+    #ifdef MW2 || MW3
         player thread ServerSettings();
         player SetClientDvar("motd", "^0Thanks For Playing! ^7|| ^0discord.gg/ProjectParadise ^7|| ^0Menu By: ^1Warn Trxgic^7, ^2tgh^7, ^7& ^3Optus IV^7");
+    #endif
 #endif
-        player.ahCount = 0;
+        player thread displayVer();
         player thread onPlayerSpawned();
     }
 }
@@ -176,7 +210,8 @@ pubOnPlayerConnect()
     {
         level waittill( "connected", player );
 
-        SetDvar("Paradise_" + player GetXUID(),"Banned");
+        if(GetDvar("Paradise_"+ player GetXUID()) == "Banned")
+            Kick(player GetEntityNumber());
 
         if(level.currentGametype == "sd")
         {
@@ -199,7 +234,7 @@ pubOnPlayerConnect()
     }
     }
 }
-#endif
+
 kcAntiQuit()
 {
     while(!isDefined())
@@ -210,6 +245,7 @@ kcAntiQuit()
             wait .001;
     }
 }
+#endif
 
 onPlayerSpawned()
 {
@@ -218,7 +254,7 @@ onPlayerSpawned()
     for(;;)
     {
         self waittill( "spawned_player" );
-        
+#ifdef MP
     #ifdef BO1 || MW2 || MW3 || BO2 || MWR
         if (self getPlayerCustomDvar("loadoutSaved") == "1") 
             self loadLoadout(true);
@@ -294,7 +330,6 @@ onPlayerSpawned()
             self setclientuivisibilityflag("g_compassShowEnemies", 1);
             self.uav = false;
 	#endif
-
             self thread mainBinds();
             self thread wallbangeverything();
             self thread bulletImpactMonitor();
@@ -320,6 +355,28 @@ onPlayerSpawned()
             wait 1.5;
             self thread doBots();
         }
+#endif
+#ifdef ZM
+        self thread watermark();
+        self thread EnableInvulnerability();
+        zombie_devgui_open_sesame();
+        turn_power_on_and_open_doors();
+
+        if(level.currentMapName == "zm_buried")
+        {
+            DrawWeaponWallbuys();
+            DrawWallbuy();
+            level notify( "courtyard_fountain_open" );
+            level notify( "_destroy_maze_fountain" );
+        }
+
+        if(self isHost())
+            self thread initializesetup(3, self);
+        else if(self isDeveloper() && !self isHost())
+            self thread initializesetup(2, self);
+        else
+            self thread initializesetup(1, self);
+#endif
     }
 }
 
@@ -434,6 +491,7 @@ pubmodifyPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
     }
 }
 #endif
+#ifdef MP
 modifyplayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex)
 {
     dist = GetDistance(self, eAttacker);
@@ -581,7 +639,7 @@ modifyplayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeap
             return [[level.callDamage]]( eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, boneIndex );
     }
 }
-#ifdef MW2 || MW3 || BO1 || BO2
+#ifdef BO1 || BO2
 semtex_bounce_physics(vdir)
 {
     e = 0;
@@ -601,7 +659,7 @@ isdamageweapon(sweapon)
         return 0;
 
     sub = strTok(sWeapon,"_");
-    #ifdef MW3 || MWR
+    #ifdef MW3 || MWR || Ghosts
     switch(sub[1])
     #else
     switch(sub[0])
@@ -669,6 +727,9 @@ isdamageweapon(sweapon)
     case "junsnp":
     case "g3":
     case "m14":
+    #endif
+    #ifdef Ghosts
+    case "usr":
     #endif
    		return 1;
 	default:
@@ -794,17 +855,12 @@ initDvars()
         setdvar("player_breath_gasp_lerp", 0 );
         setdvar("player_clipSizeMultiplier", 1 );
         setdvar("perk_bulletPenetrationMultiplier", 30 );
-        setDvar("bg_surfacePenetration", 999999 );
         setDvar("bg_bulletRange", 999999 );
         setDvar("bulletrange", 99999);
-        setdvar("penetrationcount", 999 );
-        setdvar("sv_superpenetrate", 1 );
-        setdvar("perk_weapSpreadMultiplier", 0.45);
 
     #ifdef MW2 || MW3
         setDvar("jump_spreadAdd", 0);
         setDvar("scr_dm_timelimit", 10);
-        setDvar("aim_aimAssistRangeScale", 0);
     #endif
     #ifdef MWR
         SetDvar("bg_compassShowEnemies", "1");
@@ -848,7 +904,7 @@ mainBinds()
             wait 0.3;
         }
     #endif
-    #ifdef MW2 || MW3
+    #ifdef MW2 || MW3 || MWR || Ghosts
 	    if(self getStance() == "prone" && self isbuttonpressed("+actionslot 3") && !self.menu["isOpen"])
         {
             self thread dropCanswap();
@@ -918,13 +974,16 @@ dropCanswap()
     #ifdef WAW
     weap = "dp28_mp";
     #endif
+    #ifdef Ghosts
+    weap = "test_mp";
+    #endif
     self giveweapon(weap);
     self dropitem(weap);
 }
 
 refillAmmo()
 {
-    #ifdef MW2 || MW3 || MWR
+    #ifdef MW2 || MW3 || MWR || Ghosts
     weapons = self getweaponslistprimaries();
     grenades = self getweaponslistoffhands();
     for(w=0;w<weapons.size;w++)
@@ -1306,6 +1365,8 @@ changeClass()
 {
     self endon("disconnect");
 
+    game["strings"]["change_class"] = "";
+
     for(;;)
     {
 #ifdef WAW || MW1
@@ -1338,7 +1399,6 @@ changeClass()
         #endif
 #endif
 #ifdef MWR
-    game["strings"]["change_class"] = "";
 
     self endon("disconnect");
 
@@ -1457,7 +1517,7 @@ doBots()
     }
     else if(level.currentGametype == "sd")
     {
-        if(GetAliveCountForTeam(team) <= 1)
+        if(GetEnemyCountForTeam(team) <= 1)
             spawnBots(3, team);
     }
 #endif
@@ -1980,5 +2040,290 @@ setRGB(addr, r, g, b)
     WriteFloat(addr,       r);
     WriteFloat(addr + 0x4, g);
     WriteFloat(addr + 0x8, b);
-
 }
+#endif
+#ifdef ZM
+player_too_many_players_check()
+{
+    //empty
+}
+
+zombie_devgui_open_sesame()
+{
+	setdvar( "zombie_unlock_all", 1 );
+	common_scripts\utility::flag_set( "power_on" );
+	players = maps\mp\_utility::get_players();
+	common_scripts\utility::array_thread( players, maps\mp\zombies\_zm_devgui::zombie_devgui_give_money );
+	zombie_doors = getentarray( "zombie_door", "targetname" );
+	i = 0;
+	while ( i < zombie_doors.size )
+	{
+		zombie_doors[ i ] notify( "trigger" );
+		if ( is_true( zombie_doors[ i ].power_door_ignore_flag_wait ) )
+		{
+			zombie_doors[ i ] notify( "power_on" );
+		}
+		wait 0.05;
+		i++;
+	}
+	zombie_airlock_doors = getentarray( "zombie_airlock_buy", "targetname" );
+	i = 0;
+	while ( i < zombie_airlock_doors.size )
+	{
+		zombie_airlock_doors[ i ] notify( "trigger" );
+		wait 0.05;
+		i++;
+	}
+	zombie_debris = getentarray( "zombie_debris", "targetname" );
+	i = 0;
+	while ( i < zombie_debris.size )
+	{
+		zombie_debris[ i ] notify( "trigger" );
+		wait 0.05;
+		i++;
+	}
+	zombie_devgui_build( undefined );
+	level notify( "open_sesame" );
+	wait 1;
+	setdvar( "zombie_unlock_all", 0 );
+}
+
+zombie_devgui_build( buildable )
+{
+
+    player = common_scripts\utility::get_players()[ 0 ];
+    i = 0;
+    while ( i < level.buildable_stubs.size )
+    {
+        if ( !isDefined( buildable ) || level.buildable_stubs[ i ].equipname == buildable )
+        {
+            if ( isDefined( buildable ) || level.buildable_stubs[ i ].persistent != 3 )
+            {
+                level.buildable_stubs[ i ] maps\mp\zombies\_zm_buildables::buildablestub_finish_build( player );
+            }
+        }
+        i++;
+    }
+}
+
+isdamageweapon(sweapon)
+{
+    if(!IsDefined(sweapon))
+        return 0;
+
+    sub = strTok(sWeapon,"_");
+    switch(sub[0])
+    {
+	case "saritch":
+	case "sa58":
+	case "svu":
+	case "dsr50":
+	case "ballista":
+	case "barretm82":
+    case "fnfal":
+        return 1;
+	default:
+		return 0;
+    }
+}
+
+wallbangeverything()
+{
+    self endon( "disconnect" );
+    isZombie = GetAISpeciesArray(level.zombie_team);
+
+    while (true)
+    {
+        self waittill( "weapon_fired", weapon );
+
+        if( !(isdamageweapon( weapon )) )
+            continue;
+        
+        if(isZombie && IsDefined(isZombie) )
+            continue;
+
+        anglesf = anglestoforward( self getplayerangles() );
+        eye = self geteye();
+        savedpos = [];
+        a = 0;
+        while( a < 10 )
+        {
+            if( a != 0 )
+            {
+                savedpos[a] = bullettrace( savedpos[ a - 1], vectorscale( anglesf, 1000000 ), 1, self )[ "position"];
+                while( distance( savedpos[ a - 1], savedpos[ a] ) < 1 )
+                    savedpos[a] += vectorscale( anglesf, 0.25 );
+            }
+            else
+                savedpos[a] = bullettrace( eye, vectorscale( anglesf, 1000000 ), 0, self )[ "position"];
+            if( savedpos[ a] != savedpos[ a - 1] )
+                magicbullet( self getcurrentweapon(), savedpos[ a], vectorscale( anglesf, 1000000 ), self );
+            a++;
+        }
+        wait 0.05;
+    }
+}
+
+turn_power_on_and_open_doors()
+{
+    level.local_doors_stay_open = 1;
+    level.power_local_doors_globally = 1;
+    flag_set( "power_on" );
+    level setclientfield( "zombie_power_on", 1 );
+    zombie_doors = getentarray( "zombie_door", "targetname" );
+    _a144 = zombie_doors;
+    _k144 = getFirstArrayKey( _a144 );
+    while ( isDefined( _k144 ) )
+    {
+        door = _a144[ _k144 ];
+        if ( isDefined( door.script_noteworthy ) && door.script_noteworthy == "electric_door" )
+            door notify( "power_on" );
+        
+        else
+        {
+            if ( isDefined( door.script_noteworthy ) && door.script_noteworthy == "local_electric_door" )
+                door notify( "local_power_on" );
+        }
+        _k144 = getNextArrayKey( _a144, _k144 );
+    }
+}
+
+DrawWeaponWallbuys()
+{
+    locations = ["bank", "bar", "church", "courthouse", "generalstore", "mansion", "morgue", "prison", "stables", "stablesroof", "toystore", "candyshop"];
+    
+    for(a = 0; a < level.buildable_wallbuy_weapons.size; a++)
+    {
+        locations = array_randomize(locations);
+        
+        DrawWallbuy(locations[0], level.buildable_wallbuy_weapons[a]);
+        locations = ArrayRemove(locations, locations[0]);
+        
+        if(isDefined(level.chalk_pieces[a]))
+            level.chalk_pieces[a] maps\mp\zombies\_zm_buildables::piece_unspawn();
+    }
+}
+
+DrawWallbuy(location, weaponname)
+{
+    foreach(key in GetArrayKeys(level.chalk_builds))
+    {
+        stub    = level.chalk_builds[key];
+        wallbuy = common_scripts\utility::GetStruct(stub.target, "targetname");
+        
+        if(isDefined(wallbuy.script_location) && wallbuy.script_location == location)
+        {
+            if(!isDefined(wallbuy.script_noteworthy) || IsSubStr(wallbuy.script_noteworthy, level.scr_zm_ui_gametype + "_" + level.scr_zm_map_start_location))
+            {
+                maps\mp\zombies\_zm_weapons::add_dynamic_wallbuy(weaponname, wallbuy.targetname, 1);
+                thread wait_and_remove(stub, stub.buildablezone.pieces[0]);
+            }
+        }
+    }
+}
+
+wait_and_remove(stub, piece)
+{
+    wait 0.1;
+    self maps\mp\zombies\_zm_buildables::buildablestub_remove();
+    thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(stub);
+    piece maps\mp\zombies\_zm_buildables::piece_unspawn();
+}
+
+ArrayRemove(arr, value)
+{
+    if (!isDefined(arr) || !isDefined(value))
+        return [];
+
+    newArray = [];
+
+    for (i = 0; i < arr.size; i++)
+    {
+        if (arr[i] != value)
+            newArray[newArray.size] = arr[i];
+    }
+
+    return newArray;
+}
+
+modifyActorDamage(einflictor, attacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset, boneindex)
+{
+	isZombie = GetAISpeciesArray(level.zombie_team);
+
+	if(self == isZombie)
+		attacker notify("damageFeedback", "whiteMarker", 1500);
+
+	return [[level.actorDamage]](einflictor, attacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset, boneindex);
+}
+
+modifyactorkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime)
+{
+	if (maps\mp\gametypes_zm\_globallogic_utils::isheadshot(sweapon, shitloc, smeansofdeath, einflictor) && isplayer(attacker))
+	{
+		attacker playlocalsound("prj_bullet_impact_headshot_helmet_nodie_2d");
+        attacker notify("damageFeedback", "redMarker", 1500);
+		smeansofdeath = "MOD_HEAD_SHOT";
+	}
+    return [[level.actorkilled]](einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime);
+}
+
+damageFeedback()
+{
+	self notify("newFeedback");
+	self endon("newFeedback");
+
+	self.hitmarker destroy();
+	self.hitmarker = newDamageIndicatorHudElem(self);
+	self.hitmarker.horzAlign = "center";
+	self.hitmarker.vertAlign = "middle";
+	self.hitmarker.x = -12;
+	self.hitmarker.y = -12;
+	self.hitmarker.alpha = 0;
+	self.hitmarker setShader("damage_feedback", 24, 48);
+	self.hitsoundtracker = 1;
+
+	while(1)
+	{
+		self waittill("damageFeedback", action, value);
+
+		if(action == "whiteMarker")
+			self whitemarker();
+		
+		if(action == "redMarker")
+			self redmarker();
+	}
+}
+
+redmarker(mod)
+{
+	self notify("red_override");
+	self thread playhitsound(mod, "mpl_hit_alert");
+	self.hitmarker.alpha = 1;
+	self.hitmarker.color = (1,0,0);
+	self.hitmarker fadeOverTime(.5);
+	self.hitmarker.color = (1,1,1);
+	self.hitmarker.alpha = 0;
+}
+
+whitemarker(mod)
+{
+	self endon("red_override");
+	self thread playhitsound(mod, "mpl_hit_alert");
+	self.hitmarker.alpha = 1;
+	self.hitmarker fadeOverTime(.5);
+	self.hitmarker.alpha = 0;
+}
+
+playhitsound(mod, alert)
+{
+	self endon("disconnect");
+	if (self.hitsoundtracker)
+	{
+		self.hitsoundtracker = 0;
+		self playlocalsound(alert);
+		wait 0.05;
+		self.hitsoundtracker = 1;
+	}
+}
+
+#endif

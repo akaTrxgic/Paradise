@@ -1,4 +1,5 @@
-#ifdef MWR
+#ifdef MP
+    #ifdef MWR
         createText(font, fontscale, align, relative, x, y, sort, alpha, text, color, isLevel) 
 {
     textElem = createFontString(font, fontscale);
@@ -69,6 +70,47 @@
         self.hud_amount++;
         return boxElem;
     }
+#endif
+#ifdef ZM
+    createText(font, fontScale, align, relative, x, y, sort, alpha, text, color, isLevel)
+    {
+        if(isDefined(isLevel))
+            textElem = level maps\mp\gametypes_zm\_hud_util::createServerFontString(font, fontScale);
+        else 
+            textElem = self maps\mp\gametypes_zm\_hud_util::createFontString(font, fontScale);
+
+        textElem setPoint(align, relative, x, y);
+        textElem.hideWhenInKillcam = true;
+        textElem.hideWhenInMenu = true;
+        textElem.foreground = true;
+        textElem.archived = true;
+        textElem.sort = sort;
+        textElem.alpha = alpha;
+        if(color != "rainbow")
+            textElem.color = color;
+
+        textElem settext(text);
+        return textElem;
+    }
+//from MrFrosty
+    createRectangle(align, relative, x, y, width, height, color, shader, sort, alpha, server)
+    {
+        boxElem                = (isDefined(server) ? maps\mp\gametypes_zm\_hud_util::createServerIcon(shader, width, height) : maps\mp\gametypes_zm\_hud_util::createIcon(shader, width, height));
+        boxElem.hideWhenInMenu = true;
+        boxElem.sort           = sort;
+        boxElem.foreground     = true;
+        boxElem.alpha          = alpha;
+
+        if(color != "rainbow")
+            boxElem.color = color;
+
+        boxElem setPoint(align, relative, x, y);
+
+        boxElem thread watchDeletion( self );
+        self.hud_amount++;
+        return boxElem;
+    }
+#endif
 
     removeFromArray( array, text )
     {
@@ -317,9 +359,11 @@
         self endon("disconnect");
         
         self.buttonPressed[button] = false;
-#ifdef MW2 || MW3 || MWR
+
+#ifdef MW2 || MW3 || MWR || Ghosts
     	self NotifyOnPlayerCommand("button_pressed_"+button,button);
 #endif
+
         while(1)
         {
             self waittill("button_pressed_"+button);

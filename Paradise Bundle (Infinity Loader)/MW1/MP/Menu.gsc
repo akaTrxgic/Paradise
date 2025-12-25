@@ -68,18 +68,19 @@ case "wpn":
     self addSliderString("Pistols", pistolIDs, pistolNames, ::doGiveWeapon);
 
     self addOpt("Attachments", ::newMenu, "attach");
-    self addOpt("Special Grenades", ::newMenu, "offhands");
-    self addOpt("Equipment", ::newMenu, "equipment");    
+    //self addOpt("Special Grenades", ::newMenu, "offhands");
+    //self addOpt("Equipment", ::newMenu, "equipment");    
     self addOpt("Take Current Weapon", ::takeWpn);
     self addOpt("Drop Current Weapon", ::dropWpn);
     break;
 
     case "attach":
     self addMenu("attach", "Attachments");
-    attachNames = ["Grenade Launcher", "Silencer", "Red Dot Sight", "ACOG Scope", "Grip"];
-    attachIDs = ["gl", "silencer", "reflex", "acog", "grip"];
-    for(a=0;a<attachNames.size;a++)
-    self addOpt(attachNames[a], ::giveplayerattachment, attachIDs[a]);
+    self addOpt("Grenade Launcher", ::giveplayerattachment, "gl");
+    self addOpt("Silencer", ::giveplayerattachment, "silencer");
+    self addOpt("Red Dot Sight", ::giveplayerattachment, "reflex");
+    self addOpt("ACOG Scope", ::giveplayerattachment, "acog");
+    self addOpt("Grip", ::giveplayerattachment, "grip");
     break;
 
     case "tp":

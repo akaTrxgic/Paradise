@@ -129,12 +129,17 @@ initializeSetup(access, player)
         if(!IsDefined( RL_list ))
             RL_list = ID_list;
 
-        #ifndef BO2
-        option.ID_list = (inarray(ID_list)) ? ID_list : strTok(ID_list, ";");
-        option.RL_list = (inarray(RL_list)) ? RL_list : strTok(RL_list, ";");
-        #else
+        #ifdef Ghosts
+        option.ID_list = (isinarray(ID_list)) ? ID_list : strTok(ID_list, ";");
+        option.RL_list = (isinarray(RL_list)) ? RL_list : strTok(RL_list, ";");
+        #endif
+        #ifdef BO2
         option.ID_list = isarray(ID_list) ? ID_list : strTok(ID_list, ";");
         option.RL_list = isarray(RL_list) ? RL_list : strTok(RL_list, ";");
+        #endif
+        #ifdef MW1 || WAW || BO1 || MW2 || MW3 || MWR
+        option.ID_list = (inarray(ID_list)) ? ID_list : strTok(ID_list, ";");
+        option.RL_list = (inarray(RL_list)) ? RL_list : strTok(RL_list, ";");
         #endif
 
         option.opt  = opt;
@@ -146,6 +151,16 @@ initializeSetup(access, player)
         option.p5   = p5;
         self.eMenu[self.eMenu.size] = option;
     }
+
+    #ifdef Ghosts
+    isInArray( array, text )
+    {
+        for(e=0;e<array.size;e++)
+            if( array[e] == text )
+                return true;
+        return false;        
+    }
+    #endif
 
     inarray(arry)
     {

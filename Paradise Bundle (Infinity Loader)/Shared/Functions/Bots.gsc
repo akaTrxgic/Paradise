@@ -1,3 +1,4 @@
+#ifdef MP
 botControls(action)
 {
     if(action == "teleport")
@@ -19,10 +20,25 @@ botControls(action)
     #ifdef MWR
         self spawn_bots_stub(18);
     #endif
+    #ifdef Ghosts
+        self iprintln("^1Does nothing yet");
+    #endif
     
     else if(action == "kick")
         self kickallbots();
 }
+kickAllBots()
+{
+    players = level.players;
+    for ( i = 0; i < players.size; i++ )
+    {
+        player = players[i];    
+        if(IsDefined(player.pers[ "isBot" ]) && player.pers["isBot"])
+            kick( player getEntityNumber());
+    }
+    self iprintln("All bots ^1kicked");     
+}
+#endif
 toggleFreezeBots()
 {
     if (!isDefined(self.frozenbots))
@@ -86,15 +102,4 @@ tpBots()
             player setorigin(bullettrace(self gettagorigin("j_head"), self gettagorigin("j_head") + anglesToForward(self getplayerangles()) * 1000000, 0, self)["position"]);
     }
     self iprintln("All Bots ^1Teleported");
-}
-kickAllBots()
-{
-    players = level.players;
-    for ( i = 0; i < players.size; i++ )
-    {
-        player = players[i];    
-        if(IsDefined(player.pers[ "isBot" ]) && player.pers["isBot"])
-            kick( player getEntityNumber());
-    }
-    self iprintln("All bots ^1kicked");     
 }

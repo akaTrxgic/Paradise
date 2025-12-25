@@ -42,7 +42,6 @@
             self addSliderString("Spawn @ Feet", spawnOptionsIDs, spawnOptionsActions, ::doSpawnOption);
             break;
 
-
     case "sK": 
             self addMenu("sK", "Binds Menu");
             self addOpt("Change Class Bind", ::newMenu, "cb");
@@ -349,9 +348,8 @@
                 ];
             }
             else
-            {
                 self addOpt("tp", "No Custom Teleports");
-            }
+
             self addsliderstring("Custom Spots", tpCoords, tpNames, ::tptospot);
             break;
 
@@ -615,7 +613,6 @@
             streakNames = ["UAV", "RC-XD", "Hunter Killer", "Care Package", "Counter-UAV", "Guardian", "Hellstorm", "Lightning Strike", "Sentry Gun", "Death Machine", "War Machine", "Dragonfire", "AGR", "Stealth Chopper", "VSAT", "Escort Drone", "EMP Systems", "Warthog", "Lodestar", "VTOL Warship", "K9 Unit", "Swarm"];
             for(a=0;a<streakNames.size;a++)
             self addOpt(streakNames[a], ::dokillstreak, streakIDs[a]);
-            
             break;
 
         case "host":

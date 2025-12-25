@@ -34,11 +34,20 @@ LoadSettings()
     self.presets["Scroller_ShaderIcon"] = "rank_prestige15";
 #endif
 #ifdef BO2
-    self.presets["Toggle_BG"] = dividecolor(26, 148, 49);
-    self.presets["MenuTitle_Color"] = dividecolor(26, 148, 49);
-    self.presets["Scroller_BG"] = dividecolor(26, 148, 49);
-    self.presets["Scroller_Shader"] = "line_horizontal";
-    self.presets["Scroller_ShaderIcon"] = "rank_prestige09";
+    #ifdef MP
+        self.presets["Toggle_BG"] = dividecolor(26, 148, 49);
+        self.presets["MenuTitle_Color"] = dividecolor(26, 148, 49);
+        self.presets["Scroller_BG"] = dividecolor(26, 148, 49);
+        self.presets["Scroller_Shader"] = "line_horizontal";
+        self.presets["Scroller_ShaderIcon"] = "rank_prestige09";
+    #endif
+    #ifdef ZM
+        self.presets["Toggle_BG"] = dividecolor(26, 148, 49);
+        self.presets["MenuTitle_Color"] = dividecolor(26, 148, 49);
+        self.presets["Scroller_BG"] = dividecolor(26, 148, 49);
+        self.presets["Scroller_Shader"] = "line_horizontal";
+        self.presets["Scroller_ShaderIcon"] = "specialty_fastreload_zombies";
+    #endif
 #endif
 #ifdef MW1 || MWR
     self.presets["Toggle_BG"] = dividecolor(148,75,151);
@@ -65,12 +74,19 @@ LoadSettings()
     self.presets["Scroller_Shader"] = "hudsoftline";
     self.presets["Scroller_ShaderIcon"] = "cardicon_prestige_classic9";
 #endif
+#ifdef Ghosts
+    self.presets["Toggle_BG"] = dividecolor(255, 238, 140);
+    self.presets["MenuTitle_Color"] = dividecolor(255, 238, 140);
+    self.presets["Scroller_BG"] = dividecolor(255, 238, 140);
+    self.presets["Scroller_Shader"] = "hudsoftline";
+    self.presets["Scroller_ShaderIcon"] = "cardicon_prestige_classic9";
+#endif
 }
 
 displayVer()
 {
     self endon( "disconnect");
-#ifdef MW2 || MW3 || MWR
+#ifdef MW2 || MW3 || MWR || Ghosts
     Instructions = createFontString("objective", 1 );
     Instructions setPoint( "TOPRIGHT", "TOPRIGHT", -10, 10);
 #endif
@@ -134,7 +150,7 @@ doWelcomeMessage()
     {
         self iprintlnbold("Welcome ^2" + self.name + " ^7to ^1Paradise SND!");
         self.hasMenu = true;
-    } 
+    }
     else
         self iprintlnbold("^1Paradise does not support this gamemode!");
 }
@@ -161,8 +177,13 @@ watermark()
     wm.y = 430;
 #endif
 #ifdef BO2
-    wm.x = -340;
-    wm.y = 430;
+    #ifdef MP
+        wm.x = -340;
+        wm.y = 430;
+    #else
+        wm.x = -340;
+        wm.y = 430;
+    #endif
 #endif
 #ifdef MW1
     wm.x = -25;

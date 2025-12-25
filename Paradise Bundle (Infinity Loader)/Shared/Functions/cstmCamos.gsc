@@ -8,7 +8,11 @@ customCamos(camoName)
     self changeCamo(1);
     #endif
     #ifdef BO2
-    self changeCamo(9); 
+        #ifdef MP
+            self changeCamo(9); 
+        #else
+            //self changeCamo(9);
+        #endif
     #endif
     #ifdef MWR
     self equip_camo(1);
@@ -46,12 +50,7 @@ customCamos(camoName)
 
     if(isAnimCamo(camoName))
         imagePath = "Images/Anim/"+camoName+"_Camo.png";
-/*
-    properNames = ["woodland","desert","arctic","digital","red_urban","red_tiger","blue_tiger","orange_fall"];
-    self.camoReplacer = "weapon_camo_" + (RandomInt(properNames.size-1));
-    self.uiCamoReplacer = "ui_camoskin_"+ (RandomInt(properNames.size-1));
-    self.menuCamoReplacer = "weapon_camo_menu_" + (RandomInt(properNames.size-1));
-*/
+
     if(imagePath != "")
     {
         #ifdef MW2
@@ -65,7 +64,11 @@ customCamos(camoName)
         ReplaceImage(uiMenuPath, "weapon_camo_menu_classic");
         #endif
         #ifdef BO2
-        ReplaceImage(imagePath, "t6_camo_kryptek_typhon_pattern");
+            #ifdef MP
+                ReplaceImage(imagePath, "t6_camo_kryptek_typhon_pattern");
+            #else
+                ReplaceImage(imagePath, "test");
+            #endif
         #endif
         #ifdef MWR
         ReplaceImage(imagePath, "wpn_h1_camo_desert");
@@ -227,7 +230,11 @@ randomAnimCamo(camoName)
     self changeCamo(1);
     #endif
     #ifdef BO2
-    self changeCamo(9); 
+        #ifdef MP
+            self changeCamo(9); 
+        #else
+            //self changeCamo(9);
+        #endif
     #endif
     #ifdef MWR
     self equip_camo(1);
