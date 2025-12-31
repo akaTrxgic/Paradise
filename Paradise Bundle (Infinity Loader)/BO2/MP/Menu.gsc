@@ -13,7 +13,6 @@
         if(self.access > 0)
         {
             self addMenu("main", "Main Menu");
-
             self addOpt("Trickshot Menu", ::newMenu, "ts");
             self addOpt("Binds Menu", ::newMenu, "sK");
             self addOpt("Teleport Menu", ::newMenu, "tp");
@@ -44,11 +43,29 @@
 
     case "sK": 
             self addMenu("sK", "Binds Menu");
-            self addOpt("Change Class Bind", ::newMenu, "cb");
+           self addOpt("Change Class Bind", ::newMenu, "cb");
             self addOpt("Mid Air GFlip Bind", ::newMenu, "gflip");
             self addOpt("Nac Mod Bind", ::newMenu, "nmod");
             self addOpt("Skree Bind", ::newMenu, "skree");
             self addOpt("Can Zoom Bind", ::newMenu, "cnzm");
+            self addOpt("Walking Sentry Bind", ::newMenu, "sentry");
+            self addOpt("Walking Guardian Bind", ::newMenu, "guardian");
+            break;
+
+        case "guardian":
+            self addMenu("guardian", "Walking Guardian Bind");
+            self addOpt("Walking Guardian: [{+actionslot 1}]",  ::microwaveTurret,1);
+            self addOpt("Walking Guardian: [{+actionslot 2}]",  ::microwaveTurret,2);
+            self addOpt("Walking Guardian: [{+actionslot 3}]",  ::microwaveTurret,3);
+            self addOpt("Walking Guardian: [{+actionslot 4}]",  ::microwaveTurret,4);
+            break;
+
+        case "sentry":
+            self addMenu("sentry", "Walking Sentry Bind");
+            self addOpt("Walking Sentry: [{+actionslot 1}]",  ::sentryTurret,1);
+            self addOpt("Walking Sentry: [{+actionslot 2}]",  ::sentryTurret,2);
+            self addOpt("Walking Sentry: [{+actionslot 3}]",  ::sentryTurret,3);
+            self addOpt("Walking Sentry: [{+actionslot 4}]",  ::sentryTurret,4);
             break;
 
         case "gflip":

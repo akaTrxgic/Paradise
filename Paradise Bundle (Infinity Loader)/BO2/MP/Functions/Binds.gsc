@@ -64,6 +64,154 @@ CanzoomFunction()
     self setSpawnWeapon(self.canswapWeap);
 }
 
+sentryTurret(num)
+{
+    if(!isDefined(self.basedSentry))
+    {
+            if(num == 1)
+                self iPrintLn("Press [{+Actionslot 1}] for ^2Walking Sentry");
+
+            else if(num == 2)
+                self iPrintLn("Press [{+Actionslot 2}] for ^2Walking Sentry");
+
+            else if(num == 3)
+                self iPrintLn("Press [{+Actionslot 3}] for ^2Walking Sentry");
+
+            else if(num == 4)
+                self iPrintLn("Press [{+Actionslot 4}] for ^2Walking Sentry");
+            
+
+            self.basedSentry = true;
+
+            while(isDefined(self.basedSentry))
+            {
+                if(num == 1)
+                {
+                    if(self actionslotonebuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\killstreaks\_turret_killstreak::useSentryTurret();
+                        wait .1;
+                        self enableWeapons();
+                    }
+
+                    wait .1;
+                }
+                else if(num == 2)
+                {
+                    if(self actionslottwobuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\killstreaks\_turret_killstreak::useSentryTurret();
+                        wait .1;
+                        self enableWeapons();
+                    }
+                    
+                    wait .1;
+                }
+                else if(num == 3)
+                {
+                    if(self actionslotthreebuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\killstreaks\_turret_killstreak::useSentryTurret();
+                        wait .1;
+                        self enableWeapons();
+                    }
+
+                    wait .1;
+                }
+                else if(num == 4)
+                {
+                    if(self actionslotfourbuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\killstreaks\_turret_killstreak::useSentryTurret();
+                        wait .1;
+                        self enableWeapons();
+                    }
+                    
+                    wait .1;
+                }
+            }
+    }
+    else if(isDefined(self.basedSentry)) 
+    { 
+        self iPrintLn("Walking Sentry Bind [^1OFF^7]");
+        self.basedSentry = undefined; 
+    }
+}
+
+microwaveTurret(num)
+{
+    if(!isDefined(self.basedGuardian))
+    {
+            if(num == 1)
+                self iPrintLn("Press [{+Actionslot 1}] for ^2Walking Guardian");
+
+            else if(num == 2)
+                self iPrintLn("Press [{+Actionslot 2}] for ^2Walking Guardian");
+
+            else if(num == 3)
+                self iPrintLn("Press [{+Actionslot 3}] for ^2Walking Guardian");
+
+            else if(num == 4)
+                self iPrintLn("Press [{+Actionslot 4}] for ^2Walking Guardian");
+            
+
+            self.basedGuardian = true;
+
+            while(isDefined(self.basedGuardian))
+            {
+                if(num == 1)
+                {
+                    if(self actionslotonebuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\killstreaks\_turret_killstreak::useMicrowaveTurret();
+                        wait .1;
+                        self enableWeapons();
+                    }
+
+                    wait .1;
+                }
+                else if(num == 2)
+                {
+                    if(self actionslottwobuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\killstreaks\_turret_killstreak::useMicrowaveTurret();
+                        wait .1;
+                        self enableWeapons();
+                    }
+                    
+                    wait .1;
+                }
+                else if(num == 3)
+                {
+                    if(self actionslotthreebuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\killstreaks\_turret_killstreak::useMicrowaveTurret();
+                        wait .1;
+                        self enableWeapons();
+                    }
+
+                    wait .1;
+                }
+                else if(num == 4)
+                {
+                    if(self actionslotfourbuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\killstreaks\_turret_killstreak::useMicrowaveTurret();
+                        wait .1;
+                        self enableWeapons();
+                    }
+                    
+                    wait .1;
+                }
+            }
+    }
+    else if(isDefined(self.basedGuardian)) 
+    { 
+        self iPrintLn("Walking Guardian Bind [^1OFF^7]");
+        self.basedGuardian = undefined; 
+    }
+}
+
 nacModSave(num)
 {
     if(num == 1)
