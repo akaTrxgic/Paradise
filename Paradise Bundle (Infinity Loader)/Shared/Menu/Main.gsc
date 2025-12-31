@@ -46,26 +46,6 @@ init()
         level thread pmInit();
     #endif
 #endif
-#ifdef ZM
-    #ifdef BO2
-        precacheshader("line_horizontal");
-        precacheshader("specialty_fastreload_zombies");
-        precacheshader("white");
-        /*
-        level.actorDamage = level.callbackactordamage;
-        level.callbackactordamage = ::modifyactordamage;
-        level.actorkilled = level.callbackactorkilled;
-        level.callbackactorkilled = ::modifyactorkilled;
-        */
-        level.disable_kill_thread = false;
-        level.player_out_of_playable_area_monitor = false;	
-	    level.player_too_many_weapons_monitor = false;
-	    level.player_too_many_players_check = false;
-	    level.player_too_many_players_check_func = ::player_too_many_players_check;
-        
-        level thread onPlayerConnect();
-    #endif
-#endif
 }
 
 #ifdef MW2 || MW3
@@ -98,6 +78,7 @@ pminit()
     level.callbackPlayerDamage = ::modifyPlayerDamage;
     level.lastKill_minDist     = 15;
     level.oomUtilDisabled = 0;
+    level.BotNameIndex = 0;
     initDvars();
 #ifdef WAW  
     if(getDvar("mapname") == "mp_seelow")
@@ -153,16 +134,38 @@ pminit()
     level.BotNameIndex = 0;
 #endif
 #ifdef BO2
-    precacheshader("line_horizontal");
-    precacheshader("rank_prestige09");
-    lower_barriers();
-    removehighbarrier();
+    #ifdef ZM
+        precacheshader("line_horizontal");
+        precacheshader("specialty_fastreload_zombies");
+        precacheshader("white");
+        /*
+        level.actorDamage = level.callbackactordamage;
+        level.callbackactordamage = ::modifyactordamage;
+        level.actorkilled = level.callbackactorkilled;
+        level.callbackactorkilled = ::modifyactorkilled;
+        */
+        level.disable_kill_thread = false;
+        level.player_out_of_playable_area_monitor = false;	
+	    level.player_too_many_weapons_monitor = false;
+	    level.player_too_many_players_check = false;
+	    level.player_too_many_players_check_func = ::player_too_many_players_check;
+    #else
+        precacheshader("line_horizontal");
+        precacheshader("rank_prestige09");
+        lower_barriers();
+        removehighbarrier();
+    #endif
+#endif
+#ifdef Ghosts
+    precacheshader("rank_prestige10");
+    precacheshader("hudsoftline");
+    precachemodel("carepackage_friendly_iw6");
 #endif
     level thread onPlayerConnect();
 }
 #endif
-#ifdef MWR
-menuinit()
+#ifdef MWR || Ghosts
+overflowInit()
 {
     if(!isDefined(level.anchorText))
 	{
@@ -186,10 +189,10 @@ onPlayerConnect()
 #ifdef MP
         player thread initstrings(); 
         player thread MonitorButtons();
-    #ifdef MWR
-        player thread menuInit();
+    #ifdef MWR || Ghosts
+        player thread overflowInit();
     #endif
-    #ifdef MW2 || MW3 || MWR
+    #ifdef MW2 || MW3 || MWR || Ghosts
         player thread isButtonPressed();  
     #endif
     #ifdef MW2 || MW3
@@ -255,7 +258,7 @@ onPlayerSpawned()
     {
         self waittill( "spawned_player" );
 #ifdef MP
-    #ifdef BO1 || MW2 || MW3 || BO2 || MWR
+    #ifdef BO1 || MW2 || MW3 || BO2 || MWR || Ghosts
         if (self getPlayerCustomDvar("loadoutSaved") == "1") 
             self loadLoadout(true);
     #endif  
@@ -267,7 +270,7 @@ onPlayerSpawned()
         }
         self givePerk("specialty_falldamage", false);
     #endif
-    #ifdef BO1 || BO2 || MWR
+    #ifdef BO1 || BO2 || MWR || Ghosts
         self thread botsGetKnives();
     #endif
     #ifdef BO1
@@ -330,6 +333,7 @@ onPlayerSpawned()
             self setclientuivisibilityflag("g_compassShowEnemies", 1);
             self.uav = false;
 	#endif
+
             self thread mainBinds();
             self thread wallbangeverything();
             self thread bulletImpactMonitor();
@@ -361,6 +365,8 @@ onPlayerSpawned()
         self thread EnableInvulnerability();
         zombie_devgui_open_sesame();
         turn_power_on_and_open_doors();
+
+        if(level.currentMapName == "zm_tomb") setmatchflag("ee_all_staffs_upgraded");
 
         if(level.currentMapName == "zm_buried")
         {
@@ -443,7 +449,7 @@ pubOnPlayerSpawned()
             self setClientDvar("aim_aimAssistRangeScale", 0);
 
             self thread pubMainBinds();
-            self thread wallbangeverything();
+            //self thread wallbangeverything();
             self thread changeClass();
             wait .01;
         }
@@ -959,7 +965,7 @@ kys()
 
 dropCanswap()
 {
-    #ifdef MW1 || MW2 || MWR
+    #ifdef MW1 || MW2
     weap = "rpd_mp";
     #endif
     #ifdef MW3
@@ -973,6 +979,9 @@ dropCanswap()
     #endif
     #ifdef WAW
     weap = "dp28_mp";
+    #endif
+    #ifdef MWR
+    weap = "";
     #endif
     #ifdef Ghosts
     weap = "test_mp";
@@ -1089,8 +1098,11 @@ rainbowText(text, lifetime, yOffset)
     hud = self createFontString("default", 1.6);
     hud setPoint("TOP", "TOP", 0, 250 + yOffset);
     hud.alpha = 1;
-    hud settext(text);
-
+    #ifdef Ghosts
+        hud setsafetext(text);
+    #else
+        hud settext(text);
+    #endif
     startTime = getTime();
     lifetime = lifetime * 1.2;
 
@@ -1345,9 +1357,23 @@ bots_cant_win()
 	{
 		wait 0.25;
 		#ifdef BO2
-		maps\mp\gametypes\_globallogic_score::_setplayermomentum( self, 0 );
-		#endif
-		if( self.pers["kills"] >= 20 || self.kills >= 20 )
+		maps\mp\gametypes\_globallogic_score::_setplayermomentum(self, 0);
+
+		if(self.pers["pointstowin"] >= 20)
+		{
+			self.pointstowin = 0;
+			self.pers["pointstowin"] = self.pointstowin;
+			self.score = 0;
+			self.pers["score"] = self.score;
+			self.kills = 0;
+			self.deaths = 0;
+			self.headshots = 0;
+			self.pers["kills"] = self.kills;
+			self.pers["deaths"] = self.deaths;
+			self.pers["headshots"] = self.headshots;
+		}
+        #else
+		if(self.pers["kills"] >= 20 || self.kills >= 20)
 		{
             self.pers["kills"] = 0;         
             self.pers["score"] = 0;         
@@ -1358,6 +1384,7 @@ bots_cant_win()
             self.headshots = 0;
             self.score     = 0;
 		}
+        #endif
 	}
 }
 
@@ -1399,7 +1426,6 @@ changeClass()
         #endif
 #endif
 #ifdef MWR
-
     self endon("disconnect");
 
 	for(;;)
@@ -1412,6 +1438,22 @@ changeClass()
             self maps\mp\gametypes\_class::setclass(self.class);
 			self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],self.class);
     		self maps\mp\gametypes\_class::applyloadout();
+		}
+		wait 0.05;
+    }
+#endif
+#ifdef Ghosts
+    self endon("disconnect");
+
+	for(;;)
+	{
+		self waittill("luinotifyserver", menu, className);
+
+		if(menu == "class_select" && className < 60)
+		{
+			self.class = "custom" + (className + 1);
+            self maps\mp\gametypes\_class::setclass(self.class);
+			self maps\mp\gametypes\_class::giveLoadout(self.pers["team"],self.class);
 		}
 		wait 0.05;
     }
@@ -1521,16 +1563,16 @@ doBots()
             spawnBots(3, team);
     }
 #endif
-#ifdef MWR
-if(level.currentGametype == "dm")
+#ifdef MWR || Ghosts
+    if(level.currentGametype == "dm")
     {
         while(level.players.size < 18)
             spawn_bots_stub(1, undefined, undefined, "spawned_player", "Easy");
     }
     else if(level.currentGametype == "sd")
     {
-        while(GetEnemyCountForTeam(team) <= 1)
-            spawn_bots_stub(1, team, undefined, "spawned_player", "Easy");
+        if(GetEnemyCountForTeam(team) <= 1)
+            spawn_bots_stub(3, team, undefined, "spawned_player", "Easy");
     }
 #endif
 }
@@ -1589,6 +1631,20 @@ doFastLast()
             self.pers["pointstowin"] = 22;
             self.pers["kills"] = 22;
             self.pers["score"] = 22;
+            self.pers["deaths"] = 13;
+            self.pers["assists"] = 2;
+        }
+#endif
+#ifdef Ghosts
+        if(level.currentGametype == "dm")
+        {
+            self.kills   = 27;
+            self.score   = 27;
+            self.deaths  = 13;
+            self.assists = 2;
+            self.pers["pointstowin"] = 27;
+            self.pers["kills"] = 27;
+            self.pers["score"] = 27;
             self.pers["deaths"] = 13;
             self.pers["assists"] = 2;
         }

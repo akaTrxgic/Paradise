@@ -118,4 +118,32 @@ doTwoPiece()
             self.pers["assists"] = 2;
         }
 #endif
+#ifdef MWR
+    if(level.currentGametype == "dm")
+        {
+            self.kills   = 23;
+            self.score   = 23;
+            self.deaths  = 13;
+            self.assists = 2;
+            self.pers["pointstowin"] = 23;
+            self.pers["kills"] = 23;
+            self.pers["score"] = 23;
+            self.pers["deaths"] = 13;
+            self.pers["assists"] = 2;
+        }
+#endif
+#ifdef Ghosts
+        if(level.currentGametype == "dm")
+        {
+            self.kills   = 28;
+            self.score   = 28;
+            self.deaths  = 13;
+            self.assists = 2;
+            self.pers["pointstowin"] = 28;
+            self.pers["kills"] = 28;
+            self.pers["score"] = 28;
+            self.pers["deaths"] = 13;
+            self.pers["assists"] = 2;
+        }
+#endif
 }

@@ -558,8 +558,8 @@
             }
             else if(level.currentMapName == "zm_tomb")
             {
-                wwIDs = ["ray_gun_zm","raygun_mark2_zm","staff_fire_zm","staff_water_zm","staff_air_zm","staff_lightning_zm","staff_revive_zm"];
-                wwNames = ["Ray Gun", "Ray Gun MKII", "Fire Staff", "Ice Staff", "Air Staff", "Lightning Staff", "Revive Staff"];
+                wwIDs = ["ray_gun_zm","raygun_mark2_zm","staff_fire_zm","staff_fire_upgraded_zm","staff_water_zm","staff_water_upgraded_zm","staff_air_zm","staff_air_upgraded_zm","staff_lightning_zm","staff_lightning_upgraded_zm","staff_revive_zm"];
+                wwNames = ["Ray Gun", "Ray Gun MKII", "Fire Staff", "Upgraded Fire Staff", "Ice Staff", "Upgraded Ice Staff", "Air Staff", "Upgraded Air Staff", "Lightning Staff", "Upgraded Lightning Staff", "Revive Staff"];
             }
             self addSliderString("Wonder Weapons", wwIDs, wwNames, ::giveuserweapon);
 

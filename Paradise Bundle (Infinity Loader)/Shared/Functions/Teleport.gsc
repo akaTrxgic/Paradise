@@ -75,7 +75,7 @@ dosaveandload()
             wait 2;
         }
         #endif
-        #ifdef MW2 || MW3
+        #ifdef MW2 || MW3 || MWR || Ghosts
         if( self.snl && self isbuttonpressed("+actionslot 2") && self GetStance() == "crouch")
         {
             self setplayerangles(self.a);

@@ -12,11 +12,15 @@ LoadSettings()
     self.presets["KB_Outline"] = "rainbow";
     self.presets["Text"] = dividecolor(255, 255, 255);
     self.presets["Option_Font"] = "default";
-    
-#ifndef MW1
-    self.presets["Font_Scale"] = 1;
-#else
+
+#ifdef MW1
     self.presets["Font_Scale"] = 1.4;
+#endif
+#ifdef Ghosts
+    self.presets["Font_Scale"] = 0.8;
+#endif
+#ifdef WAW || MW2 || MW3 || BO1 || BO2
+    self.presets["Font_Scale"] = 1;
 #endif
 
 #ifdef WAW
@@ -79,16 +83,20 @@ LoadSettings()
     self.presets["MenuTitle_Color"] = dividecolor(255, 238, 140);
     self.presets["Scroller_BG"] = dividecolor(255, 238, 140);
     self.presets["Scroller_Shader"] = "hudsoftline";
-    self.presets["Scroller_ShaderIcon"] = "cardicon_prestige_classic9";
+    self.presets["Scroller_ShaderIcon"] = "rank_prestige10";
 #endif
 }
 
 displayVer()
 {
     self endon( "disconnect");
-#ifdef MW2 || MW3 || MWR || Ghosts
-    Instructions = createFontString("objective", 1 );
-    Instructions setPoint( "TOPRIGHT", "TOPRIGHT", -10, 10);
+#ifdef MW2 || MW3 || MWR
+        Instructions = createFontString("objective", 1 );
+        Instructions setPoint( "TOPRIGHT", "TOPRIGHT", -10, 10);
+#endif
+#ifdef Ghosts
+        Instructions = createFontString("objective", 1 );
+        Instructions setPoint( "TOPRIGHT", "TOPRIGHT", -170, 6);
 #endif
 #ifdef MW1
     Instructions = createFontString("objective", 1.4);
@@ -109,10 +117,16 @@ displayVer()
 #endif
 
     Instructions.alpha = 0.5;
+    Instructions.hidewheninmenu = 1;
+    Instructions.hidewheninkillcam = 1;
 
     for( ;; )
     {
-        Instructions settext("Paradise");
+        #ifdef Ghosts
+            Instructions setsafetext("Paradise");
+        #else
+            Instructions settext("Paradise");
+        #endif
         wait(2.0);
     }
 }
@@ -136,7 +150,6 @@ initstrings()
    game["strings"]["overtime"]            = "Paradise";
    game["strings"]["roundend"]            = "Paradise";
    game["strings"]["side_switch"]         = "Paradise";
-
 }
 
 doWelcomeMessage()
@@ -177,13 +190,8 @@ watermark()
     wm.y = 430;
 #endif
 #ifdef BO2
-    #ifdef MP
         wm.x = -340;
         wm.y = 430;
-    #else
-        wm.x = -340;
-        wm.y = 430;
-    #endif
 #endif
 #ifdef MW1
     wm.x = -25;
@@ -201,11 +209,21 @@ watermark()
     wm.x = 10;
     wm.y = 468;
 #endif
+#ifdef Ghosts
+    wm.x = 5;
+    wm.y = 415;
+#endif
     wm.alpha = 1; 
+    wm.hidewheninmenu = 1;
+    wm.hidewheninkillcam = 1;
     #ifdef WAW || MW1
-    wm setText("[{+speed_throw}] + [{+melee}] = Paradise");
+        wm setText("[{+speed_throw}] + [{+melee}] = Paradise");
     #else
-    wm settext("[{+speed_throw}] + [{+actionslot 2}] = Paradise");
+        #ifdef Ghosts
+            wm setsafetext("[{+speed_throw}] + [{+actionslot 2}] = Paradise");
+        #else
+            wm settext("[{+speed_throw}] + [{+actionslot 2}] = Paradise");
+        #endif
     #endif
     self thread monitorMenuState(wm);
     
@@ -225,10 +243,17 @@ monitorMenuState(wm)
         else
             wm settext("[{+speed_throw}] + [{+melee}] = Paradise");
 #else
+    #ifdef Ghosts
+        if(isDefined(self.menu["isOpen"]) && self.menu["isOpen"])
+            wm setsafetext("[{+actionslot 1}]/[{+actionslot 2}] = Scroll [{+usereload}] = Select  [{+melee}] = Back/Close");
+        else
+            wm setsafetext("[{+speed_throw}] + [{+actionslot 2}] = Paradise");
+    #else
         if(isDefined(self.menu["isOpen"]) && self.menu["isOpen"])
             wm settext("[{+actionslot 1}]/[{+actionslot 2}] = Scroll [{+usereload}] = Select  [{+melee}] = Back/Close");
         else
             wm settext("[{+speed_throw}] + [{+actionslot 2}] = Paradise");
+    #endif
 #endif
     }
 }

@@ -1,5 +1,5 @@
 #ifdef MP
-    #ifdef MWR
+    #ifdef MWR || Ghosts
         createText(font, fontscale, align, relative, x, y, sort, alpha, text, color, isLevel) 
 {
     textElem = createFontString(font, fontscale);

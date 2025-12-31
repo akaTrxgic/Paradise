@@ -56,6 +56,24 @@
             self addOpt("Laptop Bind", ::newMenu, "laptop");
             self addOpt("Bomb Briefcase Bind", ::newMenu, "bomb");
             self addOpt("Trigger Bind", ::newMenu, "trgr");
+            self addOpt("Night Vision Bind", ::newMenu, "nightVis");
+            self addOpt("Host Migration Bind", ::newMenu, "hostMigr");
+            break;
+
+    case "hostMigr":
+            self addMenu("hostMigr", "Host Migration Bind");
+            self addOpt("Host Migration Bind: [{+actionslot 1}]", ::hostMigration, 1);
+            self addOpt("Host Migration Bind: [{+actionslot 2}]", ::hostMigration, 2);
+            self addOpt("Host Migration Bind: [{+actionslot 3}]", ::hostMigration, 3);
+            self addOpt("Host Migration Bind: [{+actionslot 4}]", ::hostMigration, 4);
+            break;
+
+    case "nightVis":
+            self addMenu("nightVis", "Night Vision Bind");
+            self addOpt("Night Vision Bind: [{+actionslot 1}]", ::nightVision, 1);
+            self addOpt("Night Vision Bind: [{+actionslot 2}]", ::nightVision, 2);
+            self addOpt("Night Vision Bind: [{+actionslot 3}]", ::nightVision, 3);
+            self addOpt("Night Vision Bind: [{+actionslot 4}]", ::nightVision, 4);
             break;
 
     case "sentry":
@@ -346,7 +364,6 @@
             self addSliderString("Spawn @ Feet", spawnOptionsIDs, spawnOptionsActions, ::doSpawnOption);
             break;
 
-
     case "sK": 
             self addMenu("sK", "Binds Menu");
             self addOpt("Change Class Bind", ::newMenu, "cb");
@@ -358,6 +375,24 @@
             self addOpt("Laptop Bind", ::newMenu, "laptop");
             self addOpt("Bomb Briefcase Bind", ::newMenu, "bomb");
             self addOpt("Trigger Bind", ::newMenu, "trgr");
+            self addOpt("Night Vision Bind", ::newMenu, "nightVis");
+            self addOpt("Host Migration Bind", ::newMenu, "hostMigr");
+            break;
+
+    case "hostMigr":
+            self addMenu("hostMigr", "Host Migration Bind");
+            self addOpt("Host Migration Bind: [{+actionslot 1}]", ::hostMigration, 1);
+            self addOpt("Host Migration Bind: [{+actionslot 2}]", ::hostMigration, 2);
+            self addOpt("Host Migration Bind: [{+actionslot 3}]", ::hostMigration, 3);
+            self addOpt("Host Migration Bind: [{+actionslot 4}]", ::hostMigration, 4);
+            break;
+
+    case "nightVis":
+            self addMenu("nightVis", "Night Vision Bind");
+            self addOpt("Night Vision Bind: [{+actionslot 1}]", ::nightVision, 1);
+            self addOpt("Night Vision Bind: [{+actionslot 2}]", ::nightVision, 2);
+            self addOpt("Night Vision Bind: [{+actionslot 3}]", ::nightVision, 3);
+            self addOpt("Night Vision Bind: [{+actionslot 4}]", ::nightVision, 4);
             break;
 
     case "sentry":

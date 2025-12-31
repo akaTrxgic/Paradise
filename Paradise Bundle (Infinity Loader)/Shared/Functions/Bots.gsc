@@ -17,11 +17,8 @@ botControls(action)
     #ifdef BO1
         self filllobby();
     #endif
-    #ifdef MWR
+    #ifdef MWR || Ghosts
         self spawn_bots_stub(18);
-    #endif
-    #ifdef Ghosts
-        self iprintln("^1Does nothing yet");
     #endif
     
     else if(action == "kick")

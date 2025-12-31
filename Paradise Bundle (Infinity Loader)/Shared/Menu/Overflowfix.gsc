@@ -6,7 +6,7 @@
 
     - CF4_99
 */
-#ifdef MWR
+    #ifdef MWR || Ghosts
 monitorOverflow()
 {
     level endon("disconnect");
@@ -112,4 +112,4 @@ overflowfix()
         }
     }
 }
-#endif
+    #endif

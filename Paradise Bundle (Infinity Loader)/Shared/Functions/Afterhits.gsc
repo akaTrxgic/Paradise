@@ -5,7 +5,11 @@ AfterHit(gunIn)
 
     #ifdef MWR
         gun = "h1_"+gunIn+"_mp_a#none_f#base";
-    #else
+    #endif
+    #ifdef Ghosts
+        gun = "iw6_" + gunIn;
+    #endif
+    #ifdef MW1 || MW2 || MW3 || BO1 || BO2
         gun = gunIn;
     #endif
 

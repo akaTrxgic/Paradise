@@ -629,7 +629,7 @@
             
             self addOpt("Fast Restart", ::FastRestart);
             self addToggle("Freeze Bots", self.frozenbots, ::toggleFreezeBots);
-            botOptNames = "Teleport Bots to Crosshairs;Spawn 18 Bots;Kick All Bots";
+            botOptNames = "Teleport to Crosshairs;Spawn 18 Bots;Kick All Bots";
             botOptIDs = "teleport;fill;kick";
             self addSliderString("Bot Controls", botOptIDs, botOptNames, ::botControls);
 

@@ -621,12 +621,14 @@ class1()
 {
     if(!isDefined(self.ChangeClass))
     {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2^2Change Class");
+        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom1" );
+            if(self isButtonPressed("+Actionslot 1") && !self.menu["isOpen"])
+            {
+
+            }
             
             wait .001; 
         } 
@@ -645,8 +647,10 @@ class2()
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom2" );
+            if(self isButtonPressed("+Actionslot 1") && !self.menu["isOpen"])
+            {
+
+            }
             
             wait .001; 
         }
@@ -665,8 +669,10 @@ class3()
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom3" );
+            if(self isButtonPressed("+Actionslot 1") && !self.menu["isOpen"])
+            {
+
+            }
             
             wait .001; 
         }
@@ -686,8 +692,10 @@ class4()
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom4" );
+            if(self isButtonPressed("+Actionslot 1") && !self.menu["isOpen"])
+            {
+
+            }
             
             wait .001; 
         }
@@ -707,9 +715,10 @@ class5()
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom5" );
-            
+            if(self isButtonPressed("+Actionslot 1") && !self.menu["isOpen"])
+            {
+
+            }
             wait .001; 
         }
     }
@@ -727,239 +736,16 @@ class6()
         self.ChangeClass = true;
         while(isDefined(self.ChangeClass))
         {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom6" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class7()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom7" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class8()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom8" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class9()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom9" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-class10()
-{
- if(!isDefined(self.ChangeClass))
-    {
-        self iPrintLn("Press [{+Actionslot 1}] to ^2Change Class");
-        self.ChangeClass = true;
-        while(isDefined(self.ChangeClass))
-        {
-            if(self isButtonPressed("+actionslot 1") && !self.menu["isOpen"])
-                self notify( "menuresponse", "changeclass", "custom10" );
-            
-            wait .001; 
-        }
-    }
-    else if(isDefined(self.ChangeClass)) 
-        { 
-            self iPrintLn("Change Class Bind [^1OFF^7]");
-            self.ChangeClass = undefined; 
-        }
-}
-
-nightVision(num)
-{
-    if(!isDefined(self.nightVision))
-    {
-            if(num == 1)
-                self iPrintLn("Press [{+Actionslot 1}] for ^2Night Vision");
-
-            else if(num == 2)
-                self iPrintLn("Press [{+Actionslot 2}] for ^2Night Vision");
-
-            else if(num == 3)
-                self iPrintLn("Press [{+Actionslot 3}] for ^2Night Vision");
-
-            else if(num == 4)
-                self iPrintLn("Press [{+Actionslot 4}] for ^2Night Vision");
-            
-
-            self.nightVision = true;
-
-            while(isDefined(self.nightVision))
+            if(self isButtonPressed("+Actionslot 1") && !self.menu["isOpen"])
             {
-                if(num == 1)
-                {
-                    if(self isbuttonpressed("+actionslot 1") && !self.menu["isOpen"])
-                        self _SetActionSlot(num, "nightvision");
 
-                    wait .1;
-                }
-                else if(num == 2)
-                {
-                    if(self isbuttonpressed("+actionslot 2") && !self.menu["isOpen"])
-                        self _SetActionSlot(num, "nightvision");
-                    
-                    wait .1;
-                }
-                else if(num == 3)
-                {
-                    if(self isbuttonpressed("+actionslot 3") && !self.menu["isOpen"])
-                        self _SetActionSlot(num, "nightvision");
-
-                    wait .1;
-                }
-                else if(num == 4)
-                {
-                    if(self isbuttonpressed("+actionslot 4") && !self.menu["isOpen"])
-                        self _SetActionSlot(num, "nightvision");
-                    
-                    wait .1;
-                }
             }
-    }
-    else if(isDefined(self.nightVision)) 
-    { 
-        self iPrintLn("Night Vision Bind [^1OFF^7]");
-        self _SetActionSlot(num, "");
-        self.nightVision = undefined; 
-    }
-}
-
-hostMigration(num)
-{
-    if(!isDefined(self.hostMigrate))
-    {
-            if(num == 1)
-                self iPrintLn("Press [{+Actionslot 1}] for ^2Host Migration");
-
-            else if(num == 2)
-                self iPrintLn("Press [{+Actionslot 2}] for ^2Host Migration");
-
-            else if(num == 3)
-                self iPrintLn("Press [{+Actionslot 3}] for ^2Host Migration");
-
-            else if(num == 4)
-                self iPrintLn("Press [{+Actionslot 4}] for ^2Host Migration");
-            
-
-            self.hostMigrate = true;
-
-            while(isDefined(self.hostMigrate))
-            {
-                if(num == 1)
-                {
-                    if(self isbuttonpressed("+actionslot 1") && !self.menu["isOpen"])
-                        self thread hostmigratelogic();
-
-                    wait .1;
-                }
-                else if(num == 2)
-                {
-                    if(self isbuttonpressed("+actionslot 2") && !self.menu["isOpen"])
-                        self thread hostmigratelogic();
-                    
-                    wait .1;
-                }
-                else if(num == 3)
-                {
-                    if(self isbuttonpressed("+actionslot 3") && !self.menu["isOpen"])
-                        self thread hostmigratelogic();
-
-                    wait .1;
-                }
-                else if(num == 4)
-                {
-                    if(self isbuttonpressed("+actionslot 4") && !self.menu["isOpen"])
-                        self thread hostmigratelogic();
-                    
-                    wait .1;
-                }
-            }
-    }
-    else if(isDefined(self.hostMigrate)) 
-    { 
-        self iPrintLn("Host Migration Bind [^1OFF^7]");
-        self notify("stopHostMigrate");
-        self.hostMigrate = undefined; 
-    }
-}
-
-hostmigrateLogic()
-{
-    self endon("disconnect");
-    self endon("game_ended");
-    self endon("stopHostMigrate");
-
-    for (;;)
-    {
-        foreach(player in level.players)
-        {
-            setDvar("HostMigrationState", "0");
-            player openPopupMenu(game["menu_hostmigration"]);
-            player freezeControlsWrapper(true);
-            wait .1;
-            setDvar("HostMigrationState", "1");
-            wait .1;
-            player closePopupMenu();
-            thread maps\mp\gametypes\_gamelogic::matchStartTimer("match_resuming_in", 5.0);
-            wait 5.0;
-            player freezeControlsWrapper(false);
-            wait 1; 
+            wait .001; 
         }
-        wait 0.01;
     }
+    else if(isDefined(self.ChangeClass)) 
+        { 
+            self iPrintLn("Change Class Bind [^1OFF^7]");
+            self.ChangeClass = undefined; 
+        }
 }

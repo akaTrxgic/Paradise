@@ -129,15 +129,10 @@ initializeSetup(access, player)
         if(!IsDefined( RL_list ))
             RL_list = ID_list;
 
-        #ifdef Ghosts
-        option.ID_list = (isinarray(ID_list)) ? ID_list : strTok(ID_list, ";");
-        option.RL_list = (isinarray(RL_list)) ? RL_list : strTok(RL_list, ";");
-        #endif
         #ifdef BO2
         option.ID_list = isarray(ID_list) ? ID_list : strTok(ID_list, ";");
         option.RL_list = isarray(RL_list) ? RL_list : strTok(RL_list, ";");
-        #endif
-        #ifdef MW1 || WAW || BO1 || MW2 || MW3 || MWR
+        #else
         option.ID_list = (inarray(ID_list)) ? ID_list : strTok(ID_list, ";");
         option.RL_list = (inarray(RL_list)) ? RL_list : strTok(RL_list, ";");
         #endif
@@ -151,16 +146,6 @@ initializeSetup(access, player)
         option.p5   = p5;
         self.eMenu[self.eMenu.size] = option;
     }
-
-    #ifdef Ghosts
-    isInArray( array, text )
-    {
-        for(e=0;e<array.size;e++)
-            if( array[e] == text )
-                return true;
-        return false;        
-    }
-    #endif
 
     inarray(arry)
     {
@@ -190,7 +175,11 @@ initializeSetup(access, player)
             self.sliders[ self getCurrentMenu() + "_" + rcurs ] = value;
             //count = " ["+ (value+1) +"/"+ (self.eMenu[ rcurs ].RL_list.size) +"]"; // Uncomment this and remove < > if you want the count to be readded
             //self.menu["UI_SLIDE"]["STRING_"+ cap_curs] settext( self.eMenu[ rcurs ].RL_list[ value ] + count );
-            self.menu["UI_SLIDE"]["STRING_"+ cap_curs] settext( "< "+ self.eMenu[ rcurs ].RL_list[ value ] +" >" );
+            #ifdef Ghosts
+                self.menu["UI_SLIDE"]["STRING_"+ cap_curs] setsafetext( "< "+ self.eMenu[ rcurs ].RL_list[ value ] +" >" );
+            #else
+                self.menu["UI_SLIDE"]["STRING_"+ cap_curs] settext( "< "+ self.eMenu[ rcurs ].RL_list[ value ] +" >" );
+            #endif
             return;
         }
         
@@ -213,7 +202,11 @@ initializeSetup(access, player)
             self.menu["UI_SLIDE"]["VAL"] setValue( value );
     #else
         if( IsFloat( value ) )
-            self.menu["UI_SLIDE"]["VAL"] settext( value );
+            #ifdef Ghosts
+                self.menu["UI_SLIDE"]["VAL"] setsafetext( value );
+            #else
+                self.menu["UI_SLIDE"]["VAL"] settext( value );
+            #endif
         else 
             self.menu["UI_SLIDE"]["VAL"] setValue( value );
     #endif
