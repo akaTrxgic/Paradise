@@ -51,7 +51,6 @@ init()
 #ifdef MW2 || MW3
 pubInit()
 {
-    level.callDamage           = level.callbackPlayerDamage;
     level.callbackPlayerDamage = ::pubmodifyPlayerDamage;
 
 #ifdef MW2
@@ -74,7 +73,6 @@ pubInit()
 #ifdef MP
 pminit()
 {
-    level.callDamage           = level.callbackPlayerDamage;
     level.callbackPlayerDamage = ::modifyPlayerDamage;
     level.lastKill_minDist     = 15;
     level.oomUtilDisabled = 0;
@@ -2381,5 +2379,6 @@ playhitsound(mod, alert)
 		self.hitsoundtracker = 1;
 	}
 }
+
 
 #endif
