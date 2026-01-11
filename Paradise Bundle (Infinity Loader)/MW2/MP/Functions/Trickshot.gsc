@@ -28,11 +28,14 @@ doNoClip()
             {
                 self playerLinkTo(UFO);
                 self.Fly = 1;
-            } else {
+            } 
+            else 
+            {
                 self unlink();
                 self.Fly = 0;
             }
-            if (self.Fly == 1) {
+            if (self.Fly == 1) 
+            {
                 Fly = self.origin + vectorScale(anglesToForward(self getPlayerAngles()), 20);
                 UFO moveTo(Fly, .01);
             }

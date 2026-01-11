@@ -39,18 +39,27 @@ init()
 #endif
     #ifdef MW2 || MW3
         if(level.rankedMatch)
+        {
+            level.isOnlineMatch = 1;
             level thread pubInit();
+        }
         else if(!level.rankedMatch)
+        {
+            level.isOnlineMatch = 0;
             level thread pmInit();
+        }
     #else
         level thread pmInit();
     #endif
+#else
+    level thread pmInit();
 #endif
 }
 
 #ifdef MW2 || MW3
 pubInit()
 {
+    level.callDamage           = level.callbackPlayerDamage;
     level.callbackPlayerDamage = ::pubmodifyPlayerDamage;
 
 #ifdef MW2
@@ -70,14 +79,16 @@ pubInit()
     level thread pubOnPlayerConnect();
 }
 #endif
-#ifdef MP
 pminit()
 {
+#ifdef MP
+    level.callDamage           = level.callbackPlayerDamage;
     level.callbackPlayerDamage = ::modifyPlayerDamage;
     level.lastKill_minDist     = 15;
     level.oomUtilDisabled = 0;
     level.BotNameIndex = 0;
     initDvars();
+#endif
 #ifdef WAW  
     if(getDvar("mapname") == "mp_seelow")
         model = "dest_seelow_crate_long";
@@ -108,6 +119,7 @@ pminit()
     precacheshader("line_horizontal");
     #endif
     precacheshader("rank_prestige4");
+
 #endif
 #ifdef MW2
     level.killstreaks = [ "uav", "airdrop", "counter_uav", "airdrop_sentry_minigun", "predator_missile", "precision_airstrike", "harrier_airstrike", "helicopter", "airdrop_mega", "helicopter_flares", "stealth_airstrike", "helicopter_minigun", "ac130", "emp" ];
@@ -128,6 +140,7 @@ pminit()
     precacheshader("hudsoftline");
     precacheshader("cardicon_prestige_classic9");
     precacheitem("at4_mp");
+    precacheitem("lightstick_mp");
     precachemodel("com_plasticcase_enemy");
     level.BotNameIndex = 0;
 #endif
@@ -161,7 +174,6 @@ pminit()
 #endif
     level thread onPlayerConnect();
 }
-#endif
 #ifdef MWR || Ghosts
 overflowInit()
 {
@@ -190,9 +202,6 @@ onPlayerConnect()
     #ifdef MWR || Ghosts
         player thread overflowInit();
     #endif
-    #ifdef MW2 || MW3 || MWR || Ghosts
-        player thread isButtonPressed();  
-    #endif
     #ifdef MW2 || MW3
         player thread ServerSettings();
         player SetClientDvar("motd", "^0Thanks For Playing! ^7|| ^0discord.gg/ProjectParadise ^7|| ^0Menu By: ^1Warn Trxgic^7, ^2tgh^7, ^7& ^3Optus IV^7");
@@ -205,7 +214,7 @@ onPlayerConnect()
 #ifdef MW2 || MW3
 pubOnPlayerConnect()
 {
-    if(level.rankedMatch)
+    if(level.isOnlineMatch)
     {
     for(;;)
     {
@@ -387,7 +396,7 @@ onPlayerSpawned()
 #ifdef MW2 || MW3
 pubOnPlayerSpawned()
 {
-    if(level.rankedMatch)
+    if(level.isOnlineMatch)
     {
     self endon( "disconnect" );
 
@@ -734,6 +743,14 @@ isdamageweapon(sweapon)
     #endif
     #ifdef Ghosts
     case "usr":
+    case "g28":
+    case "mk14":
+    case "imbel":
+    case "svu":
+    case "dlcweap03":
+    case "l115a3":
+    case "gm6":
+    case "vks":
     #endif
    		return 1;
 	default:
@@ -1078,13 +1095,18 @@ bulletImpactMonitor(eAttacker)
 }
 registerAlmostHit(nearestPlayer, dist)
 {
-    if(!level.rankedMatch)
+    #ifdef MW2 || MW3
+    if(!level.isOnlineMatch)
     {
         iprintln("^2" + self.name + "^7 almost hit ^1" + nearestPlayer.name + " ^7from ^1" + dist + "m^7!");
         self.ahCount++;
     }
-    else if(level.rankedMatch)
+    else if(level.isOnlineMatch)
         self.ahCount++;
+    #else
+    iprintln("^2" + self.name + "^7 almost hit ^1" + nearestPlayer.name + " ^7from ^1" + dist + "m^7!");
+    self.ahCount++;
+    #endif
 
     // EVERY 3 ALMOST HITS ? RAINBOW FUNNY MESSAGE
     if(self.ahCount % 3 == 0)
@@ -1536,7 +1558,7 @@ doBots()
             spawnBots(3, !hostTeam);
     }
 #endif
-#ifdef MW3 
+#ifdef MW3
     if(level.currentGametype == "dm")
     {
         emptySlots = 18 - level.players.size;
@@ -1549,6 +1571,8 @@ doBots()
             addbot(3, !hostTeam);
     }  
 #endif 
+#ifdef Ghosts
+#endif
 #ifdef BO2
     if(level.currentGametype == "dm")
     {
@@ -1561,7 +1585,7 @@ doBots()
             spawnBots(3, team);
     }
 #endif
-#ifdef MWR || Ghosts
+#ifdef MWR
     if(level.currentGametype == "dm")
     {
         while(level.players.size < 18)
@@ -1584,7 +1608,7 @@ GetEnemyCountForTeam(team)
         if(player.team != team)
             continue;
         
-        enemyCount++;
+        enemCount++;
     }
 
     return enemyCount;
@@ -2379,6 +2403,5 @@ playhitsound(mod, alert)
 		self.hitsoundtracker = 1;
 	}
 }
-
 
 #endif

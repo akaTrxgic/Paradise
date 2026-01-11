@@ -1,15 +1,3 @@
-    /*
-        Teleport spots
-        Give buildables
-        Equipment give
-        Find pap camo texture name for replacement
-    */
-
-    pOrigin()
-    {
-        self iprintln("^1" + self getorigin());
-    }
-
     menuOptions()
     {
         player = self.selected_player;        
@@ -26,8 +14,6 @@
             if(self.access > 0)
             {
                 self addMenu("main", "Main Menu");
-                self addOpt("Print Origin", ::pOrigin);
-
                 self addOpt("Trickshot Menu", ::newMenu, "ts");
                 self addOpt("Binds Menu", ::newMenu, "sK");
                 self addOpt("Teleport Menu", ::newMenu, "tp");

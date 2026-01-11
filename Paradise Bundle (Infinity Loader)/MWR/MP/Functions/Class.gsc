@@ -29,6 +29,21 @@ randomCamo()
     self SetSpawnWeapon(Weapon);
 }
 
+giveSpecWeapon(baseWpn) 
+{
+    weapon = "h1_"+baseWpn+"_mp";
+        
+    if(self hasWeapon(Weapon))
+    {
+        self SetSpawnWeapon(Weapon);
+        return;
+    }
+
+    self GiveWeapon(Weapon);
+    self GiveMaxAmmo(Weapon);
+    self SwitchToWeapon(Weapon);
+}
+
 giveUserWeapon(baseWpn) 
 {
     weapon = "h1_"+baseWpn+"_mp_a#none_f#base";
@@ -144,44 +159,6 @@ HasAttachment(weapon, attachment)
     return false;
 }
 
-setPlayerCustomDvar(dvar, value) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    setDvar(dvar, value);
-}
-
-getPlayerCustomDvar(dvar) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    return getDvar(dvar);
-}
-isExclude(array, array_exclude)
-{
-    newarray = array;
-
-    if (inarray(array_exclude))
-    {
-        for (i = 0; i < array_exclude.size; i++)
-        {
-            exclude_item = array_exclude[i];
-            removeValueFromArray(newarray, exclude_item);
-        }
-    }
-    else
-        removeValueFromArray(newarray, array_exclude);
-
-    return newarray;
-}
-removeValueFromArray(array, valueToRemove)
-{
-    newArray = [];
-    for (i = 0; i < array.size; i++)
-    {
-        if (array[i] != valueToRemove)
-            newArray[newArray.size] = array[i];
-    }
-    return newArray;
-}
 saveloadouttoggle()
 {
     if(!self.saveLoadoutEnabled)

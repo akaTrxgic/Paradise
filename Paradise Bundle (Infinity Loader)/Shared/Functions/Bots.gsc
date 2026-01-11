@@ -12,15 +12,17 @@ botControls(action)
         self spawnBots(18);
     #endif
     #ifdef MW3
-        self addBot(18);
+        self addbot(18);
     #endif
     #ifdef BO1
         self filllobby();
     #endif
-    #ifdef MWR || Ghosts
+    #ifdef MWR
         self spawn_bots_stub(18);
     #endif
-    
+    #ifdef Ghosts
+        iprintln();
+    #endif
     else if(action == "kick")
         self kickallbots();
 }

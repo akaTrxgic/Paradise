@@ -2,10 +2,13 @@
 customCamos(camoName)
 {
     #ifdef MW2
-    self changeCamo(8); 
+        self changeCamo(8); 
     #endif
     #ifdef MW3
-    self changeCamo(1);
+        self changeCamo(1);
+    #endif
+    #ifdef BO1
+        self changeCamo(1);
     #endif
     #ifdef BO2
         #ifdef MP
@@ -15,7 +18,7 @@ customCamos(camoName)
         #endif
     #endif
     #ifdef MWR
-    self equip_camo(1);
+        self equip_camo(1);
     #endif
 
     if(is3arcCamo(camoName))
@@ -54,14 +57,17 @@ customCamos(camoName)
     if(imagePath != "")
     {
         #ifdef MW2
-        ReplaceImage(imagePath, "weapon_camo_orange_fall");
-        ReplaceImage(uiMenuPath, "ui_camoskin_orange_fall");
-        ReplaceImage(uiMenuPath, "weapon_camo_menu_orange_fall");
+            ReplaceImage(imagePath, "weapon_camo_orange_fall");
+            ReplaceImage(uiMenuPath, "ui_camoskin_orange_fall");
+            ReplaceImage(uiMenuPath, "weapon_camo_menu_orange_fall");
         #endif
         #ifdef MW3
-        ReplaceImage(imagePath, "weapon_camo_classic");
-        ReplaceImage(uiMenuPath, "ui_camoskin_classic");
-        ReplaceImage(uiMenuPath, "weapon_camo_menu_classic");
+            ReplaceImage(imagePath, "weapon_camo_classic");
+            ReplaceImage(uiMenuPath, "ui_camoskin_classic");
+            ReplaceImage(uiMenuPath, "weapon_camo_menu_classic");
+        #endif
+        #ifdef BO1
+            ReplaceImage(uiMenuPath, "menu_mp_weapons_camo_dusty");
         #endif
         #ifdef BO2
             #ifdef MP
@@ -71,8 +77,8 @@ customCamos(camoName)
             #endif
         #endif
         #ifdef MWR
-        ReplaceImage(imagePath, "wpn_h1_camo_desert");
-        ReplaceImage(imagePath, "h1_weapon_camo_desert");
+            ReplaceImage(imagePath, "wpn_h1_camo_desert");
+            ReplaceImage(imagePath, "h1_weapon_camo_desert");
         #endif
     }
 }

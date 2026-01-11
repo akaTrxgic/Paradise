@@ -410,7 +410,6 @@
             pstlsNames = ["Five Seven","Tac-45","B23R","Executioner","Kap-40"];
             self addSliderString("Pistols", pstlsIDs, pstlsNames, ::giveuserweapon);
 
-
             self addOpt("Launchers", ::newMenu, "lnchrs");
             self addOpt("Specials", ::newMenu, "specs");
             self addOpt("Miscellaneous", ::newMenu, "misc");
@@ -418,11 +417,16 @@
             break;
 
         case "attach":
+            weapon = self getcurrentweapon();
+            base = getbasename(weapon);
+            attOpts = GetWeaponValidAttachments(base);
+
             self addMenu("attach", "Attachments");
 
             //smh -- CF4
             attachIDs = ["reflex", "fastads", "dualclip", "acog", "grip", "stalker", "rangefinder", "steadyaim", "sf", "holo", "silencer", "fmj", "dualoptic", "extclip", "gl", "mms", "extbarrel", "rf", "vzoom", "ir", "is", "tacknife", "dw", "stackfire"];
             attachNames = ["Reflex", "Quickdraw", "Fast Mag", "ACOG", "Fore Grip", "Stock", "Target Finder", "Laser Sight", "Select Fire", "EO Tech", "Suppressor", "FMJ", "Hybrid Optic", "Extended Clip", "Launcher", "MMS", "Long Barrel", "Rapid Fire", "Variable Zoom", "Dual Band", "Iron Sight", "Knife", "Dual Wield", "Tri-Bolt"];
+            
             for(a=0;a<attachNames.size;a++)
                 self addOpt(attachNames[a], ::giveplayerattachment, attachIDs[a]);
             break;

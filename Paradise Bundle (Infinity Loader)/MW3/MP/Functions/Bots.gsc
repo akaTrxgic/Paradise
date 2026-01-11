@@ -1,4 +1,4 @@
-AddBot(num, team)
+addbot(num, team)
     {
         if(team == "enemy")
             team = self getenemyteam();

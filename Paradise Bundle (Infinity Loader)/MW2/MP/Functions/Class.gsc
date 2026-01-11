@@ -43,6 +43,7 @@ giveUserWeapon(weapon, akimbo)
     self GiveMaxAmmo(Weapon);
     self SwitchToWeapon(Weapon);
 } 
+
 GiveSelfWeapon(weapon)
 {
         weap = StrTok(Weapon,"_");
@@ -53,6 +54,7 @@ GiveSelfWeapon(weapon)
         self GiveMaxAmmo(Weapon);
         self SwitchToWeapon(Weapon);
 }
+
 GivePlayerAttachment(attachment)
 {
     weapon      = self GetCurrentWeapon();
@@ -142,44 +144,6 @@ HasAttachment(weapon, attachment)
     return false;
 }
 
-setPlayerCustomDvar(dvar, value) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    setDvar(dvar, value);
-}
-
-getPlayerCustomDvar(dvar) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    return getDvar(dvar);
-}
-isExclude(array, array_exclude)
-{
-    newarray = array;
-
-    if (inarray(array_exclude))
-    {
-        for (i = 0; i < array_exclude.size; i++)
-        {
-            exclude_item = array_exclude[i];
-            removeValueFromArray(newarray, exclude_item);
-        }
-    }
-    else
-        removeValueFromArray(newarray, array_exclude);
-
-    return newarray;
-}
-removeValueFromArray(array, valueToRemove)
-{
-    newArray = [];
-    for (i = 0; i < array.size; i++)
-    {
-        if (array[i] != valueToRemove)
-            newArray[newArray.size] = array[i];
-    }
-    return newArray;
-}
 saveloadouttoggle()
 {
     if(!self.saveLoadoutEnabled)
@@ -242,7 +206,7 @@ loadLoadout()
             self.camo = self randomcamo();
 
         weapon = self.primaryWeaponList[i];
-        //weaponOptions = self calcWeaponOptions(self.camo, self.currentLens, self.currentReticle, 0);
+        
         if(issubstr(weapon, "akimbo"))
             self giveuserweapon(weapon, true);
         else

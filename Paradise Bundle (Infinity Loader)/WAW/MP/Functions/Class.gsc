@@ -95,6 +95,23 @@ givePlayerAttachment(attachment)
         }
 }       
 
+GetWeaponValidAttachments(weapon)
+{
+    attachments = [];
+    
+    for(a = 11;; a++)
+    {
+        column = TableLookUp("mp/statsTable.csv", 4, weapon, a);
+        
+        if(!isDefined(column) || column == "")
+            break;
+        
+        attachments[attachments.size] = column;
+    }
+    
+    return attachments;
+}
+
 giveLethal(grenadeTypePrimary)
 {
     if ( grenadeTypePrimary != "" )

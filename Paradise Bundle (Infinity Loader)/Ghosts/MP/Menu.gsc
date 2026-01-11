@@ -1,13 +1,3 @@
-    pmapname()
-    {
-        self iprintln("^1" + getdvar("mapname"));
-    }
-
-    porigin()
-    {
-        self iprintln("^1" + self getorigin());
-    }
-    
     menuOptions()
     {
         player = self.selected_player;        
@@ -23,8 +13,6 @@
         if(self.access > 0)
         {
             self addMenu("main", "Main Menu");
-            self addOpt("Print map name", ::pmapname);
-            self addOpt("Print origin", ::porigin);
             self addOpt("Trickshot Menu", ::newMenu, "ts");
             self addOpt("Binds Menu", ::newMenu, "sK");
             self addOpt("Teleport Menu", ::newMenu, "tp");
@@ -62,9 +50,6 @@
             self addOpt("Skree Bind", ::newMenu, "skree");
             self addOpt("Can Zoom Bind", ::newMenu, "cnzm");
             self addOpt("Walking Sentry Bind", ::newMenu, "sentry");
-            self addOpt("Laptop Bind", ::newMenu, "laptop");
-            self addOpt("Bomb Briefcase Bind", ::newMenu, "bomb");
-            self addOpt("Trigger Bind", ::newMenu, "trgr");
             break;
 
     case "sentry":
@@ -73,30 +58,6 @@
             self addOpt("Walking Sentry Bind: [{+actionslot 2}]", ::sentryBind, 2);
             self addOpt("Walking Sentry Bind: [{+actionslot 3}]", ::sentryBind, 3);
             self addOpt("Walking Sentry Bind: [{+actionslot 4}]", ::sentryBind, 4);
-            break;
-
-    case "laptop":
-            self addMenu("laptop", "Laptop Bind");
-            self addOpt("Laptop Bind: [{+actionslot 1}]", ::predBind, 1);
-            self addOpt("Laptop Bind: [{+actionslot 2}]", ::predBind, 2);
-            self addOpt("Laptop Bind: [{+actionslot 3}]", ::predBind, 3);
-            self addOpt("Laptop Bind: [{+actionslot 4}]", ::predBind, 4);
-            break;
-        
-    case "bomb":
-            self addMenu("bomb", "Bomb Bind");
-            self addOpt("Bomb Bind: [{+actionslot 1}]", ::bombBind, 1);
-            self addOpt("Bomb Bind: [{+actionslot 2}]", ::bombBind, 2);
-            self addOpt("Bomb Bind: [{+actionslot 3}]", ::bombBind, 3);
-            self addOpt("Bomb Bind: [{+actionslot 4}]", ::bombBind, 4);
-            break;
-
-    case "trgr":
-            self addMenu("trgr", "Trigger Bind");
-            self addOpt("Trigger Bind: [{+actionslot 1}]", ::trgrBind, 1);
-            self addOpt("Trigger Bind: [{+actionslot 2}]", ::trgrBind, 2);
-            self addOpt("Trigger Bind: [{+actionslot 3}]", ::trgrBind, 3);
-            self addOpt("Trigger Bind: [{+actionslot 4}]", ::trgrBind, 4);
             break;
 
         case "gflip":
@@ -257,15 +218,6 @@
             (264.148, -783.875, 1147.13)
         ];
     }
-    /*
-    else if(getDvar("mapname") == "")
-    {
-        tpNames = "";
-        tpCoords = [
-
-        ];
-    }
-    */
     else
     {
         tpNames  = "No Custom Spots";
@@ -303,11 +255,11 @@
             lmgNames = "Ameli;M27-IAR;LSAT;Chain SAW";
             self addSliderstring("Light Machine Guns", lmgIDs, lmgNames, ::giveUserWeapon);
 
-            mrksmanIDs = "g28_mp_g28scope;g28_mp;mk14_mp_mk14scope;mk14_mp;imbel_mp_imbelscope;imbel_mp;svu_mp_svuscope;svu_mp";
-            mrksmanNames = "MR-28;Scopeless MR-28;MK14 EBR;Scopeless MK14-EBR;IA-2;Scopeless IA-2;SVU;Scopeless SVU";
+            mrksmanIDs = "g28_mp_g28scope;mk14_mp_mk14scope;imbel_mp_imbelscope;svu_mp_svuscope";
+            mrksmanNames = "MR-28;MK14 EBR;IA-2;SVU";
             self addSliderstring("Marksman Rifles", mrksmanIDs, mrksmanNames, ::giveUserWeapon);
 
-            srIDs = "dlcweap03_mp_dlcweap03scope;dlcweap03_mp;usr_mp_usrscope;usr_mp;l115a3_mp_l115a3scope;_l115a3_mp;gm6_mp_gm6scope;gm6_mp;vks_mp_vksscope;vks_mp";
+            srIDs = "dlcweap03_mp_dlcweap03scope;dlcweap03_mp;usr_mp_usrscope;usr_mp;l115a3_mp_l115a3scope;l115a3_mp;gm6_mp_gm6scope;gm6_mp;vks_mp_vksscope;vks_mp";
             srNames = "Maverick-A2;Scopeless Maverick-A2;USR;Scopeless USR;L115;Scopless L115;Lynx;Scopeless Lynx;VKS;Scopeless VKS";
             self addSliderstring("Sniper Rifles", srIDs, srNames, ::giveUserWeapon);
 
@@ -333,12 +285,8 @@
             break;
 
         case "atchmnts":
-            self addMenu("atchmnts", "Attachments");
+            self addMenu("Weapon Attachments");
             
-            attachmentIDs = [];
-            attachmentNames = [];
-            for(a=0;a<attachmentIDs.size;a++)
-            self addOpt( attachmentNames[a], ::GivePlayerAttachment, attachmentIDs[a]);
             break;
 
         case "camos":
@@ -416,16 +364,19 @@
             self addOpt("Frag", ::GiveEquipment, "frag_grenade_mp");
             self addOpt("Semtex", ::GiveEquipment, "semtex_mp");
             self addOpt("Throwing Knife", ::GiveEquipment, "throwingknife_mp");
-            self addOpt("Tactical Insertion", ::GiveEquipment, "flare_mp");
-            self addOpt("Claymore", ::GiveEquipment, "claymore_mp");
+            self addOpt("I.E.D.", ::GiveEquipment, "proximity_explosive_mp");
             self addOpt("C4", ::GiveEquipment, "c4_mp");
+            self addOpt("Canister Bomb", ::GiveEquipment, "mortar_shell_mp");
             break;
 
         case "tacticals":
             self addMenu("tacticals", "Special Grenades");
-            self addOpt("Flash Grenade", ::GiveSecondaryOffhand, "flash_grenade_mp");
-            self addOpt("Stun Grenade", ::GiveSecondaryOffhand, "concussion_grenade_mp");
-            self addOpt("Smoke Grenade", ::GiveSecondaryOffhand, "smoke_grenade_mp");
+            self addOpt("9-Bang", ::GiveSecondaryOffhand, "flash_grenade_mp");
+            self addOpt("Concussion", ::GiveSecondaryOffhand, "concussion_grenade_mp");
+            self addOpt("Smoke", ::GiveSecondaryOffhand, "smoke_grenade_mp");
+            self addOpt("Trophy System", ::GiveSecondaryOffhand, "trophy_mp");
+            self addOpt("Motion Sensor", ::GiveSecondaryOffhand, "motion_sensor_mp");
+            self addOpt("Thermobaric", ::GiveSecondaryOffhand, "thermobaric_grenade_mp");
             break;
 
         case "afthit":
@@ -537,6 +488,7 @@ clientOptions()
         }
     }
 }
+
     menuMonitor()
     {
         self endon("disconnect");

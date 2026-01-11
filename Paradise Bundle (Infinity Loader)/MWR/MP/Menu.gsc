@@ -36,7 +36,6 @@
             self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
 
             self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
-            self addToggle("Dolphin Dive", self.DolphinDive, ::DolphinDive);
 
             self addOpt("Spawn Slide @ Crosshairs", ::slide);
 
@@ -306,6 +305,10 @@
             pstlNames = ["M9", "USP .45", "M1911 .45", "Desert Eagle", "Commander Desert Eagle", ".44 Magnum", "Prokolot", "BR9"];
             pstlIDs   = ["beretta", "usp", "colt45", "deserteagle", "deserteagle55", "janpst", "aprpst", "augpst"];
             self addSliderstring("Pistols", pstlIDs, pstlNames, ::giveUserWeapon);
+
+            specNames = ["PP2000", "Galil", "Striker", "FAL", "Dragonuv", "M240", ".44 Magnum"];
+            specIDs = ["pp2000", "galil", "striker", "fal", "vssvintorez", "m240", "coltanaconda"];
+            self addSliderString("Specials", specIDs, specNames, ::giveSpecWeapon);
 
             meleeNames = ["Cleaver", "Machete", "Thug", "Tidal", "Shamrock Blade", "Sickle", "Brawler's Brew", "Point Knife", "Sarsaparilla", "Sawtooth", "Diabolical", "Bludgeon", "Nauticus", "Danger Close", "Tribal", "Barber", "Cliffhanger", "OMSK Hammer", "Scorpion", "Gravedigger", "Gladiator", "CQB Bayonet", "Enforce", "Mechanic", "Samurai", "Hatchetman", "Caveman", "Leprechaun"];
             meleeIDs = ["meleejun2", "meleeapr2", "meleefeb4", "meleejun4", "meleefeb2", "meleesickle", "meleebottle", "meleeaug3", "meleejun6", "meleeapr4", "meleeapr3", "meleejun1", "meleejun3", "meleeaug1", "meleejun5", "meleeaug2", "meleeicepick", "meleepaddle", "meleeblade", "meleeshovel", "meleegladius", "meleebayonet", "meleeaug4", "meleefeb1", "meleefeb3", "meleehatchet", "meleeapr1", "meleefeb5"];

@@ -57,7 +57,7 @@ GetPlayerEquipment(type)
         
         weapon = TableLookup("mp/statstable.csv", 0, a, 4);
         
-        if(self HasWeapon1(weapon))
+        if(self HasWeapon(weapon))
             equipment[equipment.size] = GetWeapon1(weapon);
     }
     
@@ -66,7 +66,7 @@ GetPlayerEquipment(type)
 
 GivePlayerEquipment(equipment)
 {
-    if(self HasWeapon1(equipment))
+    if(self HasWeapon(equipment))
     {
         self GiveStartAmmo(self GetWeapon1(equipment));
         return;
@@ -87,15 +87,6 @@ GivePlayerEquipment(equipment)
     self GiveStartAmmo(equipment);
 }
 
-HasWeapon1(weapon)
-{
-    foreach(weap in self GetWeaponsList())
-        if(IsSubStr(weap, weapon) || weapon == weap)
-            return true;
-    
-    return false;
-}
-
 GetWeapon1(weapon)
 {
     foreach(weap in self GetWeaponsList())
@@ -105,44 +96,6 @@ GetWeapon1(weapon)
     return false;
 }
 
-setPlayerCustomDvar(dvar, value) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    setDvar(dvar, value);
-}
-
-getPlayerCustomDvar(dvar) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    return getDvar(dvar);
-}
-isExclude(array, array_exclude)
-{
-    newarray = array;
-
-    if (inarray(array_exclude))
-    {
-        for (i = 0; i < array_exclude.size; i++)
-        {
-            exclude_item = array_exclude[i];
-            removeValueFromArray(newarray, exclude_item);
-        }
-    }
-    else
-        removeValueFromArray(newarray, array_exclude);
-
-    return newarray;
-}
-removeValueFromArray(array, valueToRemove)
-{
-    newArray = [];
-    for (i = 0; i < array.size; i++)
-    {
-        if (array[i] != valueToRemove)
-            newArray[newArray.size] = array[i];
-    }
-    return newArray;
-}
 saveLoadoutToggle()
 {
     if(!self.saveLoadoutEnabled)
@@ -259,9 +212,29 @@ loadLoadout()
 getBaseName(weapon)
 {
     prefix = strtok(weapon, "+");
-    base = prefix[0];
+    prefix0 = prefix[0];
+    weaponString = strtok(prefix0, "_");
+    base = weaponString[0];
     return base;
 }
+
+GetWeaponValidAttachments(weapon)
+{
+    attachments = [];
+    
+    for(a = 25;; a++)
+    {
+        column = TableLookUp("mp/statsTable.csv", 4, weapon, a);
+        
+        if(!isDefined(column) || column == "")
+            break;
+        
+        attachments[attachments.size] = column;
+    }
+    
+    return attachments;
+}
+
 HasAttachment(weapon, attachment)
 {
     attachments = getattachments(weapon);
@@ -272,6 +245,7 @@ HasAttachment(weapon, attachment)
     
     return false;
 }
+
 getAttachments(weapon)
 {
     prefix = strtok(weapon, "+");
@@ -282,6 +256,7 @@ getAttachments(weapon)
 
     return attachments;
 }
+
 givePlayerAttachment(attachment)
 {
     weapon      = self GetCurrentWeapon(); 

@@ -9,7 +9,7 @@ AfterHit(gunIn)
     #ifdef Ghosts
         gun = "iw6_" + gunIn;
     #endif
-    #ifdef MW1 || MW2 || MW3 || BO1 || BO2
+    #ifdef MW1 || MW2 || MW3 || BO1 || BO2 || WAW
         gun = gunIn;
     #endif
 

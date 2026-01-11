@@ -19,7 +19,7 @@ LoadSettings()
 #ifdef Ghosts
     self.presets["Font_Scale"] = 0.8;
 #endif
-#ifdef WAW || MW2 || MW3 || BO1 || BO2
+#ifdef WAW || MW2 || MW3 || BO1 || BO2 || MWR
     self.presets["Font_Scale"] = 1;
 #endif
 

@@ -70,73 +70,6 @@ GivePlayerAttachment(attachment)
     clip        = self GetWeaponAmmoClip(weapon);
     akimbo      = false;
 
-        if(attachment == "acogHandler")
-        {
-            if(weaponClass(weapon) == "smg")
-                attachment = "acogsmg";
-            else
-                attachment = "acog";
-        }
-        else if(attachment == "reflexHandler")
-        {
-            if(weaponClass(weapon) == "smg")
-                attachment = "reflexsmg";
-            else if(weaponClass(weapon) == "lmg")
-                attachment = "reflexlmg";
-            else
-                attachment = "reflex";
-        }
-        else if(attachment == "silencerHandler")
-        {
-            if(weaponClass(weapon) == "smg" || weaponClass(weapon) == "assault" || weaponClass(weapon) == "lmg")
-                attachment = "silencer";
-            else if(weaponClass(weapon) == "pistol" || weaponClass(weapon) == "machine_pistol")
-                attachment = "silencer02";
-            else if(weaponClass(weapon) == "shotgun" || weaponClass(weapon) == "sniper")
-                attachment = "silencer03";
-        }
-        else if(attachment == "glHandler")
-        {
-            sub = strTok(weapon,"_");
-            switch(sub[1]) 
-            {
-	            case "m4":
-	            case "m16":
-                attachment = "gl";
-                break;
-
-                case "ak47":
-                attachment = "gp25";
-                break;
-
-                case "scar":
-                case "cm901":
-                case "type95":
-                case "g36c":
-                case "acr":
-                case "mk14":
-                case "fad":
-                attachment = "m320";
-                break;
-            }
-        }
-        else if(attachment == "thermalHandler")
-        {
-            if(weaponClass(weapon) == "smg")
-                attachment = "thermalsmg";
-            else
-                attachment = "thermal";
-        }
-        else if(attachment == "holoHandler")
-        {
-            if(weaponClass(weapon) == "smg")
-                attachment = "eotechsmg";
-            else if(weaponClass(weapon) == "lmg")
-                attachment = "eotechlmg";
-            else
-                attachment = "eotech";
-        }
-    
         if(HasAttachment(weapon, attachment))
         {
             if(isDefined(attachments) && attachments.size > 1)
@@ -221,45 +154,6 @@ HasAttachment(weapon, attachment)
     
     return false;
 }  
-
-setPlayerCustomDvar(dvar, value) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    setDvar(dvar, value);
-}
-
-getPlayerCustomDvar(dvar) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    return getDvar(dvar);
-}
-isExclude(array, array_exclude)
-{
-    newarray = array;
-
-    if (inarray(array_exclude))
-    {
-        for (i = 0; i < array_exclude.size; i++)
-        {
-            exclude_item = array_exclude[i];
-            removeValueFromArray(newarray, exclude_item);
-        }
-    }
-    else
-        removeValueFromArray(newarray, array_exclude);
-
-    return newarray;
-}
-removeValueFromArray(array, valueToRemove)
-{
-    newArray = [];
-    for (i = 0; i < array.size; i++)
-    {
-        if (array[i] != valueToRemove)
-            newArray[newArray.size] = array[i];
-    }
-    return newArray;
-}
 
 saveloadouttoggle()
 {
@@ -362,6 +256,7 @@ loadLoadout()
         }
     }
 }
+
 giveEquipment(equipment)
 {
     self TakeWeapon( self GetCurrentOffhand() );
@@ -373,6 +268,7 @@ giveEquipment(equipment)
 GiveSecondaryOffhand(offhand)
 {
     weaponList = self GetWeaponsListOffhands();
+    
 	foreach( weapon in weaponList )
 	{
 		switch( weapon )
@@ -392,8 +288,10 @@ GiveSecondaryOffhand(offhand)
 			
 	if ( offhand == "flash_grenade_mp" )
 	    self SetOffhandSecondaryClass( "flash" );
+
 	else if ( offhand == "smoke_grenade_mp" || offhand == "concussion_grenade_mp" )
-		self SetOffhandSecondaryClass( "smoke" );	
+		self SetOffhandSecondaryClass( "smoke" );
+
 	else 
     	self SetOffhandSecondaryClass( "flash" );
 
@@ -437,15 +335,6 @@ GiveSecondaryOffhand(offhand)
 			break;
 	}
 }
-AttachmentTable(a)
-{
-    return TableLookup("mp/attachmentTable.csv",0,a,4);
-}
-
-AttachmentNameTable(name)
-{
-    return TableLookupIString("mp/attachmentTable.csv",4,name,3);
-}
 
 giveQuickdrawKillstreak()
 {
@@ -461,4 +350,25 @@ giveQuickdrawKillstreak()
         self unsetperk("specialty_fastoffhand");
         self.quickdraw = 0;
     }
+}
+
+GiveGlowstick()
+{
+    wait .1;
+    self TakeWeapon(self GetCurrentOffhand());
+    self SetOffhandPrimaryClass("other");
+    self GiveWeapon("lightstick_mp");
+    self SetWeaponHudIconOverride( "primaryoffhand", "lightstick_mp" );
+}
+
+rhThrowingKnife()
+{
+    wait .1;
+    self takeweapon(self getcurrentoffhand());
+    wait 0.01;
+    self giveweapon("throwingknife_mp",0,false);
+    wait 0.01;
+    self takeweapon("throwingknife_mp");
+    wait 0.01;
+    self giveweapon("throwingknife_rhand_mp",0,false); 
 }

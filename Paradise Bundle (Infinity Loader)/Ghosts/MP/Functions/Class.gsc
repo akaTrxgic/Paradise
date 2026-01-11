@@ -33,14 +33,15 @@ giveUserWeapon(weap, akimbo)
         return;
     }
 
-    //if(issubstr(weapon, "akimbo"))
-        //akimbo = true;
+    if(issubstr(weapon, "akimbo"))
+        akimbo = true;
 
     self GiveWeapon(Weapon);
     self GiveMaxAmmo(Weapon);
     self SwitchToWeapon(Weapon);
     self iprintln("Given: ^2" + weapon);
 } 
+
 GiveSelfWeapon(weapon)
 {
         weap = StrTok(Weapon,"_");
@@ -51,6 +52,7 @@ GiveSelfWeapon(weapon)
         self GiveMaxAmmo(Weapon);
         self SwitchToWeapon(Weapon);
 }
+
 GivePlayerAttachment(attachment)
 {
     weapon      = self GetCurrentWeapon();
@@ -113,7 +115,7 @@ GetWeaponValidAttachments(weapon)
     
     for(a = 11;; a++)
     {
-        column = TableLookUp("mp/statsTable.csv", 4, weapon, a);
+        column = TableLookUp("mp/attachmentTable.csv", 4, weapon, a);
         
         if(!isDefined(column) || column == "")
             break;
@@ -140,44 +142,6 @@ HasAttachment(weapon, attachment)
     return false;
 }
 
-setPlayerCustomDvar(dvar, value) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    setDvar(dvar, value);
-}
-
-getPlayerCustomDvar(dvar) 
-{
-    dvar = self getXuid() + "_" + dvar;
-    return getDvar(dvar);
-}
-isExclude(array, array_exclude)
-{
-    newarray = array;
-
-    if (inarray(array_exclude))
-    {
-        for (i = 0; i < array_exclude.size; i++)
-        {
-            exclude_item = array_exclude[i];
-            removeValueFromArray(newarray, exclude_item);
-        }
-    }
-    else
-        removeValueFromArray(newarray, array_exclude);
-
-    return newarray;
-}
-removeValueFromArray(array, valueToRemove)
-{
-    newArray = [];
-    for (i = 0; i < array.size; i++)
-    {
-        if (array[i] != valueToRemove)
-            newArray[newArray.size] = array[i];
-    }
-    return newArray;
-}
 saveloadouttoggle()
 {
     if(!self.saveLoadoutEnabled)
@@ -191,6 +155,7 @@ saveloadouttoggle()
         self.saveLoadoutEnabled = 0;
     }
 }
+
 saveLoadout() 
 {
     wait .01;
@@ -240,11 +205,12 @@ loadLoadout()
             self.camo = self randomcamo();
 
         weapon = self.primaryWeaponList[i];
-        //weaponOptions = self calcWeaponOptions(self.camo, self.currentLens, self.currentReticle, 0);
+
         if(issubstr(weapon, "akimbo"))
             self giveuserweapon(weapon, true);
         else
-            self giveWeapon(weapon, 0); //0, weaponOptions
+            self giveWeapon(weapon, 0);
+
         if (weapon == "rpg_mp" || weapon == "m79_mp") 
             self giveMaxAmmo(weapon);
     }
@@ -256,20 +222,23 @@ loadLoadout()
     {
         offhand = self.offHandWeaponList[i];
 
-            switch (offhand) 
+            switch(offhand) 
             {
                 case "frag_grenade_mp":
-                case "sticky_grenade_mp":
-                case "claymore_mp":
-                case "c4_mp":
-                case "flare_mp":
+                case "semtex_mp":
                 case "throwingknife_mp":
+                case "proximity_explosive_mp":
+                case "c4_mp":
+                case "mortar_shell_mp":
                 self thread giveequipment(offhand);
                 break;
 
-                case "concussion_grenade_mp":
                 case "flash_grenade_mp":
+                case "concussion_grenade_mp":
                 case "smoke_grenade_mp":
+                case "trophy_mp":
+                case "motion_sensor_mp":
+                case "thermobaric_grenade_mp":
                 self thread givesecondaryoffhand(offhand);
                 break;
 
@@ -279,40 +248,65 @@ loadLoadout()
         }
     }
 }
+
 GiveEquipment(equipment)
 {
-    equip = StrTok(equipment,"_");
-    if(equip[equip.size-1] != "mp" && !isSubStr(equipment,"specialty"))
+    equip = StrTok(equipment, "_");
+    
+    if(equip[(equip.size - 1)] != "mp" && !IsSubStr(equipment, "specialty"))
         equipment += "_mp";
     
-    self TakeWeapon(self GetCurrentOffhand());
-    self SetOffhandPrimaryClass("other");
-    self GiveStartAmmo(equipment);
-    self SetWeaponHudIconOverride( "primaryoffhand", equipment );
+    lethals = ["frag_grenade_mp","semtex_mp","throwingknife_mp","proximity_explosive_mp","c4_mp","mortar_shell_mp"];
+    hasEquipment     = self HasWeapon(equipment);
+
+    for(a=0;a<lethals.size;a++)
+    {
+        if(self HasWeapon1(lethals[a]))
+            self TakeWeapon(lethals[a] + "_mp");
+        
+        if(self _HasPerk(lethals[a] + "_mp"))
+            self _UnsetPerk(lethals[a] + "_mp");
+        
+        self SetOffhandPrimaryClass("none");
+    }
+    
+    if(!hasEquipment)
+        self givePerkEquipment(equipment, false);
 }
 
 GiveSecondaryOffhand(offhand)
 {
-    equip = StrTok(offhand,"_");
-    if(equip[equip.size-1] != "mp")
-        offhand += "_mp";
+    if(!IsSubStr(offhand, "specialty"))
+    {
+        equip = StrTok(offhand, "_");
+        
+        if(equip[(equip.size - 1)] != "mp")
+            offhand += "_mp";
+    }
     
-    if(offhand == "flash_grenade_mp")
+    offhands = ["flash_grenade_mp","concussion_grenade_mp","smoke_grenade_mp","trophy_mp","motion_sensor_mp","thermobaric_grenade_mp"];
+    hasEquipment       = self HasWeapon(offhand);
+    
+    for(a = 0; a < offhands.size; a++)
     {
-        self SetOffhandSecondaryClass("flash");
-        self SetWeaponAmmoClip(offhand,2);
+        if(self HasWeapon1(offhands[a]))
+            self TakeWeapon(offhands[a] + "_mp");
+        
+        if(self _HasPerk(offhands[a]))
+            self _UnsetPerk(offhands[a]);
+        
+        self SetOffhandSecondaryClass("none");
     }
-    else if(offhand == "concussion_grenade_mp")
-    {
-        self SetOffhandSecondaryClass("concussion");
-        self SetWeaponAmmoClip(offhand,2);
-    }
-    else if(offhand == "smoke_grenade_mp")
-    {
-        self SetOffhandSecondaryClass("smoke");
-        self SetWeaponAmmoClip(offhand,1);
-    }
-    self TakeWeapon(self GetCurrentOffhand());
-    self GiveWeapon(offhand);
-    self SetWeaponHudIconOverride( "secondaryoffhand", offhand );
+    
+    if(!hasEquipment)
+        self givePerkOffhand(offhand, false);
+}
+
+HasWeapon1(weapon)
+{
+    foreach(weap in self GetWeaponsList())
+        if(IsSubStr(weap, weapon) || weapon == weap)
+            return true;
+    
+    return false;
 }

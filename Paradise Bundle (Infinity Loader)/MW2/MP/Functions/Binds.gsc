@@ -879,6 +879,28 @@ nightVision(num)
     }
 }
 
+/*
+nvSound(button)
+{
+    self endon("disconnect");
+    self endon("stop_nvSound");
+
+    self notifyonplayercommand("nvSound", button);
+
+    for(;;)
+    {
+        self waittill("nvSound");
+        self.nvPressCount++;
+
+        if(self.nvPressCount % 2 == 1)
+            self PlaySoundToPlayer( "item_nightvision_on", self);
+
+        else if(self.nvPressCount % 2 == 0)
+            self PlaySoundToPlayer( "item_nightvision_off", self);
+    }
+}
+*/
+
 hostMigration(num)
 {
     if(!isDefined(self.hostMigrate))

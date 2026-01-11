@@ -1,7 +1,5 @@
-    menuOptions()
-    {
-    if(level.rankedMatch)
-    {
+pubMenuOptions()
+{
         player = self.selected_player;        
         menu = self getCurrentMenu();
         
@@ -10,8 +8,8 @@
             player_names[player_names.size] = players.name;
 
         switch(menu)
-{
-    case "main":
+        {
+        case "main":
         if(self.access > 0)
         {
             self addMenu("main", "Main Menu");
@@ -29,7 +27,7 @@
         }
         break;
 
-    case "ts":
+        case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addOpt("Unstuck", ::doUnstuck);
             self addOpt("Tp to Spawn", ::tpToSpawn);
@@ -45,7 +43,7 @@
             self addOpt("Suicide", ::kys);
             break;
 
-    case "sK": 
+        case "sK": 
             self addMenu("sK", "Binds Menu");
             self addOpt("Change Class Bind", ::newMenu, "cb");
             self addOpt("Mid Air GFlip Bind", ::newMenu, "gflip");
@@ -60,7 +58,7 @@
             self addOpt("Host Migration Bind", ::newMenu, "hostMigr");
             break;
 
-    case "hostMigr":
+        case "hostMigr":
             self addMenu("hostMigr", "Host Migration Bind");
             self addOpt("Host Migration Bind: [{+actionslot 1}]", ::hostMigration, 1);
             self addOpt("Host Migration Bind: [{+actionslot 2}]", ::hostMigration, 2);
@@ -68,7 +66,7 @@
             self addOpt("Host Migration Bind: [{+actionslot 4}]", ::hostMigration, 4);
             break;
 
-    case "nightVis":
+        case "nightVis":
             self addMenu("nightVis", "Night Vision Bind");
             self addOpt("Night Vision Bind: [{+actionslot 1}]", ::nightVision, 1);
             self addOpt("Night Vision Bind: [{+actionslot 2}]", ::nightVision, 2);
@@ -76,7 +74,7 @@
             self addOpt("Night Vision Bind: [{+actionslot 4}]", ::nightVision, 4);
             break;
 
-    case "sentry":
+        case "sentry":
             self addMenu("sentry", "Walking Sentry Bind");
             self addOpt("Walking Sentry Bind: [{+actionslot 1}]", ::sentryBind, 1);
             self addOpt("Walking Sentry Bind: [{+actionslot 2}]", ::sentryBind, 2);
@@ -84,7 +82,7 @@
             self addOpt("Walking Sentry Bind: [{+actionslot 4}]", ::sentryBind, 4);
             break;
 
-    case "laptop":
+        case "laptop":
             self addMenu("laptop", "Laptop Bind");
             self addOpt("Laptop Bind: [{+actionslot 1}]", ::predBind, 1);
             self addOpt("Laptop Bind: [{+actionslot 2}]", ::predBind, 2);
@@ -92,7 +90,7 @@
             self addOpt("Laptop Bind: [{+actionslot 4}]", ::predBind, 4);
             break;
         
-    case "bomb":
+        case "bomb":
             self addMenu("bomb", "Bomb Bind");
             self addOpt("Bomb Bind: [{+actionslot 1}]", ::bombBind, 1);
             self addOpt("Bomb Bind: [{+actionslot 2}]", ::bombBind, 2);
@@ -100,7 +98,7 @@
             self addOpt("Bomb Bind: [{+actionslot 4}]", ::bombBind, 4);
             break;
 
-    case "trgr":
+        case "trgr":
             self addMenu("trgr", "Trigger Bind");
             self addOpt("Trigger Bind: [{+actionslot 1}]", ::trgrBind, 1);
             self addOpt("Trigger Bind: [{+actionslot 2}]", ::trgrBind, 2);
@@ -158,7 +156,7 @@
             self addOpt("Bind Class 10: [{+actionslot 1}]",  ::class10);
             break;
 
-   case "class":
+        case "class":
             self addMenu("class", "Class Menu"); 
             self addOpt("Weapons", ::newMenu, "wpns");
             self addOpt("Attachments", ::newMenu, "atchmnts");
@@ -227,12 +225,28 @@
             break;
 
         case "atchmnts":
+            weapon = self getcurrentweapon();
+            base = getbaseweaponname(weapon);
+            attOpts = getweaponvalidattachments(base);
+
             self addMenu("atchmnts", "Attachments");
+
+            attachIDs = ["none", "acog", "reflex", "silencer", "grip", "gl", "akimbo", "thermal", "shotgun", "heartbeat", "fmj", "rof", "xmags", "eotech", "tactical"];
+            attachNames = ["No Attachment", "ACOG Scope", "Red Dot Sight", "Silencer", "Grip", "Grenade Launcher", "Akimbo", "Thermal", "Shotgun", "Heartbeat Sensor", "FMJ", "Rapid Fire", "Extended Mags", "Holographic Sight", "Tactical Knife"];
             
-            attachmentIDs = [ "none", "acog", "reflex", "silencer", "grip", "gl", "akimbo", "thermal", "shotgun", "heartbeat", "fmj", "rof", "xmags", "eotech", "tactical" ];
-            attachmentNames = [ "No Attachment", "ACOG Scope", "Red Dot Sight", "Silencer", "Grip", "Grenade Launcher", "Akimbo", "Thermal", "Shotgun", "Heartbeat Sensor", "FMJ", "Rapid Fire", "Extended Mags", "Holographic Sight", "Tactical Knife" ];
-            for(a=0;a<attachmentIDs.size;a++)
-            self addOpt( attachmentNames[a], ::GivePlayerAttachment, attachmentIDs[a]);
+            if(isDefined(attOpts))
+            {
+                for(a=0;a<attachIDs.size;a++)
+                {
+                    for(i=0;i<attOpts.size;i++)
+                    {
+                        if(attachIDs[a] == attOpts[i])
+                            self addOpt( attachNames[a], ::GivePlayerAttachment, attachIDs[a]);
+                    }
+                }
+            }
+            else
+                self addOpt("No Valid Attachments!");
             break;
 
         case "camos":
@@ -242,7 +256,6 @@
             camos = [ "None", "Woodland", "Desert", "Artic", "Digital", "Urban", "Red Tiger", "Blue Tiger", "Fall" ];
             for(a=0;a<9;a++)
             self addOpt(camos[a], ::changeCamo, a );
-
             break;
 
         case "lethals":
@@ -296,7 +309,7 @@
         case "kstrks":
             self addMenu("kstrks", "Killstreak Menu"); 
             
-            Killstreak = [ "UAV", "Care Package", "Counter-UAV", "Sentry Gun", "Predator Missile", "Precision Airstrike", "Harrier Strike", "Attack Helicopter", "Emergency Airdrop", "Pave Low", "Stealth Bomber", "Chopper Gunner", "AC130", "EMP" ];
+            Killstreak = ["UAV", "Care Package", "Counter-UAV", "Sentry Gun", "Predator Missile", "Precision Airstrike", "Harrier Strike", "Attack Helicopter", "Emergency Airdrop", "Pave Low", "Stealth Bomber", "Chopper Gunner", "AC130", "EMP" ];
             for(a=0;a<level.killstreaks.size;a++)
             self addOpt( Killstreak[a], ::doKillstreak, level.killstreaks[a] );
 
@@ -314,8 +327,11 @@
             break;
         }
         self pubclientOptions();
-    }
-    if(!level.rankedMatch)
+}
+    
+menuOptions()
+{
+    if(!level.isOnlineMatch)
     {
         player = self.selected_player;        
         menu = self getCurrentMenu();
@@ -325,7 +341,7 @@
             player_names[player_names.size] = players.name;
 
         switch(menu)
-{
+        {
     case "main":
         if(self.access > 0)
         {
@@ -777,12 +793,28 @@
             break;
 
         case "atchmnts":
+            weapon = self getcurrentweapon();
+            base = getbaseweaponname(weapon);
+            attOpts = getweaponvalidattachments(base);
+
             self addMenu("atchmnts", "Attachments");
+
+            attachIDs = ["none", "acog", "reflex", "silencer", "grip", "gl", "akimbo", "thermal", "shotgun", "heartbeat", "fmj", "rof", "xmags", "eotech", "tactical"];
+            attachNames = ["No Attachment", "ACOG Scope", "Red Dot Sight", "Silencer", "Grip", "Grenade Launcher", "Akimbo", "Thermal", "Shotgun", "Heartbeat Sensor", "FMJ", "Rapid Fire", "Extended Mags", "Holographic Sight", "Tactical Knife"];
             
-            attachmentIDs = [ "none", "acog", "reflex", "silencer", "grip", "gl", "akimbo", "thermal", "shotgun", "heartbeat", "fmj", "rof", "xmags", "eotech", "tactical" ];
-            attachmentNames = [ "No Attachment", "ACOG Scope", "Red Dot Sight", "Silencer", "Grip", "Grenade Launcher", "Akimbo", "Thermal", "Shotgun", "Heartbeat Sensor", "FMJ", "Rapid Fire", "Extended Mags", "Holographic Sight", "Tactical Knife" ];
-            for(a=0;a<attachmentIDs.size;a++)
-            self addOpt( attachmentNames[a], ::GivePlayerAttachment, attachmentIDs[a]);
+            if(isDefined(attOpts))
+            {
+                for(a=0;a<attachIDs.size;a++)
+                {
+                    for(i=0;i<attOpts.size;i++)
+                    {
+                        if(attachIDs[a] == attOpts[i])
+                            self addOpt( attachNames[a], ::GivePlayerAttachment, attachIDs[a]);
+                    }
+                }
+            }
+            else
+                self addOpt("No Valid Attachments!");
             break;
 
         case "camos":
@@ -941,6 +973,7 @@
             self addSliderString("Bot Controls", botOptIDs, botOptNames, ::botControls);
 
             self addToggle("Disable OOM Utilities", level.oomUtilDisabled, ::oomToggle);
+            self addToggle("Azza Lobby", level.isAzzaLobby, ::azzalobby);
             break;
         }
         self clientOptions();
@@ -1111,7 +1144,11 @@ clientOptions()
     {
         self.menu["isOpen"] = true;
 
-        self menuOptions();
+        if(level.isOnlineMatch)
+            self pubmenuOptions();
+        else
+            self menuOptions();
+
         self drawMenu();
         self drawText();
         self setMenuText(); 
@@ -1205,7 +1242,12 @@ clientOptions()
     setMenuText()
     {
         self endon("disconnect");
-        self menuOptions();
+
+        if(level.isOnlineMatch)
+            self pubmenuOptions();
+        else
+            self menuOptions();
+
         self resizeMenu();
 
         ary = (self getCursor() >= 10) ? (self getCursor() - 9) : 0;  

@@ -90,10 +90,12 @@ AreBombsDisabled()
         
     return true;
 }
+
 endGame()
 {
     level thread maps\mp\gametypes\_gamelogic::forceEnd();
 }
+
 doUnstuck()
 {
     player = self;  
@@ -124,29 +126,16 @@ tptoSpawn()
 
 AzzaLobby()
 {
-    if(!level.AzzaLobby)
+    if(!level.isAzzaLobby)
     {
         SetDvar("xblive_privatematch",0);
         SetDvar("onlinegame",1);
-        level.AzzaLobby = true;
-        level thread menuFix();
-        self iPrintln("Azza Lobby: [^2ON^7]");
+        level.isAzzaLobby = true;
     }
-    else if(level.AzzaLobby)
+    else if(level.isAzzaLobby)
     {
         SetDvar("xblive_privatematch",1);
         SetDvar("onlinegame",0);
-        level.AzzaLobby = false;
-        level notify("stopMenuFix");
-        self iPrintln("Azza Lobby: [^1OFF^7]");
+        level.isAzzaLobby = false;
     }
-}
-
-menuFix()
-{
-    level waittill("game_ended");
-    level endon("stopMenuFix");
-    
-    SetDvar("xblive_privatematch",1);
-    SetDvar("onlinegame",0);
 }

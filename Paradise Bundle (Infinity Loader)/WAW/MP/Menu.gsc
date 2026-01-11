@@ -48,7 +48,7 @@ case "class":
     rifleIDs   = ["svt40_mp","gewehr43_mp","m1garand_mp","stg44_mp","m1carbine_mp"];
     self addSliderString("Rifles", rifleIDs, rifleNames, ::doGiveWeapon);
 
-    smgNames = ["Thompson","MP40","Type 100","PPSh-41"];
+    smgNames = ["Thompson","MP40","Type 100","PPSH-41"];
     smgIDs   = ["thompson_mp","mp40_mp","type100smg_mp","ppsh_mp"];
     self addSliderString("SMGs", smgIDs, smgNames, ::doGiveWeapon);
 
@@ -76,11 +76,28 @@ case "class":
     break;
 
     case "attach":
+    weapon = self getcurrentweapon();
+    base = getbasename(weapon);
+    attOpts = GetWeaponValidAttachments(base);
+
     self addMenu("attach", "Attachments");
+
     attachNames = ["Sniper Scope", "Bayonet", "Rifle Grenade", "Flash Hider", "Aperture Sight", "Telescopic Sight", "Suppressor", "Box Magazine", "Round Drum", "Dual Magazines", "Grip", "Sawed-Off Shotgun", "Bipod"];
     attachIDs = ["scoped", "bayonet", "gl", "flash", "aperture", "telescopic", "silenced", "bigammo", "bigammo", "bigammo", "grip", "sawoff", "bipod"];
-    for(a=0;a<attachNames.size;a++)
-    self addOpt(attachNames[a], ::giveplayerattachment, attachIDs[a]);
+    
+    if(isDefined(attOpts))
+    {
+        for(a=0;a<attachIDs.size;a++)
+        {
+            for(i=0;i<attOpts.size;i++)
+            {
+                if(attachIDs[a] == attOpts[i])
+                    self addOpt( attachNames[a], ::GivePlayerAttachment, attachIDs[a]);
+            }
+        }
+    }
+    else
+        self addOpt("No Valid Attachments!");
     break;
 
     case "lethals":

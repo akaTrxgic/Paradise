@@ -81,42 +81,6 @@ lazyele()
     }
 }
 
-DolphinDive()
-{
- if(!IsDefined( self.DolphinDive ))
-    {
-         self.DolphinDive = true;
-            
-         while(IsDefined( self.DolphinDive ))
-         {
-             self.Prone360 = true;
-             setDvar("bg_prone_yawcap", 360);
-            
-            if(self isSprinting())
-            {
-                vec = AnglesToForward( self GetPlayerAngles() );
-                end = ( vec[0] * 110,vec[1] * 110,vec[2] * 110 );
-                    
-                if(self GetStance() == "crouch" && self IsOnGround())
-                {
-                    self SetStance( "prone" );
-                    self SetVelocity( self GetVelocity() + end + (0, 0, 300) );
-                        
-                    while(1)
-                    {
-                        if(self IsOnGround())
-                        break;
-                        wait .05;
-                    }
-                }
-            }
-            wait .05;
-        }
-    }    
-    else
-        self.DolphinDive = undefined; 
-}
-
 monitortrampoline(model)
 {
     self endon("disconnect");

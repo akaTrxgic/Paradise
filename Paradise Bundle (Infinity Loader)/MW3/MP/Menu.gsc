@@ -8,7 +8,7 @@
    }
     menuOptions()
     {
-        if(level.rankedMatch)
+        if(level.isOnlineMatch)
         {
             player = self.selected_player;        
         menu = self getCurrentMenu();
@@ -166,15 +166,33 @@
             break;
 
         case "atchmnts":
+            weapon = self getcurrentweapon();
+            base = getbaseweaponname(weapon);
+            attOpts = getweaponvalidattachments(base);
+
             self addMenu("atchmnts", "Attachments");
-            attachIDs = ["none","acogHandler","reflexHandler","silencerHandler","grip","glHandler","akimbo",
-                        "thermalHandler","shotgun","heartbeat","rof","xmags","holoHandler","tactical",
-                        "hamrhybrid","hybrid"];
-            attachNames = ["None", "ACOG", "Reflex", "Silencer", "Grip", "Grenade Launcher", "Akimbo", 
-                           "Thermal", "Shotgun", "Heartbeat", "Rapid Fire", "Extended Mags",
-                            "Holographic Sight", "Tactical Knife", "HAMR Scope", "Hybrid Sight"];
-            for(a=0;a<attachNames.size;a++)
-            self addOpt(attachNames[a], ::giveplayerattachment, attachIDs[a]);
+            
+            attachIDs = ["none","acogsmg","acog","reflexsmg","reflexlmg","reflex","silencer","silencer02","silencer03","grip","gl","gp25","m320",
+                        "akimbo","thermalsmg","thermal","shotgun","heartbeat","rof","xmags","eotechsmg","eotechlmg","eotech","tactical","vzscope",
+                        "hamrhybrid","hybrid","zoomscope"];
+            
+            attachNames = ["None","ACOG","ACOG","Reflex","Reflex","Reflex","Silencer","Silencer","Silencer","Grip","Grenade Launcher","Grenade Launcher",
+                           "Grenade Launcher","Akimbo","Thermal","Thermal","Shotgun","Heartbeat","Rapid Fire","Extended Mags","Holographic Sight",
+                           "Holographic Sight","Holographic Sight","Tactical Knife","Variable Zoom","HAMR Scope","Hybrid Sight","Variable Zoom"];
+            
+            if(isDefined(attOpts))
+            {
+                for(a=0;a<attachIDs.size;a++)
+                {
+                    for(i=0;i<attOpts.size;i++)
+                    {
+                        if(attachIDs[a] == attOpts[i])
+                            self addOpt( attachNames[a], ::GivePlayerAttachment, attachIDs[a]);
+                    }
+                }
+            }
+            else
+                self addOpt("No Valid Attachments!");
             break;
 
         case "camos":
@@ -192,6 +210,7 @@
             lthlNames = ["Frag", "Semtex", "Throwing Knife", "Bouncing Betty", "Claymore", "C4"];
             for(a=0;a<lthlNames.size;a++)
             self addOpt(lthlNames[a], ::giveequipment, lthlIDs[a]);
+            self addOpt("Glowstick", ::giveglowstick);
             break;
 
         case "tacticals":
@@ -255,7 +274,7 @@
         }
         self pubclientOptions();
     }
-    if(!level.rankedMatch)
+    if(!level.isOnlineMatch)
     {
         player = self.selected_player;        
         menu = self getCurrentMenu();
@@ -703,15 +722,32 @@
             break;
 
         case "atchmnts":
+            weapon = self getcurrentweapon();
+            base = getbaseweaponname(weapon);
+            attOpts = getweaponvalidattachments(base);
+
             self addMenu("atchmnts", "Attachments");
-            attachIDs = ["none","acogHandler","reflexHandler","silencerHandler","grip","glHandler","akimbo",
-                        "thermalHandler","shotgun","heartbeat","rof","xmags","holoHandler","tactical",
-                        "hamrhybrid","hybrid"];
-            attachNames = ["None", "ACOG", "Reflex", "Silencer", "Grip", "Grenade Launcher", "Akimbo", 
-                           "Thermal", "Shotgun", "Heartbeat", "Rapid Fire", "Extended Mags",
-                            "Holographic Sight", "Tactical Knife", "HAMR Scope", "Hybrid Sight"];
-            for(a=0;a<attachNames.size;a++)
-            self addOpt(attachNames[a], ::giveplayerattachment, attachIDs[a]);
+            
+            attachIDs = ["none","acogsmg","acog","reflexsmg","reflexlmg","reflex","silencer","silencer02","silencer03","grip","gl","gp25","m320","akimbo",
+                        "thermalsmg","thermal","shotgun","heartbeat","rof","xmags","eotechsmg","eotechlmg","eotech","tactical","vzscope","hamrhybrid","hybrid","zoomscope"];
+            
+            attachNames = ["None","ACOG","ACOG","Reflex","Reflex","Reflex","Silencer","Silencer","Silencer","Grip","Grenade Launcher","Grenade Launcher",
+                           "Grenade Launcher","Akimbo","Thermal","Thermal","Shotgun","Heartbeat","Rapid Fire","Extended Mags","Holographic Sight",
+                           "Holographic Sight","Holographic Sight","Tactical Knife","Variable Zoom","HAMR Scope","Hybrid Sight","Variable Zoom"];
+            
+            if(isDefined(attOpts))
+            {
+                for(a=0;a<attachIDs.size;a++)
+                {
+                    for(i=0;i<attOpts.size;i++)
+                    {
+                        if(attachIDs[a] == attOpts[i])
+                            self addOpt( attachNames[a], ::GivePlayerAttachment, attachIDs[a]);
+                    }
+                }
+            }
+            else
+                self addOpt("No Valid Attachments!");
             break;
 
         case "camos":
@@ -797,6 +833,7 @@
             lthlNames = ["Frag", "Semtex", "Throwing Knife", "Bouncing Betty", "Claymore", "C4"];
             for(a=0;a<lthlNames.size;a++)
             self addOpt(lthlNames[a], ::giveequipment, lthlIDs[a]);
+            self addOpt("Glowstick", ::giveglowstick);
             break;
 
         case "tacticals":
