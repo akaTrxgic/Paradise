@@ -30,8 +30,11 @@
         textElem.alpha = alpha;
         if(color != "rainbow")
             textElem.color = color;
-
+    #ifdef MW1
+        textElem setsafetext(text);
+    #else
         textElem settext(text);
+    #endif
         return textElem;
     }
 #endif
@@ -46,6 +49,7 @@
         if(color != "rainbow")
             boxElem.color = color;
 
+        boxElem.hideWhenInKillcam = true;
         boxElem.hideWhenInMenu = true;
         boxElem.archived = true;
         if( self.hud_amount >= 19 ) 

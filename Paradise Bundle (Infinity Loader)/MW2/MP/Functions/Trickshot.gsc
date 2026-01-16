@@ -111,7 +111,6 @@ knifeMod(type)
     }
 }
 
-
 lazyeletggl() 
 {
     if(!self.lazyEles)

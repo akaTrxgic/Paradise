@@ -61,7 +61,6 @@ pubInit()
 {
     level.callDamage           = level.callbackPlayerDamage;
     level.callbackPlayerDamage = ::pubmodifyPlayerDamage;
-
 #ifdef MW2
     level.killstreaks = [ "uav", "airdrop", "counter_uav", "airdrop_sentry_minigun", "predator_missile", "precision_airstrike", "harrier_airstrike", "helicopter", "airdrop_mega", "helicopter_flares", "stealth_airstrike", "helicopter_minigun", "ac130", "emp" ];
     precacheshader("hudsoftline");

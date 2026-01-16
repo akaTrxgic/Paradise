@@ -118,7 +118,7 @@ displayVer()
 
     Instructions.alpha = 0.5;
     Instructions.hidewheninmenu = 1;
-    Instructions.hidewheninkillcam = 1;
+    Instructions.hideWhenInKillcam = true;
 
     for( ;; )
     {
@@ -214,8 +214,8 @@ watermark()
     wm.y = 415;
 #endif
     wm.alpha = 1; 
-    wm.hidewheninmenu = 1;
-    wm.hidewheninkillcam = 1;
+    wm.hidewheninmenu = true;
+    wm.hideWhenInKillcam = true;
     #ifdef WAW || MW1
         wm setText("[{+speed_throw}] + [{+melee}] = Paradise");
     #else

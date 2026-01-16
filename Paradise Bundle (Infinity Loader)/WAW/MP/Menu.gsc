@@ -1,4 +1,3 @@
-
 menuOptions()
 {
     player = self.selected_player;        

@@ -1,13 +1,5 @@
-   porigin()
-   {
-        self iprintln("^2" + self getorigin());
-   }
-   pmapname()
-   {
-        self iprintln("^1" + getdvar("mapname"));
-   }
-    menuOptions()
-    {
+pubmenuOptions()
+{
         if(level.isOnlineMatch)
         {
             player = self.selected_player;        
@@ -18,7 +10,7 @@
             player_names[player_names.size] = players.name;
 
         switch(menu)
-{
+    {
     case "main":
         if(self.access > 0)
         {
@@ -41,6 +33,7 @@
             self addMenu("ts", "Trickshot Menu");
             self addOpt("Unstuck", ::doUnstuck);
             self addOpt("Tp to Spawn", ::tpToSpawn);
+            self addToggle("Lazy Elevators", self.lazyEles, ::lazyeletggl);
 
             canOpts = "Current;Infinite";
             self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
@@ -58,6 +51,33 @@
             self addOpt("Skree Bind", ::newMenu, "skree");
             self addOpt("Laptop Bind", ::newMenu, "laptop");
             self addOpt("Trigger Bind", ::newMenu, "trgr");
+            self addOpt("Walking Sentry Bind", ::newMenu, "sentry");
+            self addOpt("Walking IMS Bind", ::newMenu, "ims");
+            self addOpt("Walking Remote Sentry Bind", ::newMenu, "remSentry");
+            break;
+
+    case "remSentry":
+            self addMenu("remSentry", "Walking Remote Sentry Bind");
+            self addOpt("Walking Remote Sentry Bind: [{+actionslot 1}]", ::remSentryBind, 1);
+            self addOpt("Walking Remote Sentry Bind: [{+actionslot 2}]", ::remSentryBind, 2);
+            self addOpt("Walking Remote Sentry Bind: [{+actionslot 3}]", ::remSentryBind, 3);
+            self addOpt("Walking Remote Sentry Bind: [{+actionslot 4}]", ::remSentryBind, 4);
+            break;
+
+    case "ims":
+            self addMenu("ims", "Walking IMS Bind");
+            self addOpt("Walking IMS Bind: [{+actionslot 1}]", ::imsBind, 1);
+            self addOpt("Walking IMS Bind: [{+actionslot 2}]", ::imsBind, 2);
+            self addOpt("Walking IMS Bind: [{+actionslot 3}]", ::imsBind, 3);
+            self addOpt("Walking IMS Bind: [{+actionslot 4}]", ::imsBind, 4);
+            break;
+
+    case "sentry":
+            self addMenu("sentry", "Walking Sentry Bind");
+            self addOpt("Walking Sentry Bind: [{+actionslot 1}]", ::sentryBind, 1);
+            self addOpt("Walking Sentry Bind: [{+actionslot 2}]", ::sentryBind, 2);
+            self addOpt("Walking Sentry Bind: [{+actionslot 3}]", ::sentryBind, 3);
+            self addOpt("Walking Sentry Bind: [{+actionslot 4}]", ::sentryBind, 4);
             break;
 
     case "laptop":
@@ -111,6 +131,16 @@
             self addOpt("Bind Class 3: [{+actionslot 1}]",  ::class3);
             self addOpt("Bind Class 4: [{+actionslot 1}]",  ::class4);
             self addOpt("Bind Class 5: [{+actionslot 1}]",  ::class5);
+            self addOpt("Bind Class 6: [{+actionslot 1}]",  ::class6);
+            self addOpt("Bind Class 7: [{+actionslot 1}]",  ::class7);
+            self addOpt("Bind Class 8: [{+actionslot 1}]",  ::class8);
+            self addOpt("Bind Class 9: [{+actionslot 1}]",  ::class9);
+            self addOpt("Bind Class 10: [{+actionslot 1}]",  ::class10);
+            self addOpt("Bind Class 11: [{+actionslot 1}]",  ::class11);
+            self addOpt("Bind Class 12: [{+actionslot 1}]",  ::class12);
+            self addOpt("Bind Class 13: [{+actionslot 1}]",  ::class13);
+            self addOpt("Bind Class 14: [{+actionslot 1}]",  ::class14);
+            self addOpt("Bind Class 15: [{+actionslot 1}]",  ::class15);
             break;
 
    case "class":
@@ -274,8 +304,9 @@
         }
         self pubclientOptions();
     }
-    if(!level.isOnlineMatch)
-    {
+}
+menuOptions()
+{
         player = self.selected_player;        
         menu = self getCurrentMenu();
         
@@ -328,6 +359,33 @@
             self addOpt("Skree Bind", ::newMenu, "skree");
             self addOpt("Laptop Bind", ::newMenu, "laptop");
             self addOpt("Trigger Bind", ::newMenu, "trgr");
+            self addOpt("Walking Sentry Bind", ::newMenu, "sentry");
+            self addOpt("Walking IMS Bind", ::newMenu, "ims");
+            self addOpt("Walking Remote Sentry Bind", ::newMenu, "remSentry");
+            break;
+
+    case "remSentry":
+            self addMenu("remSentry", "Walking Remote Sentry Bind");
+            self addOpt("Walking Remote Sentry Bind: [{+actionslot 1}]", ::remSentryBind, 1);
+            self addOpt("Walking Remote Sentry Bind: [{+actionslot 2}]", ::remSentryBind, 2);
+            self addOpt("Walking Remote Sentry Bind: [{+actionslot 3}]", ::remSentryBind, 3);
+            self addOpt("Walking Remote Sentry Bind: [{+actionslot 4}]", ::remSentryBind, 4);
+            break;
+
+    case "ims":
+            self addMenu("ims", "Walking IMS Bind");
+            self addOpt("Walking IMS Bind: [{+actionslot 1}]", ::imsBind, 1);
+            self addOpt("Walking IMS Bind: [{+actionslot 2}]", ::imsBind, 2);
+            self addOpt("Walking IMS Bind: [{+actionslot 3}]", ::imsBind, 3);
+            self addOpt("Walking IMS Bind: [{+actionslot 4}]", ::imsBind, 4);
+            break;
+
+    case "sentry":
+            self addMenu("sentry", "Walking Sentry Bind");
+            self addOpt("Walking Sentry Bind: [{+actionslot 1}]", ::sentryBind, 1);
+            self addOpt("Walking Sentry Bind: [{+actionslot 2}]", ::sentryBind, 2);
+            self addOpt("Walking Sentry Bind: [{+actionslot 3}]", ::sentryBind, 3);
+            self addOpt("Walking Sentry Bind: [{+actionslot 4}]", ::sentryBind, 4);
             break;
 
     case "laptop":
@@ -885,7 +943,7 @@
             if(self ishost() || self isdeveloper())
             self addOpt("Fake MOAB", ::fakenuke);
             break;
-/*
+    /*
         case "acc":
         self addMenu("acc", "Account Menu");
                     
@@ -898,7 +956,7 @@
         //self addOpt("Button Class Names", ::buttonclasses);
         //self addOpt("Colored Class Names", ::coloredClassNames);
         break;
-*/
+    */
         case "host":
             self addMenu("host", "Host Options");
             self addOpt("Client Menu", ::newMenu, "Verify");
@@ -923,7 +981,6 @@
         }
         self clientOptions();
     }
-}
 
 pubclientOptions()
 {   
@@ -1089,7 +1146,11 @@ clientOptions()
     {
         self.menu["isOpen"] = true;
 
-        self menuOptions();
+        if(level.isOnlineMatch)
+            self pubmenuOptions();
+        else
+            self menuOptions();
+
         self drawMenu();
         self drawText();
         self setMenuText(); 
@@ -1183,7 +1244,12 @@ clientOptions()
     setMenuText()
     {
         self endon("disconnect");
-        self menuOptions();
+        
+        if(level.isOnlineMatch)
+            self pubmenuOptions();
+        else
+            self menuOptions();
+
         self resizeMenu();
 
         ary = (self getCursor() >= 10) ? (self getCursor() - 9) : 0;  

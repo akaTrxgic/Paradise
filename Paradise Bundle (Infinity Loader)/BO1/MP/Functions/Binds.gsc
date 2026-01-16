@@ -1,3 +1,143 @@
+samTurretBind(num)
+{
+    if(!isDefined(self.basedSAM))
+    {
+            if(num == 1)
+                self iPrintLn("Press [{+Actionslot 1}] for ^2Walking SAM");
+
+            else if(num == 2)
+                self iPrintLn("Press [{+Actionslot 2}] for ^2Walking SAM");
+
+            else if(num == 3)
+                self iPrintLn("Press [{+Actionslot 3}] for ^2Walking SAM");
+
+            else if(num == 4)
+                self iPrintLn("Press [{+Actionslot 4}] for ^2Walking SAM");
+            
+
+            self.basedSAM = true;
+
+            while(isDefined(self.basedSAM))
+            {
+                if(num == 1)
+                {
+                    if(self actionslotonebuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\_turret_killstreak::useTowTurret(self);
+                        self enableWeapons();
+                    }
+
+                    wait .1;
+                }
+                else if(num == 2)
+                {
+                    if(self actionslottwobuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\_turret_killstreak::useTowTurret(self);
+                        self enableWeapons();
+                    }
+                    
+                    wait .1;
+                }
+                else if(num == 3)
+                {
+                    if(self actionslotthreebuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\_turret_killstreak::useTowTurret(self);
+                        self enableWeapons();
+                    }
+
+                    wait .1;
+                }
+                else if(num == 4)
+                {
+                    if(self actionslotfourbuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\_turret_killstreak::useTowTurret(self);
+                        self enableWeapons();
+                    }
+                    
+                    wait .1;
+                }
+            }
+    }
+    else if(isDefined(self.basedSAM)) 
+    { 
+        self iPrintLn("Walking SAM Bind [^1OFF^7]");
+        self.basedSAM = undefined; 
+    }
+}
+
+sentryBind(num)
+{
+    if(!isDefined(self.basedSentry))
+    {
+            if(num == 1)
+                self iPrintLn("Press [{+Actionslot 1}] for ^2Walking Sentry");
+
+            else if(num == 2)
+                self iPrintLn("Press [{+Actionslot 2}] for ^2Walking Sentry");
+
+            else if(num == 3)
+                self iPrintLn("Press [{+Actionslot 3}] for ^2Walking Sentry");
+
+            else if(num == 4)
+                self iPrintLn("Press [{+Actionslot 4}] for ^2Walking Sentry");
+            
+
+            self.basedSentry = true;
+
+            while(isDefined(self.basedSentry))
+            {
+                if(num == 1)
+                {
+                    if(self actionslotonebuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\_turret_killstreak::useSentryTurret(self);
+                        self enableWeapons();
+                    }
+
+                    wait .1;
+                }
+                else if(num == 2)
+                {
+                    if(self actionslottwobuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\_turret_killstreak::useSentryTurret(self);
+                        self enableWeapons();
+                    }
+                    
+                    wait .1;
+                }
+                else if(num == 3)
+                {
+                    if(self actionslotthreebuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\_turret_killstreak::useSentryTurret(self);
+                        self enableWeapons();
+                    }
+
+                    wait .1;
+                }
+                else if(num == 4)
+                {
+                    if(self actionslotfourbuttonpressed() && !self.menu["isOpen"])
+                    {
+                        self thread maps\mp\_turret_killstreak::useSentryTurret(self);
+                        self enableWeapons();
+                    }
+                    
+                    wait .1;
+                }
+            }
+    }
+    else if(isDefined(self.basedSentry)) 
+    { 
+        self iPrintLn("Walking Sentry Bind [^1OFF^7]");
+        self.basedSentry = undefined; 
+    }
+}
+
 Canzoom(num)
 {
     self endon ("disconnect");
@@ -571,6 +711,7 @@ MidAirGflip()
     wait 0.01;
     self setStance("prone");
 }
+
 class1()
 {
    if(!isDefined(self.ChangeClass))

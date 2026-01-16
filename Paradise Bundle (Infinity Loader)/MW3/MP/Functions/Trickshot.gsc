@@ -41,6 +41,47 @@ doNoClip()
         }
 }
 
+lazyeletggl() 
+{
+    if(!self.lazyEles)
+    {
+        self.lazyEles = 1;
+        self thread lazyele();
+    }
+    else if(self.lazyEles)
+    {
+        self notify ("stop_lzEle");
+        self.lazyEles = 0;
+    }
+}
+
+lazyele()
+{
+    self endon("stop_lzEle");
+
+    for(;;)
+    {
+        while (self getStance() != "crouch") 
+            wait .01;
+        while (self getStance() != "stand") 
+            wait .01;
+            
+        x = self.origin[0];
+        z = self.origin[1];
+        
+        if (x > 0)
+            x += 0.15;
+        else
+            x -= 0.15;
+        if (z > 0)
+            z += 0.15;
+        else
+            z -= 0.15;
+        self setOrigin((int(x), int(z), self.origin[2]));
+        wait .01;
+    }
+}
+
 DolphinDive()
 {
  if(!IsDefined( self.DolphinDive ))

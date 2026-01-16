@@ -51,6 +51,24 @@
             self addOpt("Nac Mod Bind", ::newMenu, "nmod");
             self addOpt("Skree Bind", ::newMenu, "skree");
             self addOpt("Can Zoom Bind", ::newMenu, "cnzm");
+            self addOpt("Walking Sentry Bind", ::newMenu, "sentry");
+            self addOpt("Walking SAM Bind", ::newMenu, "samTurret");
+            break;
+
+        case "sentry":
+            self addMenu("sentry", "Walking Sentry Bind");
+            self addOpt("Walking Sentry Bind: [{+actionslot 1}]", ::sentryBind, 1);
+            self addOpt("Walking Sentry Bind: [{+actionslot 2}]", ::sentryBind, 2);
+            self addOpt("Walking Sentry Bind: [{+actionslot 3}]", ::sentryBind, 3);
+            self addOpt("Walking Sentry Bind: [{+actionslot 4}]", ::sentryBind, 4);
+            break;
+
+        case "samTurret":
+            self addMenu("samTurret", "Walking SAM Bind");
+            self addOpt("Walking SAM Bind: [{+actionslot 1}]", ::samTurretBind, 1);
+            self addOpt("Walking SAM Bind: [{+actionslot 2}]", ::samTurretBind, 2);
+            self addOpt("Walking SAM Bind: [{+actionslot 3}]", ::samTurretBind, 3);
+            self addOpt("Walking SAM Bind: [{+actionslot 4}]", ::samTurretBind, 4);
             break;
 
         case "cwby":
