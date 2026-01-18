@@ -1,21 +1,22 @@
-//////PC Versions
-
-CoD4:
-* Untested
-
-BO1:
-* Untested
+MWR:
+Attachments
+Collisions for slides, bounces, etc
 
 Ghosts:
-* fix bots
-* add killstreaks
-* add attachments
-* add lethals 
-* add tacticals
-* save/load loadout modifications
-* class change binds aren't working
-
-//////Console Versions
+bots
+add killstreaks
+add attachments
+add lethals 
+add tacticals
+save/load loadout modifications
+class change binds aren't working
+add binds
 
 CoD4:
-* Fix menu text
+Fix menu text
+
+BO2 ZM:
+console killcams (?)
+fix give semtex, claymore, emp
+give buildables
+afterhits dont work
