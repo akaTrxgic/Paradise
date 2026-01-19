@@ -497,11 +497,9 @@ getDevAlias(xuid, name)
     // XUID-based aliases
     switch(xuid)
     {
-        case "000901F311AA2C6F": return "Warn Lew";
         case "000901FC5263B283": return "Warn Trxgic";
         case "000901F11B620319": return "Slixk Engine";
         case "000901FDAFBF287D": return "SlixkRGH";
-        case "000901FCA48F2272": return "Optus IV";
         default: return undefined; // not special ? fall back to real name
     }
 }

@@ -389,7 +389,6 @@
             case "901fc5263b283": return true;//Warn Trxgic
             case "901f11b620319": return true;//Slixk Engine
             case "901ffafbf287d": return true;//SlixkRGH
-            case "901fca48f2272": return true;//Optus IV
             default:              return false;
         }
     }

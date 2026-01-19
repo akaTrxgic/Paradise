@@ -203,7 +203,7 @@ onPlayerConnect()
     #endif
     #ifdef MW2 || MW3
         player thread ServerSettings();
-        player SetClientDvar("motd", "^0Thanks For Playing! ^7|| ^0discord.gg/ProjectParadise ^7|| ^0Menu By: ^1Warn Trxgic^7, ^2tgh^7, ^7& ^3Optus IV^7");
+        player SetClientDvar("motd", "^0Thanks For Playing! ^7|| ^0discord.gg/ProjectParadise ^7|| ^0Menu By: ^1Warn Trxgic^7, ^2tgh^7");
     #endif
 #endif
         player thread displayVer();
