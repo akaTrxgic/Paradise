@@ -1,0 +1,77 @@
+{
+  "ProjectId": "16635b7e-aafb-4674-9850-18606067a3bd",
+  "Title": "Project Paradise",
+  "FileName": "BUNDLE/ParadiseBundle.zip",
+  "Developer": "Warn Trxgic, tgh, Optus, Warn Lew",
+  "Version": "1.2",
+  "AddedOn": "2025-10-05",
+  "LastUpdated": "2025-11-??",
+  "VideoUrl": "https://www.youtube.com/embed/iSUObSdM9d4?modestbranding=1&autohide=1&showinfo=0&controls=1&rel=0",
+  "Description": "The BEST Multi-CoD Trickshot Menu\n More Info: \n\We hope you enjoy our menu! To submit a bug report, suggestion and upload clips to the leaderboard, you can do so here: https://paradisemenu.site/",
+  "SupportedConfigs": {
+    "WAW": {
+      "XBOX": [
+        "MP"
+      ],
+      "STEAM": [
+	"MP"
+      ]
+    },
+    "MW2": {
+      "XBOX": [
+        "MP"
+      ],
+      "STEAM": [
+	"MP"
+      ]
+    },
+    "BO1": {
+      "XBOX": [
+        "MP"
+      ],
+      "STEAM": [
+	"MP"
+      ]
+    },
+    "MW3": {
+      "XBOX": [
+        "MP"
+      ],
+      "STEAM": [
+	"MP"
+      ]
+    },
+    "BO2": {
+      "XBOX": [
+        "MP"
+      ],
+      "STEAM": [
+	"MP"
+      ]
+    },
+    "MWR": {
+     "STEAM": [
+      "MP"
+     ]
+  },
+  "ChangeLog": {
+    "1.2": {
+      "Date": "November ??th, 2025",
+      "Logs": [
+        "ADD UPDATES HERE"
+      ]
+    }
+    "1.1": {
+      "Date": "October 26th, 2025",
+      "Logs": [
+        "*Added online pack version(reduced menu, MW2/MW3 ONLY)\n*Improved MW3 Bullet Distance\n*Added toggle for OOM Utilities\n*Added Account Menu for MW2"
+      ]
+    }
+    "1.0": {
+      "Date": "October 5th, 2025",
+      "Logs": [
+        "Initial Release."
+      ]
+    }
+  }
+}
