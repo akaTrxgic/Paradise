@@ -28,11 +28,10 @@ menuOptions()
             self addToggle("Noclip [{+smoke}]", self.ufo, ::NoClip);
             self addOpt("Go for Two Piece", ::dotwopiece);
 
-            canswapActions = ["Current", "Infinite"];
-            canswapIDs     = ["Current","Infinite"]; 
-            self addSliderString("Canswap Mode", canswapIDs, canswapActions, ::SetCanswapMode);
+            canOpts = ["Current", "Infinite"];
+            self addSliderString("Canswap Mode", canOpts, canOpts, ::SetCanswapMode);
 
-            self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+            self addToggle("Instashoots", self.instashoot, ::instashoot);
             self addOpt("Spawn Slide", ::slide);
 
             spawnOptionsActions = ["Bounce","Platform","Crate"];

@@ -38,7 +38,7 @@ pubmenuOptions()
             canOpts = "Current;Infinite";
             self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
 
-            self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+            self addToggle("Instashoots", self.instashoot, ::instashoot);
             self addToggle("Dolphin Dive", self.DolphinDive, ::DolphinDive);       
             self addOpt("Suicide", ::kys);
             break;
@@ -342,7 +342,7 @@ menuOptions()
             canOpts = "Current;Infinite";
             self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
 
-            self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+            self addToggle("Instashoots", self.instashoot, ::instashoot);
             self addToggle("Dolphin Dive", self.DolphinDive, ::DolphinDive);
             self addOpt("Spawn Slide @ Crosshairs", ::slide);
 

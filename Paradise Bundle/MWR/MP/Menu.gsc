@@ -18,7 +18,7 @@ menuOptions()
             if(self.access > 0)
             {
                 self addMenu("main", "Main Menu");
-                self addOpt("Print Wpn Name", ::pwpn);
+                //self addOpt("Print Wpn Name", ::pwpn);
                 self addOpt("Trickshot Menu", ::newMenu, "ts");
                 self addOpt("Binds Menu", ::newMenu, "sK");
                 self addOpt("Teleport Menu", ::newMenu, "tp");
@@ -41,7 +41,7 @@ menuOptions()
                 canOpts = "Current;Infinite";
                 self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
 
-                self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+                self addToggle("Instashoots", self.instashoot, ::instashoot);
 
                 self addOpt("Spawn Slide @ Crosshairs", ::slide);
 

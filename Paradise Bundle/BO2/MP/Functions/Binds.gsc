@@ -1,3 +1,73 @@
+iPadBind(num)
+{
+    if(!isDefined(self.basediPad))
+    {
+        if(num == 1)
+            self iPrintLn("Press [{+Actionslot 1}] for ^2iPad");
+
+        else if(num == 2)
+            self iPrintLn("Press [{+Actionslot 2}] for ^2iPad");
+
+        else if(num == 3)
+            self iPrintLn("Press [{+Actionslot 3}] for ^2iPad");
+
+        else if(num == 4)
+            self iPrintLn("Press [{+Actionslot 4}] for ^2iPad");
+        
+
+        self.basediPad = true;
+
+        while(isDefined(self.basediPad))
+        {
+            if(num == 1)
+            {
+                if(self actionslotonebuttonpressed() && !self.menu["isOpen"])
+                {
+                    self giveweapon("killstreak_remote_turret_mp");
+                    self switchtoweapon("killstreak_remote_turret_mp");
+                }
+
+                wait .01;
+            }
+            else if(num == 2)
+            {
+                if(self actionslottwobuttonpressed() && !self.menu["isOpen"])
+                {
+                    self giveweapon("killstreak_remote_turret_mp");
+                    self switchtoweapon("killstreak_remote_turret_mp");
+                }
+                
+                wait .01;
+            }
+            else if(num == 3)
+            {
+                if(self actionslotthreebuttonpressed() && !self.menu["isOpen"])
+                {
+                    self giveweapon("killstreak_remote_turret_mp");
+                    self switchtoweapon("killstreak_remote_turret_mp");
+                }
+
+                wait .01;
+            }
+            else if(num == 4)
+            {
+                if(self actionslotfourbuttonpressed() && !self.menu["isOpen"])
+                {
+                    self giveweapon("killstreak_remote_turret_mp");
+                    self switchtoweapon("killstreak_remote_turret_mp");
+                }
+                
+                wait .01;
+            }
+        }
+    }
+    else if(isDefined(self.basediPad)) 
+    { 
+        self iPrintLn("iPad Bind [^1OFF^7]");
+        self.basediPad = undefined; 
+    }
+}
+
 sentryTurret(num)
 {
     if(!isDefined(self.basedSentry))

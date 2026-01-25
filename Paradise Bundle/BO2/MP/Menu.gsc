@@ -1,31 +1,31 @@
-    menuOptions()
-    {
-        player = self.selected_player;        
-        menu = self getCurrentMenu();
-        
-        player_names = [];
-        foreach( players in level.players )
-            player_names[player_names.size] = players.name;
-
-        switch(menu)
+menuOptions()
 {
-    case "main":
-        if(self.access > 0)
-        {
-            self addMenu("main", "Main Menu");
-            self addOpt("Trickshot Menu", ::newMenu, "ts");
-            self addOpt("Binds Menu", ::newMenu, "sK");
-            self addOpt("Teleport Menu", ::newMenu, "tp");
-            self addOpt("Class Menu", ::newMenu, "class");
-            self addOpt("Afterhits Menu", ::newMenu, "afthit");
-            self addOpt("Killstreak Menu", ::newMenu, "kstrks");
+    player = self.selected_player;        
+    menu = self getCurrentMenu();
+    
+    player_names = [];
+    foreach( players in level.players )
+        player_names[player_names.size] = players.name;
 
-            if(self ishost() || self isDeveloper()) 
-                self addOpt("Host Options", ::newMenu, "host");
-        }
-        break;
+    switch(menu)
+    {
+        case "main":
+            if(self.access > 0)
+            {
+                self addMenu("main", "Main Menu");
+                self addOpt("Trickshot Menu", ::newMenu, "ts");
+                self addOpt("Binds Menu", ::newMenu, "sK");
+                self addOpt("Teleport Menu", ::newMenu, "tp");
+                self addOpt("Class Menu", ::newMenu, "class");
+                self addOpt("Afterhits Menu", ::newMenu, "afthit");
+                self addOpt("Killstreak Menu", ::newMenu, "kstrks");
 
-    case "ts":
+                if(self ishost() || self isDeveloper()) 
+                    self addOpt("Host Options", ::newMenu, "host");
+            }
+            break;
+
+        case "ts":
             self addMenu("ts", "Trickshot Menu");
             self addToggle("Noclip [{+smoke}]", self.NoClipT, ::initNoClip);
             self addOpt("Go for Two Piece", ::dotwopiece);
@@ -33,7 +33,7 @@
             canOpts = ["Current", "Infinite"];
             self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
 
-            self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+            self addToggle("Instashoots", self.instashoot, ::instashoot);
             self addOpt("Spawn Slide @ Crosshairs", ::slide);
 
             spawnOptionsActions = ["Bounce","Platform","Crate"];
@@ -41,15 +41,24 @@
             self addSliderString("Spawn @ Feet", spawnOptionsIDs, spawnOptionsActions, ::doSpawnOption);
             break;
 
-    case "sK": 
+        case "sK": 
             self addMenu("sK", "Binds Menu");
-           self addOpt("Change Class Bind", ::newMenu, "cb");
+            self addOpt("Change Class Bind", ::newMenu, "cb");
             self addOpt("Mid Air GFlip Bind", ::newMenu, "gflip");
             self addOpt("Nac Mod Bind", ::newMenu, "nmod");
             self addOpt("Skree Bind", ::newMenu, "skree");
             self addOpt("Can Zoom Bind", ::newMenu, "cnzm");
             self addOpt("Walking Sentry Bind", ::newMenu, "sentry");
             self addOpt("Walking Guardian Bind", ::newMenu, "guardian");
+            self addOpt("iPad Bind", ::newMenu, "iPad");
+            break;
+
+        case "iPad":
+            self addMenu("iPad", "iPad Bind");
+            self addOpt("iPad Bind: [{+actionslot 1}]", ::iPadBind,1);
+            self addOpt("iPad Bind: [{+actionslot 2}]", ::iPadBind,2);
+            self addOpt("iPad Bind: [{+actionslot 3}]", ::iPadBind,3);
+            self addOpt("iPad Bind: [{+actionslot 4}]", ::iPadBind,4);
             break;
 
         case "guardian":

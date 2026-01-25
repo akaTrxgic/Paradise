@@ -30,7 +30,7 @@ SetCanswapMode(type)
             self thread CurrCanswapLoop();
         }
 
-        else if(self.currCan && self.currCanWpn == self getCurrentWeapon())
+        else if(self.currCan)
         {
             self.currCan = 0;
             self iprintln("Canswap Mode: [^1OFF^7]");

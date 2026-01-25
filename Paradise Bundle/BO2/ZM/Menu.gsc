@@ -33,7 +33,7 @@
             canOpts = ["Current", "Infinite"];
             self addSliderString("Canswaps", canOpts, canOpts, ::SetCanswapMode);
 
-            self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+            self addToggle("Instashoots", self.instashoot, ::instashoot);
             break;
 
             case "sK": 

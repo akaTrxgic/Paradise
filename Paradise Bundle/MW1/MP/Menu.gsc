@@ -32,7 +32,7 @@ menuOptions()
             canswapIDs     = ["Current","Infinite"]; 
             self addSliderString("Canswap Mode", canswapIDs, canswapActions, ::SetCanswapMode);
 
-            self addToggle("Toggle Instashoots", self.instashoot, ::instashoot);
+            self addToggle("Instashoots", self.instashoot, ::instashoot);
             self addOpt("Spawn Slide", ::slide);
 
             spawnOptionsActions = ["Bounce","Platform","Crate"];
