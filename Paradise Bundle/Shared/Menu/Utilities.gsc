@@ -384,7 +384,7 @@ toUpper( string )
     {
         switch(self getxuid())
         {
-            case "901fc5263b283": return true;//Warn Trxgic
+            case "901fc5263b283": return true; //akaTrxgic
             default:              return false;
         }
     }
@@ -421,3 +421,4 @@ GetDistance(you, them)
         dz = you.origin[2] - them.origin[2];    
         return floor(Sqrt((dx * dx) + (dy * dy) + (dz * dz)) * 0.03048);
     }
+
