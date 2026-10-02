@@ -1,0 +1,9 @@
+USE THE FILES FROM THE "COMPILED" FOLDER
+
+* Extract the files from the .zip
+* Launch Xbox 360 Neighborhood (or put extracted files on USB)
+* Navigate to your MW3 game path (ie HDD > Games > MW3)
+* Extract the raw folder to your game path. When done it should be: [MW3 Path] > raw > script.gscbin
+* Extract the GSCLoader.xex to the root of your HDD
+* Launch MW3 and load the .xex via a module loader (or set as a plugin)
+* Then launch the game and the GSC will load whenever you start a match
