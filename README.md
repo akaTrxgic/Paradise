@@ -2,11 +2,34 @@ Welcome to Project Paradise!
 
 Join the discord: https://discord.gg/qbpnQfbVqY
 
-This is a GSC trickshot menu that I have spent the better part of a year or so developing. It's by no means perfect, but it's been a huge learning project for me.
+### XEX Features
+| Feature | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Menu Working** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | N/A |
+| **Force Host** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
+| **Force Start** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
+| **Game Settings** | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | N/A |
+| **Min/Max Clients** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
+| **Disable DLC** | ✅ | ✅ | ✅ | ✅ | N/A | ❌ | ✅ | ❌ | ❌ | N/A |
+| **Load GSC** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
+| **GSC Mem funcs** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
 
--- About the Menu --
+* WriteByte("address", "value");
+* WriteShort("address", "value");
+* WriteInt("address", "value");
+* WriteFloat("address", "value");
+* WriteString("address", "value");
+* ReadByte("address");
+* ReadShort("address");
+* ReadInt("address");
+* ReadFloat("address");
+* ReadString("address");
+* RPC("address", "arg1", "arg2", "arg3", "arg4", "arg5", "arg6", "arg7", "arg8" );
 
-Features:
+* MW3: Bot spawning re-added [addtestclient("name")]
+
+### GSC Features
+
 * Distance Tracking
 * Almost Hit Tracking
 * Wallbang Everything
@@ -16,9 +39,11 @@ Features:
 * Public Match (Pack) & Private Match (Azza)
 * and more!
 
+### Infinity Loader version(s) are no longer supported!
+
 Credits:
 * Xesoftware: menu base, helped with guidance when I got stuck or was struggling to figure something out, also has provided code snippets
 * CF4_99: showed and explained how to fix issues with the base on certain titles, overflow fix, helped with guidance when I got stuck or was struggling to figure something out, also has provided code snippets
-* Optus IV/Deprecated: ran the original site, has helped a lot with code and sorting issues, porting base to just about every game, and so much more
+* Deprecated: ran the original site, has helped a lot with code and sorting issues, porting base to just about every game, and so much more
 * Kurt: Provided memory addresses & methods for mw2/mw3 animations
 * Broph: Helped with a lot of the ports (without IL versions) and has helped with some of the code on the IL versions
