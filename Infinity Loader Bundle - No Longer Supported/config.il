@@ -1,0 +1,1 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project><Title>Paradise Azza Bundle</Title><Author>akaTrxgic &amp; Deprecated</Author><Game>BO2</Game><Mode>ZM</Mode><Platform>Xbox</Platform><Symbols>DEBUG;EXAMPLE</Symbols></Project>
