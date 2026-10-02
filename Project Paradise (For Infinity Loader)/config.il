@@ -1,1 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Project><Title>Paradise Azza Bundle</Title><Author>akaTrxgic &amp; Deprecated</Author><Game>BO4</Game><Mode>MP</Mode><Platform>BattleNet</Platform><Symbols>DEBUG;EXAMPLE</Symbols></Project>
