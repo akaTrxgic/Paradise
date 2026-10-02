@@ -14,6 +14,8 @@ Join the discord: https://discord.gg/qbpnQfbVqY
 | **Load GSC** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
 | **GSC Mem funcs** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
 
+### Supported Write to Memory Functions 
+
 * WriteByte("address", "value");
 * WriteShort("address", "value");
 * WriteInt("address", "value");
@@ -28,7 +30,7 @@ Join the discord: https://discord.gg/qbpnQfbVqY
 
 * MW3: Bot spawning re-added [addtestclient("name")]
 
-### GSC Features
+### GSC Menu Features
 
 * Distance Tracking
 * Almost Hit Tracking
