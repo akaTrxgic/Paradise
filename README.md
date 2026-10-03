@@ -5,7 +5,6 @@ Join the Discord: https://discord.gg/qbpnQfbVqY
 ### XEX Features
 | Feature | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-
 | **Menu Working** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | N/A |
 | **Force Host** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Force Start** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
