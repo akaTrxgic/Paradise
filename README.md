@@ -1,8 +1,6 @@
 <img width="2241" height="702" alt="welcome_banner" src="https://github.com/user-attachments/assets/40c40dfd-79cf-492b-b650-f75bfb940794" />
 
-<a href="https://discord.gg/qbpnQfbVqY">
-<img width="200" height="200" alt="discord logo" src="https://github.com/user-attachments/assets/33fc5439-e920-4546-8582-ed00df4d1eb9">
-</a>
+Join the Discord: https://discord.gg/qbpnQfbVqY
 
 ### XEX Features
 | Feature | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
