@@ -41,7 +41,7 @@ Join the Discord: https://discord.gg/qbpnQfbVqY
 * Public Match (Pack) & Private Match (Azza)
 * and more!
 
-### Infinity Loader version(s) are no longer supported!
+### Infinity Loader versions will **NOT** be receiving any further updates
 
 Credits:
 * Xesoftware: menu base, helped with guidance when I got stuck or was struggling to figure something out, also has provided code snippets
