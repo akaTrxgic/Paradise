@@ -1,6 +1,8 @@
-Welcome to Project Paradise!
+<img width="2241" height="702" alt="welcome_banner" src="https://github.com/user-attachments/assets/40c40dfd-79cf-492b-b650-f75bfb940794" />
 
-Join the discord: https://discord.gg/qbpnQfbVqY
+<a href="https://discord.gg/qbpnQfbVqY">
+<img width="700" height="700" alt="discord-logo-discord-icon-transparent-free-png" src="https://github.com/user-attachments/assets/94997fa5-36ab-4cae-b3cb-5c1fb63a3739">
+</a>
 
 ### XEX Features
 | Feature | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
