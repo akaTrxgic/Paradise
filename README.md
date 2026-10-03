@@ -12,7 +12,7 @@ Join the Discord: https://discord.gg/qbpnQfbVqY
 | **Min/Max Clients** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Disable DLC** | ✅ | ✅ | ✅ | ✅ | N/A | ❌ | ✅ | ❌ | ❌ | N/A |
 | **Load GSC** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
-| **GSC Mem funcs** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **GSC Mem funcs** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
 
 ### Supported Write to Memory Functions 
 
