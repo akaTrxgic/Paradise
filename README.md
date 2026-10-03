@@ -1,7 +1,7 @@
 <img width="2241" height="702" alt="welcome_banner" src="https://github.com/user-attachments/assets/40c40dfd-79cf-492b-b650-f75bfb940794" />
 
 <a href="https://discord.gg/qbpnQfbVqY">
-<img width="200" height="200" alt="discord-logo-discord-icon-transparent-free-png" src="https://github.com/user-attachments/assets/94997fa5-36ab-4cae-b3cb-5c1fb63a3739">
+<img width="100" height="100" alt="discord-logo-discord-icon-transparent-free-png" src="https://github.com/user-attachments/assets/94997fa5-36ab-4cae-b3cb-5c1fb63a3739">
 </a>
 
 ### XEX Features
