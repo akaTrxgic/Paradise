@@ -14,7 +14,7 @@ Join the Discord: https://discord.gg/qbpnQfbVqY
 | **Load GSC** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
 | **GSC Mem funcs** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
 
-### Supported Write to Memory Functions 
+### Supported Custom Functions 
 
 * WriteByte("address", "value");
 * WriteShort("address", "value");
