@@ -1,6 +1,7 @@
 <img width="2241" height="702" alt="welcome_banner" src="https://github.com/user-attachments/assets/40c40dfd-79cf-492b-b650-f75bfb940794" />
 
 Join the Discord: https://discord.gg/qbpnQfbVqY
+
 Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FTDHYRxhGZ6yFK3_fq47g
 
 ### XEX Features
