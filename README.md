@@ -8,14 +8,17 @@ Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FT
 
 | Features (SP)       | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
 | :-----------------: | :--: | :-: | :-: | :-: | :-: | :-: | :----: | :-: | :-: | :-: |
-| COMING SOON |
+| **Menu**            |  ✅  |  ✅ |  ❌ |  ❌ |  ❌ |  ❌ |   ❌   |  ❌ |  ❌ |  ❌ |
+| **Min/Max Players** |  ❌  |  ✅ |  ❌ |  ❌ |  ❌ |  ❌ |   ❌   |  ❌ |  ❌ |  ❌ |
+| **Load GSC**        |  ❌  |  ❌ |  ❌ |  ❌ |  ❌ |  ❌ |   ❌   |  ❌ |  ❌ |  ❌ |
+| **GSC Mem Funcs**   |  ❌  |  ❌ |  ❌ |  ❌ |  ❌ |  ❌ |   ❌   |  ❌ |  ❌ |  ❌ |
 
 | Features (MP)       | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
 | :-----------------: | :--: | :-: | :-: | :-: | :-: | :-: | :----: | :-: | :-: | :-: |
 | **Menu**            |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ❌ |  ✅ |
 | **Force Host**      |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
 | **Force Start**     |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
-| **Change Map/Mode** |  ✅  |  ✅ |  ✅ |  ❌ |  ✅ |  ❌ |   ❌   |  ❌ |  ❌ | N/A |
+| **Change Map/Mode** |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
 | **Min/Max Players** |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
 | **Disable DLC**     |  ✅  |  ✅ |  ✅ |  ✅ | N/A |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
 | **Load GSC**        |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ |  ✅ |
@@ -23,7 +26,10 @@ Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FT
 
 | Features (ZM)       | WAW | BO1 | BO2 | Ghosts | AW | BO3 |
 | :-----------------: | :--: | :-: | :-: | :-: | :-: | :-: |
-| COMING SOON |
+| **Menu**            |  ✅  |  ✅ |  ❌ |  ✅ |  ✅ |  ❌ |
+| **Min/Max Players** |  ❌  |  ✅ |  ❌ |  ❌ |  ❌ |  ❌ |
+| **Load GSC**        |  ❌  |  ❌ |  ❌ |  ❌ |  ❌ |  ❌ |
+| **GSC Mem Funcs**   |  ❌  |  ❌ |  ❌ |  ❌ |  ❌ |  ❌ |
 
 ### Supported Custom Functions 
 
