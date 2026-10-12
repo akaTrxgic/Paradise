@@ -5,16 +5,17 @@ Join the Discord: https://discord.gg/qbpnQfbVqY
 Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FTDHYRxhGZ6yFK3_fq47g
 
 ### XEX Features
-| Feature | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Menu Working** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | N/A |
-| **Force Host** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
-| **Force Start** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
-| **Game Settings** | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | N/A |
-| **Min/Max Clients** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | N/A |
-| **Disable DLC** | ✅ | ✅ | ✅ | ✅ | N/A | ❌ | ✅ | ❌ | ❌ | N/A |
-| **Load GSC** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
-| **GSC Mem funcs** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
+
+| Features (MP)       | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
+| :-----------------: | :--: | :-: | :-: | :-: | :-: | :-: | :----: | :-: | :-: | :-: |
+| **Menu**            |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ❌ |  ✅ |
+| **Force Host**      |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
+| **Force Start**     |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
+| **Change Map/Mode** |  ✅  |  ✅ |  ✅ |  ❌ |  ✅ |  ❌ |   ❌   |  ❌ |  ❌ | N/A |
+| **Min/Max Players** |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
+| **Disable DLC**     |  ✅  |  ✅ |  ✅ |  ✅ | N/A |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
+| **Load GSC**        |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ |  ✅ |
+| **GSC Mem Funcs**   |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ |  ✅ |
 
 ### Supported Custom Functions 
 
