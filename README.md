@@ -6,6 +6,10 @@ Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FT
 
 ### XEX Features
 
+| Features (SP)       | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
+| :-----------------: | :--: | :-: | :-: | :-: | :-: | :-: | :----: | :-: | :-: | :-: |
+| COMING SOON |
+
 | Features (MP)       | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
 | :-----------------: | :--: | :-: | :-: | :-: | :-: | :-: | :----: | :-: | :-: | :-: |
 | **Menu**            |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ❌ |  ✅ |
@@ -16,6 +20,10 @@ Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FT
 | **Disable DLC**     |  ✅  |  ✅ |  ✅ |  ✅ | N/A |  ❌ |   ✅   |  ❌ |  ❌ | N/A |
 | **Load GSC**        |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ |  ✅ |
 | **GSC Mem Funcs**   |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ❌ |  ❌ |  ✅ |
+
+| Features (ZM)       | WAW | BO1 | BO2 | Ghosts | AW | BO3 |
+| :-----------------: | :--: | :-: | :-: | :-: | :-: | :-: |
+| COMING SOON |
 
 ### Supported Custom Functions 
 
