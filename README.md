@@ -2,8 +2,6 @@
 
 Join the Discord: https://discord.gg/qbpnQfbVqY
 
-Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FTDHYRxhGZ6yFK3_fq47g
-
 ### XEX Features
 
 | Features (SP)       | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
@@ -15,7 +13,7 @@ Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FT
 
 | Features (MP)       | COD4 | WAW | MW2 | BO1 | MW3 | BO2 | Ghosts | AW | BO3 | NX1 |
 | :-----------------: | :--: | :-: | :-: | :-: | :-: | :-: | :----: | :-: | :-: | :-: |
-| **Elevators**       |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ✅ |  ✅ |
+| **Elevators**       |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ❌ |   ✅   |  ✅ |  ❌ |  ✅ |
 | **Bounces**         |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ✅ |  ✅ |
 | **WB Everything**   |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ✅ |  ✅ |
 | **No Barriers**     |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ✅ |  ✅ |
@@ -62,7 +60,7 @@ Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FT
 * Public Match (Pack) & Private Match (Azza)
 * and more!
 
-### Infinity Loader versions will **NOT** be receiving any further updates
+### Infinity Loader library versions will **NOT** be receiving any further updates
 
 Credits:
 * Xesoftware: menu base, helped with guidance when I got stuck or was struggling to figure something out, also has provided code snippets
