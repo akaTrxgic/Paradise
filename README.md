@@ -20,7 +20,6 @@ Xensik360 Compiler & GUI: https://mega.nz/file/jrZHTYBZ#SBcwLozXQsmVI5fuxjCUl-FT
 | **WB Everything**   |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ✅ |  ✅ |
 | **No Barriers**     |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ✅ |  ✅ |  ✅ |
 | **Double Taps**     |  N/A  |  N/A |  N/A |  N/A |  ✅ |  N/A |   ✅   |  ✅ |  N/A |  N/A |
-
 | **Force Host**      |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ❌ |  ❌ | N/A |
 | **Force Start**     |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ❌ |  ❌ | N/A |
 | **Change Map/Mode** |  ✅  |  ✅ |  ✅ |  ✅ |  ✅ |  ✅ |   ✅   |  ❌ |  ✅ | N/A |
